@@ -1,0 +1,35 @@
+{
+  "name": "tagspaces-browser-extension",
+  "version": "2.9.1",
+  "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn build-chrome && yarn build-firefox",
+    "build-chrome": "TARGET=chrome $(yarn bin)/webpack",
+    "build-firefox": "TARGET=firefox $(yarn bin)/webpack",
+    "pack": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
+    "patch-version": "node utils/patch-version.js",
+    "pack-chrome": "cd build/chrome && zip -r ../chrome.zip .",
+    "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a build/",
+    "eslint": "$(yarn bin)/eslint .",
+    "clean": "rm -rf ./build/"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "eslint": "^4.5.0",
+    "shelljs": "^0.8.0",
+    "typescript": "^2.4.2",
+    "web-ext": "^2.0.0",
+    "web-ext-types": "^0.3.1",
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "dompurify": "^1.0.3",
+    "file-saver": "^1.3.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "webextension-polyfill": "^0.1.1"
+  }
+}

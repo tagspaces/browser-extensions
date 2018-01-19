@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css/font-awesome.min.css">
+</head>
+<body style="width: 540px; height: 400px; padding:0; font-size: 14px; background-color: #f9f9f9;">
+<div class="well" style="margin: 0; border: 0px; background-color: transparent;">
+    <div style="white-space: nowrap; margin-bottom: 30px;" class="text-center">
+        <img src="images/icon-128.png" class="pull-left" style="margin-left: 20px; max-height: 32px; max-width: 32px;"/>&nbsp;&nbsp;
+        <label style="font-size: 20px;" data-i18n="appLauncherLabel"></label>
+        <a href="#" class="btn btn-link fa-lg pull-right" id="closePopup"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="title"><span class="badge">1</span> <span data-i18n="editTitleLabel"></span></label>
+        <input class="form-control" type="text" name="title" id="title" autocomplete="off"/>
+        <p class="help-block"></p>
+    </div>
+    <form role="form" data-toggle="validator">
+        <div class="form-group">
+            <label class="control-label" for="tags"><span class="badge">2</span> <span data-i18n="addTagLabel"></span></label>
+            <input class="form-control" type="text" name="tags" id="tags" autocomplete="off"/>
+            <p class="help-block" data-i18n="addTagHelp"></p>
+        </div>
+    </form>
+    <label><span class="badge">3</span> <span data-i18n="saveFileLabel"></span></label>
+    <div class="btn-toolbar text-center noWrap">
+        <a href="#" class="btn btn-primary" id="saveAsMhtml" data-i18n-title="saveAsMhtmlTitle">
+            <i class="fa fa-file-image-o fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveAsMhtmlLabel"></span>
+        </a>
+        <a href="#" class="btn btn-primary" id="saveWholePageAsHtml" data-i18n-title="savePageAsHtmlTitle">
+            <i class="fa fa-file fa-lg fa-fw"></i>&nbsp;<span data-i18n="savePageAsHtmlLabel"></span>
+        </a>
+        <a href="#" class="btn btn-primary" id="saveSelectionAsHtml" data-i18n-title="saveSelectionAsHtmlTitle">
+            <i class="fa fa-file-text fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveAsSelectionLabel"></span>
+        </a>
+        <a href="#" class="btn btn-primary" id="saveScreenshot" data-i18n-title="saveScreenshotTitle">
+            <i class="fa fa-camera fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveScreenshotLabel"></span>
+        </a>
+        <a href="#" class="btn btn-primary" id="saveAsBookmark" data-i18n-title="saveBookmarkTitle">
+            <i class="fa fa-bookmark  fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveBookmarkLabel"></span>
+        </a>
+    </div>
+</div>
+<script src="./vendor/browser-polyfill.js" type="text/javascript"></script>
+<script src="./vendor/jquery.min.js" type="text/javascript"></script>
+<script src="./vendor/FileSaver.min.js" type="text/javascript"></script>
+<script src="./vendor/purify.min.js" type="text/javascript"></script>
+<script src="./popup.dist.js" type="text/javascript"></script>
+</body>
+</html>
+
