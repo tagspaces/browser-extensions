@@ -15,8 +15,6 @@ let config = {
   entry: {
     background: [
       "./background/background.js",
-      // "./background/context-menus.js",
-      // "./background/message-listeners.js"
     ],
     options: "./ui/options.js",
     popup: "./ui/popup.js",
@@ -35,10 +33,11 @@ let config = {
   plugins: [
     new CopyWebpackPlugin([
       { from: './static/', to: './' },
+      { from: '../LICENSE', to: './' },
       { from: '../_locales/', to: './_locales' },
       { from: `./manifest.${process.env.TARGET}.json`, to: `./manifest.json` },
       { from: '../node_modules/webextension-polyfill/dist/browser-polyfill.js', to: './vendor/' },
-      { from: '../node_modules/bootstrap/dist/css/bootstrap.min.css', to: './vendor/css' },
+      { from: '../node_modules/bootswatch/paper/bootstrap.min.css', to: './vendor/css' },
       { from: '../node_modules/jquery/dist/jquery.min.js', to: './vendor' },
       { from: '../node_modules/file-saver/FileSaver.min.js', to: './vendor' },
       { from: '../node_modules/dompurify/dist/purify.min.js', to: './vendor' },
@@ -51,7 +50,6 @@ let config = {
       'ENVIRONMENT': require(`./src/environment.${process.env.TARGET}.js`)
     }) */
   ],
-  // always ship with source map so anyone can debug it
   devtool: "source-map"
 };
 

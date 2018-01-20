@@ -44,4 +44,4 @@ To debug in Firefox: [Tools] Menu -> Add-ons -> [Gear] Icon -> Debug Add-ons -> 
 
 ## License
 
-See [LICENSE.txt](./LICENSE.txt)
+See [LICENSE](./LICENSE)
