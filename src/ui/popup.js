@@ -72,11 +72,14 @@ function saveAsBookmark() {
 function handleHTMLContent (request) {
   if (request.action == "htmlcontent") {
     //console.log("HTML: " + request.source);
-    var cleanenHTML = prepareContent(request.source);
-    var htmlBlob = new Blob([cleanenHTML], {
-      type: "text/html;charset=utf-8"
+    prepareContentPromise(request.source).then((cleanenHTML) => {
+      const htmlBlob = new Blob([cleanenHTML], {
+        type: "text/html;charset=utf-8"
+      });
+      saveAs(htmlBlob, generateFileName('html'));
+    }).catch((err) => {
+      console.warn('Error handling html content ' + err);
     });
-    saveAs(htmlBlob, generateFileName('html'));
   }
 }
 
@@ -153,15 +156,26 @@ function dataURItoBlob(dataURI) {
   return blob;
 }
 
-function getBase64Image(imgURL) {
-  const canvas = document.createElement("canvas");
-  const img = new Image();
-  img.src = imgURL;
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  return canvas.toDataURL("image/png");
+function getBase64ImagePromise(imgURL) {
+  return new Promise((resolve) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    let dataURL;
+    img.src = imgURL;
+    img.crossOrigin = 'anonymous';
+    img.onerror = (err) => {
+      console.warn('Error fetching image: ' + JSON.stringify(err));
+      resolve([imgURL, imgURL]);
+    }
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      dataURL = canvas.toDataURL("image/png");
+      resolve([imgURL, dataURL]);
+    }
+  });
 }
 
 function getFileExt(fileName) {
@@ -169,40 +183,49 @@ function getFileExt(fileName) {
   return (supportedExts.indexOf(ext) >= 0) ? ext : "mhtml";
 }
 
-function prepareContent(uncleanedHTML) {
-  //console.log("uncleaned "+uncleanedHTML);
-  var cleanedHTML = uncleanedHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
-  // var cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
+function prepareContentPromise(uncleanedHTML) {
+  return new Promise((resolve) => {
+    //console.log("uncleaned "+uncleanedHTML);
+    var cleanedHTML = uncleanedHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
+    // var cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
 
-  // console.log("cleaned "+cleanedHTML);
+    // console.log("cleaned "+cleanedHTML);
 
-  // saving all images as png in base64 format
-  let match;
-  const urls = [];
-  let imgUrl = '';
-  const rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+    // saving all images as png in base64 format
+    let match;
+    const urlPromises = [];
+    let imgUrl = '';
+    let originalImgUrl;
+    const rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
 
-  while ( match = rex.exec( cleanedHTML ) ) {
-    imgUrl = match[1];
-    if (!imgUrl.startsWith('http')) {
-      imgUrl = currentTabURL + imgUrl;
+    while ( match = rex.exec( cleanedHTML ) ) {
+      imgUrl = match[1];
+      if (!imgUrl.startsWith('http')) {
+        originalImgUrl = imgUrl;
+        imgUrl = currentTabURL + imgUrl;
+        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl);
+      }
+      // console.log("URLs: "+imgUrl);
+      urlPromises.push(getBase64ImagePromise(imgUrl));
     }
-    console.log("URLs: "+imgUrl);
-    urls.push([imgUrl, getBase64Image(imgUrl)]);
-  }
 
-  urls.forEach((dataURLObject) => {
-    cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
-    //console.log(dataURLObject[0]+" - "+dataURLObject[1]);
+    Promise.all(urlPromises).then((resultUrls) => {
+      resultUrls.forEach((dataURLObject) => {
+        cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
+        //console.log(dataURLObject[0]+" - "+dataURLObject[1]);
+      });
+
+      if (!cleanedHTML.includes('<body')) {
+        cleanedHTML = "<body data-sourceurl='" + currentTabURL + "' data-scrappedon='" + (new Date()).toISOString() + "' >" + cleanedHTML + "</body>";
+        cleanedHTML = htmlTemplate.replace(/\<body[^>]*\>([^]*)\<\/body>/m, cleanedHTML); // jshint ignore:line
+      }
+      // console.log('Content before saving: ' + cleanedHTML);
+      return resolve(cleanedHTML);
+    }).catch((error) => {
+      console.warn('Error by preparing content: ' + error);
+      return resolve(cleanedHTML);
+    })
   });
-  // end saving all images
-
-  if (!cleanedHTML.includes('<body')) {
-    cleanedHTML = "<body data-sourceurl='" + currentTabURL + "' data-scrappedon='" + (new Date()).toISOString() + "' >" + cleanedHTML + "</body>";
-    cleanedHTML = htmlTemplate.replace(/\<body[^>]*\>([^]*)\<\/body>/m, cleanedHTML); // jshint ignore:line
-  }
-  console.log('Content before saving: ' + cleanedHTML);
-  return cleanedHTML;
 }
 
 /* function loadSettingsLocalStorage() {
