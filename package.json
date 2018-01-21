@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "2.10.0",
+  "version": "2.10.1",
   "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
     "build-firefox": "TARGET=firefox $(yarn bin)/webpack",
     "pack": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
     "patch-version": "node utils/patch-version.js",
-    "pack-chrome": "cd build/chrome && zip -r ../chrome.zip .",
+    "pack-chrome": "node utils/pack-chrome.js",
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a build/",
     "eslint": "$(yarn bin)/eslint .",
     "clean": "rm -rf ./build/"
