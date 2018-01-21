@@ -105,7 +105,11 @@ function saveWholePageAsHTML() {
   });
   executing.then(() => {
     console.log('Content script injected...');
-  }, (err) => console.warn('Error executing script ' + JSON.stringify(err)));
+  }, (err) => {
+    console.warn('Error executing script ' + JSON.stringify(err));
+    alert('Error getting content from the current tab.')
+    location.reload();
+  });
 }
 
 function saveSelectionAsHTML() {
@@ -115,7 +119,11 @@ function saveSelectionAsHTML() {
   });
   executing.then(() => {
     console.log('Content script injected...');
-  }, (err) => console.warn('Error executing script ' + JSON.stringify(err)));
+  }, (err) => {
+    console.warn('Error executing script ' + JSON.stringify(err));
+    alert('Error getting content from the current tab.')
+    location.reload();
+  });
 }
 
 function saveScreenshot() {
@@ -147,7 +155,7 @@ function generateFileName(extension) {
 
   const rawTags = document.getElementById("tags").value.split(",");
   const tags = [];
-  for(let tag of rawTags) {
+  for (let tag of rawTags) {
     let trimmedTag = tag.trim();
     if (trimmedTag.length > 1) { // setting minimum tag length of 2
       tags.push(trimmedTag);
