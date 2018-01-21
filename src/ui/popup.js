@@ -248,10 +248,12 @@ function prepareContentPromise(uncleanedHTML) {
         if (currentTabURL.startsWith('file:')) {
           baseTabPath = currentTabURL.substring(0, currentTabURL.lastIndexOf(dirSeparator) + 1);
           imgUrl = baseTabPath + imgUrl;
+        } else if (imgUrl.startsWith('/')) {
+          // TODO handle the /image.jpg path
         } else {
           imgUrl = currentTabURL + imgUrl;
         }
-        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl);
+        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl); // TODO ensure to replace only src="..." and not data-src=".."
         urlPromises.push(getBase64ImagePromise(imgUrl));
       }
       console.log("URLs: " + imgUrl);
