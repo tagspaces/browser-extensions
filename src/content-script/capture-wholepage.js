@@ -21,8 +21,8 @@ const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
 function getCompleteHtml() {
   let body = document.body.innerHTML;
-  let head = document.body.innerHTML;
-  return '<html><head>' + head + '</head><body>' + body + '</body>';
+  let head = document.head.innerHTML;
+  return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
 }
 
 if (isFirefox) {
