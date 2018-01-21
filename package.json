@@ -10,7 +10,7 @@
     "pack": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
     "patch-version": "node utils/patch-version.js",
     "pack-chrome": "node utils/pack-chrome.js",
-    "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a build/",
+    "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/",
     "eslint": "$(yarn bin)/eslint .",
     "clean": "rm -rf ./build/"
   },
