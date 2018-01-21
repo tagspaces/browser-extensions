@@ -1,3 +1,9 @@
 .btn-primary {
     margin-bottom: 5px !important;
 }
+
+#closePopup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}

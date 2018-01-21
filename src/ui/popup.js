@@ -63,9 +63,13 @@ function init() {
   browser.runtime.onMessage.addListener(handleHTMLContent);
 }
 
-function handleHTMLContent (request) {
+function handleHTMLContent(request) {
   if (request.action == "htmlcontent") {
     //console.log("HTML: " + request.source);
+    if (request.source.length < 1) {
+      alert('No content selected....');
+      return;
+    }
     prepareContentPromise(request.source).then((cleanenHTML) => {
       const htmlBlob = new Blob([cleanenHTML], {
         type: "text/html;charset=utf-8"
@@ -140,10 +144,21 @@ function generateFileName(extension) {
   if (lastIndexOfDot > 0 && (filename.length - lastIndexOfDot) < 5) {
     filename = filename.substring(0, filename.lastIndexOf('.'))
   }
-  let tags = document.getElementById("tags").value;
-  if (tags) {
-    tags = tags.split(",").join(" ");
-    filename = filename + ' [' + tags + '].' + extension;
+
+  const rawTags = document.getElementById("tags").value.split(",");
+  const tags = [];
+  for(let tag of rawTags) {
+    let trimmedTag = tag.trim();
+    if (trimmedTag.length > 1) { // setting minimum tag length of 2
+      tags.push(trimmedTag);
+    }
+  }
+  if (extension.toLowerCase() === 'png') { // screenshot case
+    tags.push('screenshot');
+    tags.push(formatDateTime4Tag((new Date()).toString(), false));
+  }
+  if (tags.length > 0) {
+    filename = filename + ' [' + tags.join(" ") + '].' + extension;
   } else {
     filename = filename + '.' + extension;
   }
@@ -231,7 +246,7 @@ function prepareContentPromise(uncleanedHTML) {
         cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl);
         urlPromises.push(getBase64ImagePromise(imgUrl));
       }
-      console.log("URLs: "+imgUrl);
+      console.log("URLs: " + imgUrl);
     }
 
     Promise.all(urlPromises).then((resultUrls) => {
@@ -256,6 +271,46 @@ function prepareContentPromise(uncleanedHTML) {
   });
 }
 
+function formatDateTime4Tag(date, includeTime) {
+  if (date === undefined || date === '') {
+    return '';
+  }
+  const d = new Date(date);
+  let cDate = d.getDate();
+  cDate += '';
+  if (cDate.length === 1) {
+    cDate = '0' + cDate;
+  }
+  let cMonth = d.getMonth();
+  cMonth++;
+  cMonth += '';
+  if (cMonth.length === 1) {
+    cMonth = '0' + cMonth;
+  }
+  const cYear = d.getFullYear();
+
+  let time = '';
+  if (includeTime) {
+    let cHour = d.getHours();
+    cHour += '';
+    if (cHour.length === 1) {
+      cHour = '0' + cHour;
+    }
+    let cMinute = d.getMinutes();
+    cMinute += '';
+    if (cMinute.length === 1) {
+      cMinute = '0' + cMinute;
+    }
+    let cSecond = d.getSeconds();
+    cSecond += '';
+    if (cSecond.length === 1) {
+      cSecond = '0' + cSecond;
+    }
+    time = '~' + cHour + '' + cMinute + '' + cSecond;
+  }
+
+  return cYear + '' + cMonth + '' + cDate + time;
+}
 /* function loadSettingsLocalStorage() {
   try {
     const settings = JSON.parse(localStorage.getItem('tagSpacesSettings'));
