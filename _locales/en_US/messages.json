@@ -1,78 +1,74 @@
 {
-    "saveAsSelectionLabel": {
-        "message": "Save Selected",
-        "description": "Title of label."
+    "appName": {
+        "message": "TagSpaces",
+        "description": "The name of the extension"
     },
     "appLauncher": {
         "message": "Launch TagSpaces",
         "description": "Title of the application launcher in the browser."
-    },
-    "saveBookmarkTitle": {
-        "message": "Bookmark this page as Windows url file",
-        "description": "Title of bookmark button"
     },
     "appDesc": {
         "message": "Web content scraping with tagging support",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / ,\\ and other.",
+        "message": "Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / ,\\ and other. Multiple tags should be separated with comma.",
         "description": "Add tag help message"
     },
-    "saveScreenshotTitle": {
-        "message": "Save screenshot of the visible page area as PNG",
-        "description": "Title of screenshot button"
-    },
     "editTitleLabel": {
-        "message": "Edit Title",
-        "description": "Title of label."
-    },
-    "appName": {
-        "message": "TagSpaces",
-        "description": ""
-    },
-    "saveBookmarkLabel": {
-        "message": "Bookmark",
+        "message": "Edit file title",
         "description": "Title of label."
     },
     "appLauncherLabel": {
         "message": "Capture Web Content",
         "description": "Title of label."
     },
-    "saveScreenshotLabel": {
-        "message": "Screenshot",
-        "description": "Title of label."
-    },
     "addTagLabel": {
-        "message": "Add Tags",
-        "description": "Title of label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "Save complete page as MHTML",
-        "description": "Title of save page button"
-    },
-    "appLauncherTitle": {
-        "message": "Start TagSpaces Browser in a new tab",
-        "description": "Title of the application launcher in the browser."
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content as HTML",
-        "description": "Title of save selection button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Save page as MHTML",
-        "description": "Title of label."
-    },
-    "savePageAsHtmlLabel": {
-        "message": "Save page as HTML",
-        "description": "Title of label."
-    },
-    "savePageAsHtmlTitle": {
-        "message": "Save complete page as HTML",
+        "message": "Add tags",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Save as File",
+        "message": "Choose file format for saving",
         "description": "Title of label."
+    },
+    "saveScreenshotLabel": {
+        "message": "Screenshot as PNG",
+        "description": "Title of label."
+    },
+    "saveScreenshotTitle": {
+        "message": "Take a screenshot of the visible page area as PNG",
+        "description": "Title of screenshot button"
+    },
+    "saveAsMhtmlLabel": {
+        "message": "Complete page as MHTML",
+        "description": "Title of label."
+    },
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page (including images) as MHTML, preserving the original design",
+        "description": "Title of save page button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Complete page as HTML",
+        "description": "Title of label."
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Save complete page (including images) as HTML, the original design will not be preserved",
+        "description": "Title of label."
+    },
+    "saveBookmarkLabel": {
+        "message": "Bookmark as URL",
+        "description": "Title of label."
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as Windows url file.",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Selected content as HTML",
+        "description": "Title of label."
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Save selected content (including images) as HTML",
+        "description": "Title of save selection button"
     }
 }
