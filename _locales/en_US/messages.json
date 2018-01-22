@@ -33,31 +33,31 @@
     },
     "saveScreenshotLabel": {
         "message": "Screenshot as PNG",
-        "description": "Title of label."
+        "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
         "message": "Take a screenshot of the visible page area as PNG",
-        "description": "Title of screenshot button"
+        "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
         "message": "Complete page as MHTML",
-        "description": "Title of label."
+        "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
         "message": "Save complete page (including images) as MHTML, preserving the original design",
-        "description": "Title of save page button"
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "Complete page as HTML",
-        "description": "Title of label."
+        "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
         "message": "Save complete page (including images) as HTML, the original design will not be preserved",
-        "description": "Title of label."
+        "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
         "message": "Bookmark as URL",
-        "description": "Title of label."
+        "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
         "message": "Save a bookmark of the current page as Windows url file.",
@@ -65,10 +65,18 @@
     },
     "saveAsSelectionLabel": {
         "message": "Selected content as HTML",
-        "description": "Title of label."
+        "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
         "message": "Save selected content (including images) as HTML",
         "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "Download File",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "Download the file in its original format",
+        "description": "Title of the download button"
     }
 }
