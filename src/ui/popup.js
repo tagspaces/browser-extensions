@@ -25,7 +25,8 @@ const isWin = navigator.appVersion.includes('Win');
 const dirSeparator = isWin ? '\\' : '/';
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-const supportedExts = ['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif', 'pdf', 'ogg', 'ogv', 'mp4', 'mp3'];
+const supportedExts = ['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif', 'bmp', 'ico', 'pdf', 'ogg', 'ogv', 'mp4', 'mp3'];
+const currentTabURLParser = document.createElement('a');
 let htmlTemplate = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style type="text/css">body{overflow:auto;width:100%;height:100%;font:13.34px Ubuntu,arial,clean,sans-serif;color:#000;line-height:1.4em;background-color:#fff;padding:15px}p{margin:1em 0;line-height:1.5em}table{font:100%;margin:1em}table th{border-bottom:1px solid #bbb;padding:.2em 1em}table td{border-bottom:1px solid #ddd;padding:.2em 1em}input[type=image],input[type=password],input[type=text],textarea{font:99% helvetica,arial,freesans,sans-serif}option,select{padding:0 .25em}optgroup{margin-top:.5em}code,pre{font:12px Monaco, Courier ,monospace}pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}pre code{padding:0;font-size:12px;background-color:#eee;border:none}code{font-size:12px;background-color:#f8f8ff;color:#444;padding:0 .2em;border:1px solid #dedede}img{border:0;max-width:100%}abbr{border-bottom:none}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a code,a:link code,a:visited code{color:#4183c4}h2,h3{margin:1em 0}h1,h2,h3,h4,h5,h6{border:0}h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em}h1:first-child{margin-top:0;padding-top:.25em;border-top:none}h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em}h3{font-size:130%;margin-top:1em}h4{font-size:120%;margin-top:1em}h5{font-size:115%;margin-top:1em}h6{font-size:110%;margin-top:1em}hr{border:1px solid #ddd}ol,ul{margin:1em 0 1em 2em}ol li,ul li{margin-top:.5em;margin-bottom:.5em}ol ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555}dt{font-weight:700;margin-left:1em}dd{margin-left:2em;margin-bottom:1em}</style></head><body></body></html>';
 let fileExt;
 let currentTabURL;
@@ -37,11 +38,13 @@ function init() {
     for (let tab of tabs) {
       currentTabURL = tab.url;
       currentTabID = tab.id;
-      fileExt = getFileExt(currentTabURL);
+      currentTabURLParser.href = currentTabURL;
+      fileExt = extractFileExtFromUrl();
       $('#title').val(tab.title.substring(tab.title.lastIndexOf("/") + 1, tab.title.length));
-      $("#saveSelectionAsHtml").attr("disabled", (fileExt !== 'mhtml'));
+
+      (supportedExts.indexOf(fileExt) >= 0) ? $("#downloadFile").show() : $("#downloadFile").hide();
     }
-  }, (err) => { console.log('Error getting activa tab: ' + err) });
+  }, (err) => { console.warn('Error getting activa tab: ' + err) });
 
   $('#title').focus();
   isFirefox ? $("#saveAsMhtml").hide() : $("#saveAsMhtml").on('click', saveAsMHTML);
@@ -51,6 +54,8 @@ function init() {
   $("#saveSelectionAsHtml").on("click", saveSelectionAsHTML);
   $("#saveWholePageAsHtml").on("click", saveWholePageAsHTML);
   $("#saveScreenshot").on("click", saveScreenshot);
+  $("#downloadFile").on('click', downloadFile);
+
 
   // I18n this panel
   $('[data-i18n]').each(function () {
@@ -65,7 +70,7 @@ function init() {
 
 function handleHTMLContent(request) {
   if (request.action == "htmlcontent") {
-    //console.log("HTML: " + request.source);
+    // console.log("HTML: " + request.source);
     if (request.source.length < 1) {
       alert('No content selected....');
       return;
@@ -75,7 +80,11 @@ function handleHTMLContent(request) {
         type: "text/html;charset=utf-8"
       });
       saveAs(htmlBlob, generateFileName('html'));
+      $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
+      $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
     }).catch((err) => {
+      alert('Error by preparing the HTML content...');
+      location.reload();
       console.warn('Error handling html content ' + err);
     });
   }
@@ -83,19 +92,20 @@ function handleHTMLContent(request) {
 
 function saveAsMHTML() {
   $('#saveAsMhtml i').removeClass('fa-file-image-o').addClass('fa-spin fa-circle-o-notch');
-  if (fileExt === 'mhtml') {
-    browser.pageCapture.saveAsMHTML({
-      tabId: currentTabID
-    }, (mhtml) => {
-      saveAs(mhtml, generateFileName(fileExt));
-    });
-  } else {
-    browser.downloads.download({
-      url: currentTabURL,
-      filename: generateFileName(fileExt),
-      saveAs: true
-    });
-  }
+  browser.pageCapture.saveAsMHTML({
+    tabId: currentTabID
+  }, (mhtml) => {
+    saveAs(mhtml, generateFileName(fileExt, 'mht'));
+    $('#saveAsMhtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-image-o');
+  });
+}
+
+function downloadFile() {
+  browser.downloads.download({
+    url: currentTabURL,
+    filename: generateFileName(fileExt),
+    saveAs: true
+  });
 }
 
 function saveWholePageAsHTML() {
@@ -132,7 +142,8 @@ function saveScreenshot() {
     "format": "png"
   });
   capturing.then((image) => {
-    saveAs(dataURItoBlob(image), generateFileName('png'));
+    saveAs(dataURItoBlob(image), generateFileName('png', 'screenshot'));
+    $('#saveScreenshot i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-camera');
   }, (err) => console.warn('Error taking screenshot ' + JSON.stringify(err)));
 }
 
@@ -143,9 +154,10 @@ function saveAsBookmark() {
     type: "text/plain;charset=utf-8"
   });
   saveAs(textBlob, generateFileName('url'));
+  $('#saveAsBookmark i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-bookmark');
 }
 
-function generateFileName(extension) {
+function generateFileName(extension, type) {
   let filename = $('#title').val()
   const lastIndexOfDot = filename.lastIndexOf('.');
   // removing the extension if the dot in for 4 or less character before teh end of the title
@@ -161,9 +173,13 @@ function generateFileName(extension) {
       tags.push(trimmedTag);
     }
   }
-  if (extension.toLowerCase() === 'png') { // screenshot case
+  if (type === 'screenshot' && extension.toLowerCase() === 'png') { // screenshot case
     tags.push('screenshot');
+    tags.push(currentTabURLParser ? currentTabURLParser.hostname : '');
     tags.push(formatDateTime4Tag((new Date()).toString(), false));
+  }
+  if (type === 'mht') {
+    extension = 'mhtml';
   }
   if (tags.length > 0) {
     filename = filename + ' [' + tags.join(" ") + '].' + extension;
@@ -213,17 +229,21 @@ function getBase64ImagePromise(imgURL) {
   });
 }
 
-function getFileExt(fileName) {
-  const ext = fileName.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
-  return (supportedExts.indexOf(ext) >= 0) ? ext : "mhtml";
+function extractFileExtFromUrl() {
+  let url = currentTabURL;
+  if (currentTabURLParser.search) {
+    url = currentTabURLParser.origin + currentTabURLParser.pathname;
+  }
+  const ext = url.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
+  return ext.toLowerCase();
 }
 
 function prepareContentPromise(uncleanedHTML) {
   return new Promise((resolve) => {
     // console.log("uncleaned "+uncleanedHTML);
-    console.log("prepareContentPromise for tab with url " + currentTabURL);
-    var cleanedHTML = uncleanedHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
-    // var cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
+    // console.log("prepareContentPromise for tab with url " + currentTabURL);
+    let cleanedHTML = uncleanedHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
+    // let cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
     // console.log("cleaned "+cleanedHTML);
 
     // saving all images as jpg in base64 format
@@ -249,20 +269,23 @@ function prepareContentPromise(uncleanedHTML) {
           baseTabPath = currentTabURL.substring(0, currentTabURL.lastIndexOf(dirSeparator) + 1);
           imgUrl = baseTabPath + imgUrl;
         } else if (imgUrl.startsWith('/')) {
-          // TODO handle the /image.jpg path
+          imgUrl = currentTabURLParser.origin + imgUrl
         } else {
           imgUrl = currentTabURL + imgUrl;
         }
-        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl); // TODO ensure to replace only src="..." and not data-src=".."
+        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl);
         urlPromises.push(getBase64ImagePromise(imgUrl));
       }
-      console.log("URLs: " + imgUrl);
+      // console.log("URLs: " + imgUrl);
     }
 
     Promise.all(urlPromises).then((resultUrls) => {
       resultUrls.forEach((dataURLObject) => {
-        cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
-        //console.log(dataURLObject[0]+" - "+dataURLObject[1]);
+        cleanedHTML = cleanedHTML.split(' src="' + dataURLObject[0]).join(' src="' + dataURLObject[1]); // ensure to replace only src="..." and not data-src=".."
+        if (cleanedHTML.includes("src='")) {
+          cleanedHTML = cleanedHTML.split(" src='" + dataURLObject[0]).join(" src='" + dataURLObject[1]);
+        }
+        // cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
       });
 
       const metaData = 'data-sourceurl="' + currentTabURL + '" data-scrappedon="' + (new Date()).toISOString() + '"';
