@@ -1,5 +1,6 @@
 {
-  "name": "TagSpaces",
+  "name": "__MSG_appName__",
+  "short_name": "TagSpaces",
   "version": "0.0.0.0",
   "version_name": "0.0.0.0",
   "manifest_version": 2,

@@ -1,6 +1,6 @@
 {
     "appName": {
-        "message": "TagSpaces",
+        "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
     "appLauncher": {
@@ -8,11 +8,11 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Web content scraping with tagging support",
+        "message": "Local, no cloud based, web content scrapping with tagging support",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / ,\\ and other. Multiple tags should be separated with comma.",
+        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
@@ -44,7 +44,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page (including images) as MHTML, preserving the original design",
+        "message": "Save complete page (including images) as one MHTML file, preserving the original design",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -52,7 +52,7 @@
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page (including images) as HTML, the original design will not be preserved",
+        "message": "Save complete page (including images) as one HTML file, the original design will not be preserved",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
@@ -60,7 +60,7 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as Windows url file.",
+        "message": "Save a bookmark of the current page as Windows compartible URL file",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
@@ -68,7 +68,7 @@
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content (including images) as HTML",
+        "message": "Save selected content (including images) as one HTML file",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
@@ -76,7 +76,7 @@
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original format",
+        "message": "Download the file in its original file format",
         "description": "Title of the download button"
     }
 }
