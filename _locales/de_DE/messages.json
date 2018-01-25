@@ -1,70 +1,82 @@
 {
     "saveAsSelectionLabel": {
-        "message": "Ausgewähltes speichern",
-        "description": "Title of label."
+        "message": "Ausgewählte Inhalte als HTML",
+        "description": "Label of save selection button"
+    },
+    "downloadTitle": {
+        "message": "Download the file in its original file format",
+        "description": "Title of the download button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Save complete page (including images) as one HTML file, the original design will not be preserved",
+        "description": "Title of the save as html button"
     },
     "appLauncher": {
         "message": "TagSpaces starten",
         "description": "Title of the application launcher in the browser."
     },
     "saveBookmarkTitle": {
-        "message": "Bookmark the page",
+        "message": "Save a bookmark of the current page as Windows compartible URL file",
         "description": "Title of bookmark button"
     },
     "appDesc": {
-        "message": "Datei Browser mit Unterstützung der Speicherung von Web-Inhalten und Projektierung von lokalen Dateien zu Chromecast. ",
-        "description": ""
+        "message": "Lokales, nicht cloud-basierte Speicherung von Webinhalten mit Unterstützung von Etiketten.",
+        "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Tags sollten mindestens 2 Zeichen lang sein und dürfen keine Sonderzeichen, wie Leerzeichen, #, /, \\ und andere enthalten.",
+        "message": "Mehrere Etiketten sollten durch ein Komma getrennt sein. Etiketten sollten mindestens 2 Zeichen lang sein und dürfen keine Sonderzeichen, wie Leerzeichen, #, /, oder \\ enthalten. ",
         "description": "Add tag help message"
     },
     "saveScreenshotTitle": {
-        "message": "Screenshot des sichtbaren Seitenbereichs als PNG speichern",
-        "description": "Title of screenshot button"
+        "message": "Screenshot des sichtbaren Seitenbereichs als PNG-Datei speichern",
+        "description": "Title of the take screenshot button"
     },
     "editTitleLabel": {
-        "message": "Titel bearbeiten",
+        "message": "Dateiname Editieren",
         "description": "Title of label."
     },
     "appName": {
-        "message": "TagSpaces",
-        "description": ""
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
+    },
+    "downloadLabel": {
+        "message": "Datei herunterladen",
+        "description": "Label of the download button"
     },
     "saveBookmarkLabel": {
-        "message": "Bookmark",
-        "description": "Title of label."
+        "message": "Lesezeichen als URL",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Ganze Seite als HTML",
+        "description": "Label of the save as html button"
     },
     "appLauncherLabel": {
         "message": "Erfassen von Web-Inhalten",
         "description": "Title of label."
     },
     "saveScreenshotLabel": {
-        "message": "Screenshot",
-        "description": "Title of label."
+        "message": "Screenshot als PNG",
+        "description": "Label of the take screenshot button"
     },
     "addTagLabel": {
-        "message": "Tags hinzufügen",
+        "message": "Etiketten hinzufügen",
         "description": "Title of label."
     },
     "saveAsMhtmlTitle": {
-        "message": "Ganze Seite als MHTML speichern",
-        "description": "Title of save page button"
-    },
-    "appLauncherTitle": {
-        "message": "TagSpaces Browser in einem neuen Tab starten",
-        "description": "Title of the application launcher in the browser."
+        "message": "Save complete page (including images) as one MHTML file, preserving the original design",
+        "description": "Title of the save as MHTML button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Ausgewählte Inhalte wie HTML speichern",
+        "message": "Save selected content (including images) as one HTML file",
         "description": "Title of save selection button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Ganze Seite speichern",
-        "description": "Title of label."
+        "message": "Ganze Seite als MHTML",
+        "description": "Label of the save as MHTML button"
     },
     "saveFileLabel": {
-        "message": "Speichern als Datei",
+        "message": "Dateiformat zum Speichern auswählen",
         "description": "Title of label."
     }
 }

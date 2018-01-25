@@ -12,6 +12,7 @@
     "pack-chrome": "node utils/pack-chrome.js",
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/ --overwrite-dest",
     "eslint": "$(yarn bin)/eslint .",
+    "update-i18n": "tx pull -a",
     "clean": "rm -rf ./build/"
   },
   "license": "AGPL-3.0",
