@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "2.10.2",
+  "version": "2.10.3",
   "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
