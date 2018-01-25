@@ -1,0 +1,82 @@
+{
+    "saveAsSelectionLabel": {
+        "message": "Selected content as HTML",
+        "description": "Label of save selection button"
+    },
+    "downloadTitle": {
+        "message": "Download the file in its original file format",
+        "description": "Title of the download button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Save complete page (including images) as one HTML file, the original design will not be preserved",
+        "description": "Title of the save as html button"
+    },
+    "appLauncher": {
+        "message": "Launch TagSpaces",
+        "description": "Title of the application launcher in the browser."
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as Windows compartible URL file",
+        "description": "Title of bookmark button"
+    },
+    "appDesc": {
+        "message": "Local, no cloud based, web content scrapping with tagging support",
+        "description": "Description of the extension"
+    },
+    "addTagHelp": {
+        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "description": "Add tag help message"
+    },
+    "saveScreenshotTitle": {
+        "message": "Take a screenshot of the visible page area as PNG",
+        "description": "Title of the take screenshot button"
+    },
+    "editTitleLabel": {
+        "message": "Edit file title",
+        "description": "Title of label."
+    },
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
+    },
+    "downloadLabel": {
+        "message": "Download File",
+        "description": "Label of the download button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Bookmark as URL",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Complete page as HTML",
+        "description": "Label of the save as html button"
+    },
+    "appLauncherLabel": {
+        "message": "Capture Web Content",
+        "description": "Title of label."
+    },
+    "saveScreenshotLabel": {
+        "message": "Screenshot as PNG",
+        "description": "Label of the take screenshot button"
+    },
+    "addTagLabel": {
+        "message": "Add tags",
+        "description": "Title of label."
+    },
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page (including images) as one MHTML file, preserving the original design",
+        "description": "Title of the save as MHTML button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Save selected content (including images) as one HTML file",
+        "description": "Title of save selection button"
+    },
+    "saveAsMhtmlLabel": {
+        "message": "Complete page as MHTML",
+        "description": "Label of the save as MHTML button"
+    },
+    "saveFileLabel": {
+        "message": "Choose file format for saving",
+        "description": "Title of label."
+    }
+}
