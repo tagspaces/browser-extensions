@@ -33,6 +33,17 @@ let currentTabURL;
 let currentTabID;
 const activeTabQuery = browser.tabs.query({ active: true });
 
+// Geo locations:
+// GMaps: https://www.google.de/maps/@48.1401285,11.5732137,15.25z
+// GMaps: https://www.google.de/maps/@-20.8096591,-49.3801033,16z
+// OpenStreetMap: https://www.openstreetmap.org/#map=17/48.13504/11.59057
+// OpenStreetMap: https://www.openstreetmap.org/#map=16/-20.8077/-49.3785
+// Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
+// Bing: no url param
+// https://regexper.com
+// RegEx: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)[,/][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+// RegEx: ^(\-?\d+(\.\d+)?)[,/](\-?\d+(\.\d+)?)$
+
 function init() {
   activeTabQuery.then((tabs) => {
     for (let tab of tabs) {
@@ -149,12 +160,15 @@ function saveScreenshot() {
 
 function saveAsBookmark() {
   $('#saveAsBookmark i').removeClass('fa-bookmark').addClass('fa-spin fa-circle-o-notch');
-  const content = '[InternetShortcut]\r\nURL=' + currentTabURL + '';
-  const textBlob = new Blob([content], {
-    type: "text/plain;charset=utf-8"
+  const capturing = browser.tabs.captureVisibleTab(null, {"format": "jpeg"});
+  capturing.then((imageDataUrl) => { // Make capturing optional, evtl. resize the image
+    const content = '[InternetShortcut]\r\nURL=' + currentTabURL + '\r\nSCREENSHOT=' + imageDataUrl;
+    const textBlob = new Blob([content], {
+      type: "text/plain;charset=utf-8"
+    });
+    saveAs(textBlob, generateFileName('url'));
+    $('#saveAsBookmark i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-bookmark');
   });
-  saveAs(textBlob, generateFileName('url'));
-  $('#saveAsBookmark i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-bookmark');
 }
 
 function generateFileName(extension, type) {
@@ -288,15 +302,21 @@ function prepareContentPromise(uncleanedHTML) {
         // cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
       });
 
-      const metaData = 'data-sourceurl="' + currentTabURL + '" data-scrappedon="' + (new Date()).toISOString() + '"';
-      if (cleanedHTML.includes('<body')) {
-        cleanedHTML = cleanedHTML.split('<body').join('<body ' + metaData);
-      } else {
-        cleanedHTML = '<body ' + metaData + '>' + cleanedHTML + "</body>";
-        cleanedHTML = htmlTemplate.replace(/\<body[^>]*\>([^]*)\<\/body>/m, cleanedHTML);
-      }
-      // console.log('Content before saving: ' + cleanedHTML);
-      return resolve(cleanedHTML);
+      const capturing = browser.tabs.captureVisibleTab(null, {"format": "jpeg"});
+      capturing.then((imageDataUrl) => { // Make capturing optional, evtl. resize the image
+        let metaData = 'data-sourceurl="' + currentTabURL + '" data-scrappedon="' + (new Date()).toISOString() + '"';
+        if (imageDataUrl) {
+          metaData = metaData + ' data-screenshot="' + imageDataUrl + '"';
+        }
+        if (cleanedHTML.includes('<body')) {
+          cleanedHTML = cleanedHTML.split('<body').join('<body ' + metaData);
+        } else {
+          cleanedHTML = '<body ' + metaData + '>' + cleanedHTML + "</body>";
+          cleanedHTML = htmlTemplate.replace(/\<body[^>]*\>([^]*)\<\/body>/m, cleanedHTML);
+        }
+        // console.log('Content before saving: ' + cleanedHTML);
+        return resolve(cleanedHTML);
+      }, (err) => console.warn('Error taking screenshot ' + JSON.stringify(err)));
     }).catch((error) => {
       console.warn('Error by preparing content: ' + error);
       return resolve(cleanedHTML);
