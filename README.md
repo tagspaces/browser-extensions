@@ -7,6 +7,10 @@
 
 ## Features
 
+* Saving complete web pages as HTML and MHTML(chrome only) files
+* Saving selected part of a web pages as HTML file
+* Saving a screenshot of the visible area of the current tab as PNG file
+* Saving a bookmark as URL files
 
 ## Keyboard Shortcuts (Chrome-only)
 
@@ -18,6 +22,10 @@ You can add keyboard shortuts for opening the web scrapping menu.
 3. Assign Keyboard Shortcuts in the dialog.
 
 ![](screenshots/keybinding-2.png)
+
+## Tips and tricks
+
+* Chrome: Enabling the setting 'Ask where to save each file before downloading' in the Downloads section of the Chorme settings, will make you files not be saved automatically in the default downdload folder.
 
 ## Known Issues
 
