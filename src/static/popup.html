@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>TagSpaces Web Clipper</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
     <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/css/font-awesome.min.css">
@@ -11,7 +11,7 @@
 <div class="well" style="margin: 0; border: 0px; background-color: transparent;">
     <div style="white-space: nowrap; margin-bottom: 30px;" class="text-center">
         <a href="https://www.tagspaces.org/" target="_blank"><img src="images/icon-128.png" class="pull-left" style="margin-left: 0px; max-height: 32px; max-width: 32px;"/></a>
-        <span style="font-size: 18px;" data-i18n="appLauncherLabel"></span>
+        <span style="font-size: 18px;" data-i18n="appName"></span>
         <a href="#" class="btn btn-link fa-lg pull-right" id="closePopup"><i class="fa fa-times"></i></a>
     </div>
     <div class="form-group">
@@ -27,24 +27,30 @@
         </div>
     </form>
     <label><span class="badge">3</span> <span data-i18n="saveFileLabel"></span></label>
-    <div class="btn-toolbar text-center noWrap">
-        <a href="#" class="btn btn-primary" id="downloadFile" data-i18n-title="downloadTitle">
-            <i class="fa fa-download fa-lg fa-fw"></i>&nbsp;<span data-i18n="downloadLabel"></span>
-        </a>
-        <a href="#" class="btn btn-primary" id="saveAsMhtml" data-i18n-title="saveAsMhtmlTitle">
-            <i class="fa fa-file-image-o fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveAsMhtmlLabel"></span>
-        </a>
+    <div>
         <a href="#" class="btn btn-primary" id="saveWholePageAsHtml" data-i18n-title="savePageAsHtmlTitle">
             <i class="fa fa-file fa-lg fa-fw"></i>&nbsp;<span data-i18n="savePageAsHtmlLabel"></span>
         </a>
+    </div>
+    <div>
+        <a href="#" class="btn btn-primary" id="saveAsMhtml" data-i18n-title="saveAsMhtmlTitle">
+            <i class="fa fa-file-image-o fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveAsMhtmlLabel"></span>
+        </a>
+    </div>
+    <div>
         <a href="#" class="btn btn-primary" id="saveSelectionAsHtml" data-i18n-title="saveSelectionAsHtmlTitle">
             <i class="fa fa-file-text fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveAsSelectionLabel"></span>
         </a>
+    </div>
+    <div>
         <a href="#" class="btn btn-primary" id="saveScreenshot" data-i18n-title="saveScreenshotTitle">
             <i class="fa fa-camera fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveScreenshotLabel"></span>
         </a>
         <a href="#" class="btn btn-primary" id="saveAsBookmark" data-i18n-title="saveBookmarkTitle">
             <i class="fa fa-bookmark fa-lg fa-fw"></i>&nbsp;<span data-i18n="saveBookmarkLabel"></span>
+        </a>
+        <a href="#" class="btn btn-primary" id="downloadFile" data-i18n-title="downloadTitle">
+            <i class="fa fa-download fa-lg fa-fw"></i>&nbsp;<span data-i18n="downloadLabel"></span>
         </a>
     </div>
     <div class="text-center">Your can use the desktop version of <b>TagSpaces</b> for organizing the scraped content. It is freely available from our <a href="https://www.tagspaces.org/products/" target="_blank">web page</a>.
