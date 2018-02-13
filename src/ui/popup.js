@@ -16,6 +16,10 @@
  *
  */
 /* globals $, saveAs, DOMPurify */
+import OptionsManager from "../lib/options-manager.js";
+
+let userSettings = {};
+OptionsManager.load().then(options => userSettings = options)
 
 $(document).ready(init);
 
@@ -45,6 +49,8 @@ const activeTabQuery = browser.tabs.query({ active: true });
 // RegEx: ^(\-?\d+(\.\d+)?)[,/](\-?\d+(\.\d+)?)$
 
 function init() {
+  // console.log('Settings: ' + JSON.stringify(userSettings));
+
   activeTabQuery.then((tabs) => {
     for (let tab of tabs) {
       currentTabURL = tab.url;
@@ -162,7 +168,8 @@ function saveAsBookmark() {
   $('#saveAsBookmark i').removeClass('fa-bookmark').addClass('fa-spin fa-circle-o-notch');
   const capturing = browser.tabs.captureVisibleTab(null, {"format": "jpeg"});
   capturing.then((imageDataUrl) => { // Make capturing optional, evtl. resize the image
-    const content = '[InternetShortcut]\r\nURL=' + currentTabURL + '\r\nSCREENSHOT=' + imageDataUrl;
+    const screenshot = userSettings.enableScreenshotEmbedding ? 'COMMENT=' + imageDataUrl + '\r\n' : ''
+    const content = '[InternetShortcut]\r\nURL=' + currentTabURL + '\r\n' + screenshot;
     const textBlob = new Blob([content], {
       type: "text/plain;charset=utf-8"
     });
@@ -223,6 +230,10 @@ function dataURItoBlob(dataURI) {
 
 function getBase64ImagePromise(imgURL) {
   return new Promise((resolve) => {
+    let mimeType = 'image/jpeg';
+    // if (imgURL.endsWith('gif')) {
+    //   mimeType = 'image/gif';
+    // }
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     const img = new Image();
@@ -237,7 +248,7 @@ function getBase64ImagePromise(imgURL) {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      dataURL = canvas.toDataURL('image/jpeg', 0.9);
+      dataURL = canvas.toDataURL(mimeType, 0.9);
       resolve([imgURL, dataURL]);
     }
   });
@@ -305,7 +316,7 @@ function prepareContentPromise(uncleanedHTML) {
       const capturing = browser.tabs.captureVisibleTab(null, {"format": "jpeg"});
       capturing.then((imageDataUrl) => { // Make capturing optional, evtl. resize the image
         let metaData = 'data-sourceurl="' + currentTabURL + '" data-scrappedon="' + (new Date()).toISOString() + '"';
-        if (imageDataUrl) {
+        if (imageDataUrl && userSettings.enableScreenshotEmbedding) {
           metaData = metaData + ' data-screenshot="' + imageDataUrl + '"';
         }
         if (cleanedHTML.includes('<body')) {
