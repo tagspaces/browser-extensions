@@ -5,7 +5,7 @@ let form = document.getElementById("form");
 // Saves options to browser.storage.sync.
 function save() {
   OptionsManager.save({
-    escape: form.escape.checked
+    enableScreenshotEmbedding: form.enableScreenshotEmbedding.checked
   })
 }
 
@@ -13,7 +13,7 @@ function save() {
 // stored in browser.storage.
 function load() {
   OptionsManager.load().then(items => {
-    form.escape.checked = items.escape
+    form.enableScreenshotEmbedding.checked = items.enableScreenshotEmbedding
   })
 }
 

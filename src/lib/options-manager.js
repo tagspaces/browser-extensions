@@ -1,5 +1,6 @@
 let DEFAULT_OPTIONS = {
-  escape: false
+  enableScreenshotEmbedding: false,
+  enableAutomaticScreenshotTagging: true
 };
 
 export default {
