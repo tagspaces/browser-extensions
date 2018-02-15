@@ -1,14 +1,18 @@
 {
+    "desktopTagSpacesLabel": {
+        "message": "Organisieren Sie die gesammelten Inhalten mit der Desktop-App TagSpaces. Es ist frei verfügbar auf",
+        "description": "Reference to TagSpaces Desktop label"
+    },
     "saveAsSelectionLabel": {
-        "message": "Ausgewählte Inhalte als HTML",
+        "message": "Auswahl speichern",
         "description": "Label of save selection button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Die Datei im Originalformat herunterladen.",
         "description": "Title of the download button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page (including images) as one HTML file, the original design will not be preserved",
+        "message": "Speichern Sie die komplette Seite einschließlich Bilder als eine HTML-Datei, das ursprüngliche Design wird nicht beibehalten",
         "description": "Title of the save as html button"
     },
     "appLauncher": {
@@ -16,11 +20,11 @@
         "description": "Title of the application launcher in the browser."
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as Windows compartible URL file",
+        "message": "Speichern Sie ein Lesezeichen der aktuellen Seite als URL-Datei, die mit Windows® und Mac OS® kompatibel ist",
         "description": "Title of bookmark button"
     },
     "appDesc": {
-        "message": "Lokales, nicht cloud-basierte Speicherung von Webinhalten mit Unterstützung von Etiketten.",
+        "message": "Sammle und organisiere Webinhalte in einfachen Dateien.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
@@ -28,11 +32,11 @@
         "description": "Add tag help message"
     },
     "saveScreenshotTitle": {
-        "message": "Screenshot des sichtbaren Seitenbereichs als PNG-Datei speichern",
+        "message": "Erstellen Sie einen Screenshot des sichtbaren Seitenbereichs als PNG-Datei. Verkleinere das Browserfenster, um den genauen Bereich für den Screenshot auszuwählen.",
         "description": "Title of the take screenshot button"
     },
     "editTitleLabel": {
-        "message": "Dateiname Editieren",
+        "message": "Dateiname editieren",
         "description": "Title of label."
     },
     "appName": {
@@ -44,11 +48,11 @@
         "description": "Label of the download button"
     },
     "saveBookmarkLabel": {
-        "message": "Lesezeichen als URL",
+        "message": "Lesezeichen erstellen",
         "description": "Lable of bookmark button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Ganze Seite als HTML",
+        "message": "Bearbeitbare Seite speichern",
         "description": "Label of the save as html button"
     },
     "appLauncherLabel": {
@@ -56,7 +60,7 @@
         "description": "Title of label."
     },
     "saveScreenshotLabel": {
-        "message": "Screenshot als PNG",
+        "message": "Screenshot erstellen",
         "description": "Label of the take screenshot button"
     },
     "addTagLabel": {
@@ -64,19 +68,19 @@
         "description": "Title of label."
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page (including images) as one MHTML file, preserving the original design",
+        "message": "Speichern Sie die komplette Seite einschließlich der Bilder als eine MHTML-Datei, das ursprüngliche Design wird beibehalten",
         "description": "Title of the save as MHTML button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content (including images) as one HTML file",
+        "message": "Speichert das ausgewählte Inhalt samt Bilder als eine HTML-Datei. ",
         "description": "Title of save selection button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Ganze Seite als MHTML",
+        "message": "Komplette Seite speichern",
         "description": "Label of the save as MHTML button"
     },
     "saveFileLabel": {
-        "message": "Dateiformat zum Speichern auswählen",
-        "description": "Title of label."
+        "message": "Speicheraktion auswählen",
+        "description": "SAving action label."
     }
 }

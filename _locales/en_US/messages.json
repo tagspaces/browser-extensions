@@ -80,7 +80,7 @@
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Your can use the TagSpaces desktop app for organizing the collected content. It is freely available on ",
+        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
         "description": "Reference to TagSpaces Desktop label"
     }
 }

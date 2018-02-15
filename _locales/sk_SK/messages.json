@@ -1,70 +1,86 @@
 {
+    "desktopTagSpacesLabel": {
+        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "description": "Reference to TagSpaces Desktop label"
+    },
     "saveAsSelectionLabel": {
-        "message": "Uložiť vybrané",
-        "description": "Title of label."
+        "message": "Clip Selection",
+        "description": "Label of save selection button"
+    },
+    "downloadTitle": {
+        "message": "Download the file in its original file format",
+        "description": "Title of the download button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "description": "Title of the save as html button"
     },
     "appLauncher": {
         "message": "Spustiť TagSpaces",
         "description": "Title of the application launcher in the browser."
     },
     "saveBookmarkTitle": {
-        "message": "Bookmark the page",
+        "message": "Save a bookmark of the current page as URL file, compartible with Windows® and Mac OS®",
         "description": "Title of bookmark button"
     },
     "appDesc": {
-        "message": "Prehliadač súborov so snímaním webového obsahu a podporou Chromecastu.",
-        "description": ""
+        "message": "Collect and organize web content in plain files.",
+        "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Značky môžu mať najmenej 2 znaky a nesmú obsahovať špeciálne znaky ako medzery, #, / ,\\ a iné.",
+        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
         "description": "Add tag help message"
     },
     "saveScreenshotTitle": {
-        "message": "Uložiť snímku obrazovky viditeľnej časti stránky ako PNG",
-        "description": "Title of screenshot button"
+        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "description": "Title of the take screenshot button"
     },
     "editTitleLabel": {
-        "message": "Upraviť názov",
+        "message": "Edit file title",
         "description": "Title of label."
     },
     "appName": {
-        "message": "TagSpaces",
-        "description": ""
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
+    },
+    "downloadLabel": {
+        "message": "Download File",
+        "description": "Label of the download button"
     },
     "saveBookmarkLabel": {
-        "message": "Bookmark",
-        "description": "Title of label."
+        "message": "Create Bookmark",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Save editable page",
+        "description": "Label of the save as html button"
     },
     "appLauncherLabel": {
         "message": "Zachytiť obsah webu",
         "description": "Title of label."
     },
     "saveScreenshotLabel": {
-        "message": "Snímka obrazovky",
-        "description": "Title of label."
+        "message": "Take Screenshot",
+        "description": "Label of the take screenshot button"
     },
     "addTagLabel": {
-        "message": "Pridať značky",
+        "message": "Add tags",
         "description": "Title of label."
     },
     "saveAsMhtmlTitle": {
-        "message": "Uložiť celú stránku ako MHTML",
-        "description": "Title of save page button"
-    },
-    "appLauncherTitle": {
-        "message": "Spustiť prehliadač TagSpaces v novej karte",
-        "description": "Title of the application launcher in the browser."
+        "message": "Save complete page including images as one MHTML file, preserving the original design",
+        "description": "Title of the save as MHTML button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Uložiť označený obsah ako HTML",
+        "message": "Save selected content including images as one HTML file",
         "description": "Title of save selection button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Uložiť celú stránku",
-        "description": "Title of label."
+        "message": "Save complete page",
+        "description": "Label of the save as MHTML button"
     },
     "saveFileLabel": {
-        "message": "Uložiť ako súbor",
-        "description": "Title of label."
+        "message": "Choose the saving action",
+        "description": "SAving action label."
     }
 }

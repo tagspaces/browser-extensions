@@ -1,70 +1,86 @@
 {
+    "desktopTagSpacesLabel": {
+        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "description": "Reference to TagSpaces Desktop label"
+    },
     "saveAsSelectionLabel": {
-        "message": "Save Selected",
-        "description": "Title of label."
+        "message": "Clip Selection",
+        "description": "Label of save selection button"
+    },
+    "downloadTitle": {
+        "message": "Download the file in its original file format",
+        "description": "Title of the download button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "description": "Title of the save as html button"
     },
     "appLauncher": {
         "message": "TagSpaces를 시작합니다",
         "description": "Title of the application launcher in the browser."
     },
     "saveBookmarkTitle": {
-        "message": "Bookmark the page",
+        "message": "Save a bookmark of the current page as URL file, compartible with Windows® and Mac OS®",
         "description": "Title of bookmark button"
     },
     "appDesc": {
-        "message": "File Browser with Web Content Scraping and Chromecast Support.",
-        "description": ""
+        "message": "Collect and organize web content in plain files.",
+        "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "태그는 최소 2글자 이상이어야 합니다. 태그에 공백, #, /, \\ 등 특수기호를 사용할 수 없습니다",
+        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
         "description": "Add tag help message"
     },
     "saveScreenshotTitle": {
-        "message": "Save screenshot of the visible page area as PNG",
-        "description": "Title of screenshot button"
+        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "description": "Title of the take screenshot button"
     },
     "editTitleLabel": {
-        "message": "제목 수정",
+        "message": "Edit file title",
         "description": "Title of label."
     },
     "appName": {
-        "message": "TagSpaces",
-        "description": ""
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
+    },
+    "downloadLabel": {
+        "message": "Download File",
+        "description": "Label of the download button"
     },
     "saveBookmarkLabel": {
-        "message": "Bookmark",
-        "description": "Title of label."
+        "message": "Create Bookmark",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Save editable page",
+        "description": "Label of the save as html button"
     },
     "appLauncherLabel": {
         "message": "Capture Web Content",
         "description": "Title of label."
     },
     "saveScreenshotLabel": {
-        "message": "Screenshot",
-        "description": "Title of label."
+        "message": "Take Screenshot",
+        "description": "Label of the take screenshot button"
     },
     "addTagLabel": {
-        "message": "태그 추가",
+        "message": "Add tags",
         "description": "Title of label."
     },
     "saveAsMhtmlTitle": {
-        "message": "Save whole page as MHTML",
-        "description": "Title of save page button"
-    },
-    "appLauncherTitle": {
-        "message": "새로운 브라우저 탭에서 TagSpaces 시작",
-        "description": "Title of the application launcher in the browser."
+        "message": "Save complete page including images as one MHTML file, preserving the original design",
+        "description": "Title of the save as MHTML button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content as HTML",
+        "message": "Save selected content including images as one HTML file",
         "description": "Title of save selection button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save Whole Page",
-        "description": "Title of label."
+        "message": "Save complete page",
+        "description": "Label of the save as MHTML button"
     },
     "saveFileLabel": {
-        "message": "Save as File",
-        "description": "Title of label."
+        "message": "Choose the saving action",
+        "description": "SAving action label."
     }
 }
