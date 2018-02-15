@@ -7,3 +7,24 @@
     top: 15px;
     right: 15px;
 }
+
+#savingActionsArea {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+#savingActionsArea a {
+    width: 98%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#savingActionsArea div {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.badge {
+    margin-right: 5px
+}
