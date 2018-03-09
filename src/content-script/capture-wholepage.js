@@ -16,13 +16,30 @@
  *
  */
 "use strict";
+import Readability from 'readability';
 
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
 function getCompleteHtml() {
-  let body = document.body.innerHTML;
-  let head = document.head.innerHTML;
-  return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
+  try {
+    const loc = document.location;
+    const uri = {
+      spec: loc.href,
+      host: loc.host,
+      prePath: loc.protocol + "//" + loc.host,
+      scheme: loc.protocol.substr(0, loc.protocol.indexOf(":")),
+      pathBase: loc.protocol + "//" + loc.host + loc.pathname.substr(0, loc.pathname.lastIndexOf("/") + 1)
+    };
+    const documentClone = document.cloneNode(true);
+    const article = new Readability(uri, documentClone).parse();
+    let extractedContent = '<h1>' + article.title + '</h1>' + article.content
+    return extractedContent;
+  } catch (error) {
+    console.warn('Error parsing document, sending original content');
+    let body = document.body.innerHTML;
+    let head = document.head.innerHTML;
+    return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
+  }
 }
 
 if (isFirefox) {
