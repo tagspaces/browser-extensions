@@ -35,7 +35,7 @@ let htmlTemplate = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style type
 let fileExt;
 let currentTabURL;
 let currentTabID;
-const activeTabQuery = browser.tabs.query({ active: true });
+const activeTabQuery = browser.tabs.query({currentWindow: true, active: true });
 
 // Geo locations:
 // GMaps: https://www.google.de/maps/@48.1401285,11.5732137,15.25z
@@ -85,6 +85,18 @@ function init() {
   browser.runtime.onMessage.addListener(handleHTMLContent);
 }
 
+function saveAsFile(blob, filename) {
+  if (isFirefox) {
+    saveAs(blob, filename);
+  } else {
+    browser.downloads.download({
+      url: URL.createObjectURL(blob),
+      filename: filename,
+      saveAs: true
+    });
+  }
+}
+
 function handleHTMLContent(request) {
   if (request.action == "htmlcontent") {
     // console.log("HTML: " + request.source);
@@ -96,7 +108,7 @@ function handleHTMLContent(request) {
       const htmlBlob = new Blob([cleanenHTML], {
         type: "text/html;charset=utf-8"
       });
-      saveAs(htmlBlob, generateFileName('html'));
+      saveAsFile(htmlBlob, generateFileName('html'));
       $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
       $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
     }).catch((err) => {
@@ -112,7 +124,7 @@ function saveAsMHTML() {
   browser.pageCapture.saveAsMHTML({
     tabId: currentTabID
   }, (mhtml) => {
-    saveAs(mhtml, generateFileName(fileExt, 'mht'));
+    saveAsFile(mhtml, generateFileName(fileExt, 'mht'));
     $('#saveAsMhtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-image-o');
   });
 }
@@ -159,7 +171,7 @@ function saveScreenshot() {
     "format": "png"
   });
   capturing.then((image) => {
-    saveAs(dataURItoBlob(image), generateFileName('png', 'screenshot'));
+    saveAsFile(dataURItoBlob(image), generateFileName('png', 'screenshot'));
     $('#saveScreenshot i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-camera');
   }, (err) => console.warn('Error taking screenshot ' + JSON.stringify(err)));
 }
@@ -173,7 +185,7 @@ function saveAsBookmark() {
     const textBlob = new Blob([content], {
       type: "text/plain;charset=utf-8"
     });
-    saveAs(textBlob, generateFileName('url'));
+    saveAsFile(textBlob, generateFileName('url'));
     $('#saveAsBookmark i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-bookmark');
   });
 }
@@ -181,7 +193,7 @@ function saveAsBookmark() {
 function generateFileName(extension, type) {
   let filename = $('#title').val()
   const lastIndexOfDot = filename.lastIndexOf('.');
-  // removing the extension if the dot in for 4 or less character before teh end of the title
+  // removing the extension if the dot in for 4 or less character before the end of the title
   if (lastIndexOfDot > 0 && (filename.length - lastIndexOfDot) < 5) {
     filename = filename.substring(0, filename.lastIndexOf('.'))
   }
@@ -207,6 +219,7 @@ function generateFileName(extension, type) {
   } else {
     filename = filename + '.' + extension;
   }
+  filename = filename.replace(/[/\\?%*:|"<>]/g, '-');
   return filename;
 }
 
