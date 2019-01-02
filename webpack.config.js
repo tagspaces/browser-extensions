@@ -39,7 +39,7 @@ let config = {
       { from: '../node_modules/webextension-polyfill/dist/browser-polyfill.js', to: './vendor/' },
       { from: '../node_modules/bootswatch/paper/bootstrap.min.css', to: './vendor/css' },
       { from: '../node_modules/jquery/dist/jquery.min.js', to: './vendor' },
-      { from: '../node_modules/file-saver/FileSaver.min.js', to: './vendor' },
+      { from: '../node_modules/file-saver/dist/FileSaver.min.js', to: './vendor' },
       { from: '../node_modules/dompurify/dist/purify.min.js', to: './vendor' },
       { from: '../node_modules/font-awesome/css/font-awesome.min.css', to: './vendor/css' },
       { from: '../node_modules/font-awesome/fonts/fontawesome-webfont.ttf', to: './vendor/fonts' },

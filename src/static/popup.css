@@ -1,5 +1,27 @@
 .btn-primary {
     margin-bottom: 5px !important;
+    background-color: #1DD19F;
+}
+
+.btn-primary:hover {
+    margin-bottom: 5px !important;
+    background-color: #1DD19F;
+}
+
+a {
+    color: #1DD19F;
+}
+
+a:hover {
+    color: #1DD19F;
+}
+
+textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
+    box-shadow: inset 0 -2px 0 #1DD19F;
+}
+
+.bg-primary {
+    background-color: #1DD19F;
 }
 
 #closePopup {
