@@ -1,5 +1,5 @@
 let DEFAULT_OPTIONS = {
-  enableScreenshotEmbedding: false,
+  enableScreenshotEmbedding: true,
   enableAutomaticScreenshotTagging: true
 };
 
