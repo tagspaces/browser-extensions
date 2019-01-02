@@ -1,86 +1,86 @@
 {
-    "desktopTagSpacesLabel": {
-        "message": "Recueillir et organiser contenu d'Internet avec TagSpaces application de bureau. Télécharger gratuitement sur\n",
-        "description": "Reference to TagSpaces Desktop label"
-    },
-    "saveAsSelectionLabel": {
-        "message": "Enregistrer la sélection",
-        "description": "Label of save selection button"
-    },
-    "downloadTitle": {
-        "message": "Télécharger le fichier dans son format d'origine",
-        "description": "Title of the download button"
-    },
-    "savePageAsHtmlTitle": {
-        "message": "Enregistrer la page complète, en incluant les images dans un fichier HTML, le design original ne sera pas conservé",
-        "description": "Title of the save as html button"
-    },
-    "appLauncher": {
-        "message": "Démarrez l'application TagSpaces",
-        "description": "Title of the application launcher in the browser."
-    },
-    "saveBookmarkTitle": {
-        "message": "Enregistrer un signet de la page en cours comme un fichier URL, compatible avec Windows® et Mac OS®",
-        "description": "Title of bookmark button"
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     },
     "appDesc": {
         "message": "Recueillir et organiser contenu d'Internet dans des fichiers simples",
         "description": "Description of the extension"
     },
-    "addTagHelp": {
-        "message": "Plusieurs étiquettes doivent être séparées par des virgules.\nLes étiquettes doivent posséder une longueur minimale de 2 caractères et ne doivent pas contenir de caractères spéciaux tels que: espace, #, / or \\.",
-        "description": "Add tag help message"
-    },
-    "saveScreenshotTitle": {
-        "message": "Enregistrer une capture d'écran de la zone de la page visible en PNG. Redimensionner la fenêtre du navigateur afin de mettre au point la zone exacte pour la capture d'écran.",
-        "description": "Title of the take screenshot button"
-    },
-    "editTitleLabel": {
-        "message": "Modifier le titre du fichier",
-        "description": "Title of label."
-    },
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
-    },
-    "downloadLabel": {
-        "message": "Télécharger le fichier",
-        "description": "Label of the download button"
-    },
-    "saveBookmarkLabel": {
-        "message": "Créer un signet",
-        "description": "Lable of bookmark button"
-    },
-    "savePageAsHtmlLabel": {
-        "message": "Enregistrer une page modifiable",
-        "description": "Label of the save as html button"
+    "appLauncher": {
+        "message": "Démarrez l'application TagSpaces",
+        "description": "Title of the application launcher in the browser."
     },
     "appLauncherLabel": {
         "message": "Capture du contenu d'Internet",
         "description": "Title of label."
     },
-    "saveScreenshotLabel": {
-        "message": "Capture d'écran",
-        "description": "Label of the take screenshot button"
+    "editTitleLabel": {
+        "message": "Modifier le titre du fichier",
+        "description": "Title of label."
     },
     "addTagLabel": {
         "message": "Ajouter des étiquettes",
         "description": "Title of label."
     },
+    "addTagHelp": {
+        "message": "Plusieurs étiquettes doivent être séparées par des virgules.\nLes étiquettes doivent posséder une longueur minimale de 2 caractères et ne doivent pas contenir de caractères spéciaux tels que: espace, #, / or \\.",
+        "description": "Add tag help message"
+    },
+    "saveFileLabel": {
+        "message": "Choisir le mode d'enregistrement",
+        "description": "SAving action label."
+    },
     "saveAsMhtmlTitle": {
         "message": "Enregistrer la page complète, en incluant les images dans un fichier MHTML, en préservant le design original",
         "description": "Title of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Enregistrer le contenu sélectionné, en incluant les images, comme un fichier HTML",
-        "description": "Title of save selection button"
     },
     "saveAsMhtmlLabel": {
         "message": "Enregistrer la page complète",
         "description": "Label of the save as MHTML button"
     },
-    "saveFileLabel": {
-        "message": "Choisir la mode d'enregistrement",
-        "description": "SAving action label."
+    "saveSelectionAsHtmlTitle": {
+        "message": "Enregistrer le contenu sélectionné, en incluant les images, comme un fichier HTML",
+        "description": "Title of save selection button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Enregistrer la sélection",
+        "description": "Label of save selection button"
+    },
+    "saveScreenshotTitle": {
+        "message": "Enregistrer une capture d'écran de la zone de la page visible en PNG. Redimensionner la fenêtre du navigateur afin de mettre au point la zone exacte pour la capture d'écran.",
+        "description": "Title of the take screenshot button"
+    },
+    "saveScreenshotLabel": {
+        "message": "Capture d'écran",
+        "description": "Label of the take screenshot button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Enregistrer un signet de la page en cours comme un fichier URL, compatible avec Windows® et Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Créer un signet",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Enregistrer la page complète, en incluant les images dans un fichier HTML, le design original ne sera pas conservé",
+        "description": "Title of the save as html button"
+    },
+    "downloadTitle": {
+        "message": "Télécharger le fichier dans son format d'origine",
+        "description": "Title of the download button"
+    },
+    "downloadLabel": {
+        "message": "Télécharger le fichier",
+        "description": "Label of the download button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Enregistrer une page modifiable",
+        "description": "Label of the save as html button"
+    },
+    "desktopTagSpacesLabel": {
+        "message": "Recueillir et organiser contenu d'Internet avec TagSpaces application de bureau. Télécharger gratuitement sur\n",
+        "description": "Reference to TagSpaces Desktop label"
     }
 }

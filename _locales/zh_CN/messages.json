@@ -1,86 +1,86 @@
 {
-    "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
-        "description": "Reference to TagSpaces Desktop label"
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     },
-    "saveAsSelectionLabel": {
-        "message": "Clip Selection",
-        "description": "Label of save selection button"
-    },
-    "downloadTitle": {
-        "message": "Download the file in its original file format",
-        "description": "Title of the download button"
-    },
-    "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
-        "description": "Title of the save as html button"
+    "appDesc": {
+        "message": "使用纯文本收集组织网页内容",
+        "description": "Description of the extension"
     },
     "appLauncher": {
         "message": "启动TagSpaces",
         "description": "Title of the application launcher in the browser."
     },
-    "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compartible with Windows® and Mac OS®",
-        "description": "Title of bookmark button"
-    },
-    "appDesc": {
-        "message": "Collect and organize web content in plain files.",
-        "description": "Description of the extension"
-    },
-    "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
-        "description": "Add tag help message"
-    },
-    "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
-        "description": "Title of the take screenshot button"
-    },
-    "editTitleLabel": {
-        "message": "Edit file title",
-        "description": "Title of label."
-    },
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
-    },
-    "downloadLabel": {
-        "message": "Download File",
-        "description": "Label of the download button"
-    },
-    "saveBookmarkLabel": {
-        "message": "Create Bookmark",
-        "description": "Lable of bookmark button"
-    },
-    "savePageAsHtmlLabel": {
-        "message": "Save editable page",
-        "description": "Label of the save as html button"
-    },
     "appLauncherLabel": {
         "message": "抓取Web内容",
         "description": "Title of label."
     },
-    "saveScreenshotLabel": {
-        "message": "Take Screenshot",
-        "description": "Label of the take screenshot button"
-    },
-    "addTagLabel": {
-        "message": "Add tags",
+    "editTitleLabel": {
+        "message": "编辑文件标题",
         "description": "Title of label."
     },
-    "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as one MHTML file, preserving the original design",
-        "description": "Title of the save as MHTML button"
+    "addTagLabel": {
+        "message": "添加标签",
+        "description": "Title of label."
     },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
-        "description": "Title of save selection button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Save complete page",
-        "description": "Label of the save as MHTML button"
+    "addTagHelp": {
+        "message": "多个标签使用逗号分隔，标签长度2字符以上，不能含有空格、#、/、\\等特殊字符",
+        "description": "Add tag help message"
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "选择保存操作",
         "description": "SAving action label."
+    },
+    "saveAsMhtmlTitle": {
+        "message": "保存所选内容（含图片）为单个MHTML文件，保留原网页设计",
+        "description": "Title of the save as MHTML button"
+    },
+    "saveAsMhtmlLabel": {
+        "message": "保存整个网页",
+        "description": "Label of the save as MHTML button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "保存所选内容（含图片）为单个HTML文件",
+        "description": "Title of save selection button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "复制所选内容",
+        "description": "Label of save selection button"
+    },
+    "saveScreenshotTitle": {
+        "message": "将当前页面可视区域截屏为PNG文件。调整浏览器窗口大小以对焦所需的截屏区域",
+        "description": "Title of the take screenshot button"
+    },
+    "saveScreenshotLabel": {
+        "message": "截屏",
+        "description": "Label of the take screenshot button"
+    },
+    "saveBookmarkTitle": {
+        "message": "将当前页面的书签保存为URL文件，适用于Windows和Mac OS",
+        "description": "Title of bookmark button"
+    },
+    "saveBookmarkLabel": {
+        "message": "创建书签",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "保存所选内容（含图片）为单个HTML文件，丢失原网页设计",
+        "description": "Title of the save as html button"
+    },
+    "downloadTitle": {
+        "message": "下载原格式文件",
+        "description": "Title of the download button"
+    },
+    "downloadLabel": {
+        "message": "下载文件",
+        "description": "Label of the download button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "保存编辑页面",
+        "description": "Label of the save as html button"
+    },
+    "desktopTagSpacesLabel": {
+        "message": "在TagSpaces桌面应用中组织所选内容",
+        "description": "Reference to TagSpaces Desktop label"
     }
 }
