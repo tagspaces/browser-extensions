@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html style="overflow: overlay;">
 <head lang="en">
     <meta charset="UTF-8">
     <title>TagSpaces Web Clipper</title>
@@ -8,36 +7,38 @@
     <link rel="stylesheet" type="text/css" href="vendor/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
-
 <body style="width: 540px; padding:0; font-size: 14px; background-color: #f9f9f9;">
-    <div class="well" style="margin: 0; border: 0px; background-color: transparent;">
-        <div style="white-space: nowrap; margin-bottom: 30px;" class="text-center">
+    <div class="well" style="margin: 0; padding-bottom: 0; border: 0px; background-color: transparent;">
+        <div style="white-space: nowrap;" class="text-center">
             <a href="https://www.tagspaces.org/" target="_blank">
                 <img src="images/icon-128.png" class="pull-left" style="margin-left: 0px; max-height: 32px; max-width: 32px;" />
             </a>
-            <span style="font-size: 18px;" data-i18n="appName"></span>
+            <img src="images/web-clipper-logo.svg" class="pull-left" style="margin-left: 10px; max-height: 60px; max-width: 232px;" />
+            <!--span style="font-size: 18px;" data-i18n="appName"></span-->
+            <div id="contentModeSwitch" class="btn-group btn-group-sm" role="group" aria-label="Extraction type">
+                <button id="simplifiedPreview" type="button" class="btn btn-default">Simplified</button>
+                <button id="fullPreview" type="button" class="btn btn-default">Full</button>
+            </div>
             <a href="#" class="btn btn-link fa-lg pull-right" id="closePopup">
                 <i class="fa fa-times"></i>
             </a>
         </div>
+        <iframe id="preview"></iframe>
         <div class="form-group">
             <label class="control-label" for="title">
                 <span class="badge">1</span>
                 <span data-i18n="editTitleLabel"></span>
             </label>
             <input class="form-control" type="text" name="title" id="title" autocomplete="off" />
-            <p class="help-block"></p>
         </div>
-        <form role="form" data-toggle="validator">
-            <div class="form-group">
-                <label class="control-label" for="tags">
-                    <span class="badge">2</span>
-                    <span data-i18n="addTagLabel"></span>
-                </label>
-                <input class="form-control" type="text" name="tags" id="tags" autocomplete="off" />
-                <p class="help-block" data-i18n="addTagHelp"></p>
-            </div>
-        </form>
+        <div class="form-group">
+            <label class="control-label" for="tags">
+                <span class="badge">2</span>
+                <span data-i18n="addTagLabel"></span>
+            </label>
+            <input class="form-control" type="text" name="tags" id="tags" autocomplete="off" />
+            <p class="help-block" style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;" data-i18n="addTagHelp"></p>
+        </div>
         <label>
             <span class="badge">3</span>
             <span data-i18n="saveFileLabel"></span>
@@ -83,11 +84,8 @@
         <label>
             <span class="badge">4</span>
             <span data-i18n="desktopTagSpacesLabel"></span>
-            <a href="https://www.tagspaces.org/" target="_blank">
-                <b>www.tagspaces.org</b>
-            </a>.
+            <a href="https://www.tagspaces.org/" target="_blank">tagspaces.org</a>.
         </label>
-    </div>
     </div>
     <script src="./vendor/browser-polyfill.js" type="text/javascript"></script>
     <script src="./vendor/jquery.min.js" type="text/javascript"></script>
@@ -95,5 +93,4 @@
     <script src="./vendor/purify.min.js" type="text/javascript"></script>
     <script src="./popup.dist.js" type="text/javascript"></script>
 </body>
-
 </html>

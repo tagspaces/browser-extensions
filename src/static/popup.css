@@ -16,6 +16,10 @@ a:hover {
     color: #1DD19F;
 }
 
+label {
+    margin-bottom: 2px;
+}
+
 textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, [type=text].form-control:focus, [type=password].form-control:focus, [type=email].form-control:focus, [type=tel].form-control:focus, [contenteditable].form-control:focus {
     box-shadow: inset 0 -2px 0 #1DD19F;
 }
@@ -27,7 +31,7 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
 #closePopup {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 5px;
 }
 
 #savingActionsArea {
@@ -50,3 +54,14 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
 .badge {
     margin-right: 5px
 }
+
+#preview {
+    width: 100%;
+    margin-top: 5px;
+    border: 0;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
