@@ -67,12 +67,12 @@ function getSelectionHtml() {
 
 if (isFirefox) {
   browser.runtime.sendMessage({
-    action: "htmlcontent",
+    action: "htmlselection",
     source: getSelectionHtml()
   });
 } else {
   chrome.runtime.sendMessage({
-    action: "htmlcontent",
+    action: "htmlselection",
     //source: DOMtoString(document)
     source: getSelectionHtml()
   });

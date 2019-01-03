@@ -37,18 +37,11 @@ let htmlTemplate = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style type
 let fileExt;
 let currentTabURL;
 let currentTabID;
+let htmlOriginal;
+let htmlCleaned;
+let htmlSelection;
+let contentMode = 'simplified'; // 'original'
 const activeTabQuery = browser.tabs.query({currentWindow: true, active: true });
-
-// Geo locations:
-// GMaps: https://www.google.de/maps/@48.1401285,11.5732137,15.25z
-// GMaps: https://www.google.de/maps/@-20.8096591,-49.3801033,16z
-// OpenStreetMap: https://www.openstreetmap.org/#map=17/48.13504/11.59057
-// OpenStreetMap: https://www.openstreetmap.org/#map=16/-20.8077/-49.3785
-// Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
-// Bing: no url param
-// https://regexper.com
-// RegEx: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)[,/][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
-// RegEx: ^(\-?\d+(\.\d+)?)[,/](\-?\d+(\.\d+)?)$
 
 function init() {
   // console.log('Settings: ' + JSON.stringify(userSettings));
@@ -58,6 +51,7 @@ function init() {
       currentTabURL = tab.url;
       currentTabID = tab.id;
       currentTabURLParser.href = currentTabURL;
+      extractLatLong();
       fileExt = extractFileExtFromUrl();
       $('#title').val(tab.title.substring(tab.title.lastIndexOf("/") + 1, tab.title.length));
 
@@ -74,7 +68,8 @@ function init() {
   $("#saveWholePageAsHtml").on("click", saveWholePageAsHTML);
   $("#saveScreenshot").on("click", saveScreenshot);
   $("#downloadFile").on('click', downloadFile);
-
+  $("#simplifiedPreview").on('click', simplifiedPreview);
+  $("#fullPreview").on('click', fullPreview);
 
   // I18n this panel
   $('[data-i18n]').each(function () {
@@ -84,7 +79,57 @@ function init() {
     $(this).attr("title", browser.i18n.getMessage($(this).data('i18n-title')));
   });
 
-  browser.runtime.onMessage.addListener(handleHTMLContent);
+  browser.runtime.onMessage.addListener(handleHTML);
+
+  browser.tabs.executeScript(null, {
+    file: "content-script-capture-wholepage.dist.js"
+  }).then(() => {
+    console.log('Content script injected...');
+  }, (err) => {
+    console.warn('Error executing script ' + JSON.stringify(err));
+    $('#preview').contents().find('html').html('Error while capturing content');
+    // alert('Error getting content from the current tab.')
+    // location.reload();
+  });
+
+  browser.tabs.executeScript(null, {
+    file: "content-script-capture-selection.dist.js"
+  }).then(() => {
+    console.log('Content script injected...');
+  }, (err) => {
+    console.warn('Error executing script ' + JSON.stringify(err));
+    $('#preview').contents().find('html').html('Error while capturing content');
+    // alert('Error getting content from the current tab.')
+    // location.reload();
+  });
+}
+
+// Geo locations:
+// GMaps: https://www.google.de/maps/@48.1401285,11.5732137,15.25z
+// GMaps: https://www.google.de/maps/@-20.8096591,-49.3801033,16z
+// OpenStreetMap: https://www.openstreetmap.org/#map=17/48.13504/11.59057
+// OpenStreetMap: https://www.openstreetmap.org/#map=16/-20.8077/-49.3785
+// Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
+// Bing: no url param
+function extractLatLong() {
+  const regex = new RegExp('@(.*),(.*),');
+  // const regex = /@(.*),(.*),/gm;
+  // https://regexper.com
+  // RegEx: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)[,/][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+  // RegEx: ^(\-?\d+(\.\d+)?)[,/](\-?\d+(\.\d+)?)$
+  // alert(currentTabURLParser.href);
+  if (currentTabURLParser.href) {
+    const lonLatMatch = currentTabURLParser.href.match(regex);
+    if (lonLatMatch && lonLatMatch.length > 1) {
+      let lon = lonLatMatch[1];
+      let lat = lonLatMatch[2];
+      if (!lat.startsWith('-')) {
+        lat = '+' + lat;
+      }
+      const geoTag = lon + lat;
+      $('#tags').val($('#tags').val() + ' ' + geoTag);
+    }
+  }
 }
 
 function saveAsFile(blob, filename) {
@@ -99,25 +144,51 @@ function saveAsFile(blob, filename) {
   }
 }
 
-function handleHTMLContent(request) {
+function handleHTML(request) {
   if (request.action == "htmlcontent") {
     // console.log("HTML: " + request.source);
+    htmlOriginal = request.originalHTML;
+    htmlCleaned = request.cleanedHTML;
+  }
+  if (request.action == "htmlselection") {
+    // console.log("HTML: " + request.source);
     if (request.source.length < 1) {
-      alert('No content selected....');
-      return;
+      // alert('No content selected....');
+    } else {
+      htmlSelection = request.source;
     }
-    prepareContentPromise(request.source).then((cleanenHTML) => {
-      const htmlBlob = new Blob([cleanenHTML], {
-        type: "text/html;charset=utf-8"
-      });
-      saveAsFile(htmlBlob, generateFileName('html'));
-      $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
-      $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
-    }).catch((err) => {
-      alert('Error by preparing the HTML content...');
-      location.reload();
-      console.warn('Error handling html content ' + err);
-    });
+  }
+  if (htmlSelection) {
+    $('#preview').contents().find('html').html(htmlSelection);
+    $('#saveWholePageAsHtml').attr("disabled",true);
+    return;
+  } else if (htmlCleaned) {
+    $('#preview').contents().find('html').html(htmlCleaned);
+    $('#saveSelectionAsHtml').attr("disabled",true);
+    contentMode = 'simplified';
+    return;
+  } else if (htmlOriginal) {
+    $('#preview').contents().find('html').html(htmlOriginal);
+    $('#saveSelectionAsHtml').attr("disabled",true);
+    contentMode = 'original';
+    return;
+  } else {
+    $('#contentModeSwitch').hide();
+    $('#preview').contents().find('html').html('No content was extracted...');
+  }
+}
+
+function simplifiedPreview() {
+  if (htmlCleaned) {
+    contentMode = 'simplified';
+    $('#preview').contents().find('html').html(htmlCleaned);
+  }
+}
+
+function fullPreview() {
+  if (htmlOriginal) {
+    contentMode = 'original';
+    $('#preview').contents().find('html').html(htmlOriginal);
   }
 }
 
@@ -141,29 +212,47 @@ function downloadFile() {
 
 function saveWholePageAsHTML() {
   $('#saveWholePageAsHtml i').removeClass('fa-file').addClass('fa-spin fa-circle-o-notch');
-  const executing = browser.tabs.executeScript(null, {
-    file: "content-script-capture-wholepage.dist.js"
-  });
-  executing.then(() => {
-    console.log('Content script injected...');
-  }, (err) => {
-    console.warn('Error executing script ' + JSON.stringify(err));
-    alert('Error getting content from the current tab.')
+  let content = '';
+  if (contentMode === 'simplified') {
+    content = htmlCleaned;
+  } else if (contentMode === 'original') {
+    content = htmlOriginal;
+  }
+  if (content < 1) {
+    alert('No content extracted....');
+    return;
+  }
+  prepareContentPromise(content).then((convertedHTML) => {
+    const htmlBlob = new Blob([convertedHTML], {
+      type: "text/html;charset=utf-8"
+    });
+    saveAsFile(htmlBlob, generateFileName('html'));
+    $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
+    $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
+  }).catch((err) => {
+    alert('Error by preparing the HTML content...');
     location.reload();
+    console.warn('Error handling html content ' + err);
   });
 }
 
 function saveSelectionAsHTML() {
   $('#saveSelectionAsHtml i').removeClass('fa-file-text').addClass('fa-spin fa-circle-o-notch');
-  const executing = browser.tabs.executeScript(null, {
-    file: "content-script-capture-selection.dist.js"
-  });
-  executing.then(() => {
-    console.log('Content script injected...');
-  }, (err) => {
-    console.warn('Error executing script ' + JSON.stringify(err));
-    alert('Error getting content from the current tab.')
-    location.reload();
+  if (htmlSelection < 1) {
+    alert('No content selected....');
+    return;
+  }
+  prepareContentPromise(htmlSelection).then((cleanenHTML) => {
+    const htmlBlob = new Blob([cleanenHTML], {
+      type: "text/html;charset=utf-8"
+    });
+    saveAsFile(htmlBlob, generateFileName('html'));
+    $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
+    $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
+  }).catch((err) => {
+    alert('Error by preparing the HTML content...');
+    // location.reload();
+    console.warn('Error handling html content ' + err);
   });
 }
 

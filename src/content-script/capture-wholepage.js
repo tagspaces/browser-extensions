@@ -20,7 +20,7 @@ import Readability from 'readability';
 
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-function getCompleteHtml() {
+function getCleanedHtml() {
   try {
     const loc = document.location;
     const uri = {
@@ -36,20 +36,19 @@ function getCompleteHtml() {
     return extractedContent;
   } catch (error) {
     console.warn('Error parsing document, sending original content');
-    let body = document.body.innerHTML;
-    let head = document.head.innerHTML;
-    return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
+    return undefined;
   }
 }
 
-if (isFirefox) {
-  browser.runtime.sendMessage({
-    action: "htmlcontent",
-    source: getCompleteHtml()
-  });
-} else {
-  chrome.runtime.sendMessage({
-    action: "htmlcontent",
-    source: getCompleteHtml()
-  });
+function getOriginalHtml() {
+  let body = document.body.innerHTML;
+  let head = document.head.innerHTML;
+  return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
 }
+
+const contentMsg = {
+  action: "htmlcontent",
+  cleanedHTML: getCleanedHtml(),
+  originalHTML: getOriginalHtml()
+};
+isFirefox ? browser.runtime.sendMessage(contentMsg) : chrome.runtime.sendMessage(contentMsg);
