@@ -7,7 +7,7 @@
     "build": "yarn build-chrome && yarn build-firefox",
     "build-chrome": "TARGET=chrome $(yarn bin)/webpack",
     "build-firefox": "TARGET=firefox $(yarn bin)/webpack",
-    "pack": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
+    "package": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
     "patch-version": "node utils/patch-version.js",
     "pack-chrome": "node utils/pack-chrome.js",
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/ --overwrite-dest",
