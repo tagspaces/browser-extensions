@@ -11,6 +11,7 @@
     "patch-version": "node utils/patch-version.js",
     "pack-chrome": "node utils/pack-chrome.js",
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/ --overwrite-dest",
+    "bump-version": "yarn version",
     "eslint": "$(yarn bin)/eslint .",
     "update-i18n": "tx pull -a -d",
     "clean": "rm -rf ./build/"
