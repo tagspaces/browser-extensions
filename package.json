@@ -2,6 +2,10 @@
   "name": "tagspaces-browser-extension",
   "version": "3.0.0",
   "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tagspaces/browser-extensions/"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn build-chrome && yarn build-firefox",
