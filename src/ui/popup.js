@@ -54,7 +54,7 @@ function init() {
       extractLatLong();
       fileExt = extractFileExtFromUrl();
       $('#title').val(tab.title.substring(tab.title.lastIndexOf("/") + 1, tab.title.length));
-
+      $('#title').focus();
       (supportedExts.indexOf(fileExt) >= 0) ? $("#downloadFile").show() : $("#downloadFile").hide();
     }
   }, (err) => { console.warn('Error getting activa tab: ' + err) });
@@ -112,22 +112,27 @@ function init() {
 // Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
 // Bing: no url param
 function extractLatLong() {
-  const regex = new RegExp('@(.*),(.*),');
-  // const regex = /@(.*),(.*),/gm;
-  // https://regexper.com
-  // RegEx: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)[,/][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
-  // RegEx: ^(\-?\d+(\.\d+)?)[,/](\-?\d+(\.\d+)?)$
-  // alert(currentTabURLParser.href);
+  // const regex = new RegExp('@(.*),(.*),'); // gmaps only
+  const regexGMH = new RegExp('(map=|@)(.*),(.*),'); // gmaps and here
+  const regexOSM = new RegExp('\\d/(.*)/(.*)'); // open street map
   if (currentTabURLParser.href) {
-    const lonLatMatch = currentTabURLParser.href.match(regex);
+    let lonLatMatch = currentTabURLParser.href.match(regexGMH);
+    let lonLatMatch2 = currentTabURLParser.href.match(regexOSM);
+    let lon;
+    let lat;
     if (lonLatMatch && lonLatMatch.length > 1) {
-      let lon = lonLatMatch[1];
-      let lat = lonLatMatch[2];
+      lon = lonLatMatch[2];
+      lat = lonLatMatch[3];
+    } else if (lonLatMatch2 && lonLatMatch2.length > 0) {
+      lon = lonLatMatch2[1];
+      lat = lonLatMatch2[2];
+    }
+    if (lon && lat) {
       if (!lat.startsWith('-')) {
         lat = '+' + lat;
       }
       const geoTag = lon + lat;
-      $('#tags').val($('#tags').val() + ' ' + geoTag);
+      $('#tags').val($('#tags').val() + ' ' + geoTag + ' ');
     }
   }
 }
@@ -160,16 +165,19 @@ function handleHTML(request) {
   }
   if (htmlSelection) {
     $('#preview').contents().find('html').html(htmlSelection);
-    $('#saveWholePageAsHtml').attr("disabled",true);
+    // $('#saveWholePageAsHtml').attr("disabled",true);
+    // $('#saveSelectionAsHtml').attr("disabled",false);
     return;
   } else if (htmlCleaned) {
     $('#preview').contents().find('html').html(htmlCleaned);
-    $('#saveSelectionAsHtml').attr("disabled",true);
+    // $('#saveSelectionAsHtml').attr("disabled",true);
+    // $('#saveWholePageAsHtml').attr("disabled",false);
     contentMode = 'simplified';
     return;
   } else if (htmlOriginal) {
     $('#preview').contents().find('html').html(htmlOriginal);
-    $('#saveSelectionAsHtml').attr("disabled",true);
+    // $('#saveSelectionAsHtml').attr("disabled",true);
+    // $('#saveWholePageAsHtml').attr("disabled",false);
     contentMode = 'original';
     return;
   } else {
@@ -218,8 +226,10 @@ function saveWholePageAsHTML() {
   } else if (contentMode === 'original') {
     content = htmlOriginal;
   }
-  if (content < 1) {
+  if (!content || content.length < 1) {
     alert('No content extracted....');
+    $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
+    $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
     return;
   }
   prepareContentPromise(content).then((convertedHTML) => {
@@ -238,8 +248,10 @@ function saveWholePageAsHTML() {
 
 function saveSelectionAsHTML() {
   $('#saveSelectionAsHtml i').removeClass('fa-file-text').addClass('fa-spin fa-circle-o-notch');
-  if (htmlSelection < 1) {
+  if (!htmlSelection || htmlSelection.length < 1) {
     alert('No content selected....');
+    $('#saveWholePageAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file');
+    $('#saveSelectionAsHtml i').removeClass('fa-spin fa-circle-o-notch').addClass('fa-file-text');
     return;
   }
   prepareContentPromise(htmlSelection).then((cleanenHTML) => {
