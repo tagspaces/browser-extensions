@@ -38,6 +38,7 @@ let config = {
       { from: `./manifest.${process.env.TARGET}.json`, to: `./manifest.json` },
       { from: '../node_modules/webextension-polyfill/dist/browser-polyfill.js', to: './vendor/' },
       { from: '../src/lib/openlocationcode.js', to: './vendor/' },
+      { from: '../node_modules/open-location-code/LICENSE', to: './vendor/openlocationcode.license.txt' },
       { from: '../node_modules/bootswatch/paper/bootstrap.min.css', to: './vendor/css' },
       { from: '../node_modules/jquery/dist/jquery.min.js', to: './vendor' },
       { from: '../node_modules/file-saver/dist/FileSaver.min.js', to: './vendor' },
