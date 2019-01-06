@@ -5,7 +5,8 @@ let form = document.getElementById("form");
 // Saves options to browser.storage.sync.
 function save() {
   OptionsManager.save({
-    enableScreenshotEmbedding: form.enableScreenshotEmbedding.checked
+    enableScreenshotEmbedding: form.enableScreenshotEmbedding.checked,
+    enableOpenLocationCode: form.enableOpenLocationCode.checked
   })
 }
 
@@ -14,6 +15,7 @@ function save() {
 function load() {
   OptionsManager.load().then(items => {
     form.enableScreenshotEmbedding.checked = items.enableScreenshotEmbedding
+    form.enableOpenLocationCode.checked = items.enableOpenLocationCode
   })
 }
 

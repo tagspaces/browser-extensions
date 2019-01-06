@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-/* globals $, saveAs, DOMPurify */
+/* globals $, saveAs, DOMPurify, OpenLocationCode */
 import OptionsManager from "../lib/options-manager.js";
 
 let userSettings = {};
@@ -128,10 +128,19 @@ function extractLatLong() {
       lat = lonLatMatch2[2];
     }
     if (lon && lat) {
-      if (!lat.startsWith('-')) {
-        lat = '+' + lat;
+      let geoTag;
+      if (OpenLocationCode && userSettings.enableOpenLocationCode) {
+        try {
+          geoTag = OpenLocationCode.encode(parseFloat(lon), parseFloat(lat));
+        } catch (err) {
+          console.warn('Error parsing lat long to float');
+        }
+      } else {
+        if (!lat.startsWith('-')) {
+          lat = '+' + lat;
+        }
+        geoTag = lon + lat;
       }
-      const geoTag = lon + lat;
       $('#tags').val($('#tags').val() + ' ' + geoTag + ' ');
     }
   }
@@ -488,15 +497,4 @@ function formatDateTime4Tag(date, includeTime) {
 
   return cYear + '' + cMonth + '' + cDate + time;
 }
-/* function loadSettingsLocalStorage() {
-  try {
-    const settings = JSON.parse(localStorage.getItem('tagSpacesSettings'));
-    if (settings) {
-      htmlTemplate = settings.newHTMLFileContent;
-      tagLibrary = settings.tagGroups;
-    }
-    console.log("Loaded settings from local storage: " + JSON.stringify(tagLibrary));
-  } catch (ex) {
-    console.log("Loading settings from local storage failed due exception: " + ex);
-  }
-} */
+
