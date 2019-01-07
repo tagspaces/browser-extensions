@@ -20,11 +20,11 @@
         "description": "Title of the application launcher in the browser."
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compartible with Windows® and Mac OS®",
+        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
         "description": "Title of bookmark button"
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Collect web pages, places, screenshots, PDF-documents and bookmarks as plain local files.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
