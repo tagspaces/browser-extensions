@@ -9,4 +9,4 @@
         console.log("Updated from " + details.previousVersion + " to " + thisVersion +" !");
     }
 });*/
-chrome.runtime.setUninstallURL("http://www.tagspaces.org/uninstallsurvey/");
+chrome.runtime.setUninstallURL("https://www.tagspaces.org/uninstallsurvey/");
