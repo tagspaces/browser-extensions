@@ -1,6 +1,6 @@
 let DEFAULT_OPTIONS = {
   enableScreenshotEmbedding: true,
-  enableOpenLocationCode: false,
+  enableOpenLocationCode: true,
   enableAutomaticScreenshotTagging: true
 };
 
