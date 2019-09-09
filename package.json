@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
   "repository": {
     "type": "git",
