@@ -373,8 +373,12 @@ function getBase64ImagePromise(imgURL) {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      dataURL = canvas.toDataURL(mimeType, 0.9);
-      resolve([imgURL, dataURL]);
+      try {
+        dataURL = canvas.toDataURL(mimeType, 0.9);
+        resolve([imgURL, dataURL]);
+      } catch (e) {
+        resolve(['', dataURL]);
+      }
     }
   });
 }
