@@ -331,7 +331,7 @@ function generateFileName(extension, type) {
   } else {
     filename = filename + '.' + extension;
   }
-  filename = filename.replace(/[/\\?%*:|"<>]/g, '-');
+  filename = filename.replace(/[/\\?%*:|"<>]/g, '-').trim();
   return filename;
 }
 
