@@ -197,15 +197,15 @@ function extractLatLong() {
 }
 
 function saveAsFile(blob, filename) {
-  if (isFirefox) {
-    saveAs(blob, filename);
-  } else {
-    browser.downloads.download({
-      url: URL.createObjectURL(blob),
-      filename: filename,
-      saveAs: true,
-    });
-  }
+  // if (isFirefox) {
+  saveAs(blob, filename);
+  // } else {
+  //   browser.downloads.download({
+  //     url: URL.createObjectURL(blob),
+  //     filename: filename,
+  //     saveAs: true,
+  //   });
+  // }
 }
 
 function handleHTML(request) {
