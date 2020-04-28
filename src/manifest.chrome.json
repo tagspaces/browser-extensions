@@ -10,7 +10,6 @@
     "pageCapture",
     "tabs",
     "downloads",
-    "contextMenus",
     "activeTab",
     "storage"
   ],
@@ -27,20 +26,17 @@
     "128": "images/icon-128.png"
   },
   "background": {
-    "scripts": [
-      "vendor/browser-polyfill.js",
-      "background.dist.js"
-    ],
+    "scripts": ["vendor/browser-polyfill.js", "background.dist.js"],
     "persistent": false
   },
   "commands": {
     "_execute_browser_action": {
       "description": "Save page",
       "suggested_key": {
-          "windows": "Ctrl+Shift+S",
-          "mac": "Command+Shift+S",
-          "chromeos": "Ctrl+Shift+S",
-          "linux": "Ctrl+Shift+S"
+        "windows": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
       }
     }
   },
