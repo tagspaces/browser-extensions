@@ -1,0 +1,86 @@
+{
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
+    },
+    "appDesc": {
+        "message": "Samle og organiser nettinnhold enkle filer",
+        "description": "Description of the extension"
+    },
+    "appLauncher": {
+        "message": "Åpne TagSpaces",
+        "description": "Title of the application launcher in the browser."
+    },
+    "appLauncherLabel": {
+        "message": "Lagre nettinnhold",
+        "description": "Title of label."
+    },
+    "editTitleLabel": {
+        "message": "Endre tittelfil",
+        "description": "Title of label."
+    },
+    "addTagLabel": {
+        "message": "Legg til stikkord",
+        "description": "Title of label."
+    },
+    "addTagHelp": {
+        "message": "Flere stikkord separeres med komma. Stikkordene bør ha en lengde på minst 2 tegn og skal ikke inneholde spesialtegn som mellomrom, #, / eller \\.",
+        "description": "Add tag help message"
+    },
+    "saveFileLabel": {
+        "message": "Velg lagringshandlingen",
+        "description": "SAving action label."
+    },
+    "saveAsMhtmlTitle": {
+        "message": "Lage ferdig side inkludert bilder som én HTML-fil, det originale designet bevares",
+        "description": "Title of the save as MHTML button"
+    },
+    "saveAsMhtmlLabel": {
+        "message": "Lagre den ferdige siden",
+        "description": "Label of the save as MHTML button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Lagre valgt innhold inkludert bilder som én HTML-fil",
+        "description": "Title of save selection button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Klipputvalg",
+        "description": "Label of save selection button"
+    },
+    "saveScreenshotTitle": {
+        "message": "Ta skjermbilde av siden som en PNG-fil. Endre størrelsen på nettleservinduet for å fokusere det nøyaktige området for skjermbildet.",
+        "description": "Title of the take screenshot button"
+    },
+    "saveScreenshotLabel": {
+        "message": "Ta skjermbilde",
+        "description": "Label of the take screenshot button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Lagre et bokmerke av gjeldene side som en URL-fil, kompatibel med Windows® og Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Opprett bokmerke",
+        "description": "Lable of bookmark button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "Lage ferdig side inkludert bilder som én HTML-fil, det originale designet vil ikke lagres",
+        "description": "Title of the save as html button"
+    },
+    "downloadTitle": {
+        "message": "Last ned filen i opprinnelig format",
+        "description": "Title of the download button"
+    },
+    "downloadLabel": {
+        "message": "Last ned fil",
+        "description": "Label of the download button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "Lage redigerbar side",
+        "description": "Label of the save as html button"
+    },
+    "desktopTagSpacesLabel": {
+        "message": "Organiser det samlede innholdet med TagSpaces skriverbordsprogram. Det er tilgjengelig gratis på",
+        "description": "Reference to TagSpaces Desktop label"
+    }
+}
