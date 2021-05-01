@@ -87,7 +87,7 @@ function init() {
       }
     },
     (err) => {
-      console.warn("Error getting activa tab: " + err);
+      console.warn("Error getting active tab: " + err);
     }
   );
 
@@ -177,8 +177,8 @@ function extractLatLong() {
       lon = lonLatMatch2[1];
       lat = lonLatMatch2[2];
     }
-    if (lon && lat) {
-      let geoTag;
+    if (lon && lon.length > 0 && lat && lat.length > 0) {
+      let geoTag = "";
       if (OpenLocationCode && userSettings.enableOpenLocationCode) {
         try {
           geoTag = OpenLocationCode.encode(parseFloat(lon), parseFloat(lat));
@@ -191,7 +191,11 @@ function extractLatLong() {
         }
         geoTag = lon + lat;
       }
-      $("#tags").val($("#tags").val() + " " + geoTag + " ");
+      const tagsText =
+        document.getElementById("tags").value.trim() + " " + geoTag;
+      if (tagsText && tagsText.length > 0) {
+        document.getElementById("tags").value = tagsText.trim();
+      }
     }
   }
 }
