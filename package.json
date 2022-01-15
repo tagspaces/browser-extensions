@@ -24,7 +24,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^6.8.0",
-    "shelljs": "^0.8.4",
+    "shelljs": "^0.8.5",
     "typescript": "^3.8.3",
     "web-ext": "^4.2.0",
     "web-ext-types": "^3.2.1",
