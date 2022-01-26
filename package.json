@@ -1,7 +1,7 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "3.1.5",
-  "description": "Codebase for the Chrome and Firefox extensions of TagSpaces",
+  "version": "3.1.6",
+  "description": "Codebase for TagSpaces' Web Clipper extension available for Chrome, MSEdge and Firefox",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tagspaces/browser-extensions/"
@@ -24,7 +24,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^6.8.0",
-    "shelljs": "^0.8.4",
+    "shelljs": "^0.8.5",
     "typescript": "^3.8.3",
     "web-ext": "^4.2.0",
     "web-ext-types": "^3.2.1",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "bootswatch": "^3.4.0",
-    "dompurify": "^2.2.7",
+    "dompurify": "^2.3.4",
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
