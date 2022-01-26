@@ -1,6 +1,6 @@
 {
     "appName": {
-        "message": "TagSpaces 網頁擷取器",
+        "message": "TagSpaces 網頁擷取工具",
         "description": "The name of the extension"
     },
     "appDesc": {
@@ -8,11 +8,11 @@
         "description": "Description of the extension"
     },
     "appLauncher": {
-        "message": "啟動TagSpaces",
+        "message": "啟動 TagSpaces",
         "description": "Title of the application launcher in the browser."
     },
     "appLauncherLabel": {
-        "message": "擷取Web內容",
+        "message": "擷取 Web 內容",
         "description": "Title of label."
     },
     "editTitleLabel": {
@@ -24,7 +24,7 @@
         "description": "Title of label."
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "多個標籤使用逗號分隔。標籤應該有2個字元的最小長度，不應該包含特殊字元。例：空格、＃、 /、\\等。",
         "description": "Add tag help message"
     },
     "saveFileLabel": {
@@ -32,7 +32,7 @@
         "description": "SAving action label."
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as one MHTML file, preserving the original design",
+        "message": "儲存完整檔案(含圖片)為單一 MHTML 文件，保留原網頁設計",
         "description": "Title of the save as MHTML button"
     },
     "saveAsMhtmlLabel": {
@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "儲存所選內容(含圖片)為單一 HTML 文件",
         "description": "Title of save selection button"
     },
     "saveAsSelectionLabel": {
@@ -48,7 +48,7 @@
         "description": "Label of save selection button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "將當前頁面可視區域截圖為 PNG 文件。調整瀏覽器窗口大小以對焦所需的截圖區域。",
         "description": "Title of the take screenshot button"
     },
     "saveScreenshotLabel": {
@@ -56,7 +56,7 @@
         "description": "Label of the take screenshot button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compartible with Windows® and Mac OS®",
+        "message": "將當前頁面的書籤保存為 URL 文件，兼容 Windows® 和 Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveBookmarkLabel": {
@@ -64,11 +64,11 @@
         "description": "Lable of bookmark button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "將完整頁面(含圖片)保存為單一 HTML 文件，不保留原始網頁設計",
         "description": "Title of the save as html button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "下載原格式文件",
         "description": "Title of the download button"
     },
     "downloadLabel": {
@@ -80,7 +80,7 @@
         "description": "Label of the save as html button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "使用 TagSpaces 桌面應用整理收集的內容。 它是免費提供的 ",
         "description": "Reference to TagSpaces Desktop label"
     }
 }
