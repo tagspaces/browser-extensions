@@ -46,8 +46,8 @@ To debug in Chrome:
 
 To debug in Firefox:
 
-- Go to Tools Menu ->
-- Click on Add-ons ->
+- Go to Tools Menu
+- Click on Add-ons
 - Click the Gear Icon
 - Select Debug Add-ons
 - Click Load Temporary Add-on
