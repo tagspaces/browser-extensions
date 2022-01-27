@@ -24,9 +24,7 @@
     "128": "images/icon-128.png"
   },
   "background": {
-    "scripts": [
-      "background.dist.js"
-    ]
+    "scripts": ["background.dist.js"]
   },
   "options_ui": {
     "page": "options.html"
@@ -36,5 +34,5 @@
       "id": "jid1-FBaMKxTifTSahQ@jetpack"
     }
   },
-  "homepage_url": "http://tagspaces.org"
+  "homepage_url": "https://www.tagspaces.org"
 }
