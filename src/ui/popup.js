@@ -92,10 +92,7 @@ function init() {
   );
 
   $("#title").focus();
-  isFirefox
-    ? $("#saveAsMhtml").hide()
-    : $("#saveAsMhtml").on("click", saveAsMHTML);
-  // isChrome ? $("#saveWholePageAsHtml").hide() : '';
+  $("#saveAsMhtml").on("click", isFirefox ? savePDF : saveAsMHTML);
   $("#closePopup").on("click", () => window.close());
   $("#saveAsBookmark").on("click", saveAsBookmark);
   $("#saveSelectionAsHtml").on("click", saveSelectionAsHTML);
@@ -384,11 +381,30 @@ function saveScreenshot() {
   );
 }
 
+function savePDF() {
+  $("#saveAsMhtml i")
+    .removeClass("fa-camera")
+    .addClass("fa-spin fa-circle-o-notch");
+  const capturing = browser.tabs.saveAsPDF({});
+  capturing.then(
+    (image) => {
+      saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
+      $("#saveAsMhtml i")
+        .removeClass("fa-spin fa-circle-o-notch")
+        .addClass("fa-camera");
+    },
+    (err) => console.warn("Error saving as PDF " + JSON.stringify(err))
+  );
+}
+
 function saveAsBookmark() {
   $("#saveAsBookmark i")
     .removeClass("fa-bookmark")
     .addClass("fa-spin fa-circle-o-notch");
-  const capturing = browser.tabs.captureVisibleTab(null, { format: "jpeg" });
+  const capturing = browser.tabs.captureVisibleTab(null, {
+    format: "jpeg",
+    quality: 95,
+  });
   capturing.then((imageDataUrl) => {
     // Make capturing optional, evtl. resize the image
     const screenshot = userSettings.enableScreenshotEmbedding
@@ -431,6 +447,9 @@ function generateFileName(extension, type) {
   }
   if (type === "mht") {
     extension = "mhtml";
+  }
+  if (type === "pdf") {
+    extension = "pdf";
   }
   if (tags.length > 0) {
     filename = filename + " [" + tags.join(" ") + "]." + extension;
@@ -555,6 +574,7 @@ function prepareContentPromise(uncleanedHTML) {
 
         const capturing = browser.tabs.captureVisibleTab(null, {
           format: "jpeg",
+          quality: 95,
         });
         capturing.then(
           (imageDataUrl) => {
