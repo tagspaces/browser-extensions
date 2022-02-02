@@ -213,6 +213,8 @@ function saveAsFile(blob, filename) {
 }
 
 function handleHTML(request) {
+  const cssInject =
+    "<style type='text/css'>img, figure, video { max-width: 100% }</style>";
   if (request.action == "htmlcontent") {
     // console.log("HTML: " + request.source);
     htmlOriginal = request.originalHTML;
@@ -228,11 +230,13 @@ function handleHTML(request) {
   }
   if (htmlSelection) {
     $("#preview").contents().find("html").html(htmlSelection);
+    $("#preview").contents().find("html").append(cssInject);
     // $('#saveWholePageAsHtml').attr("disabled",true);
     // $('#saveSelectionAsHtml').attr("disabled",false);
     return;
   } else if (htmlCleaned) {
     $("#preview").contents().find("html").html(htmlCleaned);
+    $("#preview").contents().find("html").append(cssInject);
     // $('#saveSelectionAsHtml').attr("disabled",true);
     // $('#saveWholePageAsHtml').attr("disabled",false);
     contentMode = "simplified";
