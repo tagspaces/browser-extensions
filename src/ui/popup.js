@@ -211,7 +211,7 @@ function saveAsFile(blob, filename) {
 
 function handleHTML(request) {
   const cssInject =
-    "<style type='text/css'>img, figure, video { max-width: 100% }</style>";
+    "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; }</style>";
   if (request.action == "htmlcontent") {
     // console.log("HTML: " + request.source);
     htmlOriginal = request.originalHTML;
