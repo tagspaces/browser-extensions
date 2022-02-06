@@ -211,7 +211,7 @@ function saveAsFile(blob, filename) {
 
 function handleHTML(request) {
   const cssInject =
-    "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; }</style>";
+    "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; } html { overflow-x: hidden; }</style>";
   if (request.action == "htmlcontent") {
     // console.log("HTML: " + request.source);
     htmlOriginal = request.originalHTML;
@@ -519,7 +519,6 @@ function extractFileExtFromUrl() {
 
 function prepareContentPromise(uncleanedHTML) {
   return new Promise((resolve) => {
-    // let cleanedHTML = uncleanedHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
     let cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
 
     // saving all images as jpg in base64 format
