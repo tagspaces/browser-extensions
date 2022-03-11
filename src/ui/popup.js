@@ -579,20 +579,23 @@ function prepareContentPromise(uncleanedHTML) {
           (imageDataUrl) => {
             // Make capturing optional, evtl. resize the image
             let metaData =
-              'data-sourceurl="' +
+              '\ndata-createdwith="TagSpaces Web Clipper"' +
+              '\ndata-sourceurl="' +
               currentTabURL +
-              '" data-scrappedon="' +
+              '" \ndata-scrappedon="' +
               new Date().toISOString() +
               '"';
             if (imageDataUrl && userSettings.enableScreenshotEmbedding) {
-              metaData = metaData + ' data-screenshot="' + imageDataUrl + '"';
+              metaData =
+                metaData + ' \ndata-screenshot="' + imageDataUrl + '"\n';
             }
             if (cleanedHTML.includes("<body")) {
               cleanedHTML = cleanedHTML
                 .split("<body")
                 .join("<body " + metaData);
             } else {
-              cleanedHTML = "<body " + metaData + ">" + cleanedHTML + "</body>";
+              cleanedHTML =
+                "\n<body " + metaData + ">" + cleanedHTML + "</body>";
               cleanedHTML = htmlTemplate.replace(
                 /<body[^>]*>([^]*)<\/body>/m,
                 cleanedHTML
