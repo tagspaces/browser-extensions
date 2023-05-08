@@ -1,7 +1,8 @@
 [main]
 host = https://www.transifex.com
 
-[tagspaces.messagesjson]
+[o:tagspaces:p:tagspaces:r:messagesjson]
 file_filter = _locales/<lang>/messages.json
+source_file = _locales/en/messages.json
 source_lang = en_US
-type = CHROME
+type        = CHROME

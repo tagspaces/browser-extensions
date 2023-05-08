@@ -17,7 +17,7 @@
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/ --overwrite-dest",
     "bump-version": "yarn version",
     "eslint": "$(yarn bin)/eslint .",
-    "update-i18n": "tx pull -a -d",
+    "update-i18n": "tx pull -a -d && cd _locales && mv de_DE/* de/* && cd ..",
     "clean": "rm -rf ./build/"
   },
   "license": "AGPL-3.0",
