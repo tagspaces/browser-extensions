@@ -112,24 +112,29 @@ function init() {
 
   browser.runtime.onMessage.addListener(handleHTML);
 
-  browser.tabs
-    .executeScript(null, {
-      file: "content-script-capture-wholepage.dist.js",
-    })
-    .then(
-      () => {
-        console.log("Content script injected...");
-      },
-      (err) => {
-        console.warn("Error executing script " + JSON.stringify(err));
-        $("#preview")
-          .contents()
-          .find("html")
-          .html("Error while capturing content");
-        // alert('Error getting content from the current tab.')
-        // location.reload();
-      }
-    );
+  // chrome.scripting.executeScript({
+  //   target: { tabId: id, allFrames: true },
+  //   files: ["content-script-capture-wholepage.dist.js"],
+  // });
+
+  // browser.tabs
+  //   .executeScript(null, {
+  //     file: "content-script-capture-wholepage.dist.js",
+  //   })
+  //   .then(
+  //     () => {
+  //       console.log("Content script injected...");
+  //     },
+  //     (err) => {
+  //       console.warn("Error executing script " + JSON.stringify(err));
+  //       $("#preview")
+  //         .contents()
+  //         .find("html")
+  //         .html("Error while capturing content");
+  //       // alert('Error getting content from the current tab.')
+  //       // location.reload();
+  //     }
+  //   );
 
   browser.tabs
     .executeScript(null, {
