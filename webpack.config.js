@@ -15,11 +15,9 @@ if (!process.env.TARGET) {
 let config = {
   context: path.resolve(__dirname, "src"),
   entry: {
-    // background: ["./background/background.js"],
     options: "./ui/options.js",
     popup: "./ui/popup.js",
-    "content-script-capture-selection": "./content-script/capture-selection.js",
-    "content-script-capture-wholepage": "./content-script/capture-wholepage.js",
+    "service-worker": "./content-script/service-worker.js",
   },
   output: {
     path: path.resolve(__dirname, "build", process.env.TARGET),
@@ -35,10 +33,6 @@ let config = {
         { from: "../LICENSE", to: "./" },
         { from: "../_locales/", to: "./_locales" },
         { from: `./manifest-v3.json`, to: `./manifest.json` },
-        {
-          from: "../node_modules/webextension-polyfill/dist/browser-polyfill.js",
-          to: "./vendor/",
-        },
         { from: "../src/lib/openlocationcode.js", to: "./vendor/" },
         {
           from: "../node_modules/open-location-code/LICENSE",

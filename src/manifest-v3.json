@@ -28,7 +28,7 @@
   },
   "host_permissions": ["http://*/", "https://*/", "<all_urls>"],
   "background": {
-    "scripts": ["vendor/browser-polyfill.js"]
+    "service_worker": "service-worker.dist.js"
   },
   "commands": {
     "_execute_action": {

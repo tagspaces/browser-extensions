@@ -18,6 +18,13 @@
 /* globals $, saveAs, DOMPurify, OpenLocationCode */
 import OptionsManager from "../lib/options-manager.js";
 
+let browserAPI = null;
+if (typeof browser !== "undefined") {
+  browserAPI = browser;
+} else if (typeof chrome !== "undefined") {
+  browserAPI = chrome;
+}
+
 let userSettings = {};
 OptionsManager.load().then((options) => (userSettings = options));
 
@@ -61,15 +68,15 @@ let htmlOriginal;
 let htmlCleaned;
 let htmlSelection;
 let contentMode = "simplified"; // 'original'
-const activeTabQuery = browser.tabs.query({
+const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
   active: true,
 });
 
-function init() {
+async function init() {
   // console.log('Settings: ' + JSON.stringify(userSettings));
 
-  activeTabQuery.then(
+  await activeTabQuery.then(
     (tabs) => {
       for (let tab of tabs) {
         currentTabURL = tab.url;
@@ -104,13 +111,65 @@ function init() {
 
   // I18n this panel
   $("[data-i18n]").each(function () {
-    $(this).html(browser.i18n.getMessage($(this).data("i18n")));
+    $(this).html(browserAPI.i18n.getMessage($(this).data("i18n")));
   });
   $("[data-i18n-title]").each(function () {
-    $(this).attr("title", browser.i18n.getMessage($(this).data("i18n-title")));
+    $(this).attr(
+      "title",
+      browserAPI.i18n.getMessage($(this).data("i18n-title"))
+    );
   });
 
-  browser.runtime.onMessage.addListener(handleHTML);
+  browserAPI.runtime.onMessage.addListener(handleHTML);
+
+  const response = await browserAPI.runtime.sendMessage({
+    type: "capture-selection",
+    tabId: currentTabID,
+  });
+  console.log("Capture selection received: " + JSON.stringify(response));
+
+  function handleHTML(msg, sender, sendResponse) {
+    console.log(JSON.stringify(msg));
+    const cssInject =
+      "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; } html { overflow-x: hidden; }</style>";
+    if (msg.action == "htmlcontent") {
+      // console.log("HTML: " + request.source);
+      htmlOriginal = msg.originalHTML;
+      htmlCleaned = msg.cleanedHTML;
+    }
+    if (msg.action == "htmlselection") {
+      // console.log("HTML: " + request.source);
+      if (msg.source.length < 1) {
+        // alert('No content selected....');
+      } else {
+        htmlSelection = msg.source;
+      }
+    }
+    if (htmlSelection) {
+      $("#preview").contents().find("html").html(htmlSelection);
+      $("#preview").contents().find("html").append(cssInject);
+      // $('#saveWholePageAsHtml').attr("disabled",true);
+      // $('#saveSelectionAsHtml').attr("disabled",false);
+      return;
+    } else if (htmlCleaned) {
+      $("#preview").contents().find("html").html(htmlCleaned);
+      $("#preview").contents().find("html").append(cssInject);
+      // $('#saveSelectionAsHtml').attr("disabled",true);
+      // $('#saveWholePageAsHtml').attr("disabled",false);
+      contentMode = "simplified";
+      return;
+    } else if (htmlOriginal) {
+      $("#preview").contents().find("html").html(htmlOriginal);
+      // $('#saveSelectionAsHtml').attr("disabled",true);
+      // $('#saveWholePageAsHtml').attr("disabled",false);
+      contentMode = "original";
+      return;
+    } else {
+      $("#contentModeSwitch").hide();
+      $("#preview").contents().find("html").html("No content was extracted...");
+    }
+    return true;
+  }
 
   // chrome.scripting.executeScript({
   //   target: { tabId: id, allFrames: true },
@@ -136,24 +195,24 @@ function init() {
   //     }
   //   );
 
-  browser.tabs
-    .executeScript(null, {
-      file: "content-script-capture-selection.dist.js",
-    })
-    .then(
-      () => {
-        console.log("Content script injected...");
-      },
-      (err) => {
-        console.warn("Error executing script " + JSON.stringify(err));
-        $("#preview")
-          .contents()
-          .find("html")
-          .html("Error while capturing content");
-        // alert('Error getting content from the current tab.')
-        // location.reload();
-      }
-    );
+  //   browser.tabs
+  //     .executeScript(null, {
+  //       file: "content-script-capture-selection.dist.js",
+  //     })
+  //     .then(
+  //       () => {
+  //         console.log("Content script injected...");
+  //       },
+  //       (err) => {
+  //         console.warn("Error executing script " + JSON.stringify(err));
+  //         $("#preview")
+  //           .contents()
+  //           .find("html")
+  //           .html("Error while capturing content");
+  //         // alert('Error getting content from the current tab.')
+  //         // location.reload();
+  //       }
+  //     );
 }
 
 // Geo locations:
@@ -214,47 +273,6 @@ function saveAsFile(blob, filename) {
   // }
 }
 
-function handleHTML(request) {
-  const cssInject =
-    "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; } html { overflow-x: hidden; }</style>";
-  if (request.action == "htmlcontent") {
-    // console.log("HTML: " + request.source);
-    htmlOriginal = request.originalHTML;
-    htmlCleaned = request.cleanedHTML;
-  }
-  if (request.action == "htmlselection") {
-    // console.log("HTML: " + request.source);
-    if (request.source.length < 1) {
-      // alert('No content selected....');
-    } else {
-      htmlSelection = request.source;
-    }
-  }
-  if (htmlSelection) {
-    $("#preview").contents().find("html").html(htmlSelection);
-    $("#preview").contents().find("html").append(cssInject);
-    // $('#saveWholePageAsHtml').attr("disabled",true);
-    // $('#saveSelectionAsHtml').attr("disabled",false);
-    return;
-  } else if (htmlCleaned) {
-    $("#preview").contents().find("html").html(htmlCleaned);
-    $("#preview").contents().find("html").append(cssInject);
-    // $('#saveSelectionAsHtml').attr("disabled",true);
-    // $('#saveWholePageAsHtml').attr("disabled",false);
-    contentMode = "simplified";
-    return;
-  } else if (htmlOriginal) {
-    $("#preview").contents().find("html").html(htmlOriginal);
-    // $('#saveSelectionAsHtml').attr("disabled",true);
-    // $('#saveWholePageAsHtml').attr("disabled",false);
-    contentMode = "original";
-    return;
-  } else {
-    $("#contentModeSwitch").hide();
-    $("#preview").contents().find("html").html("No content was extracted...");
-  }
-}
-
 function simplifiedPreview() {
   if (htmlCleaned) {
     contentMode = "simplified";
@@ -273,7 +291,7 @@ function saveAsMHTML() {
   $("#saveAsMhtml i")
     .removeClass("fa-file-image-o")
     .addClass("fa-spin fa-circle-o-notch");
-  browser.pageCapture.saveAsMHTML(
+  browserAPI.pageCapture.saveAsMHTML(
     {
       tabId: currentTabID,
     },
@@ -287,7 +305,7 @@ function saveAsMHTML() {
 }
 
 function downloadFile() {
-  browser.downloads.download({
+  browserAPI.downloads.download({
     url: currentTabURL,
     filename: generateFileName(fileExt),
     saveAs: true,
@@ -372,7 +390,7 @@ function saveScreenshot() {
   $("#saveScreenshot i")
     .removeClass("fa-camera")
     .addClass("fa-spin fa-circle-o-notch");
-  const capturing = browser.tabs.captureVisibleTab(null, {
+  const capturing = browserAPI.tabs.captureVisibleTab(null, {
     format: "png",
   });
   capturing.then(
@@ -390,7 +408,7 @@ function savePDF() {
   $("#saveAsMhtml i")
     .removeClass("fa-camera")
     .addClass("fa-spin fa-circle-o-notch");
-  const capturing = browser.tabs.saveAsPDF({});
+  const capturing = browserAPI.tabs.saveAsPDF({});
   capturing.then(
     (image) => {
       saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
@@ -406,7 +424,7 @@ function saveAsBookmark() {
   $("#saveAsBookmark i")
     .removeClass("fa-bookmark")
     .addClass("fa-spin fa-circle-o-notch");
-  const capturing = browser.tabs.captureVisibleTab(null, {
+  const capturing = browserAPI.tabs.captureVisibleTab(null, {
     format: "jpeg",
     quality: 95,
   });
@@ -576,7 +594,7 @@ function prepareContentPromise(uncleanedHTML) {
           // cleanedHTML = cleanedHTML.split(dataURLObject[0]).join(dataURLObject[1]);
         });
 
-        const capturing = browser.tabs.captureVisibleTab(null, {
+        const capturing = browserAPI.tabs.captureVisibleTab(null, {
           format: "jpeg",
           quality: 95,
         });
