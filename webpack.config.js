@@ -38,6 +38,14 @@ let config = {
           from: "../node_modules/open-location-code/LICENSE",
           to: "./vendor/openlocationcode.license.txt",
         },
+        // {
+        //   from: "../node_modules/@mozilla/readability/LICENSE.md",
+        //   to: "./vendor/Readability.license.txt",
+        // },
+        // {
+        //   from: "../node_modules/@mozilla/readability/Readability.js",
+        //   to: "./vendor/Readability.js",
+        // },
         {
           from: "../node_modules/bootswatch/paper/bootstrap.min.css",
           to: "./vendor/css",

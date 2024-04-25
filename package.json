@@ -38,6 +38,6 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "open-location-code": "^1.0.3",
-    "readability": "https://github.com/mozilla/readability.git"
+    "@mozilla/readability": "0.5.0"
   }
 }

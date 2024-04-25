@@ -16,6 +16,7 @@
  *
  */
 /* globals chrome, browser */
+// import Readability from "readability";
 
 let browserAPI = null;
 if (typeof browser !== "undefined") {
@@ -68,9 +69,62 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
       // sendResponse(response);
       await browserAPI.runtime.sendMessage(response);
     }
+  } else if (msg.type === "capture-page") {
+    const injectionResults = await browserAPI.scripting.executeScript({
+      target: { tabId: msg.tabId },
+      func: () => {
+        const body = document.body.innerHTML;
+        const head = document.head.innerHTML;
+        const documentHTML =
+          "<html><head>" + head + "</head><body>" + body + "</body></htlm>";
+        const documentClone = document.cloneNode(true);
+        return {
+          documentClone: documentClone,
+          documentBaseUri: document.baseURI,
+          documentHTML: documentHTML,
+        };
+      },
+    });
+    if (injectionResults && injectionResults[0] && injectionResults[0].result) {
+      const firstResult = injectionResults[0].result;
+      const response = {
+        action: "htmlcontent",
+        cleanedHTML: "", //getCleanedHtml(),
+        documentClone: firstResult.documentClone,
+        documentBaseUri: firstResult.documentBaseUri,
+        originalHTML: firstResult.documentHTML,
+      };
+      // console.log(JSON.stringify(response));
+      // sendResponse(response);
+      await browserAPI.runtime.sendMessage(response);
+    }
   }
   return true;
 });
+
+function getCleanedHtml() {
+  // try {
+  //   const loc = document.location;
+  //   const uri = {
+  //     spec: loc.href,
+  //     host: loc.host,
+  //     prePath: loc.protocol + "//" + loc.host,
+  //     scheme: loc.protocol.substr(0, loc.protocol.indexOf(":")),
+  //     pathBase:
+  //       loc.protocol +
+  //       "//" +
+  //       loc.host +
+  //       loc.pathname.substr(0, loc.pathname.lastIndexOf("/") + 1),
+  //   };
+  //   const documentClone = document.cloneNode(true);
+  //   const article = new Readability(uri, documentClone).parse();
+  //   let extractedContent = "<h1>" + article.title + "</h1>" + article.content;
+  //   return extractedContent;
+  // } catch (error) {
+  //   console.warn("Error parsing document, sending original content");
+  //   return undefined;
+  // }
+}
 
 browserAPI.runtime.onInstalled.addListener((details) => {
   if (details.reason === browserAPI.runtime.OnInstalledReason.INSTALL) {

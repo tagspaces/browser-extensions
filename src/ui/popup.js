@@ -17,6 +17,8 @@
  */
 /* globals $, saveAs, DOMPurify, OpenLocationCode */
 import OptionsManager from "../lib/options-manager.js";
+// import Readability from "./vendor/Readability.js";
+import { Readability } from "@mozilla/readability";
 
 let browserAPI = null;
 if (typeof browser !== "undefined") {
@@ -104,15 +106,31 @@ async function init() {
   );
 
   titleEl.focus();
-  $("#saveAsMhtml").on("click", isFirefox ? savePDF : saveAsMHTML);
-  $("#closePopup").on("click", () => window.close());
-  $("#saveAsBookmark").on("click", saveAsBookmark);
-  $("#saveSelectionAsHtml").on("click", saveSelectionAsHTML);
-  $("#saveWholePageAsHtml").on("click", saveWholePageAsHTML);
-  $("#saveScreenshot").on("click", saveScreenshot);
-  $("#downloadFile").on("click", downloadFile);
-  $("#simplifiedPreview").on("click", simplifiedPreview);
-  $("#fullPreview").on("click", fullPreview);
+  document
+    .getElementById("saveAsMhtml")
+    .addEventListener("click", isFirefox ? savePDF : saveAsMHTML);
+  document
+    .getElementById("closePopup")
+    .addEventListener("click", () => window.close());
+  document
+    .getElementById("saveAsBookmark")
+    .addEventListener("click", saveAsBookmark);
+  document
+    .getElementById("saveSelectionAsHtml")
+    .addEventListener("click", saveSelectionAsHTML);
+  document
+    .getElementById("saveWholePageAsHtml")
+    .addEventListener("click", saveWholePageAsHTML);
+  document
+    .getElementById("saveScreenshot")
+    .addEventListener("click", saveScreenshot);
+  document
+    .getElementById("downloadFile")
+    .addEventListener("click", downloadFile);
+  document
+    .getElementById("simplifiedPreview")
+    .addEventListener("click", simplifiedPreview);
+  document.getElementById("fullPreview").addEventListener("click", fullPreview);
 
   // I18n this panel
   $("[data-i18n]").each(function () {
@@ -127,11 +145,19 @@ async function init() {
 
   browserAPI.runtime.onMessage.addListener(handleHTML);
 
-  const response = await browserAPI.runtime.sendMessage({
+  const responseSelection = await browserAPI.runtime.sendMessage({
     type: "capture-selection",
     tabId: currentTabID,
   });
-  console.log("Capture selection received: " + JSON.stringify(response));
+  console.log(
+    "Capture selection received: " + JSON.stringify(responseSelection)
+  );
+
+  const responsePage = await browserAPI.runtime.sendMessage({
+    type: "capture-page",
+    tabId: currentTabID,
+  });
+  console.log("Capture page received: " + JSON.stringify(responsePage));
 
   function handleHTML(msg, sender, sendResponse) {
     console.log(JSON.stringify(msg));
@@ -140,7 +166,6 @@ async function init() {
     if (msg.action == "htmlcontent") {
       // console.log("HTML: " + request.source);
       htmlOriginal = msg.originalHTML;
-      htmlCleaned = msg.cleanedHTML;
     }
     if (msg.action == "htmlselection") {
       // console.log("HTML: " + request.source);
@@ -150,6 +175,7 @@ async function init() {
         htmlSelection = msg.source;
       }
     }
+
     if (htmlSelection) {
       $("#preview").contents().find("html").html(htmlSelection);
       $("#preview").contents().find("html").append(cssInject);
@@ -165,8 +191,11 @@ async function init() {
       return;
     } else if (htmlOriginal) {
       $("#preview").contents().find("html").html(htmlOriginal);
-      // $('#saveSelectionAsHtml').attr("disabled",true);
-      // $('#saveWholePageAsHtml').attr("disabled",false);
+      // const article = new Readability(
+      //   msg.documentBaseUri,
+      //   document.getElementById("preview").cloneNode(true)
+      // ).parse();
+      // console.log(article);
       contentMode = "original";
       return;
     } else {
@@ -175,44 +204,6 @@ async function init() {
     }
     return true;
   }
-
-  // browser.tabs
-  //   .executeScript(null, {
-  //     file: "content-script-capture-wholepage.dist.js",
-  //   })
-  //   .then(
-  //     () => {
-  //       console.log("Content script injected...");
-  //     },
-  //     (err) => {
-  //       console.warn("Error executing script " + JSON.stringify(err));
-  //       $("#preview")
-  //         .contents()
-  //         .find("html")
-  //         .html("Error while capturing content");
-  //       // alert('Error getting content from the current tab.')
-  //       // location.reload();
-  //     }
-  //   );
-
-  //   browser.tabs
-  //     .executeScript(null, {
-  //       file: "content-script-capture-selection.dist.js",
-  //     })
-  //     .then(
-  //       () => {
-  //         console.log("Content script injected...");
-  //       },
-  //       (err) => {
-  //         console.warn("Error executing script " + JSON.stringify(err));
-  //         $("#preview")
-  //           .contents()
-  //           .find("html")
-  //           .html("Error while capturing content");
-  //         // alert('Error getting content from the current tab.')
-  //         // location.reload();
-  //       }
-  //     );
 }
 
 // Geo locations:
