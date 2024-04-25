@@ -30,11 +30,11 @@ if (typeof browser !== "undefined") {
 let userSettings = {};
 OptionsManager.load().then((options) => (userSettings = options));
 
-$(document).ready(init);
+document.addEventListener("DOMContentLoaded", init);
 
 console.log("Loading Popup...");
 
-const isWin = navigator.appVersion.includes("Win");
+const isWin = navigator.userAgent.includes("Win");
 const dirSeparator = isWin ? "\\" : "/";
 const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 const isChrome = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
@@ -78,6 +78,9 @@ const activeTabQuery = browserAPI.tabs.query({
 async function init() {
   // console.log('Settings: ' + JSON.stringify(userSettings));
 
+  const downloadFileEl = document.getElementById("downloadFile");
+  const titleEl = document.getElementById("title");
+
   await activeTabQuery.then(
     (tabs) => {
       for (let tab of tabs) {
@@ -88,8 +91,8 @@ async function init() {
         fileExt = extractFileExtFromUrl();
         let title = tab.title.trim();
         title = title.replace(/[/\\?%*:|"<>]/g, "-");
-        $("#title").val(title);
-        $("#title").focus();
+        titleEl.value = title;
+        titleEl.focus();
         supportedExts.indexOf(fileExt) >= 0
           ? $("#downloadFile").show()
           : $("#downloadFile").hide();
@@ -100,7 +103,7 @@ async function init() {
     }
   );
 
-  $("#title").focus();
+  titleEl.focus();
   $("#saveAsMhtml").on("click", isFirefox ? savePDF : saveAsMHTML);
   $("#closePopup").on("click", () => window.close());
   $("#saveAsBookmark").on("click", saveAsBookmark);
