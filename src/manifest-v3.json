@@ -2,12 +2,13 @@
   "name": "__MSG_appName__",
   "short_name": "TagSpaces",
   "version": "0.0.0.0",
-  "version_name": "0.0.0.0",
   "manifest_version": 3,
   "homepage_url": "https://www.tagspaces.org",
   "description": "__MSG_appDesc__",
   "permissions": [
+    "<all_urls>",
     "pageCapture",
+    "tabs",
     "downloads",
     "activeTab",
     "storage",
@@ -18,8 +19,7 @@
   "action": {
     "default_icon": "images/icon-128.png",
     "default_title": "__MSG_appLauncher__",
-    "default_popup": "popup.html",
-    "browser_style": true
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "images/icon-16.png",
@@ -28,7 +28,8 @@
   },
   "host_permissions": ["http://*/", "https://*/", "<all_urls>"],
   "background": {
-    "service_worker": "service-worker.dist.js"
+    "service_worker": "service-worker.dist.js",
+    "scripts": ["service-worker.dist.js"]
   },
   "commands": {
     "_execute_action": {

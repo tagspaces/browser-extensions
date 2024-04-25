@@ -1,5 +1,5 @@
 /**
- * @copyright Copyright (c) 2016-present, TagSpaces UG (haftungsbeschraenkt).
+ * @copyright Copyright (c) 2016-present, TagSpaces GmbH.
  * @license AGPL-3.0
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,8 @@ import OptionsManager from "../lib/options-manager.js";
 let browserAPI = null;
 if (typeof browser !== "undefined") {
   browserAPI = browser;
+  // Permission needed in Firefox for captureVisibleTabs
+  browser.permissions.request({ origins: ["<all_urls>"] });
 } else if (typeof chrome !== "undefined") {
   browserAPI = chrome;
 }
@@ -170,11 +172,6 @@ async function init() {
     }
     return true;
   }
-
-  // chrome.scripting.executeScript({
-  //   target: { tabId: id, allFrames: true },
-  //   files: ["content-script-capture-wholepage.dist.js"],
-  // });
 
   // browser.tabs
   //   .executeScript(null, {
@@ -390,7 +387,7 @@ function saveScreenshot() {
   $("#saveScreenshot i")
     .removeClass("fa-camera")
     .addClass("fa-spin fa-circle-o-notch");
-  const capturing = browserAPI.tabs.captureVisibleTab(null, {
+  const capturing = browserAPI.tabs.captureVisibleTab(undefined, {
     format: "png",
   });
   capturing.then(

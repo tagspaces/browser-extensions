@@ -1,5 +1,5 @@
 /**
- * @copyright Copyright (c) 2016-present, TagSpaces UG (haftungsbeschraenkt).
+ * @copyright Copyright (c) 2016-present, TagSpaces GmbH.
  * @license AGPL-3.0
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,9 +16,9 @@
  *
  */
 "use strict";
-import Readability from 'readability';
+import Readability from "readability";
 
-const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
 function getCleanedHtml() {
   try {
@@ -28,14 +28,18 @@ function getCleanedHtml() {
       host: loc.host,
       prePath: loc.protocol + "//" + loc.host,
       scheme: loc.protocol.substr(0, loc.protocol.indexOf(":")),
-      pathBase: loc.protocol + "//" + loc.host + loc.pathname.substr(0, loc.pathname.lastIndexOf("/") + 1)
+      pathBase:
+        loc.protocol +
+        "//" +
+        loc.host +
+        loc.pathname.substr(0, loc.pathname.lastIndexOf("/") + 1),
     };
     const documentClone = document.cloneNode(true);
     const article = new Readability(uri, documentClone).parse();
-    let extractedContent = '<h1>' + article.title + '</h1>' + article.content
+    let extractedContent = "<h1>" + article.title + "</h1>" + article.content;
     return extractedContent;
   } catch (error) {
-    console.warn('Error parsing document, sending original content');
+    console.warn("Error parsing document, sending original content");
     return undefined;
   }
 }
@@ -43,12 +47,14 @@ function getCleanedHtml() {
 function getOriginalHtml() {
   let body = document.body.innerHTML;
   let head = document.head.innerHTML;
-  return '<html><head>' + head + '</head><body>' + body + '</body></htlm>';
+  return "<html><head>" + head + "</head><body>" + body + "</body></htlm>";
 }
 
 const contentMsg = {
   action: "htmlcontent",
   cleanedHTML: getCleanedHtml(),
-  originalHTML: getOriginalHtml()
+  originalHTML: getOriginalHtml(),
 };
-isFirefox ? browser.runtime.sendMessage(contentMsg) : chrome.runtime.sendMessage(contentMsg);
+isFirefox
+  ? browser.runtime.sendMessage(contentMsg)
+  : chrome.runtime.sendMessage(contentMsg);

@@ -1,5 +1,5 @@
 /**
- * @copyright Copyright (c) 2016-present, TagSpaces UG (haftungsbeschraenkt).
+ * @copyright Copyright (c) 2016-present, TagSpaces GmbH.
  * @license AGPL-3.0
  *
  * This program is free software: you can redistribute it and/or modify
@@ -39,7 +39,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
     // const tabId = tabs[0].id;
     const injectionResults = await browserAPI.scripting.executeScript({
       target: { tabId: msg.tabId },
-      function: () => {
+      func: () => {
         // const htmlSelection = getSelection().toString();
         let htmlSelection = getSelection().toString();
         if (typeof window.getSelection != "undefined") {
@@ -64,7 +64,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         action: "htmlselection",
         source: injectionResults[0].result,
       };
-      console.log(JSON.stringify(response));
+      // console.log(JSON.stringify(response));
       // sendResponse(response);
       await browserAPI.runtime.sendMessage(response);
     }
