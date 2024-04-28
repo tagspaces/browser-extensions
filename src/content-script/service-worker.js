@@ -94,7 +94,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
       await browserAPI.runtime.sendMessage(response);
     }
   }
-  return true;
+  // return true; needed for async responses
 });
 
 browserAPI.runtime.onInstalled.addListener((details) => {
