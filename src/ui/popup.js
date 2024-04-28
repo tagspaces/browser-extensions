@@ -15,8 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-/* globals $, saveAs, DOMPurify, OpenLocationCode */
+/* globals saveAs, DOMPurify, OpenLocationCode */
 import OptionsManager from "../lib/options-manager.js";
+import {
+  formatDateTime4Tag,
+  extractFileExtFromUrl,
+  getBase64ImagePromise,
+  dataURItoBlob,
+  generateFileName,
+  extractLatLong,
+} from "../lib/utils.js";
 // import Readability from "./vendor/Readability.js";
 import { Readability } from "@mozilla/readability";
 
@@ -78,8 +86,6 @@ const activeTabQuery = browserAPI.tabs.query({
 });
 
 async function init() {
-  // console.log('Settings: ' + JSON.stringify(userSettings));
-
   const downloadFileEl = document.getElementById("downloadFile");
   const titleEl = document.getElementById("title");
 
@@ -90,14 +96,14 @@ async function init() {
         currentTabID = tab.id;
         currentTabURLParser.href = currentTabURL;
         extractLatLong();
-        fileExt = extractFileExtFromUrl();
+        fileExt = extractFileExtFromUrl(currentTabURL);
         let title = tab.title.trim();
         title = title.replace(/[/\\?%*:|"<>]/g, "-");
         titleEl.value = title;
         titleEl.focus();
         supportedExts.indexOf(fileExt) >= 0
-          ? $("#downloadFile").show()
-          : $("#downloadFile").hide();
+          ? (downloadFileEl.style.display = "")
+          : (downloadFileEl.style.display = "none");
       }
     },
     (err) => {
@@ -133,13 +139,13 @@ async function init() {
   document.getElementById("fullPreview").addEventListener("click", fullPreview);
 
   // I18n this panel
-  $("[data-i18n]").each(function () {
-    $(this).html(browserAPI.i18n.getMessage($(this).data("i18n")));
+  document.querySelectorAll("[data-i18n]").forEach((item) => {
+    item.innerHTML = browserAPI.i18n.getMessage(item.dataset.i18n);
   });
-  $("[data-i18n-title]").each(function () {
-    $(this).attr(
+  document.querySelectorAll("[data-i18n-title]").forEach((item) => {
+    item.setAttribute(
       "title",
-      browserAPI.i18n.getMessage($(this).data("i18n-title"))
+      browserAPI.i18n.getMessage(item.dataset.i18nTitle)
     );
   });
 
@@ -161,6 +167,7 @@ async function init() {
 
   function handleHTML(msg, sender, sendResponse) {
     console.log(JSON.stringify(msg));
+    const previewEl = document.getElementById("preview");
     const cssInject =
       "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; } html { overflow-x: hidden; }</style>";
     if (msg.action == "htmlcontent") {
@@ -176,79 +183,35 @@ async function init() {
       }
     }
 
+    const previewHtmlEl = previewEl.contentDocument.documentElement;
+
     if (htmlSelection) {
-      $("#preview").contents().find("html").html(htmlSelection);
-      $("#preview").contents().find("html").append(cssInject);
-      // $('#saveWholePageAsHtml').attr("disabled",true);
-      // $('#saveSelectionAsHtml').attr("disabled",false);
-      return;
+      previewHtmlEl.innerHTML = htmlSelection;
+      // return;
     } else if (htmlCleaned) {
-      $("#preview").contents().find("html").html(htmlCleaned);
-      $("#preview").contents().find("html").append(cssInject);
-      // $('#saveSelectionAsHtml').attr("disabled",true);
-      // $('#saveWholePageAsHtml').attr("disabled",false);
+      previewHtmlEl.innerHTML = htmlCleaned;
       contentMode = "simplified";
-      return;
+      // return;
     } else if (htmlOriginal) {
-      $("#preview").contents().find("html").html(htmlOriginal);
+      previewHtmlEl.innerHTML = htmlOriginal;
+      const cleanedOriginalHTML = htmlOriginal; // DOMPurify.sanitize(htmlOriginal);
       // const article = new Readability(
       //   msg.documentBaseUri,
       //   document.getElementById("preview").cloneNode(true)
       // ).parse();
       // console.log(article);
       contentMode = "original";
-      return;
+      // return;
     } else {
-      $("#contentModeSwitch").hide();
-      $("#preview").contents().find("html").html("No content was extracted...");
+      document.getElementById("saveSelectionAsHtml").style.display = "none";
+      previewHtmlEl.innerHTML = "No content was extracted...";
     }
-    return true;
-  }
-}
+    let styleEl = previewEl.contentDocument.createElement("style");
+    styleEl.type = "text/css";
+    styleEl.innerText = cssInject;
+    previewEl.contentDocument.head.appendChild(styleEl);
 
-// Geo locations:
-// GMaps: https://www.google.de/maps/@48.1401285,11.5732137,15.25z
-// GMaps: https://www.google.de/maps/@-20.8096591,-49.3801033,16z
-// OpenStreetMap: https://www.openstreetmap.org/#map=17/48.13504/11.59057
-// OpenStreetMap: https://www.openstreetmap.org/#map=16/-20.8077/-49.3785
-// Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
-// Bing: no url param
-function extractLatLong() {
-  // const regex = new RegExp('@(.*),(.*),'); // gmaps only
-  const regexGMH = new RegExp("(map=|@)(.*),(.*),"); // gmaps and here
-  const regexOSM = new RegExp("\\d/(.*)/(.*)"); // open street map
-  if (currentTabURLParser.href) {
-    let lonLatMatch = currentTabURLParser.href.match(regexGMH);
-    let lonLatMatch2 = currentTabURLParser.href.match(regexOSM);
-    let lon;
-    let lat;
-    if (lonLatMatch && lonLatMatch.length > 1) {
-      lon = lonLatMatch[2];
-      lat = lonLatMatch[3];
-    } else if (lonLatMatch2 && lonLatMatch2.length > 0) {
-      lon = lonLatMatch2[1];
-      lat = lonLatMatch2[2];
-    }
-    if (lon && lon.length > 0 && lat && lat.length > 0) {
-      let geoTag = "";
-      if (OpenLocationCode && userSettings.enableOpenLocationCode) {
-        try {
-          geoTag = OpenLocationCode.encode(parseFloat(lon), parseFloat(lat));
-        } catch (err) {
-          console.warn("Error parsing lat long to float");
-        }
-      } else {
-        if (!lat.startsWith("-")) {
-          lat = "+" + lat;
-        }
-        geoTag = lon + lat;
-      }
-      const tagsText =
-        document.getElementById("tags").value.trim() + " " + geoTag;
-      if (tagsText && tagsText.length > 0) {
-        document.getElementById("tags").value = tagsText.trim();
-      }
-    }
+    return true;
   }
 }
 
@@ -267,30 +230,33 @@ function saveAsFile(blob, filename) {
 function simplifiedPreview() {
   if (htmlCleaned) {
     contentMode = "simplified";
-    $("#preview").contents().find("html").html(htmlCleaned);
+    const previewHtmlEl =
+      document.getElementById("preview").contentDocument.documentElement;
+    previewHtmlEl.innerHTML = htmlCleaned;
   }
 }
 
 function fullPreview() {
   if (htmlOriginal) {
     contentMode = "original";
-    $("#preview").contents().find("html").html(htmlOriginal);
+    const previewHtmlEl =
+      document.getElementById("preview").contentDocument.documentElement;
+    previewHtmlEl.innerHTML = htmlOriginal;
   }
 }
 
 function saveAsMHTML() {
-  $("#saveAsMhtml i")
-    .removeClass("fa-file-image-o")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
+  saveAsMhtmlIcon.classList.remove("fa-file-image-o");
+  saveAsMhtmlIcon.classList.add("fa-spin", "fa-circle-o-notch");
   browserAPI.pageCapture.saveAsMHTML(
     {
       tabId: currentTabID,
     },
     (mhtml) => {
       saveAsFile(mhtml, generateFileName(fileExt, "mht"));
-      $("#saveAsMhtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-file-image-o");
+      saveAsMhtmlIcon.classList.add("fa-file-image-o");
+      saveAsMhtmlIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     }
   );
 }
@@ -304,9 +270,14 @@ function downloadFile() {
 }
 
 function saveWholePageAsHTML() {
-  $("#saveWholePageAsHtml i")
-    .removeClass("fa-file")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveAsSelectionIcon = document.querySelector(
+    "#saveSelectionAsHtml .fa"
+  );
+  const saveAsWholePageIcon = document.querySelector(
+    "#saveWholePageAsHtml .fa"
+  );
+  saveAsWholePageIcon.classList.remove("fa-file");
+  saveAsWholePageIcon.classList.add("fa-spin", "fa-circle-o-notch");
   let content = "";
   if (contentMode === "simplified") {
     content = htmlCleaned;
@@ -315,12 +286,10 @@ function saveWholePageAsHTML() {
   }
   if (!content || content.length < 1) {
     alert("No content extracted....");
-    $("#saveWholePageAsHtml i")
-      .removeClass("fa-spin fa-circle-o-notch")
-      .addClass("fa-file");
-    $("#saveSelectionAsHtml i")
-      .removeClass("fa-spin fa-circle-o-notch")
-      .addClass("fa-file-text");
+    saveAsWholePageIcon.classList.add("fa-file");
+    saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+    saveAsSelectionIcon.classList.add("fa-file-text");
+    saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     return;
   }
   prepareContentPromise(content)
@@ -329,12 +298,10 @@ function saveWholePageAsHTML() {
         type: "text/html;charset=utf-8",
       });
       saveAsFile(htmlBlob, generateFileName("html"));
-      $("#saveWholePageAsHtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-file");
-      $("#saveSelectionAsHtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-file-text");
+      saveAsWholePageIcon.classList.add("fa-file");
+      saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveAsSelectionIcon.classList.add("fa-file-text");
+      saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     })
     .catch((err) => {
       alert("Error by preparing the HTML content...");
@@ -344,17 +311,20 @@ function saveWholePageAsHTML() {
 }
 
 function saveSelectionAsHTML() {
-  $("#saveSelectionAsHtml i")
-    .removeClass("fa-file-text")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveAsSelectionIcon = document.querySelector(
+    "#saveSelectionAsHtml .fa"
+  );
+  const saveAsWholePageIcon = document.querySelector(
+    "#saveWholePageAsHtml .fa"
+  );
+  saveAsSelectionIcon.classList.remove("fa-file-text");
+  saveAsSelectionIcon.classList.add("fa-spin", "fa-circle-o-notch");
   if (!htmlSelection || htmlSelection.length < 1) {
     alert("No content selected....");
-    $("#saveWholePageAsHtml i")
-      .removeClass("fa-spin fa-circle-o-notch")
-      .addClass("fa-file");
-    $("#saveSelectionAsHtml i")
-      .removeClass("fa-spin fa-circle-o-notch")
-      .addClass("fa-file-text");
+    saveAsWholePageIcon.classList.add("fa-file");
+    saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+    saveAsSelectionIcon.classList.add("fa-file-text");
+    saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     return;
   }
   prepareContentPromise(htmlSelection)
@@ -363,12 +333,10 @@ function saveSelectionAsHTML() {
         type: "text/html;charset=utf-8",
       });
       saveAsFile(htmlBlob, generateFileName("html"));
-      $("#saveWholePageAsHtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-file");
-      $("#saveSelectionAsHtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-file-text");
+      saveAsWholePageIcon.classList.add("fa-file");
+      saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveAsSelectionIcon.classList.add("fa-file-text");
+      saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     })
     .catch((err) => {
       alert("Error by preparing the HTML content...");
@@ -378,43 +346,42 @@ function saveSelectionAsHTML() {
 }
 
 function saveScreenshot() {
-  $("#saveScreenshot i")
-    .removeClass("fa-camera")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveScreenshotIcon = document.querySelector("#saveScreenshot .fa");
+  saveScreenshotIcon.classList.remove("fa-camera");
+  saveScreenshotIcon.classList.add("fa-spin", "fa-circle-o-notch");
   const capturing = browserAPI.tabs.captureVisibleTab(undefined, {
     format: "png",
   });
   capturing.then(
     (image) => {
       saveAsFile(dataURItoBlob(image), generateFileName("png", "screenshot"));
-      $("#saveScreenshot i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-camera");
+      saveScreenshotIcon.classList.add("fa-camera");
+      saveScreenshotIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     },
     (err) => console.warn("Error taking screenshot " + JSON.stringify(err))
   );
 }
 
 function savePDF() {
-  $("#saveAsMhtml i")
-    .removeClass("fa-camera")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
+  saveAsMhtmlIcon.classList.remove("fa-camera");
+  saveAsMhtmlIcon.classList.add("fa-spin", "fa-circle-o-notch");
   const capturing = browserAPI.tabs.saveAsPDF({});
   capturing.then(
     (image) => {
       saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
-      $("#saveAsMhtml i")
-        .removeClass("fa-spin fa-circle-o-notch")
-        .addClass("fa-camera");
+      const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
+      saveAsMhtmlIcon.classList.add("fa-camera");
+      saveAsMhtmlIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     },
     (err) => console.warn("Error saving as PDF " + JSON.stringify(err))
   );
 }
 
 function saveAsBookmark() {
-  $("#saveAsBookmark i")
-    .removeClass("fa-bookmark")
-    .addClass("fa-spin fa-circle-o-notch");
+  const saveAsBookmarkIcon = document.querySelector("#saveAsBookmark .fa");
+  saveAsBookmarkIcon.classList.remove("fa-bookmark");
+  saveAsBookmarkIcon.classList.add("fa-spin", "fa-circle-o-notch");
   const capturing = browserAPI.tabs.captureVisibleTab(null, {
     format: "jpeg",
     quality: 95,
@@ -430,105 +397,9 @@ function saveAsBookmark() {
       type: "text/plain;charset=utf-8",
     });
     saveAsFile(textBlob, generateFileName("url"));
-    $("#saveAsBookmark i")
-      .removeClass("fa-spin fa-circle-o-notch")
-      .addClass("fa-bookmark");
+    saveAsBookmarkIcon.classList.add("fa-bookmark");
+    saveAsBookmarkIcon.classList.remove("fa-spin", "fa-circle-o-notch");
   });
-}
-
-function generateFileName(extension, type) {
-  let filename = $("#title").val();
-  const lastIndexOfDot = filename.lastIndexOf(".");
-  // removing the extension if the dot in for 4 or less character before the end of the title
-  if (lastIndexOfDot > 0 && filename.length - lastIndexOfDot < 5) {
-    filename = filename.substring(0, filename.lastIndexOf("."));
-  }
-
-  const rawTags = document.getElementById("tags").value.split(",");
-  const tags = [];
-  for (let tag of rawTags) {
-    let trimmedTag = tag.trim();
-    if (trimmedTag.length > 1) {
-      // setting minimum tag length of 2
-      tags.push(trimmedTag);
-    }
-  }
-  if (type === "screenshot" && extension.toLowerCase() === "png") {
-    // screenshot case
-    tags.push("screenshot");
-    tags.push(currentTabURLParser ? currentTabURLParser.hostname : "");
-    tags.push(formatDateTime4Tag(new Date().toString(), false));
-  }
-  if (type === "mht") {
-    extension = "mhtml";
-  }
-  if (type === "pdf") {
-    extension = "pdf";
-  }
-  if (tags.length > 0) {
-    filename = filename + " [" + tags.join(" ") + "]." + extension;
-  } else {
-    filename = filename + "." + extension;
-  }
-  filename = filename.replace(/[/\\?%*:|"<>]/g, "-").trim();
-  return filename;
-}
-
-function dataURItoBlob(dataURI) {
-  // convert base64 to raw binary data held in a string
-  const byteString = atob(dataURI.split(",")[1]);
-  // separate out the mime component
-  const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-  // write the bytes of the string to an ArrayBuffer
-  const arrayBuffer = new ArrayBuffer(byteString.length);
-  let _ia = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < byteString.length; i++) {
-    _ia[i] = byteString.charCodeAt(i);
-  }
-  const dataView = new DataView(arrayBuffer);
-  const blob = new Blob([dataView], {
-    type: mimeString,
-  });
-  return blob;
-}
-
-function getBase64ImagePromise(imgURL) {
-  return new Promise((resolve) => {
-    let mimeType = "image/jpeg";
-    // if (imgURL.endsWith('gif')) {
-    //   mimeType = 'image/gif';
-    // }
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    let dataURL;
-    img.src = imgURL;
-    img.crossOrigin = "anonymous";
-    img.onerror = (err) => {
-      console.warn("Error fetching image: " + JSON.stringify(err));
-      resolve([imgURL, imgURL]);
-    };
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      try {
-        dataURL = canvas.toDataURL(mimeType, 0.9);
-        resolve([imgURL, dataURL]);
-      } catch (e) {
-        resolve(["", dataURL]);
-      }
-    };
-  });
-}
-
-function extractFileExtFromUrl() {
-  let url = currentTabURL;
-  if (currentTabURLParser.search) {
-    url = currentTabURLParser.origin + currentTabURLParser.pathname;
-  }
-  const ext = url.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
-  return ext.toLowerCase();
 }
 
 function prepareContentPromise(uncleanedHTML) {
@@ -627,45 +498,4 @@ function prepareContentPromise(uncleanedHTML) {
         return resolve(cleanedHTML);
       });
   });
-}
-
-function formatDateTime4Tag(date, includeTime) {
-  if (date === undefined || date === "") {
-    return "";
-  }
-  const d = new Date(date);
-  let cDate = d.getDate();
-  cDate += "";
-  if (cDate.length === 1) {
-    cDate = "0" + cDate;
-  }
-  let cMonth = d.getMonth();
-  cMonth++;
-  cMonth += "";
-  if (cMonth.length === 1) {
-    cMonth = "0" + cMonth;
-  }
-  const cYear = d.getFullYear();
-
-  let time = "";
-  if (includeTime) {
-    let cHour = d.getHours();
-    cHour += "";
-    if (cHour.length === 1) {
-      cHour = "0" + cHour;
-    }
-    let cMinute = d.getMinutes();
-    cMinute += "";
-    if (cMinute.length === 1) {
-      cMinute = "0" + cMinute;
-    }
-    let cSecond = d.getSeconds();
-    cSecond += "";
-    if (cSecond.length === 1) {
-      cSecond = "0" + cSecond;
-    }
-    time = "~" + cHour + "" + cMinute + "" + cSecond;
-  }
-
-  return cYear + "" + cMonth + "" + cDate + time;
 }

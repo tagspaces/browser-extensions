@@ -39,7 +39,8 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
     // });
     // const tabId = tabs[0].id;
     const injectionResults = await browserAPI.scripting.executeScript({
-      target: { tabId: msg.tabId },
+      target: { tabId: msg.tabId }, // allFrames: true
+      // files: ["vendor/Readability.js", "page-extraction.js"],
       func: () => {
         // const htmlSelection = getSelection().toString();
         let htmlSelection = getSelection().toString();
@@ -65,7 +66,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         action: "htmlselection",
         source: injectionResults[0].result,
       };
-      // console.log(JSON.stringify(response));
+      console.log(JSON.stringify(response));
       // sendResponse(response);
       await browserAPI.runtime.sendMessage(response);
     }
