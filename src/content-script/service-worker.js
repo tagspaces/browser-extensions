@@ -64,7 +64,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
     if (injectionResults && injectionResults[0] && injectionResults[0].result) {
       const response = {
         action: "htmlselection",
-        source: injectionResults[0].result,
+        originalHTML: injectionResults[0].result,
       };
       console.log(JSON.stringify(response));
       // sendResponse(response);
@@ -78,9 +78,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         const head = document.head.innerHTML;
         const documentHTML =
           "<html><head>" + head + "</head><body>" + body + "</body></htlm>";
-        const documentClone = document.cloneNode(true);
         return {
-          documentClone: documentClone,
           documentBaseUri: document.baseURI,
           documentHTML: documentHTML,
         };
@@ -90,8 +88,6 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
       const firstResult = injectionResults[0].result;
       const response = {
         action: "htmlcontent",
-        cleanedHTML: "", //getCleanedHtml(),
-        documentClone: firstResult.documentClone,
         documentBaseUri: firstResult.documentBaseUri,
         originalHTML: firstResult.documentHTML,
       };

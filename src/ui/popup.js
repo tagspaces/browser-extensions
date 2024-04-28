@@ -25,7 +25,6 @@ import {
   generateFileName,
   extractLatLong,
 } from "../lib/utils.js";
-// import Readability from "./vendor/Readability.js";
 import { Readability } from "@mozilla/readability";
 
 let browserAPI = null;
@@ -176,10 +175,10 @@ async function init() {
     }
     if (msg.action == "htmlselection") {
       // console.log("HTML: " + request.source);
-      if (msg.source.length < 1) {
+      if (msg.originalHTML.length < 1) {
         // alert('No content selected....');
       } else {
-        htmlSelection = msg.source;
+        htmlSelection = msg.originalHTML;
       }
     }
 
@@ -187,21 +186,17 @@ async function init() {
 
     if (htmlSelection) {
       previewHtmlEl.innerHTML = htmlSelection;
-      // return;
-    } else if (htmlCleaned) {
-      previewHtmlEl.innerHTML = htmlCleaned;
-      contentMode = "simplified";
-      // return;
     } else if (htmlOriginal) {
       previewHtmlEl.innerHTML = htmlOriginal;
       const cleanedOriginalHTML = htmlOriginal; // DOMPurify.sanitize(htmlOriginal);
-      // const article = new Readability(
-      //   msg.documentBaseUri,
-      //   document.getElementById("preview").cloneNode(true)
-      // ).parse();
-      // console.log(article);
+      const article = new Readability(
+        msg.documentBaseUri,
+        previewEl.contentDocument.cloneNode(true)
+      ).parse();
+      console.log(article);
+      htmlCleaned = article.content;
+      previewHtmlEl.innerHTML = htmlCleaned;
       contentMode = "original";
-      // return;
     } else {
       document.getElementById("saveSelectionAsHtml").style.display = "none";
       previewHtmlEl.innerHTML = "No content was extracted...";
@@ -210,7 +205,6 @@ async function init() {
     styleEl.type = "text/css";
     styleEl.innerText = cssInject;
     previewEl.contentDocument.head.appendChild(styleEl);
-
     return true;
   }
 }
