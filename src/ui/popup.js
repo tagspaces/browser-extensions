@@ -72,7 +72,7 @@ const cssReset =
 const cssInject = `
   img, figure, video { 
     max-width: 100%; 
-    height: unset; 
+    height: auto; 
   } 
   html { overflow-x: hidden; }
 `;
@@ -467,8 +467,12 @@ function prepareContentPromise(htmlContent) {
         capturing.then(
           (imageDataUrl) => {
             // Make capturing optional, evtl. resize the image
+            let browserName = isChrome ? " (Chrome)" : "";
+            browserName = isFirefox ? " (Firefox)" : browserName;
             let metaData =
-              '\ndata-createdwith="TagSpaces Web Clipper"' +
+              '\ndata-createdwith="TagSpaces Web Clipper' +
+              browserName +
+              '"' +
               '\ndata-sourceurl="' +
               currentTabURL +
               '" \ndata-scrappedon="' +
