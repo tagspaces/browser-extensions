@@ -25,7 +25,8 @@ import {
   generateFileName,
   extractLatLong,
 } from "../lib/utils.js";
-import { Readability } from "@mozilla/readability";
+import { Readability, isProbablyReaderable } from "@mozilla/readability";
+import * as DOMPurify from "dompurify";
 
 let browserAPI = null;
 if (typeof browser !== "undefined") {
@@ -67,10 +68,19 @@ const cssReadability =
   "body{overflow:auto;font: Ubuntu,arial,clean,sans-serif;color:#000;line-height:1.4em;background-color:#fff;padding:20px}p{margin:1em 0;line-height:1.5em}table{font:100%;margin:1em}table th{border-bottom:1px solid #bbb;padding:.2em 1em}table td{border-bottom:1px solid #ddd;padding:.2em 1em}input[type=image],input[type=password],input[type=text],textarea{font:99% helvetica,arial,freesans,sans-serif}option,select{padding:0 .25em}optgroup{margin-top:.5em}code,pre{font:12px Monaco, Courier ,monospace}pre{margin:1em 0;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;color:#444;overflow:auto;-webkit-box-shadow:rgba(0,0,0,.07) 0 1px 2px inset;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}pre code{padding:0;font-size:12px;background-color:#eee;border:none}code{font-size:12px;background-color:#f8f8ff;color:#444;padding:0 .2em;border:1px solid #dedede}img{border:0;max-width:100%}abbr{border-bottom:none}a{color:#4183c4;text-decoration:none}a:hover{text-decoration:underline}a code,a:link code,a:visited code{color:#4183c4}h2,h3{margin:1em 0}h1,h2,h3,h4,h5,h6{border:0}h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em}h1:first-child{margin-top:0;padding-top:.25em;border-top:none}h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em}h3{font-size:130%;margin-top:1em}h4{font-size:120%;margin-top:1em}h5{font-size:115%;margin-top:1em}h6{font-size:110%;margin-top:1em}hr{border:1px solid #ddd}ol,ul{margin:1em 0 1em 2em}ol li,ul li{margin-top:.5em;margin-bottom:.5em}ol ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555}dt{font-weight:700;margin-left:1em}dd{margin-left:2em;margin-bottom:1em}";
 const cssReset =
   "/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=checkbox],[type=radio],legend{box-sizing:border-box;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}fieldset{padding:.35em .75em .625em}legend{color:inherit;display:table;max-width:100%;white-space:normal}textarea{overflow:auto}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}";
+
+const cssInject = `
+  img, figure, video { 
+    max-width: 100%; 
+    height: unset; 
+  } 
+  html { overflow-x: hidden; }
+`;
 let htmlTemplate =
   '<!DOCTYPE html><html><head><meta charset="UTF-8"><style type="text/css">' +
-  cssReset +
+  // cssReset +
   cssReadability +
+  cssInject +
   "</style></head><body></body></html>";
 let fileExt;
 let currentTabURL;
@@ -165,20 +175,16 @@ async function init() {
   console.log("Capture page received: " + JSON.stringify(responsePage));
 
   function handleHTML(msg, sender, sendResponse) {
-    console.log(JSON.stringify(msg));
+    // console.log(msg);
     const previewEl = document.getElementById("preview");
-    const cssInject =
-      "<style type='text/css'>img, figure, video { max-width: 100%; height: unset; } html { overflow-x: hidden; }</style>";
     if (msg.action == "htmlcontent") {
-      // console.log("HTML: " + request.source);
-      htmlOriginal = msg.originalHTML;
+      htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
     }
     if (msg.action == "htmlselection") {
-      // console.log("HTML: " + request.source);
       if (msg.originalHTML.length < 1) {
         // alert('No content selected....');
       } else {
-        htmlSelection = msg.originalHTML;
+        htmlSelection = DOMPurify.sanitize(msg.originalHTML);
       }
     }
 
@@ -188,15 +194,21 @@ async function init() {
       previewHtmlEl.innerHTML = htmlSelection;
     } else if (htmlOriginal) {
       previewHtmlEl.innerHTML = htmlOriginal;
-      const cleanedOriginalHTML = htmlOriginal; // DOMPurify.sanitize(htmlOriginal);
-      const article = new Readability(
-        msg.documentBaseUri,
-        previewEl.contentDocument.cloneNode(true)
-      ).parse();
-      console.log(article);
-      htmlCleaned = article.content;
-      previewHtmlEl.innerHTML = htmlCleaned;
       contentMode = "original";
+      const iframeClone = previewEl.contentDocument.cloneNode(true);
+      if (isProbablyReaderable(iframeClone)) {
+        const article = new Readability(
+          msg.documentBaseUri,
+          iframeClone
+        ).parse();
+        console.log(article);
+        htmlCleaned = "<h1>" + article.title + "</h1>\n" + article.content;
+        if (article.title) {
+          titleEl.value = article.title;
+        }
+        previewHtmlEl.innerHTML = htmlCleaned;
+        contentMode = "simplified";
+      }
     } else {
       document.getElementById("saveSelectionAsHtml").style.display = "none";
       previewHtmlEl.innerHTML = "No content was extracted...";
@@ -298,9 +310,9 @@ function saveWholePageAsHTML() {
       saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
     })
     .catch((err) => {
+      console.warn("Error handling html content " + err);
       alert("Error by preparing the HTML content...");
       location.reload();
-      console.warn("Error handling html content " + err);
     });
 }
 
@@ -396,10 +408,8 @@ function saveAsBookmark() {
   });
 }
 
-function prepareContentPromise(uncleanedHTML) {
+function prepareContentPromise(htmlContent) {
   return new Promise((resolve) => {
-    let cleanedHTML = DOMPurify.sanitize(uncleanedHTML);
-
     // saving all images as jpg in base64 format
     let match;
     const urlPromises = [];
@@ -408,7 +418,7 @@ function prepareContentPromise(uncleanedHTML) {
     const rex = /<img.*?src=['"](.*?)['"]/g;
     const imgSources = [];
 
-    while ((match = rex.exec(cleanedHTML)) !== null) {
+    while ((match = rex.exec(htmlContent)) !== null) {
       imgSources.push(match[1]);
       // console.log(`Found ${match[1]} in ${match[0]}`);
     }
@@ -430,7 +440,7 @@ function prepareContentPromise(uncleanedHTML) {
         } else {
           imgUrl = currentTabURL + imgUrl;
         }
-        cleanedHTML = cleanedHTML.split(originalImgUrl).join(imgUrl);
+        htmlContent = htmlContent.split(originalImgUrl).join(imgUrl);
         urlPromises.push(getBase64ImagePromise(imgUrl));
       }
       // console.log("URLs: " + imgUrl);
@@ -439,11 +449,11 @@ function prepareContentPromise(uncleanedHTML) {
     Promise.all(urlPromises)
       .then((resultUrls) => {
         resultUrls.forEach((dataURLObject) => {
-          cleanedHTML = cleanedHTML
+          htmlContent = htmlContent
             .split(' src="' + dataURLObject[0])
             .join(' src="' + dataURLObject[1]); // ensure to replace only src="..." and not data-src=".."
-          if (cleanedHTML.includes("src='")) {
-            cleanedHTML = cleanedHTML
+          if (htmlContent.includes("src='")) {
+            htmlContent = htmlContent
               .split(" src='" + dataURLObject[0])
               .join(" src='" + dataURLObject[1]);
           }
@@ -468,20 +478,20 @@ function prepareContentPromise(uncleanedHTML) {
               metaData =
                 metaData + ' \ndata-screenshot="' + imageDataUrl + '"\n';
             }
-            if (cleanedHTML.includes("<body")) {
-              cleanedHTML = cleanedHTML
+            if (htmlContent.includes("<body")) {
+              htmlContent = htmlContent
                 .split("<body")
                 .join("<body " + metaData);
             } else {
-              cleanedHTML =
-                "\n<body " + metaData + ">" + cleanedHTML + "</body>";
-              cleanedHTML = htmlTemplate.replace(
+              htmlContent =
+                "\n<body " + metaData + ">" + htmlContent + "</body>";
+              htmlContent = htmlTemplate.replace(
                 /<body[^>]*>([^]*)<\/body>/m,
-                cleanedHTML
+                htmlContent
               );
             }
             // console.log('Content before saving: ' + cleanedHTML);
-            return resolve(cleanedHTML);
+            return resolve(htmlContent);
           },
           (err) =>
             console.warn("Error taking screenshot " + JSON.stringify(err))
@@ -489,7 +499,7 @@ function prepareContentPromise(uncleanedHTML) {
       })
       .catch((error) => {
         console.warn("Error by preparing content: " + error);
-        return resolve(cleanedHTML);
+        return resolve(htmlContent);
       });
   });
 }

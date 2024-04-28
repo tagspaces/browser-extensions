@@ -1,7 +1,8 @@
 const currentTabURLParser = document.createElement("a");
 
 export function generateFileName(extension, type) {
-  let filename = $("#title").val();
+  const titleEl = document.getElementById("title");
+  let filename = titleEl.value;
   const lastIndexOfDot = filename.lastIndexOf(".");
   // removing the extension if the dot in for 4 or less character before the end of the title
   if (lastIndexOfDot > 0 && filename.length - lastIndexOfDot < 5) {
