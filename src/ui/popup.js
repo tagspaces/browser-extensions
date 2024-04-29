@@ -48,6 +48,7 @@ const isWin = navigator.userAgent.includes("Win");
 const dirSeparator = isWin ? "\\" : "/";
 const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 const isChrome = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
+const isEdge = navigator.userAgent.toLowerCase().indexOf("edg") > -1;
 const supportedExts = [
   "png",
   "jpg",
@@ -210,7 +211,7 @@ async function init() {
         contentMode = "simplified";
       }
     } else {
-      document.getElementById("saveSelectionAsHtml").style.display = "none";
+      // document.getElementById("saveSelectionAsHtml").style.display = "none";
       previewHtmlEl.innerHTML = "No content was extracted...";
     }
     let styleEl = previewEl.contentDocument.createElement("style");
@@ -252,17 +253,15 @@ function fullPreview() {
 }
 
 function saveAsMHTML() {
-  const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
-  saveAsMhtmlIcon.classList.remove("fa-file-image-o");
-  saveAsMhtmlIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  const saveAsMhtmlSpinner = document.querySelector("#saveAsMhtmlSpinner");
+  saveAsMhtmlSpinner.classList.remove("d-none");
   browserAPI.pageCapture.saveAsMHTML(
     {
       tabId: currentTabID,
     },
     (mhtml) => {
       saveAsFile(mhtml, generateFileName(fileExt, "mht"));
-      saveAsMhtmlIcon.classList.add("fa-file-image-o");
-      saveAsMhtmlIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveAsMhtmlSpinner.classList.add("d-none");
     }
   );
 }
@@ -276,14 +275,8 @@ function downloadFile() {
 }
 
 function saveWholePageAsHTML() {
-  const saveAsSelectionIcon = document.querySelector(
-    "#saveSelectionAsHtml .fa"
-  );
-  const saveAsWholePageIcon = document.querySelector(
-    "#saveWholePageAsHtml .fa"
-  );
-  saveAsWholePageIcon.classList.remove("fa-file");
-  saveAsWholePageIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  const saveAsHTMLSpinner = document.querySelector("#saveAsHTMLSpinner");
+  saveAsHTMLSpinner.classList.remove("d-none");
   let content = "";
   if (contentMode === "simplified") {
     content = htmlCleaned;
@@ -292,10 +285,7 @@ function saveWholePageAsHTML() {
   }
   if (!content || content.length < 1) {
     alert("No content extracted....");
-    saveAsWholePageIcon.classList.add("fa-file");
-    saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
-    saveAsSelectionIcon.classList.add("fa-file-text");
-    saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+    saveAsHTMLSpinner.classList.add("d-none");
     return;
   }
   prepareContentPromise(content)
@@ -304,10 +294,7 @@ function saveWholePageAsHTML() {
         type: "text/html;charset=utf-8",
       });
       saveAsFile(htmlBlob, generateFileName("html"));
-      saveAsWholePageIcon.classList.add("fa-file");
-      saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
-      saveAsSelectionIcon.classList.add("fa-file-text");
-      saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveAsHTMLSpinner.classList.add("d-none");
     })
     .catch((err) => {
       console.warn("Error handling html content " + err);
@@ -317,20 +304,13 @@ function saveWholePageAsHTML() {
 }
 
 function saveSelectionAsHTML() {
-  const saveAsSelectionIcon = document.querySelector(
-    "#saveSelectionAsHtml .fa"
+  const saveSelectionAsHtmlSpinner = document.querySelector(
+    "#saveSelectionAsHtmlSpinner"
   );
-  const saveAsWholePageIcon = document.querySelector(
-    "#saveWholePageAsHtml .fa"
-  );
-  saveAsSelectionIcon.classList.remove("fa-file-text");
-  saveAsSelectionIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  saveSelectionAsHtmlSpinner.classList.remove("d-none");
   if (!htmlSelection || htmlSelection.length < 1) {
     alert("No content selected....");
-    saveAsWholePageIcon.classList.add("fa-file");
-    saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
-    saveAsSelectionIcon.classList.add("fa-file-text");
-    saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+    saveSelectionAsHtmlSpinner.classList.add("d-none");
     return;
   }
   prepareContentPromise(htmlSelection)
@@ -339,10 +319,7 @@ function saveSelectionAsHTML() {
         type: "text/html;charset=utf-8",
       });
       saveAsFile(htmlBlob, generateFileName("html"));
-      saveAsWholePageIcon.classList.add("fa-file");
-      saveAsWholePageIcon.classList.remove("fa-spin", "fa-circle-o-notch");
-      saveAsSelectionIcon.classList.add("fa-file-text");
-      saveAsSelectionIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveSelectionAsHtmlSpinner.classList.add("d-none");
     })
     .catch((err) => {
       alert("Error by preparing the HTML content...");
@@ -352,42 +329,41 @@ function saveSelectionAsHTML() {
 }
 
 function saveScreenshot() {
-  const saveScreenshotIcon = document.querySelector("#saveScreenshot .fa");
-  saveScreenshotIcon.classList.remove("fa-camera");
-  saveScreenshotIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  const saveScreenshotSpinner = document.querySelector(
+    "#saveScreenshotSpinner"
+  );
+  saveScreenshotSpinner.classList.remove("d-none");
   const capturing = browserAPI.tabs.captureVisibleTab(undefined, {
     format: "png",
   });
   capturing.then(
     (image) => {
       saveAsFile(dataURItoBlob(image), generateFileName("png", "screenshot"));
-      saveScreenshotIcon.classList.add("fa-camera");
-      saveScreenshotIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveScreenshotSpinner.classList.add("d-none");
     },
-    (err) => console.warn("Error taking screenshot " + JSON.stringify(err))
+    (err) => {
+      saveScreenshotSpinner.classList.add("d-none");
+      console.warn("Error taking screenshot " + JSON.stringify(err));
+    }
   );
 }
 
 function savePDF() {
-  const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
-  saveAsMhtmlIcon.classList.remove("fa-camera");
-  saveAsMhtmlIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  const saveAsMhtmlSpinner = document.querySelector("#saveAsMhtmlSpinner");
+  saveAsMhtmlSpinner.classList.remove("d-none");
   const capturing = browserAPI.tabs.saveAsPDF({});
   capturing.then(
     (image) => {
       saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
-      const saveAsMhtmlIcon = document.querySelector("#saveAsMhtml .fa");
-      saveAsMhtmlIcon.classList.add("fa-camera");
-      saveAsMhtmlIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+      saveAsMhtmlSpinner.classList.add("d-none");
     },
     (err) => console.warn("Error saving as PDF " + JSON.stringify(err))
   );
 }
 
 function saveAsBookmark() {
-  const saveAsBookmarkIcon = document.querySelector("#saveAsBookmark .fa");
-  saveAsBookmarkIcon.classList.remove("fa-bookmark");
-  saveAsBookmarkIcon.classList.add("fa-spin", "fa-circle-o-notch");
+  const saveBookmarkSpinner = document.querySelector("#saveBookmarkSpinner");
+  saveBookmarkSpinner.classList.remove("d-none");
   const capturing = browserAPI.tabs.captureVisibleTab(null, {
     format: "jpeg",
     quality: 95,
@@ -403,8 +379,7 @@ function saveAsBookmark() {
       type: "text/plain;charset=utf-8",
     });
     saveAsFile(textBlob, generateFileName("url"));
-    saveAsBookmarkIcon.classList.add("fa-bookmark");
-    saveAsBookmarkIcon.classList.remove("fa-spin", "fa-circle-o-notch");
+    saveBookmarkSpinner.classList.add("d-none");
   });
 }
 
@@ -466,8 +441,8 @@ function prepareContentPromise(htmlContent) {
         });
         capturing.then(
           (imageDataUrl) => {
-            // Make capturing optional, evtl. resize the image
             let browserName = isChrome ? " (Chrome)" : "";
+            browserName = isEdge ? " (Edge)" : browserName;
             browserName = isFirefox ? " (Firefox)" : browserName;
             let metaData =
               '\ndata-createdwith="TagSpaces Web Clipper' +

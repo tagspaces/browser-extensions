@@ -82,5 +82,9 @@
   "desktopTagSpacesLabel": {
     "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
     "description": "Reference to TagSpaces Desktop label"
+  },
+  "previewLabel": {
+    "message": "Preview",
+    "description": "Preview before clipping"
   }
 }

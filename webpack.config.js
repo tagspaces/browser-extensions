@@ -39,32 +39,12 @@ let config = {
           to: "./vendor/openlocationcode.license.txt",
         },
         {
-          from: "../node_modules/bootswatch/paper/bootstrap.min.css",
+          from: "../node_modules/bootstrap/dist/css/bootstrap.min.css",
           to: "./vendor/css",
         },
         {
           from: "../node_modules/file-saver/dist/FileSaver.min.js",
           to: "./vendor",
-        },
-        {
-          from: "../node_modules/dompurify/dist/purify.min.js",
-          to: "./vendor",
-        },
-        {
-          from: "../node_modules/font-awesome/css/font-awesome.min.css",
-          to: "./vendor/css",
-        },
-        {
-          from: "../node_modules/font-awesome/fonts/fontawesome-webfont.ttf",
-          to: "./vendor/fonts",
-        },
-        {
-          from: "../node_modules/font-awesome/fonts/fontawesome-webfont.woff",
-          to: "./vendor/fonts",
-        },
-        {
-          from: "../node_modules/font-awesome/fonts/fontawesome-webfont.woff2",
-          to: "./vendor/fonts",
         },
       ],
     }),
