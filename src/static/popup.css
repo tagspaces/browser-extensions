@@ -5,7 +5,20 @@
   --ts-color: 20, 173, 130; /* #14ad82; */
   /* --bs-primary: rgb(var(--ts-color));
   --bs-btn-bg: rgb(var(--ts-color)); */
-} 
+}   
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #363636 !important;
+    color: white !important;
+  }
+  .btn-outline {
+    color: white !important;
+  }
+  .badge {
+    background-color: #6e6e6e !important;
+  }
+}
 
 a {
   color: rgb(var(--ts-color));
@@ -143,7 +156,7 @@ label {
 .badge {
   margin-left: 2px;
   margin-right: 5px;
-  background-color: lightgray !important;
+  background-color: lightgray;
 }
 
 #preview {
