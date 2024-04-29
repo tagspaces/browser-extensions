@@ -77,8 +77,20 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         const head = document.head.innerHTML;
         const documentHTML =
           "<html><head>" + head + "</head><body>" + body + "</body></htlm>";
+        const loc = document.location;
+        const uri = {
+          spec: loc.href,
+          host: loc.host,
+          prePath: loc.protocol + "//" + loc.host,
+          scheme: loc.protocol.substring(0, loc.protocol.indexOf(":")),
+          pathBase:
+            loc.protocol +
+            "//" +
+            loc.host +
+            loc.pathname.substring(0, loc.pathname.lastIndexOf("/") + 1),
+        };
         return {
-          documentBaseUri: document.baseURI,
+          documentBaseUri: uri, // document.baseURI,
           documentHTML: documentHTML,
         };
       },

@@ -89,6 +89,7 @@ let currentTabID;
 let htmlOriginal;
 let htmlCleaned;
 let htmlSelection;
+let documentBaseUri;
 let contentMode = "simplified"; // 'original'
 const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
@@ -165,18 +166,23 @@ async function init() {
     type: "capture-selection",
     tabId: currentTabID,
   });
-  console.log(
-    "Capture selection received: " + JSON.stringify(responseSelection)
-  );
+  // console.log(
+  //   "Capture selection received: " + JSON.stringify(responseSelection)
+  // );
 
   const responsePage = await browserAPI.runtime.sendMessage({
     type: "capture-page",
     tabId: currentTabID,
   });
-  console.log("Capture page received: " + JSON.stringify(responsePage));
+  // console.log("Capture page received: " + JSON.stringify(responsePage));
 
   function handleHTML(msg, sender, sendResponse) {
-    // console.log(msg);
+    documentBaseUri = msg.documentBaseUri;
+    // host: "www.tagspaces.com"
+    // pathBase: "https://www.tagspaces.com/articles/"
+    // prePath: "https://www.tagspaces.com"
+    // scheme: "https"
+    // spec: "https://www.tagspaces.com/articles/testarticle
     const previewEl = document.getElementById("preview");
     if (msg.action == "htmlcontent") {
       htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
@@ -192,32 +198,36 @@ async function init() {
     const previewHtmlEl = previewEl.contentDocument.documentElement;
 
     if (htmlSelection) {
-      previewHtmlEl.innerHTML = htmlSelection;
+      updatePreviewArea(htmlSelection);
     } else if (htmlOriginal) {
-      previewHtmlEl.innerHTML = htmlOriginal;
+      updatePreviewArea(htmlOriginal);
       contentMode = "original";
       const iframeClone = previewEl.contentDocument.cloneNode(true);
       if (isProbablyReaderable(iframeClone)) {
-        const article = new Readability(
-          msg.documentBaseUri,
-          iframeClone
-        ).parse();
-        console.log(article);
-        htmlCleaned = "<h1>" + article.title + "</h1>\n" + article.content;
+        const article = new Readability(iframeClone).parse();
+        // console.log(article);
+        // byline: "Core Team Member"
+        // content: "<div id=\"readability-page-1\" class=\"page\"><di
+        // dir: null
+        // excerpt: "Your Own Decentralized ..."
+        // lang: null
+        // length: 10521
+        // publishedTime: null
+        // siteName: null
+        // textContent: "Your Own Decentralized
+        // title: "TagSpaces as a platform for file-based apps"
+        htmlCleaned = article.content;
         if (article.title) {
           titleEl.value = article.title;
         }
-        previewHtmlEl.innerHTML = htmlCleaned;
+        htmlCleaned = "<h1>" + titleEl.value + "</h1>\n" + htmlCleaned;
+        updatePreviewArea(htmlCleaned);
         contentMode = "simplified";
       }
     } else {
       // document.getElementById("saveSelectionAsHtml").style.display = "none";
-      previewHtmlEl.innerHTML = "No content was extracted...";
+      updatePreviewArea("No content was extracted...");
     }
-    let styleEl = previewEl.contentDocument.createElement("style");
-    styleEl.type = "text/css";
-    styleEl.innerText = cssInject;
-    previewEl.contentDocument.head.appendChild(styleEl);
     return true;
   }
 }
@@ -237,18 +247,14 @@ function saveAsFile(blob, filename) {
 function simplifiedPreview() {
   if (htmlCleaned) {
     contentMode = "simplified";
-    const previewHtmlEl =
-      document.getElementById("preview").contentDocument.documentElement;
-    previewHtmlEl.innerHTML = htmlCleaned;
+    updatePreviewArea(htmlCleaned);
   }
 }
 
 function fullPreview() {
   if (htmlOriginal) {
     contentMode = "original";
-    const previewHtmlEl =
-      document.getElementById("preview").contentDocument.documentElement;
-    previewHtmlEl.innerHTML = htmlOriginal;
+    updatePreviewArea(htmlOriginal);
   }
 }
 
@@ -381,6 +387,39 @@ function saveAsBookmark() {
     saveAsFile(textBlob, generateFileName("url"));
     saveBookmarkSpinner.classList.add("d-none");
   });
+}
+
+function updatePreviewArea(htmlContent) {
+  const previewEl = document.getElementById("preview");
+  const previewHtmlEl = previewEl.contentDocument.documentElement;
+  previewHtmlEl.innerHTML = htmlContent;
+  const allSource = previewHtmlEl.getElementsByTagName("source");
+  for (const source of allSource) {
+    // console.log("srcset: " + source.srcset);
+    source.setAttribute("srcset", "");
+  }
+  const allImages = previewHtmlEl.getElementsByTagName("img");
+  for (const img of allImages) {
+    const imgSrc = img.getAttribute("src");
+    if (
+      imgSrc.startsWith("file:") ||
+      imgSrc.startsWith("http") ||
+      imgSrc.startsWith("ts:")
+    ) {
+      // do nothing
+    } else if (imgSrc.startsWith("//")) {
+      img.setAttribute("src", documentBaseUri.scheme + ":" + imgSrc);
+      console.log(img.src);
+    } else if (imgSrc.startsWith("/")) {
+      img.setAttribute("src", documentBaseUri.prePath + "/" + imgSrc);
+    } else {
+      img.setAttribute("src", documentBaseUri.pathBase + "/" + imgSrc);
+    }
+  }
+  let styleEl = previewEl.contentDocument.createElement("style");
+  styleEl.type = "text/css";
+  styleEl.innerText = cssInject;
+  previewEl.contentDocument.head.appendChild(styleEl);
 }
 
 function prepareContentPromise(htmlContent) {
