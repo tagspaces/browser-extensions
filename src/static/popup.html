@@ -3,11 +3,6 @@
   <head lang="en">
     <meta charset="UTF-8" />
     <title>TagSpaces Web Clipper</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="vendor/css/bootstrap.min.css"
-    />
     <link rel="stylesheet" type="text/css" href="popup.css" />
   </head>
   <body
@@ -27,7 +22,7 @@
         background-color: transparent;
       "
     >
-      <div style="white-space: nowrap">
+      <div style="white-space: nowrap; text-align: center">
         <a
           href="https://www.tagspaces.org/?utm_source=webclipper"
           style="text-decoration: none"
@@ -35,18 +30,25 @@
         >
           <img
             src="images/icon-128.png"
-            class="pull-left"
             style="margin-left: 0px; max-height: 22px; max-width: 22px"
           />
           <img
-            src="images/text-logo.svg"
-            class="pull-left"
-            style="margin-left: 10px; height: 22px; max-width: 232px"
+            src="images/web-clipper-logo.svg"
+            style="height: 45px; max-width: 232px"
           />
         </a>
+
+        <a href="#" class="btn btn-link pull-right btn-sm" id="closePopup">
+          <i class="closeIcon"></i>
+        </a>
+      </div>
+      <div class="container" style="padding: 0">
+        <span class="badge text-bg-secondary">1</span
+        ><span data-i18n="previewLabel">Preview</span>
         <div
           id="contentModeSwitch"
           class="btn-group btn-group-sm"
+          style="float: right"
           role="group"
           aria-label="Extraction type"
         >
@@ -55,22 +57,17 @@
             type="button"
             class="btn btn-outline-secondary btn-sm"
           >
-            Simplified
+            simplified
           </button>
           <button
             id="fullPreview"
             type="button"
             class="btn btn-outline-secondary btn-sm"
           >
-            Full
+            full
           </button>
         </div>
-        <a href="#" class="btn btn-link fa-lg pull-right" id="closePopup">
-          <i class="closeIcon"></i>
-        </a>
       </div>
-      <span class="badge text-bg-secondary">1</span
-      ><span data-i18n="previewLabel">Preview</span>
       <iframe id="preview"></iframe>
       <div class="form-group">
         <label class="control-label" for="title">
@@ -78,7 +75,7 @@
           <span data-i18n="editTitleLabel"></span>
         </label>
         <input
-          class="form-control"
+          class="form-control form-control-sm"
           type="text"
           name="title"
           id="title"
@@ -91,7 +88,7 @@
           <span data-i18n="addTagLabel"></span>
         </label>
         <input
-          class="form-control"
+          class="form-control form-control-sm"
           type="text"
           name="tags"
           id="tags"
