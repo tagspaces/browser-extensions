@@ -32,7 +32,10 @@ let config = {
         { from: "./static/", to: "./" },
         { from: "../LICENSE", to: "./" },
         { from: "../_locales/", to: "./_locales" },
-        { from: `./manifest-v3.json`, to: `./manifest.json` },
+        {
+          from: `./manifest.${process.env.TARGET}.json`,
+          to: `./manifest.json`,
+        },
         { from: "../src/lib/openlocationcode.js", to: "./vendor/" },
         {
           from: "../node_modules/open-location-code/LICENSE",
