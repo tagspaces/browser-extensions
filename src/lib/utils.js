@@ -1,44 +1,3 @@
-const currentTabURLParser = document.createElement("a");
-
-export function generateFileName(extension, type) {
-  const titleEl = document.getElementById("title");
-  let filename = titleEl.value;
-  const lastIndexOfDot = filename.lastIndexOf(".");
-  // removing the extension if the dot in for 4 or less character before the end of the title
-  if (lastIndexOfDot > 0 && filename.length - lastIndexOfDot < 5) {
-    filename = filename.substring(0, filename.lastIndexOf("."));
-  }
-
-  const rawTags = document.getElementById("tags").value.split(",");
-  const tags = [];
-  for (let tag of rawTags) {
-    let trimmedTag = tag.trim();
-    if (trimmedTag.length > 1) {
-      // setting minimum tag length of 2
-      tags.push(trimmedTag);
-    }
-  }
-  if (type === "screenshot" && extension.toLowerCase() === "png") {
-    // screenshot case
-    tags.push("screenshot");
-    tags.push(currentTabURLParser ? currentTabURLParser.hostname : "");
-    tags.push(formatDateTime4Tag(new Date().toString(), false));
-  }
-  if (type === "mht") {
-    extension = "mhtml";
-  }
-  if (type === "pdf") {
-    extension = "pdf";
-  }
-  if (tags.length > 0) {
-    filename = filename + " [" + tags.join(" ") + "]." + extension;
-  } else {
-    filename = filename + "." + extension;
-  }
-  filename = filename.replace(/[/\\?%*:|"<>]/g, "-").trim();
-  return filename;
-}
-
 export function dataURItoBlob(dataURI) {
   // convert base64 to raw binary data held in a string
   const byteString = atob(dataURI.split(",")[1]);
@@ -85,15 +44,6 @@ export function getBase64ImagePromise(imgURL) {
       }
     };
   });
-}
-
-export function extractFileExtFromUrl(currentTabURL) {
-  let url = currentTabURL;
-  if (currentTabURLParser.search) {
-    url = currentTabURLParser.origin + currentTabURLParser.pathname;
-  }
-  const ext = url.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
-  return ext.toLowerCase();
 }
 
 export function formatDateTime4Tag(date, includeTime) {
@@ -144,13 +94,13 @@ export function formatDateTime4Tag(date, includeTime) {
 // OpenStreetMap: https://www.openstreetmap.org/#map=16/-20.8077/-49.3785
 // Here: https://wego.here.com/?map=-20.80625,-49.37421,16,normal
 // Bing: no url param
-export function extractLatLong() {
+export function extractLatLong(currentUrl, enableOpenLocationCode) {
   // const regex = new RegExp('@(.*),(.*),'); // gmaps only
   const regexGMH = new RegExp("(map=|@)(.*),(.*),"); // gmaps and here
   const regexOSM = new RegExp("\\d/(.*)/(.*)"); // open street map
-  if (currentTabURLParser.href) {
-    let lonLatMatch = currentTabURLParser.href.match(regexGMH);
-    let lonLatMatch2 = currentTabURLParser.href.match(regexOSM);
+  if (currentUrl) {
+    let lonLatMatch = currentUrl.match(regexGMH);
+    let lonLatMatch2 = currentUrl.match(regexOSM);
     let lon;
     let lat;
     if (lonLatMatch && lonLatMatch.length > 1) {
@@ -162,7 +112,7 @@ export function extractLatLong() {
     }
     if (lon && lon.length > 0 && lat && lat.length > 0) {
       let geoTag = "";
-      if (OpenLocationCode && userSettings.enableOpenLocationCode) {
+      if (OpenLocationCode && enableOpenLocationCode) {
         try {
           geoTag = OpenLocationCode.encode(parseFloat(lon), parseFloat(lat));
         } catch (err) {
