@@ -1,6 +1,32 @@
+@import "vendor/css/bootstrap.min.css";
+
+
+:root {
+  --ts-color: 20, 173, 130; /* #14ad82; */
+  /* --bs-primary: rgb(var(--ts-color));
+  --bs-btn-bg: rgb(var(--ts-color)); */
+}   
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #363636 !important;
+    color: white !important;
+  }
+  .btn-outline {
+    color: white !important;
+  }
+  .badge {
+    background-color: #6e6e6e !important;
+  }
+}
+
+a {
+  color: rgb(var(--ts-color));
+}
+
 .btn-primary {
-  margin-bottom: 5px !important;
-  background-color: #1dd19f;
+  background-color: rgb(var(--ts-color));
+  border: 0;
 }
 
 .btn-primary:hover,
@@ -8,20 +34,9 @@
 .btn-primary:target,
 .btn-primary:visited,
 .btn-primary:focus {
-  background-color: #14ad82 !important;
-}
+  background-color: rgba(var(--ts-color), .8) !important;
+} 
 
-a {
-  color: #0fbb8a;
-}
-
-a:hover {
-  color: #1dd19f;
-}
-
-label {
-  margin-bottom: 2px;
-}
 
 textarea:focus,
 textarea.form-control:focus,
@@ -35,17 +50,87 @@ input[type="number"]:focus,
 [type="email"].form-control:focus,
 [type="tel"].form-control:focus,
 [contenteditable].form-control:focus {
-  box-shadow: inset 0 -2px 0 #1dd19f;
+  box-shadow: 0 0 0 .14rem rgba(var(--ts-color), .5);
+  border-color: transparent !important;
 }
 
-.bg-primary {
-  background-color: #1dd19f;
+label {
+  margin-bottom: 4px;
+  margin-top: 4px;
+  border-color: lightgray;
 }
 
 #closePopup {
   position: absolute;
-  top: 15px;
-  right: 5px;
+  top: 0px;
+  right: 0px;
+}
+
+#simplifiedPreview, #fullPreview {
+  height: 28px;
+  line-height: 18px;
+  border-color: lightgray;
+}
+
+.closeIcon {
+  display: inline-block;
+  width: 2rem;
+  aspect-ratio: 1;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: File earmark text fill */
+.saveAsHTMLIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: File earmark richtext fill */
+.saveAsMHTMLIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-richtext-fill" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M7 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m-.861 1.542 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V9.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V9s1.54-1.274 1.639-1.208M5 11h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: File earmark code fill */
+.saveSelectionAsHtmlIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-code-fill" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.646 7.646a.5.5 0 1 1 .708.708L5.707 10l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 10 8.646 8.354a.5.5 0 1 1 .708-.708"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: Camera fill */
+.saveScreenshotIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16"><path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/><path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: Bookmark star fill */
+.saveBookmarkIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.18.18 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.18.18 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.18.18 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.18.18 0 0 1-.134-.098z"/></svg>') 0 0/contain no-repeat;
+}
+
+/*  bootstrap-icon: File earmark arrow down fill */
+.downloadIcon {
+  display: inline-block;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  background-color: white;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-down-fill" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0"/></svg>') 0 0/contain no-repeat;
 }
 
 #savingActionsArea {
@@ -54,35 +139,30 @@ input[type="number"]:focus,
   padding-bottom: 0;
 }
 
-#savingActionsArea a {
-  width: 98%;
-  text-align: left;
-  vertical-align: middle;
+#savingActionsArea .btn-primary {
+  margin-bottom: 5px !important;
 }
 
-#savingActionsArea div {
-  padding-left: 0;
-  padding-right: 0;
+#savingActionsArea a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#savingActionsArea .spinner-border {
+  margin-left: 5px;
 }
 
 .badge {
+  margin-left: 2px;
   margin-right: 5px;
+  background-color: lightgray;
 }
 
 #preview {
   width: 100%;
-  margin-top: 5px;
-  border: 0;
+  height: 140px;
+  border: 1px solid lightgray;
   background-color: white;
-  border-radius: 10px;
-}
-
-.form-group {
-  margin-bottom: 0px;
-}
-
-.form-control {
-  background-color: white;
-  padding-left: 5px !important;
-  padding-right: 5px !important;
+  border-radius: 7px;
 }

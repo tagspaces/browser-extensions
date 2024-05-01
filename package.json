@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "3.1.9",
+  "version": "4.0.1",
   "description": "Codebase for TagSpaces' Web Clipper extension available for Chrome, MSEdge and Firefox",
   "repository": {
     "type": "git",
@@ -22,23 +22,19 @@
   },
   "license": "AGPL-3.0",
   "devDependencies": {
-    "copy-webpack-plugin": "^4.0.1",
+    "copy-webpack-plugin": "^12.0.2",
     "eslint": "^6.8.0",
     "shelljs": "^0.8.5",
-    "typescript": "^3.8.3",
-    "web-ext": "^6.6.0",
+    "web-ext": "^7.11.0",
     "web-ext-types": "^3.2.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "bootswatch": "^3.4.0",
-    "dompurify": "^2.3.4",
+    "@mozilla/readability": "0.5.0",
+    "bootstrap": "^5.3.3",
+    "dompurify": "^3.1.0",
     "file-saver": "^2.0.5",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.6.0",
-    "open-location-code": "^1.0.3",
-    "readability": "https://github.com/mozilla/readability.git",
-    "webextension-polyfill": "^0.8.0"
+    "open-location-code": "^1.0.3"
   }
 }

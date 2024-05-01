@@ -15,11 +15,9 @@ if (!process.env.TARGET) {
 let config = {
   context: path.resolve(__dirname, "src"),
   entry: {
-    background: ["./background/background.js"],
     options: "./ui/options.js",
     popup: "./ui/popup.js",
-    "content-script-capture-selection": "./content-script/capture-selection.js",
-    "content-script-capture-wholepage": "./content-script/capture-wholepage.js",
+    "service-worker": "./content-script/service-worker.js",
   },
   output: {
     path: path.resolve(__dirname, "build", process.env.TARGET),
@@ -29,47 +27,30 @@ let config = {
     modules: [path.resolve(__dirname, "node_modules")],
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: "./static/", to: "./" },
-      { from: "../LICENSE", to: "./" },
-      { from: "../_locales/", to: "./_locales" },
-      { from: `./manifest.${process.env.TARGET}.json`, to: `./manifest.json` },
-      {
-        from: "../node_modules/webextension-polyfill/dist/browser-polyfill.js",
-        to: "./vendor/",
-      },
-      { from: "../src/lib/openlocationcode.js", to: "./vendor/" },
-      {
-        from: "../node_modules/open-location-code/LICENSE",
-        to: "./vendor/openlocationcode.license.txt",
-      },
-      {
-        from: "../node_modules/bootswatch/paper/bootstrap.min.css",
-        to: "./vendor/css",
-      },
-      { from: "../node_modules/jquery/dist/jquery.min.js", to: "./vendor" },
-      {
-        from: "../node_modules/file-saver/dist/FileSaver.min.js",
-        to: "./vendor",
-      },
-      { from: "../node_modules/dompurify/dist/purify.min.js", to: "./vendor" },
-      {
-        from: "../node_modules/font-awesome/css/font-awesome.min.css",
-        to: "./vendor/css",
-      },
-      {
-        from: "../node_modules/font-awesome/fonts/fontawesome-webfont.ttf",
-        to: "./vendor/fonts",
-      },
-      {
-        from: "../node_modules/font-awesome/fonts/fontawesome-webfont.woff",
-        to: "./vendor/fonts",
-      },
-      {
-        from: "../node_modules/font-awesome/fonts/fontawesome-webfont.woff2",
-        to: "./vendor/fonts",
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "./static/", to: "./" },
+        { from: "../LICENSE", to: "./" },
+        { from: "../_locales/", to: "./_locales" },
+        {
+          from: `./manifest.${process.env.TARGET}.json`,
+          to: `./manifest.json`,
+        },
+        { from: "../src/lib/openlocationcode.js", to: "./vendor/" },
+        {
+          from: "../node_modules/open-location-code/LICENSE",
+          to: "./vendor/openlocationcode.license.txt",
+        },
+        {
+          from: "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+          to: "./vendor/css",
+        },
+        {
+          from: "../node_modules/file-saver/dist/FileSaver.min.js",
+          to: "./vendor",
+        },
+      ],
+    }),
     /* new webpack.DefinePlugin({
       'ENVIRONMENT': require(`./src/environment.${process.env.TARGET}.js`)
     }) */
