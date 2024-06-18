@@ -397,9 +397,17 @@ function updatePreviewArea(htmlContent) {
     // console.log("srcset: " + source.srcset);
     source.setAttribute("srcset", "");
   }
+
+  // Fix svg icons shown in full width
+  const allSVGs = previewHtmlEl.getElementsByTagName("svg");
+  for (const svg of allSVGs) {
+    svg.style.maxWidth = "100px"; // svg.getAttribute("naturalWidth");
+  }
+
   const allImages = previewHtmlEl.getElementsByTagName("img");
   for (const img of allImages) {
     const imgSrc = img.getAttribute("src");
+    // img.setAttribute("width", img.getAttribute("naturalWidth"));
     if (
       imgSrc.startsWith("file:") ||
       imgSrc.startsWith("http") ||
@@ -414,6 +422,12 @@ function updatePreviewArea(htmlContent) {
     } else {
       img.setAttribute("src", documentBaseUri.pathBase + "/" + imgSrc);
     }
+    // remove unneeded img attributes
+    // todo use the biggest image in the srcset
+    img.removeAttribute("srcset");
+    img.removeAttribute("data-srcset");
+    img.removeAttribute("sizes");
+    img.removeAttribute("loading");
   }
   let styleEl = previewEl.contentDocument.createElement("style");
   styleEl.type = "text/css";
