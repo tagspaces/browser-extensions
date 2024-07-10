@@ -392,10 +392,22 @@ function updatePreviewArea(htmlContent) {
   const previewEl = document.getElementById("preview");
   const previewHtmlEl = previewEl.contentDocument.documentElement;
   previewHtmlEl.innerHTML = htmlContent;
+  // console.log(previewHtmlEl.innerHTML);
   const allSource = previewHtmlEl.getElementsByTagName("source");
   for (const source of allSource) {
     // console.log("srcset: " + source.srcset);
     source.setAttribute("srcset", "");
+  }
+
+  // Fix relative urls in links
+  const allLinks = previewHtmlEl.getElementsByTagName("a");
+  for (const link of allLinks) {
+    const linkHref = link.getAttribute("href");
+    if (linkHref.startsWith("/")) {
+      const newLinkUrl = documentBaseUri.prePath + linkHref;
+      // console.log(newImageUrl);
+      link.setAttribute("href", newLinkUrl);
+    }
   }
 
   // Fix svg icons shown in full width
@@ -407,20 +419,27 @@ function updatePreviewArea(htmlContent) {
   const allImages = previewHtmlEl.getElementsByTagName("img");
   for (const img of allImages) {
     const imgSrc = img.getAttribute("src");
+    // console.log(imgSrc);
     // img.setAttribute("width", img.getAttribute("naturalWidth"));
     if (
       imgSrc.startsWith("file:") ||
       imgSrc.startsWith("http") ||
+      imgSrc.startsWith("data:image") ||
       imgSrc.startsWith("ts:")
     ) {
       // do nothing
     } else if (imgSrc.startsWith("//")) {
-      img.setAttribute("src", documentBaseUri.scheme + ":" + imgSrc);
-      console.log(img.src);
+      const newImageUrl = documentBaseUri.scheme + ":" + imgSrc;
+      // console.log(newImageUrl);
+      img.setAttribute("src", newImageUrl);
     } else if (imgSrc.startsWith("/")) {
-      img.setAttribute("src", documentBaseUri.prePath + "/" + imgSrc);
+      const newImageUrl = documentBaseUri.prePath + imgSrc;
+      // console.log(newImageUrl);
+      img.setAttribute("src", newImageUrl);
     } else {
-      img.setAttribute("src", documentBaseUri.pathBase + "/" + imgSrc);
+      const newImageUrl = documentBaseUri.pathBase + "/" + imgSrc;
+      // console.log(newImageUrl);
+      img.setAttribute("src", newImageUrl);
     }
     // remove unneeded img attributes
     // todo use the biggest image in the srcset
@@ -450,7 +469,7 @@ function prepareContentPromise(htmlContent) {
       // console.log(`Found ${match[1]} in ${match[0]}`);
     }
     for (let imgUrl of imgSources) {
-      if (imgUrl.startsWith("data")) {
+      if (imgUrl.startsWith("data:image")) {
         // ignoring data urls
       } else if (imgUrl.startsWith("http") || imgUrl.startsWith("file")) {
         urlPromises.push(getBase64ImagePromise(imgUrl));
