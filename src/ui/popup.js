@@ -131,9 +131,9 @@ async function init() {
   document
     .getElementById("saveAsBookmark")
     .addEventListener("click", saveAsBookmark);
-  document
-    .getElementById("saveSelectionAsHtml")
-    .addEventListener("click", saveSelectionAsHTML);
+  // document
+  //   .getElementById("saveSelectionAsHtml")
+  //   .addEventListener("click", saveSelectionAsHTML);
   document
     .getElementById("saveWholePageAsHtml")
     .addEventListener("click", saveWholePageAsHTML);
@@ -224,7 +224,6 @@ async function init() {
         contentMode = "simplified";
       }
     } else {
-      // document.getElementById("saveSelectionAsHtml").style.display = "none";
       updatePreviewArea("No content was extracted...");
     }
     return true;
@@ -282,24 +281,25 @@ function downloadFile() {
 function saveWholePageAsHTML() {
   const saveAsHTMLSpinner = document.querySelector("#saveAsHTMLSpinner");
   saveAsHTMLSpinner.classList.remove("d-none");
-  let content = "";
-  if (contentMode === "simplified") {
-    content = htmlCleaned;
-  } else if (contentMode === "original") {
-    content = htmlOriginal;
-  }
-  if (!content || content.length < 1) {
-    alert("No content extracted....");
-    saveAsHTMLSpinner.classList.add("d-none");
-    return;
-  }
-  // const htmlContent =
-  //   document.getElementById("preview")?.contentDocument?.documentElement
-  //     ?.innerHTML;
-  // console.log(htmlContent);
-  prepareContentPromise(content)
+  // let content = "";
+  // if (contentMode === "simplified") {
+  //   content = htmlCleaned;
+  // } else if (contentMode === "original") {
+  //   content = htmlOriginal;
+  // }
+  // if (!content || content.length < 1) {
+  //   alert("No content extracted....");
+  //   saveAsHTMLSpinner.classList.add("d-none");
+  //   return;
+  // }
+  const htmlContent =
+    document.getElementById("preview")?.contentDocument?.documentElement
+      ?.innerHTML;
+  prepareContentPromise(htmlContent)
     .then((convertedHTML) => {
-      const htmlBlob = new Blob([convertedHTML], {
+      console.log(convertedHTML);
+      var BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
+      const htmlBlob = new Blob([BOM, convertedHTML], {
         type: "text/html;charset=utf-8",
       });
       saveAsFile(htmlBlob, generateFileName("html"));
@@ -312,30 +312,30 @@ function saveWholePageAsHTML() {
     });
 }
 
-function saveSelectionAsHTML() {
-  const saveSelectionAsHtmlSpinner = document.querySelector(
-    "#saveSelectionAsHtmlSpinner"
-  );
-  saveSelectionAsHtmlSpinner.classList.remove("d-none");
-  if (!htmlSelection || htmlSelection.length < 1) {
-    alert("No content selected....");
-    saveSelectionAsHtmlSpinner.classList.add("d-none");
-    return;
-  }
-  prepareContentPromise(htmlSelection)
-    .then((cleanenHTML) => {
-      const htmlBlob = new Blob([cleanenHTML], {
-        type: "text/html;charset=utf-8",
-      });
-      saveAsFile(htmlBlob, generateFileName("html"));
-      saveSelectionAsHtmlSpinner.classList.add("d-none");
-    })
-    .catch((err) => {
-      alert("Error by preparing the HTML content...");
-      // location.reload();
-      console.warn("Error handling html content " + err);
-    });
-}
+// function saveSelectionAsHTML() {
+//   const saveSelectionAsHtmlSpinner = document.querySelector(
+//     "#saveSelectionAsHtmlSpinner"
+//   );
+//   saveSelectionAsHtmlSpinner.classList.remove("d-none");
+//   if (!htmlSelection || htmlSelection.length < 1) {
+//     alert("No content selected....");
+//     saveSelectionAsHtmlSpinner.classList.add("d-none");
+//     return;
+//   }
+//   prepareContentPromise(htmlSelection)
+//     .then((cleanenHTML) => {
+//       const htmlBlob = new Blob([cleanenHTML], {
+//         type: "text/html;charset=utf-8",
+//       });
+//       saveAsFile(htmlBlob, generateFileName("html"));
+//       saveSelectionAsHtmlSpinner.classList.add("d-none");
+//     })
+//     .catch((err) => {
+//       alert("Error by preparing the HTML content...");
+//       // location.reload();
+//       console.warn("Error handling html content " + err);
+//     });
+// }
 
 function saveScreenshot() {
   const saveScreenshotSpinner = document.querySelector(
@@ -429,6 +429,7 @@ function updatePreviewArea(htmlContent) {
   const cleanedPath = pathBaseURL.origin + pathBaseURL.pathname;
 
   for (const img of allImages) {
+    img.style.maxWidth = "100%";
     const imgSrc = img.getAttribute("src");
     // console.log(imgSrc);
     // img.setAttribute("width", img.getAttribute("naturalWidth"));
