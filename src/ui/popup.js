@@ -293,6 +293,10 @@ function saveWholePageAsHTML() {
     saveAsHTMLSpinner.classList.add("d-none");
     return;
   }
+  // const htmlContent =
+  //   document.getElementById("preview")?.contentDocument?.documentElement
+  //     ?.innerHTML;
+  // console.log(htmlContent);
   prepareContentPromise(content)
     .then((convertedHTML) => {
       const htmlBlob = new Blob([convertedHTML], {
@@ -403,6 +407,9 @@ function updatePreviewArea(htmlContent) {
   const allLinks = previewHtmlEl.getElementsByTagName("a");
   for (const link of allLinks) {
     const linkHref = link.getAttribute("href");
+    if (!linkHref) {
+      continue;
+    }
     if (linkHref.startsWith("/")) {
       const newLinkUrl = documentBaseUri.prePath + linkHref;
       // console.log(newImageUrl);
@@ -417,10 +424,18 @@ function updatePreviewArea(htmlContent) {
   }
 
   const allImages = previewHtmlEl.getElementsByTagName("img");
+
+  const pathBaseURL = new URL(documentBaseUri.pathBase);
+  const cleanedPath = pathBaseURL.origin + pathBaseURL.pathname;
+
   for (const img of allImages) {
     const imgSrc = img.getAttribute("src");
     // console.log(imgSrc);
     // img.setAttribute("width", img.getAttribute("naturalWidth"));
+    if (!imgSrc) {
+      continue;
+    }
+
     if (
       imgSrc.startsWith("file:") ||
       imgSrc.startsWith("http") ||
@@ -436,8 +451,13 @@ function updatePreviewArea(htmlContent) {
       const newImageUrl = documentBaseUri.prePath + imgSrc;
       // console.log(newImageUrl);
       img.setAttribute("src", newImageUrl);
+    } else if (imgSrc.startsWith("./")) {
+      const newImageUrl = cleanedPath + imgSrc;
+      // console.log(newImageUrl);
+      img.setAttribute("src", newImageUrl);
     } else {
-      const newImageUrl = documentBaseUri.pathBase + "/" + imgSrc;
+      let newImageUrl = cleanedPath + "/" + imgSrc;
+      newImageUrl = newImageUrl.replaceAll("//", "/");
       // console.log(newImageUrl);
       img.setAttribute("src", newImageUrl);
     }
