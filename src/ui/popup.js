@@ -297,7 +297,7 @@ function saveWholePageAsHTML() {
       ?.innerHTML;
   prepareContentPromise(htmlContent)
     .then((convertedHTML) => {
-      console.log(convertedHTML);
+      // console.log(convertedHTML);
       var BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
       const htmlBlob = new Blob([BOM, convertedHTML], {
         type: "text/html;charset=utf-8",
