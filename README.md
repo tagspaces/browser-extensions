@@ -1,3 +1,6 @@
+[![firefox](https://img.shields.io/amo/v/tagspaces?style=flat-square&color=success)](https://addons.mozilla.org/firefox/addon/tagspaces/) 
+[![chrome](https://img.shields.io/chrome-web-store/v/ldalmgifdlgpiiadeccbcjojljeanhjk?style=flat-square&color=success)](https://chromewebstore.google.com/detail/tagspaces-web-clipper/ldalmgifdlgpiiadeccbcjojljeanhjk?pli=1)
+
 # TagSpaces web clipper for Chrome & Firefox
 
 ## Downloads
