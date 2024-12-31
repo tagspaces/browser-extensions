@@ -476,6 +476,7 @@ function updatePreviewArea(htmlContent) {
 }
 
 function prepareContentPromise(htmlContent) {
+  htmlContent = htmlContent.trim();
   return new Promise((resolve) => {
     // saving all images as jpg in base64 format
     let match;
@@ -562,6 +563,12 @@ function prepareContentPromise(htmlContent) {
               );
             }
             // console.log('Content before saving: ' + cleanedHTML);
+            if (!htmlContent.startsWith("<html")) {
+              htmlContent = "<html>\n" + htmlContent + "\n</html>";
+            }
+            if (!htmlContent.startsWith("<!DOCTYPE html>")) {
+              htmlContent = "<!DOCTYPE html>\n" + htmlContent;
+            }
             return resolve(htmlContent);
           },
           (err) =>
