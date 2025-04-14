@@ -17,23 +17,23 @@
     "pack-firefox": "$(yarn bin)/web-ext build -s build/firefox -a ../builds/ --overwrite-dest",
     "bump-version": "yarn version",
     "eslint": "$(yarn bin)/eslint .",
-    "update-i18n": "tx pull -a -d && cd _locales && mv de_DE/* de/* && cd ..",
+    "update-i18n": "./tx pull -a -d && cd _locales && mv de_DE/* de/* && cd ..",
     "clean": "rm -rf ./build/"
   },
   "license": "AGPL-3.0",
   "devDependencies": {
     "copy-webpack-plugin": "^12.0.2",
     "eslint": "^6.8.0",
-    "shelljs": "^0.8.5",
+    "shelljs": "^0.9.2",
     "web-ext": "^7.11.0",
     "web-ext-types": "^3.2.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@mozilla/readability": "0.5.0",
-    "bootstrap": "^5.3.3",
-    "dompurify": "^3.1.0",
+    "@mozilla/readability": "0.6.0",
+    "bootstrap": "^5.3.5",
+    "dompurify": "^3.2.5",
     "file-saver": "^2.0.5",
     "open-location-code": "^1.0.3"
   }

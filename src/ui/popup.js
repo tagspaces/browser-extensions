@@ -24,7 +24,7 @@ import {
   extractLatLong,
 } from "../lib/utils.js";
 import { Readability, isProbablyReaderable } from "@mozilla/readability";
-import * as DOMPurify from "dompurify";
+import DOMPurify from "dompurify";
 
 let browserAPI = null;
 if (typeof browser !== "undefined") {
