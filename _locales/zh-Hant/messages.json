@@ -1,86 +1,86 @@
 {
     "appLauncher": {
-        "message": "TagSpaces starten",
+        "message": "启动 TagSpaces",
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Sammle und organisiere Webinhalte in einfachen Dateien.",
+        "message": "使用纯文本收集和组织网页内容",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Mehrere Etiketten sollten durch ein Komma getrennt sein. Etiketten sollten mindestens 2 Zeichen lang sein und dürfen keine Sonderzeichen, wie Leerzeichen, #, /, oder \\ enthalten. ",
+        "message": "多个标签应以逗号分隔。标签长度至少应为 2 个字符，且不应包含空格、#、/ 或 \\ 等特殊字符。",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Dateiname editieren",
+        "message": "編輯檔案標題",
         "description": "Title of label."
     },
     "appLauncherLabel": {
-        "message": "Web-Inhalten erfassen",
+        "message": "抓取 Web 内容",
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Etiketten hinzufügen",
+        "message": "新增標籤",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Speicheraktion auswählen",
+        "message": "選擇儲存動作",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Bildschirmfoto erstellen",
+        "message": "建立螢幕截圖",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Erstellen Sie ein Bildschirmfoto des sichtbaren Seitenbereichs als PNG-Datei. Verkleinere das Browserfenster, um den genauen Bereich für das Bildschirmfoto auszuwählen.",
+        "message": "将可见页面区域的屏幕截图保存为 PNG 文件。调整浏览器窗口大小，以便将焦点集中在屏幕截图的准确区域。",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Komplette Seite speichern",
+        "message": "儲存完整檔案",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Speichern Sie die komplette Seite inklusive Bilder als PDF in Firefox oder als MHTML in allen anderen Browsern",
+        "message": "在 Firefox 上将包含图片的完整页面保存为 PDF，在所有其他浏览器上将包含图片的完整页面保存为 MHTML",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Bearbeitbare Seite speichern",
+        "message": "儲存可編輯頁面",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Speichern Sie die komplette Seite einschließlich Bilder als eine HTML-Datei, das ursprüngliche Design wird nicht beibehalten",
+        "message": "将包含图像的完整页面保存为一个 HTML 文件，原始设计将不会保留",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Lesezeichen erstellen",
+        "message": "建立書籤",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Speichern Sie ein Lesezeichen der aktuellen Seite als URL-Datei, kompatibel mit Windows® und Mac OS®",
+        "message": "将当前页面的书签保存为 URL 文件，兼容 Windows® 和 Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Auswahl speichern",
+        "message": "擷取選擇",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Speichert das ausgewählte Inhalt samt Bilder als eine HTML-Datei. ",
+        "message": "将选定的内容（包括图像）保存为一个 HTML 文件",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Datei herunterladen",
+        "message": "下載檔案",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Die Datei im Originalformat herunterladen.",
+        "message": "下載原格式文件",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organisieren Sie die gesammelten Inhalten mit der Desktop-App TagSpaces. Es ist frei verfügbar auf",
+        "message": "在 TagSpaces 桌面应用中组织所选内容",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {
-        "message": "TagSpaces Web Clipper",
+        "message": "TagSpaces 网页剪辑器",
         "description": "The name of the extension"
     }
 }
