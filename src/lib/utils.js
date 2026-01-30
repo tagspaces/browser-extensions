@@ -112,18 +112,18 @@ export function extractLatLong(currentUrl, enableOpenLocationCode) {
     }
     if (lon && lon.length > 0 && lat && lat.length > 0) {
       let geoTag = "";
-      if (OpenLocationCode && enableOpenLocationCode) {
-        try {
-          geoTag = OpenLocationCode.encode(parseFloat(lon), parseFloat(lat));
-        } catch (err) {
-          console.warn("Error parsing lat long to float");
-        }
-      } else {
-        if (!lat.startsWith("-")) {
-          lat = "+" + lat;
-        }
-        geoTag = lon + lat;
+      // if (enableOpenLocationCode) {
+      try {
+        geoTag = OpenLocationCode?.encode(parseFloat(lon), parseFloat(lat));
+      } catch (err) {
+        console.warn("Error parsing lat long to float");
       }
+      // } else {
+      //   if (!lat.startsWith("-")) {
+      //     lat = "+" + lat;
+      //   }
+      //   geoTag = lon + lat;
+      // }
       const tagsText =
         document.getElementById("tags").value.trim() + " " + geoTag;
       if (tagsText && tagsText.length > 0) {
