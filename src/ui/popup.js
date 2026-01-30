@@ -591,44 +591,75 @@ export function extractFileExtFromUrl(currentTabURL) {
   return ext.toLowerCase();
 }
 
-// background.js
-
 async function captureFullPage(tabId) {
+  // 1. Get page dimensions and Device Pixel Ratio from the tab
+  const [{ result: dimensions }] = await browserAPI.scripting.executeScript({
+    target: { tabId },
+    func: () => ({
+      width: Math.max(
+        document.documentElement.offsetWidth,
+        document.body.scrollWidth,
+      ),
+      height: Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+      ),
+      viewportHeight: window.innerHeight,
+      dpr: window.devicePixelRatio || 1,
+    }),
+  });
+
+  const { width, height, viewportHeight, dpr } = dimensions;
   const images = [];
 
-  let y = 0;
-  while (y < pageHeight) {
-    // Scroll page to current segment
+  // 2. Capture chunks
+  let currentY = 0;
+  while (currentY < height) {
+    // Scroll to position
     await browserAPI.scripting.executeScript({
       target: { tabId },
-      func: (scrollY) => window.scrollTo(0, scrollY),
-      args: [y],
+      func: (y) => window.scrollTo(0, y),
+      args: [currentY],
     });
 
-    // Wait for scroll/render
-    await new Promise((r) => setTimeout(r, 100));
+    // Wait for scroll to settle and UI (headers/animations) to stabilize
+    await new Promise((r) => setTimeout(r, 200));
 
-    // Capture viewport
-    const dataUrl = await new Promise((resolve) =>
-      browserAPI.tabs.captureVisibleTab(null, { format: "png" }, resolve),
-    );
+    // Get the ACTUAL scroll position (in case we hit the bottom of the page)
+    const [{ result: actualY }] = await browserAPI.scripting.executeScript({
+      target: { tabId },
+      func: () => window.scrollY,
+    });
 
-    images.push(dataUrl);
-    y += viewportHeight;
+    const dataUrl = await browserAPI.tabs.captureVisibleTab(null, {
+      format: "png",
+    });
+    images.push({ dataUrl, y: actualY });
+
+    // If we've reached the bottom, stop
+    if (actualY + viewportHeight >= height) break;
+
+    currentY += viewportHeight;
   }
 
-  // 2. Stitch images
-  const canvas = new OffscreenCanvas(pageWidth, pageHeight);
+  // 3. Prepare the Canvas in physical pixels
+  const canvas = new OffscreenCanvas(width * dpr, height * dpr);
   const ctx = canvas.getContext("2d");
 
-  let offsetY = 0;
-  for (const imgDataUrl of images) {
-    const img = await createImageBitmap(await (await fetch(imgDataUrl)).blob());
-    ctx.drawImage(img, 0, offsetY);
-    offsetY += img.height;
+  // 4. Stitch images
+  for (const item of images) {
+    const response = await fetch(item.dataUrl);
+    const blob = await response.blob();
+    const img = await createImageBitmap(blob);
+
+    // Draw using physical coordinates (CSS pixels * DPR)
+    // We don't need to calculate "drawHeight" manually;
+    // the absolute Y coordinate handles overlaps automatically.
+    ctx.drawImage(img, 0, item.y * dpr);
+
+    // Clean up memory
+    img.close();
   }
 
-  // 3. Export final PNG
-  const finalBlob = await canvas.convertToBlob({ type: "image/png" });
-  return finalBlob;
+  return canvas.convertToBlob({ type: "image/png" });
 }
