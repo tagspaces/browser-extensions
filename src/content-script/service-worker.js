@@ -25,24 +25,26 @@ if (typeof browser !== "undefined") {
 }
 
 browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
-  if (msg.type === "capture-selection") {
-    // Get the current tab.
-    // console.log(
-    //   sender.tab
-    //     ? "from a content script:" + sender.tab.url
-    //     : "from the extension"
-    // );
-    // const tabs = await browserAPI.tabs.query({
-    //   active: true,
-    //   currentWindow: true,
-    // });
-    // const tabId = tabs[0].id;
+  // Get the current tab.
+  // console.log(
+  //   sender.tab
+  //     ? "from a content script:" + sender.tab.url
+  //     : "from the extension"
+  // );
+  // const tabs = await browserAPI.tabs.query({
+  //   active: true,
+  //   currentWindow: true,
+  // });
+  // const tabId = tabs[0].id;
+  if (msg.type === "capture-page") {
     const injectionResults = await browserAPI.scripting.executeScript({
-      target: { tabId: msg.tabId }, // allFrames: true
-      // files: ["vendor/Readability.js", "page-extraction.js"],
+      target: { tabId: msg.tabId },
       func: () => {
-        // const htmlSelection = getSelection().toString();
-        let htmlSelection = getSelection().toString();
+        const body = document.body.innerHTML;
+        const head = document.head.innerHTML;
+        const documentHTML = `<html><head>${head}</head><body>${body}</body></htlm>`;
+
+        let selectionHTML = getSelection().toString();
         if (typeof window.getSelection != "undefined") {
           var sel = window.getSelection();
           if (sel.rangeCount) {
@@ -50,33 +52,14 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
             for (var i = 0, len = sel.rangeCount; i < len; ++i) {
               container.appendChild(sel.getRangeAt(i).cloneContents());
             }
-            htmlSelection = container.innerHTML;
+            selectionHTML = container.innerHTML;
           }
         } else if (typeof document.selection != "undefined") {
           if (document.selection.type == "Text") {
-            htmlSelection = document.selection.createRange().htmlText;
+            selectionHTML = document.selection.createRange().htmlText;
           }
         }
-        return htmlSelection;
-      },
-    });
-    if (injectionResults && injectionResults[0] && injectionResults[0].result) {
-      const response = {
-        action: "htmlselection",
-        originalHTML: injectionResults[0].result,
-      };
-      // console.log(JSON.stringify(response));
-      // sendResponse(response);
-      await browserAPI.runtime.sendMessage(response);
-    }
-  } else if (msg.type === "capture-page") {
-    const injectionResults = await browserAPI.scripting.executeScript({
-      target: { tabId: msg.tabId },
-      func: () => {
-        const body = document.body.innerHTML;
-        const head = document.head.innerHTML;
-        const documentHTML =
-          "<html><head>" + head + "</head><body>" + body + "</body></htlm>";
+
         const loc = document.location;
         const uri = {
           spec: loc.href,
@@ -89,20 +72,37 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
             loc.host +
             loc.pathname.substring(0, loc.pathname.lastIndexOf("/") + 1),
         };
-        return {
+
+        const response = {
+          width: document.documentElement.scrollWidth,
+          height: document.documentElement.scrollHeight,
+          viewportHeight: window.innerHeight,
           documentBaseUri: uri, // document.baseURI,
-          documentHTML: documentHTML,
+          selectionHTML,
+          documentHTML,
         };
+        return response;
       },
     });
-    if (injectionResults && injectionResults[0] && injectionResults[0].result) {
-      const firstResult = injectionResults[0].result;
+
+    if (injectionResults && injectionResults[0]?.result) {
+      const {
+        width,
+        height,
+        viewportHeight,
+        documentHTML,
+        selectionHTML,
+        documentBaseUri,
+      } = injectionResults[0].result;
       const response = {
         action: "htmlcontent",
-        documentBaseUri: firstResult.documentBaseUri,
-        originalHTML: firstResult.documentHTML,
+        originalHTML: documentHTML,
+        selectionHTML,
+        width,
+        height,
+        viewportHeight,
+        documentBaseUri,
       };
-      // sendResponse(response);
       await browserAPI.runtime.sendMessage(response);
     }
   }
@@ -112,7 +112,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
 browserAPI.runtime.onInstalled.addListener((details) => {
   if (details.reason === browserAPI.runtime.OnInstalledReason.INSTALL) {
     browserAPI.runtime.setUninstallURL(
-      "https://www.tagspaces.org/uninstallsurvey/"
+      "https://www.tagspaces.org/uninstallsurvey/",
     );
   }
 });

@@ -85,6 +85,9 @@ let htmlCleaned;
 let htmlSelection;
 let documentBaseUri;
 let contentMode = "simplified"; // 'original'
+let viewportHeight;
+let pageWidth;
+let pageHeight;
 const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
   active: true,
@@ -113,7 +116,7 @@ async function init() {
     },
     (err) => {
       console.warn("Error getting active tab: " + err);
-    }
+    },
   );
 
   titleEl.focus();
@@ -126,9 +129,6 @@ async function init() {
   document
     .getElementById("saveAsBookmark")
     .addEventListener("click", saveAsBookmark);
-  // document
-  //   .getElementById("saveSelectionAsHtml")
-  //   .addEventListener("click", saveSelectionAsHTML);
   document
     .getElementById("saveWholePageAsHtml")
     .addEventListener("click", saveWholePageAsHTML);
@@ -150,50 +150,31 @@ async function init() {
   document.querySelectorAll("[data-i18n-title]").forEach((item) => {
     item.setAttribute(
       "title",
-      browserAPI.i18n.getMessage(item.dataset.i18nTitle)
+      browserAPI.i18n.getMessage(item.dataset.i18nTitle),
     );
   });
 
   browserAPI.runtime.onMessage.addListener(handleHTML);
 
-  const responseSelection = await browserAPI.runtime.sendMessage({
-    type: "capture-selection",
-    tabId: currentTabID,
-  });
-  // console.log(
-  //   "Capture selection received: " + JSON.stringify(responseSelection)
-  // );
-
-  const responsePage = await browserAPI.runtime.sendMessage({
+  browserAPI.runtime.sendMessage({
     type: "capture-page",
     tabId: currentTabID,
   });
-  // console.log("Capture page received: " + JSON.stringify(responsePage));
 
   function handleHTML(msg, sender, sendResponse) {
-    documentBaseUri = msg.documentBaseUri;
     // host: "www.tagspaces.com"
     // pathBase: "https://www.tagspaces.com/articles/"
     // prePath: "https://www.tagspaces.com"
     // scheme: "https"
     // spec: "https://www.tagspaces.com/articles/testarticle
     const previewEl = document.getElementById("preview");
-    if (msg.action == "htmlcontent") {
+    pageHeight = msg.height;
+    pageWidth = msg.width;
+    viewportHeight = msg.viewportHeight;
+    documentBaseUri = msg.documentBaseUri;
+    console.log(msg);
+    if (msg.originalHTML && !msg.selectionHTML) {
       htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
-    }
-    if (msg.action == "htmlselection") {
-      if (msg.originalHTML.length < 1) {
-        // alert('No content selected....');
-      } else {
-        htmlSelection = DOMPurify.sanitize(msg.originalHTML);
-      }
-    }
-
-    const previewHtmlEl = previewEl.contentDocument.documentElement;
-
-    if (htmlSelection) {
-      updatePreviewArea(htmlSelection);
-    } else if (htmlOriginal) {
       updatePreviewArea(htmlOriginal);
       contentMode = "original";
       const iframeClone = previewEl.contentDocument.cloneNode(true);
@@ -218,6 +199,9 @@ async function init() {
         updatePreviewArea(htmlCleaned);
         contentMode = "simplified";
       }
+    } else if (msg.selectionHTML) {
+      htmlSelection = DOMPurify.sanitize(msg.selectionHTML);
+      updatePreviewArea(htmlSelection);
     } else {
       updatePreviewArea("No content was extracted...");
     }
@@ -261,7 +245,7 @@ function saveAsMHTML() {
     (mhtml) => {
       saveAsFile(mhtml, generateFileName(fileExt, "mht"));
       saveAsMhtmlSpinner.classList.add("d-none");
-    }
+    },
   );
 }
 
@@ -307,49 +291,38 @@ function saveWholePageAsHTML() {
     });
 }
 
-// function saveSelectionAsHTML() {
-//   const saveSelectionAsHtmlSpinner = document.querySelector(
-//     "#saveSelectionAsHtmlSpinner"
-//   );
-//   saveSelectionAsHtmlSpinner.classList.remove("d-none");
-//   if (!htmlSelection || htmlSelection.length < 1) {
-//     alert("No content selected....");
-//     saveSelectionAsHtmlSpinner.classList.add("d-none");
-//     return;
-//   }
-//   prepareContentPromise(htmlSelection)
-//     .then((cleanenHTML) => {
-//       const htmlBlob = new Blob([cleanenHTML], {
-//         type: "text/html;charset=utf-8",
-//       });
-//       saveAsFile(htmlBlob, generateFileName("html"));
-//       saveSelectionAsHtmlSpinner.classList.add("d-none");
-//     })
-//     .catch((err) => {
-//       alert("Error by preparing the HTML content...");
-//       // location.reload();
-//       console.warn("Error handling html content " + err);
-//     });
-// }
-
 function saveScreenshot() {
   const saveScreenshotSpinner = document.querySelector(
-    "#saveScreenshotSpinner"
+    "#saveScreenshotSpinner",
   );
   saveScreenshotSpinner.classList.remove("d-none");
-  const capturing = browserAPI.tabs.captureVisibleTab(undefined, {
-    format: "png",
-  });
-  capturing.then(
-    (image) => {
-      saveAsFile(dataURItoBlob(image), generateFileName("png", "screenshot"));
+  const fileName = generateFileName("png", "screenshot");
+  const captureFull = false;
+  if (captureFull) {
+    captureFullPage(currentTabID).then((blob) => {
+      const url = URL.createObjectURL(blob);
       saveScreenshotSpinner.classList.add("d-none");
-    },
-    (err) => {
-      saveScreenshotSpinner.classList.add("d-none");
-      console.warn("Error taking screenshot " + JSON.stringify(err));
-    }
-  );
+      browserAPI.downloads.download({
+        url,
+        filename: fileName,
+      });
+    });
+  } else {
+    browserAPI.tabs
+      .captureVisibleTab(undefined, {
+        format: "png",
+      })
+      .then(
+        (image) => {
+          saveAsFile(dataURItoBlob(image), fileName);
+          saveScreenshotSpinner.classList.add("d-none");
+        },
+        (err) => {
+          saveScreenshotSpinner.classList.add("d-none");
+          console.warn("Error taking screenshot " + JSON.stringify(err));
+        },
+      );
+  }
 }
 
 function savePDF() {
@@ -361,7 +334,7 @@ function savePDF() {
       saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
       saveAsMhtmlSpinner.classList.add("d-none");
     },
-    (err) => console.warn("Error saving as PDF " + JSON.stringify(err))
+    (err) => console.warn("Error saving as PDF " + JSON.stringify(err)),
   );
 }
 
@@ -495,7 +468,7 @@ function prepareContentPromise(htmlContent) {
         if (currentTabURL.startsWith("file:")) {
           baseTabPath = currentTabURL.substring(
             0,
-            currentTabURL.lastIndexOf(dirSeparator) + 1
+            currentTabURL.lastIndexOf(dirSeparator) + 1,
           );
           imgUrl = baseTabPath + imgUrl;
         } else if (imgUrl.startsWith("/")) {
@@ -554,7 +527,7 @@ function prepareContentPromise(htmlContent) {
                 "\n<body " + metaData + ">" + htmlContent + "</body>";
               htmlContent = htmlTemplate.replace(
                 /<body[^>]*>([^]*)<\/body>/m,
-                htmlContent
+                htmlContent,
               );
             }
             // console.log('Content before saving: ' + cleanedHTML);
@@ -567,7 +540,7 @@ function prepareContentPromise(htmlContent) {
             return resolve(htmlContent);
           },
           (err) =>
-            console.warn("Error taking screenshot " + JSON.stringify(err))
+            console.warn("Error taking screenshot " + JSON.stringify(err)),
         );
       })
       .catch((error) => {
@@ -623,4 +596,46 @@ export function extractFileExtFromUrl(currentTabURL) {
   }
   const ext = url.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
   return ext.toLowerCase();
+}
+
+// background.js
+
+async function captureFullPage(tabId) {
+  const images = [];
+
+  let y = 0;
+  while (y < pageHeight) {
+    // Scroll page to current segment
+    await browserAPI.scripting.executeScript({
+      target: { tabId },
+      func: (scrollY) => window.scrollTo(0, scrollY),
+      args: [y],
+    });
+
+    // Wait for scroll/render
+    await new Promise((r) => setTimeout(r, 100));
+
+    // Capture viewport
+    const dataUrl = await new Promise((resolve) =>
+      browserAPI.tabs.captureVisibleTab(null, { format: "png" }, resolve),
+    );
+
+    images.push(dataUrl);
+    y += viewportHeight;
+  }
+
+  // 2. Stitch images
+  const canvas = new OffscreenCanvas(pageWidth, pageHeight);
+  const ctx = canvas.getContext("2d");
+
+  let offsetY = 0;
+  for (const imgDataUrl of images) {
+    const img = await createImageBitmap(await (await fetch(imgDataUrl)).blob());
+    ctx.drawImage(img, 0, offsetY);
+    offsetY += img.height;
+  }
+
+  // 3. Export final PNG
+  const finalBlob = await canvas.convertToBlob({ type: "image/png" });
+  return finalBlob;
 }
