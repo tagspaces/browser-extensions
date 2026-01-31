@@ -60,6 +60,41 @@ export function getBase64ImagePromiseJPG(imgURL) {
   });
 }
 
+export async function getBase64ImagePromiseJPGOffscreen(imgURL) {
+  try {
+    // 1. Fetch the image data
+    const response = await fetch(imgURL);
+    const blob = await response.blob();
+
+    // 2. Decode the image off-thread
+    const img = await createImageBitmap(blob);
+
+    // 3. Use OffscreenCanvas (faster than document.createElement)
+    const canvas = new OffscreenCanvas(img.width, img.height);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // 4. Convert to Blob with quality settings
+    const compressedBlob = await canvas.convertToBlob({
+      type: "image/jpeg",
+      quality: 0.9,
+    });
+
+    // 5. Clean up memory
+    img.close();
+
+    // 6. Convert final blob to DataURL
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve([imgURL, reader.result]);
+      reader.readAsDataURL(compressedBlob);
+    });
+  } catch (err) {
+    console.warn("Error processing image:", imgURL, err);
+    return [imgURL, imgURL]; // Fallback to original URL
+  }
+}
+
 export function formatDateTime4Tag(date, includeTime) {
   if (date === undefined || date === "") {
     return "";
