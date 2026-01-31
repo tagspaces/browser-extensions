@@ -20,7 +20,7 @@ import OptionsManager from "../lib/options-manager.js";
 import {
   formatDateTime4Tag,
   getBase64ImagePromise,
-  dataURItoBlob,
+  dataURItoBlobAsync,
   extractLatLong,
 } from "../lib/utils.js";
 import { Readability, isProbablyReaderable } from "@mozilla/readability";
@@ -88,9 +88,6 @@ let htmlCleaned;
 let htmlSelection;
 let documentBaseUri;
 let contentMode = "simplified"; // 'original'
-let viewportHeight;
-let pageWidth;
-let pageHeight;
 const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
   active: true,
@@ -139,6 +136,9 @@ async function init() {
     .getElementById("saveScreenshot")
     .addEventListener("click", saveScreenshot);
   document
+    .getElementById("saveFullScreenshot")
+    .addEventListener("click", saveFullScreenshot);
+  document
     .getElementById("downloadFile")
     .addEventListener("click", downloadFile);
   document
@@ -171,11 +171,8 @@ async function init() {
     // scheme: "https"
     // spec: "https://www.tagspaces.com/articles/testarticle
     const previewEl = document.getElementById("preview");
-    pageHeight = msg.height;
-    pageWidth = msg.width;
-    viewportHeight = msg.viewportHeight;
     documentBaseUri = msg.documentBaseUri;
-    console.log(msg);
+    // console.log(msg);
     if (msg.originalHTML && !msg.selectionHTML) {
       htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
       updatePreviewArea(htmlOriginal);
@@ -300,43 +297,66 @@ function saveScreenshot() {
   );
   saveScreenshotSpinner.classList.remove("d-none");
   const fileName = generateFileName("png", "screenshot");
-  const captureFull = true;
-  if (captureFull) {
-    captureFullPage(currentTabID).then((blob) => {
-      const url = URL.createObjectURL(blob);
-      saveScreenshotSpinner.classList.add("d-none");
+  const captureFull = true; // !isFirefox
+  browserAPI.tabs
+    .captureVisibleTab(undefined, {
+      format: "png",
+    })
+    .then(
+      (imageUrl) => {
+        dataURItoBlobAsync(imageUrl).then((blob) => {
+          saveAsFile(blob, fileName);
+        });
+        saveScreenshotSpinner.classList.add("d-none");
+      },
+      (err) => {
+        saveScreenshotSpinner.classList.add("d-none");
+        console.warn("Error taking screenshot " + JSON.stringify(err));
+      },
+    );
+}
+
+function saveFullScreenshot() {
+  const saveFullScreenshotSpinner = document.querySelector(
+    "#saveFullScreenshotSpinner",
+  );
+  saveFullScreenshotSpinner.classList.remove("d-none");
+  const fileName = generateFileName("png", "screenshot");
+  captureFullPage(currentTabID).then((blob) => {
+    const url = URL.createObjectURL(blob);
+    saveFullScreenshotSpinner.classList.add("d-none");
+    if (isFirefox) {
+      dataURItoBlobAsync(url).then((blob) => {
+        saveAsFile(blob, fileName);
+      });
+    } else {
       browserAPI.downloads.download({
         url,
         filename: fileName,
         saveAs: true,
       });
-    });
-  } else {
-    browserAPI.tabs
-      .captureVisibleTab(undefined, {
-        format: "png",
-      })
-      .then(
-        (image) => {
-          saveAsFile(dataURItoBlob(image), fileName);
-          saveScreenshotSpinner.classList.add("d-none");
-        },
-        (err) => {
-          saveScreenshotSpinner.classList.add("d-none");
-          console.warn("Error taking screenshot " + JSON.stringify(err));
-        },
-      );
-  }
+    }
+  });
 }
 
 function savePDF() {
   const saveAsMhtmlSpinner = document.querySelector("#saveAsMhtmlSpinner");
   saveAsMhtmlSpinner.classList.remove("d-none");
-  const capturing = browserAPI.tabs.saveAsPDF({});
-  capturing.then(
-    (image) => {
-      saveAsFile(dataURItoBlob(image), generateFileName("pdf"));
+  const fileName = generateFileName("pdf");
+  browserAPI.tabs.saveAsPDF({}).then(
+    (pdfDateUrl) => {
       saveAsMhtmlSpinner.classList.add("d-none");
+      if (isFirefox) {
+        dataURItoBlobAsync(pdfDateUrl).then((blob) => {
+          saveAsFile(blob, fileName);
+        });
+      } else {
+        browserAPI.downloads.download({
+          pdfDateUrl,
+          filename: fileName,
+          saveAs: true,
+        });
+      }
     },
     (err) => console.warn("Error saving as PDF " + JSON.stringify(err)),
   );

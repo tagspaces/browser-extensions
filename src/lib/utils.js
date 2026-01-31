@@ -1,22 +1,36 @@
 export function dataURItoBlob(dataURI) {
-  // convert base64 to raw binary data held in a string
-  const byteString = atob(dataURI.split(",")[1]);
-  // separate out the mime component
-  const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-  // write the bytes of the string to an ArrayBuffer
-  const arrayBuffer = new ArrayBuffer(byteString.length);
-  let _ia = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < byteString.length; i++) {
-    _ia[i] = byteString.charCodeAt(i);
-  }
-  const dataView = new DataView(arrayBuffer);
-  const blob = new Blob([dataView], {
-    type: mimeString,
-  });
-  return blob;
+  const [header, base64] = dataURI.split(",");
+  const mime = header.match(/:(.*?);/)[1];
+  const binary = atob(base64);
+
+  // Create the byte array in one shot
+  const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
+
+  return new Blob([bytes], { type: mime });
 }
 
-export function getBase64ImagePromise(imgURL) {
+export async function dataURItoBlobAsync(dataURI) {
+  return await (await fetch(dataURI)).blob();
+}
+
+export async function getBase64ImagePromise(imgURL) {
+  try {
+    const response = await fetch(imgURL);
+    const blob = await response.blob();
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve([imgURL, reader.result]);
+      reader.onerror = () => resolve([imgURL, imgURL]);
+      reader.readAsDataURL(blob);
+    });
+  } catch (err) {
+    console.warn("Fetch failed for image:", imgURL);
+    return [imgURL, imgURL];
+  }
+}
+
+export function getBase64ImagePromiseJPG(imgURL) {
   return new Promise((resolve) => {
     let mimeType = "image/jpeg";
     // if (imgURL.endsWith('gif')) {

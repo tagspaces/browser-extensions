@@ -32,12 +32,20 @@
     "description": "Saving action label."
   },
   "saveScreenshotLabel": {
-    "message": "Take Screenshot",
+    "message": "Visible Area Screenshot",
     "description": "Label of the take screenshot button"
   },
   "saveScreenshotTitle": {
-    "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+    "message": "Take a screenshot of the visible page area as PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
     "description": "Title of the take screenshot button"
+  },
+  "saveFullScreenshotLabel": {
+    "message": "Full Page Screenshot",
+    "description": "Label for the full page screenshot button"
+  },
+  "saveFullScreenshotTitle": {
+    "message": "Take a screenshot of the full page as PNG file.",
+    "description": "Title for the full page screenshot button"
   },
   "saveAsMhtmlLabel": {
     "message": "Save complete page",
