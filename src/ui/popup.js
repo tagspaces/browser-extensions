@@ -593,7 +593,9 @@ export function extractFileExtFromUrl(currentTabURL) {
 }
 
 async function captureFullPage(tabId) {
-  // 1. Get dimensions and DPR
+  const MIN_DELAY = 600; // Ensuring we stay under 2 calls/sec (1000ms / 2 = 500ms + buffer)
+
+  // 1. Get dimensions
   const [{ result: dimensions }] = await browserAPI.scripting.executeScript({
     target: { tabId },
     func: () => ({
@@ -613,7 +615,7 @@ async function captureFullPage(tabId) {
   const { width, height, viewportHeight, dpr } = dimensions;
   const images = [];
 
-  // Helper to toggle sticky/fixed elements
+  // Helper to hide/show sticky elements (from previous step)
   const setStickyVisibility = async (visible) => {
     await browserAPI.scripting.executeScript({
       target: { tabId },
@@ -621,8 +623,7 @@ async function captureFullPage(tabId) {
         // If hiding, store elements to restore them later
         if (!isVisible) {
           window._hiddenStickyNodes = [];
-          const allNodes = document.querySelectorAll("*");
-          for (const node of allNodes) {
+          document.querySelectorAll("*").forEach((node) => {
             const style = window.getComputedStyle(node);
             if (style.position === "fixed" || style.position === "sticky") {
               window._hiddenStickyNodes.push({
@@ -631,12 +632,11 @@ async function captureFullPage(tabId) {
               });
               node.style.visibility = "hidden";
             }
-          }
+          });
         } else if (window._hiddenStickyNodes) {
-          // Restore original visibility
-          for (const item of window._hiddenStickyNodes) {
-            item.node.style.visibility = item.originalVisibility;
-          }
+          window._hiddenStickyNodes.forEach(
+            (item) => (item.node.style.visibility = item.originalVisibility),
+          );
           delete window._hiddenStickyNodes;
         }
       },
@@ -644,8 +644,27 @@ async function captureFullPage(tabId) {
     });
   };
 
+  // Helper to capture with Quota handling
+  const captureWithRetry = async (retries = 3) => {
+    try {
+      return await browserAPI.tabs.captureVisibleTab(null, { format: "png" });
+    } catch (err) {
+      if (
+        err.message.includes("MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND") &&
+        retries > 0
+      ) {
+        // Wait 1 second and try again
+        await new Promise((r) => setTimeout(r, 1000));
+        return captureWithRetry(retries - 1);
+      }
+      throw err;
+    }
+  };
+
   let currentY = 0;
   while (currentY < height) {
+    const startTime = Date.now();
+
     // Scroll to position
     await browserAPI.scripting.executeScript({
       target: { tabId },
@@ -653,15 +672,12 @@ async function captureFullPage(tabId) {
       args: [currentY],
     });
 
-    // Wait for scroll and potential lazy loads
+    // Wait for content to render (min 250ms)
     await new Promise((r) => setTimeout(r, 250));
 
-    // CAPTURE STEP
-    const dataUrl = await browserAPI.tabs.captureVisibleTab(null, {
-      format: "png",
-    });
+    // Capture using the retry-protected helper
+    const dataUrl = await captureWithRetry();
 
-    // Get actual scroll Y (critical for bottom of page alignment)
     const [{ result: actualY }] = await browserAPI.scripting.executeScript({
       target: { tabId },
       func: () => window.scrollY,
@@ -670,18 +686,22 @@ async function captureFullPage(tabId) {
     images.push({ dataUrl, y: actualY });
 
     // AFTER the first capture, hide sticky elements so they don't repeat
-    if (currentY === 0) {
-      await setStickyVisibility(false);
-    }
-
+    if (currentY === 0) await setStickyVisibility(false);
     if (actualY + viewportHeight >= height) break;
     currentY += viewportHeight;
+
+    // MANDATORY RATE LIMITING:
+    // Calculate how long the capture took and wait longer if necessary
+    // to ensure we don't exceed 2 calls per second.
+    const elapsed = Date.now() - startTime;
+    if (elapsed < MIN_DELAY) {
+      await new Promise((r) => setTimeout(r, MIN_DELAY - elapsed));
+    }
   }
 
-  // Restore the page UI for the user
   await setStickyVisibility(true);
 
-  // 2. Stitching
+  // Stitching logic
   const canvas = new OffscreenCanvas(width * dpr, height * dpr);
   const ctx = canvas.getContext("2d");
 
