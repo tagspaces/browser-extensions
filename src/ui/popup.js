@@ -308,6 +308,7 @@ function saveScreenshot() {
       browserAPI.downloads.download({
         url,
         filename: fileName,
+        saveAs: true,
       });
     });
   } else {
@@ -592,7 +593,7 @@ export function extractFileExtFromUrl(currentTabURL) {
 }
 
 async function captureFullPage(tabId) {
-  // 1. Get page dimensions and Device Pixel Ratio from the tab
+  // 1. Get dimensions and DPR
   const [{ result: dimensions }] = await browserAPI.scripting.executeScript({
     target: { tabId },
     func: () => ({
@@ -612,7 +613,37 @@ async function captureFullPage(tabId) {
   const { width, height, viewportHeight, dpr } = dimensions;
   const images = [];
 
-  // 2. Capture chunks
+  // Helper to toggle sticky/fixed elements
+  const setStickyVisibility = async (visible) => {
+    await browserAPI.scripting.executeScript({
+      target: { tabId },
+      func: (isVisible) => {
+        // If hiding, store elements to restore them later
+        if (!isVisible) {
+          window._hiddenStickyNodes = [];
+          const allNodes = document.querySelectorAll("*");
+          for (const node of allNodes) {
+            const style = window.getComputedStyle(node);
+            if (style.position === "fixed" || style.position === "sticky") {
+              window._hiddenStickyNodes.push({
+                node,
+                originalVisibility: node.style.visibility,
+              });
+              node.style.visibility = "hidden";
+            }
+          }
+        } else if (window._hiddenStickyNodes) {
+          // Restore original visibility
+          for (const item of window._hiddenStickyNodes) {
+            item.node.style.visibility = item.originalVisibility;
+          }
+          delete window._hiddenStickyNodes;
+        }
+      },
+      args: [visible],
+    });
+  };
+
   let currentY = 0;
   while (currentY < height) {
     // Scroll to position
@@ -622,42 +653,45 @@ async function captureFullPage(tabId) {
       args: [currentY],
     });
 
-    // Wait for scroll to settle and UI (headers/animations) to stabilize
-    await new Promise((r) => setTimeout(r, 200));
+    // Wait for scroll and potential lazy loads
+    await new Promise((r) => setTimeout(r, 250));
 
-    // Get the ACTUAL scroll position (in case we hit the bottom of the page)
+    // CAPTURE STEP
+    const dataUrl = await browserAPI.tabs.captureVisibleTab(null, {
+      format: "png",
+    });
+
+    // Get actual scroll Y (critical for bottom of page alignment)
     const [{ result: actualY }] = await browserAPI.scripting.executeScript({
       target: { tabId },
       func: () => window.scrollY,
     });
 
-    const dataUrl = await browserAPI.tabs.captureVisibleTab(null, {
-      format: "png",
-    });
     images.push({ dataUrl, y: actualY });
 
-    // If we've reached the bottom, stop
-    if (actualY + viewportHeight >= height) break;
+    // AFTER the first capture, hide sticky elements so they don't repeat
+    if (currentY === 0) {
+      await setStickyVisibility(false);
+    }
 
+    if (actualY + viewportHeight >= height) break;
     currentY += viewportHeight;
   }
 
-  // 3. Prepare the Canvas in physical pixels
+  // Restore the page UI for the user
+  await setStickyVisibility(true);
+
+  // 2. Stitching
   const canvas = new OffscreenCanvas(width * dpr, height * dpr);
   const ctx = canvas.getContext("2d");
 
-  // 4. Stitch images
   for (const item of images) {
     const response = await fetch(item.dataUrl);
     const blob = await response.blob();
     const img = await createImageBitmap(blob);
 
-    // Draw using physical coordinates (CSS pixels * DPR)
-    // We don't need to calculate "drawHeight" manually;
-    // the absolute Y coordinate handles overlaps automatically.
-    ctx.drawImage(img, 0, item.y * dpr);
-
-    // Clean up memory
+    // Draw using physical pixel coordinates
+    ctx.drawImage(img, 0, Math.round(item.y * dpr));
     img.close();
   }
 
