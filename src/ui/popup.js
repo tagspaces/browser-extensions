@@ -260,17 +260,6 @@ function downloadFile() {
 function saveWholePageAsHTML() {
   const saveAsHTMLSpinner = document.querySelector("#saveAsHTMLSpinner");
   saveAsHTMLSpinner.classList.remove("d-none");
-  // let content = "";
-  // if (contentMode === "simplified") {
-  //   content = htmlCleaned;
-  // } else if (contentMode === "original") {
-  //   content = htmlOriginal;
-  // }
-  // if (!content || content.length < 1) {
-  //   alert("No content extracted....");
-  //   saveAsHTMLSpinner.classList.add("d-none");
-  //   return;
-  // }
   const htmlContent =
     document.getElementById("preview")?.contentDocument?.documentElement
       ?.innerHTML;
