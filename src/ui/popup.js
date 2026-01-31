@@ -339,27 +339,40 @@ function saveFullScreenshot() {
   });
 }
 
-function savePDF() {
+/* Firefox only */
+async function savePDF() {
+  if (!isFirefox) return;
   const saveAsMhtmlSpinner = document.querySelector("#saveAsMhtmlSpinner");
   saveAsMhtmlSpinner.classList.remove("d-none");
   const fileName = generateFileName("pdf");
-  browserAPI.tabs.saveAsPDF({}).then(
-    (pdfDateUrl) => {
-      saveAsMhtmlSpinner.classList.add("d-none");
-      if (isFirefox) {
-        dataURItoBlobAsync(pdfDateUrl).then((blob) => {
-          saveAsFile(blob, fileName);
-        });
-      } else {
-        browserAPI.downloads.download({
-          pdfDateUrl,
-          filename: fileName,
-          saveAs: true,
-        });
-      }
+
+  // 2. Inject script to change the title (and store the original)
+  const [{ result: originalTitle }] = await browserAPI.scripting.executeScript({
+    target: { tabId: currentTabID },
+    func: (newTitle) => {
+      const old = document.title;
+      document.title = newTitle;
+      return old; // Return to extension so we can restore it later
     },
-    (err) => console.warn("Error saving as PDF " + JSON.stringify(err)),
-  );
+    args: [fileName],
+  });
+
+  try {
+    // 3. Trigger the Firefox PDF dialog
+    // It will now see the new document.title as the filename
+    await browserAPI.tabs.saveAsPDF({});
+  } catch (err) {
+    console.error("Firefox saveAsPDF failed:", err);
+  } finally {
+    // 4. Always restore the original title so the user doesn't see ".pdf" in their tab
+    await browserAPI.scripting.executeScript({
+      target: { tabId: currentTabID },
+      func: (oldTitle) => {
+        document.title = oldTitle;
+      },
+      args: [originalTitle],
+    });
+  }
 }
 
 function saveAsBookmark() {
