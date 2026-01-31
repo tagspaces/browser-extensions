@@ -27,16 +27,22 @@ a {
 .btn-primary {
   background-color: rgb(var(--ts-color));
   border: 0;
+  border-radius: 10px;
 }
 
 .btn-primary:hover,
-.btn-primary:active,
 .btn-primary:target,
-.btn-primary:visited,
-.btn-primary:focus {
+.btn-primary:visited {
   background-color: rgba(var(--ts-color), .8) !important;
 } 
 
+.btn-primary:active {
+  background-color: rgba(var(--ts-color), .9) !important;
+} 
+
+textarea, input {
+  border-radius: 10px !important;
+}
 
 textarea:focus,
 textarea.form-control:focus,
@@ -164,5 +170,5 @@ label {
   height: 140px;
   border: 1px solid lightgray;
   background-color: white;
-  border-radius: 7px;
+  border-radius: 10px;
 }
