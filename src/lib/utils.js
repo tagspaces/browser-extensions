@@ -30,12 +30,10 @@ export async function getBase64ImagePromise(imgURL) {
   }
 }
 
+// Legacy function creating JPG files from dataUrls
 export function getBase64ImagePromiseJPG(imgURL) {
   return new Promise((resolve) => {
     let mimeType = "image/jpeg";
-    // if (imgURL.endsWith('gif')) {
-    //   mimeType = 'image/gif';
-    // }
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     const img = new Image();
