@@ -22,6 +22,7 @@ import {
   getBase64ImagePromise,
   dataURItoBlobAsync,
   extractLatLong,
+  getHighestResUrl,
 } from "../lib/utils.js";
 import { Readability, isProbablyReaderable } from "@mozilla/readability";
 import DOMPurify from "dompurify";
@@ -496,7 +497,10 @@ async function prepareContentPromise(htmlContent) {
 
         try {
           // Resolve absolute URL relative to the current tab
-          const absoluteUrl = new URL(originalUrl, currentTabURL).href;
+          const absoluteUrl =
+            target.selector === "img"
+              ? getHighestResUrl(el, currentTabURL)
+              : new URL(originalUrl, currentTabURL).href;
 
           conversionTasks.push(async () => {
             try {

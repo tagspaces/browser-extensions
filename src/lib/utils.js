@@ -6,79 +6,57 @@ export async function getBase64ImagePromise(imgURL) {
   try {
     const response = await fetch(imgURL);
     const blob = await response.blob();
-
     return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onloadend = () => resolve([imgURL, reader.result]);
-      reader.onerror = () => resolve([imgURL, imgURL]);
+      reader.onloadend = () => resolve(reader.result); // Returns just the string
       reader.readAsDataURL(blob);
     });
-  } catch (err) {
-    console.warn("Fetch failed for image:", imgURL);
-    return [imgURL, imgURL];
+  } catch (e) {
+    return null; // Return null on failure
   }
 }
 
-// Legacy function creating JPG files from dataUrls
-export function getBase64ImagePromiseJPG(imgURL) {
-  return new Promise((resolve) => {
-    let mimeType = "image/jpeg";
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    let dataURL;
-    img.src = imgURL;
-    img.crossOrigin = "anonymous";
-    img.onerror = (err) => {
-      console.warn("Error fetching image: " + JSON.stringify(err));
-      resolve([imgURL, imgURL]);
-    };
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      try {
-        dataURL = canvas.toDataURL(mimeType, 0.9);
-        resolve([imgURL, dataURL]);
-      } catch (e) {
-        resolve(["", dataURL]);
-      }
-    };
+// Helper: Robustly parse srcset and pick the highest resolution URL
+export function getHighestResUrl(el, baseUrl) {
+  const src = el.getAttribute("src");
+  const srcset = el.getAttribute("srcset");
+  const candidates = [];
+
+  // 1. Add the fallback src as a baseline (1x)
+  if (src) candidates.push({ url: src, value: 1, type: "x" });
+
+  // 2. Parse srcset if it exists
+  if (srcset) {
+    // Regex handles URLs with commas (often found in CDNs) by looking for the descriptor
+    const regex = /([^,\s]+)\s*(?:(\d+)w|(\d+(?:\.\d+)?)x)?/g;
+    let match;
+    while ((match = regex.exec(srcset)) !== null) {
+      const url = match[1];
+      const wDesc = match[2] ? parseInt(match[2], 10) : null;
+      const xDesc = match[3] ? parseFloat(match[3]) : null;
+
+      if (wDesc) candidates.push({ url, value: wDesc, type: "w" });
+      else if (xDesc) candidates.push({ url, value: xDesc, type: "x" });
+      else candidates.push({ url, value: 1, type: "x" }); // Default to 1x
+    }
+  }
+
+  if (candidates.length === 0) return null;
+
+  // 3. Rank candidates: Prioritize 'w' (width) over 'x' (density)
+  // If mixed, we treat 1000w as "better" than 2x for clipping purposes
+  const best = candidates.reduce((prev, curr) => {
+    if (curr.type === "w" && prev.type === "w")
+      return curr.value > prev.value ? curr : prev;
+    if (curr.type === "w" && prev.type === "x") return curr; // w is usually higher res
+    if (curr.type === "x" && prev.type === "w") return prev;
+    return curr.value > prev.value ? curr : prev;
   });
-}
 
-export async function getBase64ImagePromiseJPGOffscreen(imgURL) {
   try {
-    // 1. Fetch the image data
-    const response = await fetch(imgURL);
-    const blob = await response.blob();
-
-    // 2. Decode the image off-thread
-    const img = await createImageBitmap(blob);
-
-    // 3. Use OffscreenCanvas (faster than document.createElement)
-    const canvas = new OffscreenCanvas(img.width, img.height);
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    // 4. Convert to Blob with quality settings
-    const compressedBlob = await canvas.convertToBlob({
-      type: "image/jpeg",
-      quality: 0.9,
-    });
-
-    // 5. Clean up memory
-    img.close();
-
-    // 6. Convert final blob to DataURL
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve([imgURL, reader.result]);
-      reader.readAsDataURL(compressedBlob);
-    });
-  } catch (err) {
-    console.warn("Error processing image:", imgURL, err);
-    return [imgURL, imgURL]; // Fallback to original URL
+    return new URL(best.url, baseUrl).href;
+  } catch (e) {
+    return null;
   }
 }
 
