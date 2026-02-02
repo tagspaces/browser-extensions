@@ -1,14 +1,3 @@
-export function dataURItoBlob(dataURI) {
-  const [header, base64] = dataURI.split(",");
-  const mime = header.match(/:(.*?);/)[1];
-  const binary = atob(base64);
-
-  // Create the byte array in one shot
-  const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0));
-
-  return new Blob([bytes], { type: mime });
-}
-
 export async function dataURItoBlobAsync(dataURI) {
   return await (await fetch(dataURI)).blob();
 }
