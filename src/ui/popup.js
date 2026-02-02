@@ -301,6 +301,7 @@ function saveScreenshot() {
       (err) => {
         saveScreenshotSpinner.classList.add("d-none");
         console.warn("Error taking screenshot " + JSON.stringify(err));
+        alert("Saving screenshot failed");
       },
     );
 }
@@ -311,21 +312,28 @@ function saveFullScreenshot() {
   );
   saveFullScreenshotSpinner.classList.remove("d-none");
   const fileName = generateFileName("png", "screenshot");
-  captureFullPage(currentTabID).then((blob) => {
-    const url = URL.createObjectURL(blob);
-    saveFullScreenshotSpinner.classList.add("d-none");
-    if (isFirefox) {
-      dataURItoBlobAsync(url).then((blob) => {
-        saveAsFile(blob, fileName);
-      });
-    } else {
-      browserAPI.downloads.download({
-        url,
-        filename: fileName,
-        saveAs: true,
-      });
-    }
-  });
+  captureFullPage(currentTabID).then(
+    (blob) => {
+      const url = URL.createObjectURL(blob);
+      saveFullScreenshotSpinner.classList.add("d-none");
+      if (isFirefox) {
+        dataURItoBlobAsync(url).then((blob) => {
+          saveAsFile(blob, fileName);
+        });
+      } else {
+        browserAPI.downloads.download({
+          url,
+          filename: fileName,
+          saveAs: true,
+        });
+      }
+    },
+    (err) => {
+      saveFullScreenshotSpinner.classList.add("d-none");
+      console.warn("Error taking screenshot " + JSON.stringify(err));
+      alert("Saving screenshot failed");
+    },
+  );
 }
 
 /* Firefox only */
@@ -352,6 +360,7 @@ async function savePDF() {
     await browserAPI.tabs.saveAsPDF({});
   } catch (err) {
     console.error("Firefox saveAsPDF failed:", err);
+    alert("Saving PDF failed");
   } finally {
     // 4. Always restore the original title so the user doesn't see ".pdf" in their tab
     await browserAPI.scripting.executeScript({
