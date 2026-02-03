@@ -18,7 +18,7 @@
 /* globals saveAs, DOMPurify, OpenLocationCode */
 import OptionsManager from "../lib/options-manager.js";
 import {
-  formatDateTime4Tag,
+  formatDateTime,
   getBase64ImagePromise,
   dataURItoBlobAsync,
   extractLatLong,
@@ -409,7 +409,9 @@ function updatePreviewArea(htmlContent) {
   // Fix svg icons shown in full width
   const allSVGs = previewHtmlEl.getElementsByTagName("svg");
   for (const svg of allSVGs) {
-    svg.style.maxWidth = "100px"; // svg.getAttribute("naturalWidth");
+    if (!svg.style.maxWidth) {
+      svg.style.maxWidth = "100px";
+    }
   }
 
   const allImages = previewHtmlEl.getElementsByTagName("img");
@@ -418,7 +420,7 @@ function updatePreviewArea(htmlContent) {
   const cleanedPath = pathBaseURL.origin + pathBaseURL.pathname;
 
   for (const img of allImages) {
-    img.style.maxWidth = "100%";
+    // img.style.maxWidth = "100%";
     const imgSrc = img.getAttribute("src");
     // console.log(imgSrc);
     // img.setAttribute("width", img.getAttribute("naturalWidth"));
@@ -603,7 +605,7 @@ export function generateFileName(extension, type) {
     // screenshot case
     tags.push("screenshot");
     tags.push(currentTabURLParser ? currentTabURLParser.hostname : "");
-    tags.push(formatDateTime4Tag(new Date().toString(), false));
+    tags.push(formatDateTime(new Date(), { dateDelimiter: "" }));
   }
   if (type === "mht") {
     extension = "mhtml";

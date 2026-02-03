@@ -60,45 +60,37 @@ export function getHighestResUrl(el, baseUrl) {
   }
 }
 
-export function formatDateTime4Tag(date, includeTime) {
-  if (date === undefined || date === "") {
-    return "";
-  }
-  const d = new Date(date);
-  let cDate = d.getDate();
-  cDate += "";
-  if (cDate.length === 1) {
-    cDate = "0" + cDate;
-  }
-  let cMonth = d.getMonth();
-  cMonth++;
-  cMonth += "";
-  if (cMonth.length === 1) {
-    cMonth = "0" + cMonth;
-  }
-  const cYear = d.getFullYear();
+export function formatDateTime(
+  date = new Date(),
+  {
+    withTime = false,
+    splitter = "T",
+    timeDelimiter = ":",
+    dateDelimiter = "-",
+  } = {},
+) {
+  const d = date instanceof Date ? date : new Date(date);
+  const pad = (n) => String(n).padStart(2, "0");
 
-  let time = "";
-  if (includeTime) {
-    let cHour = d.getHours();
-    cHour += "";
-    if (cHour.length === 1) {
-      cHour = "0" + cHour;
-    }
-    let cMinute = d.getMinutes();
-    cMinute += "";
-    if (cMinute.length === 1) {
-      cMinute = "0" + cMinute;
-    }
-    let cSecond = d.getSeconds();
-    cSecond += "";
-    if (cSecond.length === 1) {
-      cSecond = "0" + cSecond;
-    }
-    time = "~" + cHour + "" + cMinute + "" + cSecond;
+  const datePart =
+    d.getFullYear() +
+    dateDelimiter +
+    pad(d.getMonth() + 1) +
+    dateDelimiter +
+    pad(d.getDate());
+
+  if (!withTime) {
+    return datePart;
   }
 
-  return cYear + "" + cMonth + "" + cDate + time;
+  const timePart =
+    pad(d.getHours()) +
+    timeDelimiter +
+    pad(d.getMinutes()) +
+    timeDelimiter +
+    pad(d.getSeconds());
+
+  return `${datePart}${splitter}${timePart}`;
 }
 
 // Geo locations:
