@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Codebase for TagSpaces' Web Clipper extension available for Chrome, MSEdge and Firefox",
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
     "bootstrap": "5.3.8",
     "dompurify": "3.3.1",
     "file-saver": "2.0.5",
-    "open-location-code": "1.0.3"
+    "open-location-code": "1.0.3",
+    "turndown": "7.2.2"
   }
 }
