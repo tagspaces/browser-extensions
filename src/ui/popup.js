@@ -26,6 +26,7 @@ import {
 } from "../lib/utils.js";
 import { Readability, isProbablyReaderable } from "@mozilla/readability";
 import DOMPurify from "dompurify";
+import TurndownService from "turndown";
 
 let browserAPI = null;
 if (typeof browser !== "undefined") {
@@ -75,7 +76,7 @@ let htmlOriginal;
 let htmlCleaned;
 let htmlSelection;
 let documentBaseUri;
-let contentMode = "simplified"; // 'original'
+let contentMode = "simplified"; // 'original', 'markdown'
 const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
   active: true,
@@ -119,7 +120,7 @@ async function init() {
     .addEventListener("click", saveAsBookmark);
   document
     .getElementById("saveWholePageAsHtml")
-    .addEventListener("click", saveWholePageAsHTML);
+    .addEventListener("click", savePageContent);
   document
     .getElementById("saveScreenshot")
     .addEventListener("click", saveScreenshot);
@@ -132,6 +133,9 @@ async function init() {
   document
     .getElementById("simplifiedPreview")
     .addEventListener("click", simplifiedPreview);
+  document
+    .getElementById("markdownPreview")
+    .addEventListener("click", markdownPreview);
   document.getElementById("fullPreview").addEventListener("click", fullPreview);
 
   // I18n this panel
@@ -164,6 +168,7 @@ async function init() {
     if (msg.originalHTML && !msg.selectionHTML) {
       htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
       updatePreviewArea(htmlOriginal);
+      fullPreview();
       contentMode = "original";
       const iframeClone = previewEl.contentDocument.cloneNode(true);
       if (isProbablyReaderable(iframeClone)) {
@@ -185,13 +190,16 @@ async function init() {
         }
         htmlCleaned = "<h1>" + titleEl.value + "</h1>\n" + htmlCleaned;
         updatePreviewArea(htmlCleaned);
+        simplifiedPreview();
         contentMode = "simplified";
       }
     } else if (msg.selectionHTML) {
       htmlSelection = DOMPurify.sanitize(msg.selectionHTML);
+      simplifiedPreview();
       updatePreviewArea(htmlSelection);
     } else {
       updatePreviewArea("No content was extracted...");
+      noPreview();
     }
     return true;
   }
@@ -209,9 +217,50 @@ function saveAsFile(blob, filename) {
   // }
 }
 
+function noPreview() {
+  document
+    .querySelector("#simplifiedPreview")
+    .classList.remove("activePreview");
+  document.querySelector("#fullPreview").classList.remove("activePreview");
+  document.querySelector("#markdownPreview").classList.remove("activePreview");
+}
+
+function markdownPreview() {
+  let htmlContent = "";
+  simplifiedPreview();
+  if (contentMode === "simplified") {
+    htmlContent = htmlCleaned;
+  } else if (contentMode === "original") {
+    htmlOriginal = htmlOriginal;
+  }
+  contentMode = "markdown";
+  document
+    .querySelector("#simplifiedPreview")
+    .classList.remove("activePreview");
+  document.querySelector("#fullPreview").classList.remove("activePreview");
+  document.querySelector("#markdownPreview").classList.add("activePreview");
+  let turndownService = new TurndownService({
+    headingStyle: "atx",
+    codeBlockStyle: "fenced",
+    fence: "```",
+  });
+  let markdown = turndownService.turndown(htmlContent);
+  if (!markdown) {
+    markdown = "Markdown conversion failed";
+  }
+  updatePreviewArea(
+    `<pre id="mdcontent" style="white-space: pre-wrap; font-size: 12px;">${markdown}</pre>`,
+  );
+}
+
 function simplifiedPreview() {
   if (htmlCleaned) {
     contentMode = "simplified";
+    document.querySelector("#simplifiedPreview").classList.add("activePreview");
+    document.querySelector("#fullPreview").classList.remove("activePreview");
+    document
+      .querySelector("#markdownPreview")
+      .classList.remove("activePreview");
     updatePreviewArea(htmlCleaned);
   }
 }
@@ -219,6 +268,13 @@ function simplifiedPreview() {
 function fullPreview() {
   if (htmlOriginal) {
     contentMode = "original";
+    document
+      .querySelector("#simplifiedPreview")
+      .classList.remove("activePreview");
+    document.querySelector("#fullPreview").classList.add("activePreview");
+    document
+      .querySelector("#markdownPreview")
+      .classList.remove("activePreview");
     updatePreviewArea(htmlOriginal);
   }
 }
@@ -245,27 +301,44 @@ function downloadFile() {
   });
 }
 
-function saveWholePageAsHTML() {
+async function savePageContent() {
   const saveAsHTMLSpinner = document.querySelector("#saveAsHTMLSpinner");
   saveAsHTMLSpinner.classList.remove("d-none");
-  const htmlContent =
-    document.getElementById("preview")?.contentDocument?.documentElement
-      ?.innerHTML;
-  prepareContentPromise(htmlContent)
-    .then((convertedHTML) => {
-      // console.log(convertedHTML);
-      var BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
-      const htmlBlob = new Blob([BOM, convertedHTML], {
+  if (contentMode === "markdown") {
+    const mdContent = document
+      .getElementById("preview")
+      ?.contentDocument?.getElementById("mdcontent")?.innerText;
+    try {
+      const targetContent = await prepareMarkdownContentPromise(mdContent);
+      const targetBlob = new Blob([targetContent], {
         type: "text/html;charset=utf-8",
       });
-      saveAsFile(htmlBlob, generateFileName("html"));
+      saveAsFile(targetBlob, generateFileName("md"));
+    } catch (err) {
+      console.warn("Error handling html content", err);
+      alert("Error by preparing the MD content...");
+      location.reload();
+    } finally {
       saveAsHTMLSpinner.classList.add("d-none");
-    })
-    .catch((err) => {
-      console.warn("Error handling html content " + err);
+    }
+  } else {
+    const htmlContent =
+      document.getElementById("preview")?.contentDocument?.documentElement
+        ?.innerHTML;
+    try {
+      const targetContent = await prepareContentPromise(htmlContent);
+      const targetBlob = new Blob([targetContent], {
+        type: "text/html;charset=utf-8",
+      });
+      saveAsFile(targetBlob, generateFileName("html"));
+    } catch (err) {
+      console.warn("Error handling html content", err);
       alert("Error by preparing the HTML content...");
       location.reload();
-    });
+    } finally {
+      saveAsHTMLSpinner.classList.add("d-none");
+    }
+  }
 }
 
 function saveScreenshot() {
@@ -479,7 +552,7 @@ async function prepareContentPromise(htmlContent) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
 
-    // 1. Define the targets we want to convert to Base64
+    // Define the targets we want to convert to Base64
     const targets = [
       { selector: "img", attribute: "src" },
       { selector: "video[poster]", attribute: "poster" },
@@ -487,7 +560,7 @@ async function prepareContentPromise(htmlContent) {
 
     const conversionTasks = [];
 
-    // 2. Collect all images and video posters
+    // Collect all images and video posters
     for (const target of targets) {
       const elements = Array.from(doc.querySelectorAll(target.selector));
 
@@ -523,10 +596,10 @@ async function prepareContentPromise(htmlContent) {
       }
     }
 
-    // 3. Process image and poster downloads in batches (size 5)
+    // Process image and poster downloads in batches (size 5)
     await processInBatches(conversionTasks, 5, (task) => task());
 
-    // 4. Capture Screenshot
+    // Capture Screenshot
     let imageDataUrl = "";
     if (
       typeof userSettings !== "undefined" &&
@@ -549,7 +622,7 @@ async function prepareContentPromise(htmlContent) {
       }
     }
 
-    // 5. Metadata handling
+    // Metadata handling
     const body = doc.body || doc.createElement("body");
 
     let browserName = isChrome ? "Chrome" : "";
@@ -567,7 +640,7 @@ async function prepareContentPromise(htmlContent) {
       body.setAttribute("data-screenshot", imageDataUrl);
     }
 
-    // 6. Serialization
+    // Serialization
     let finalHtml = "";
     if (doc.doctype) {
       finalHtml += new XMLSerializer().serializeToString(doc.doctype) + "\n";
@@ -580,6 +653,173 @@ async function prepareContentPromise(htmlContent) {
   } catch (error) {
     console.error("Content preparation failed:", error);
     return htmlContent;
+  }
+}
+
+/**
+ * Process Markdown content: resolve relative URLs, convert images to Base64,
+ * and inject metadata via YAML Front Matter.
+ */
+async function prepareMarkdownContentPromise(markdownContent) {
+  try {
+    // Define Regex targets (Standard Markdown images and HTML img tags within MD)
+    const regexTargets = [
+      // Matches ![alt](url "title") or ![alt](url)
+      {
+        type: "markdown",
+        regex: /!\[(.*?)\]\(((?!data:).+?)(?:\s+"(.*?)")?\)/g,
+        urlIndex: 2, // The capture group index for the URL
+      },
+      // Matches <img src="url" ...>
+      {
+        type: "html",
+        regex: /<img\s+[^>]*src=["']((?!data:)[^"']+)["'][^>]*>/g,
+        urlIndex: 1,
+      },
+    ];
+
+    const conversionTasks = [];
+    const replacements = new Map(); // Store Original URL -> Data URL mapping
+
+    // Scan content to find URLs to convert
+    for (const target of regexTargets) {
+      let match;
+      // Reset lastIndex because we are reusing regex objects or looping
+      while ((match = target.regex.exec(markdownContent)) !== null) {
+        const originalUrl = match[target.urlIndex];
+
+        if (!originalUrl) continue;
+
+        try {
+          // Resolve absolute URL relative to the current tab
+          // Note: Markdown doesn't have `getHighestResUrl` equivalent easily without DOM,
+          // so we usually just resolve the string path.
+          const absoluteUrl = new URL(originalUrl, currentTabURL).href;
+
+          // Avoid queuing the same URL multiple times
+          if (replacements.has(originalUrl)) continue;
+
+          // Reserve a spot in the map
+          replacements.set(originalUrl, null);
+
+          conversionTasks.push(async () => {
+            try {
+              const dataUrl = await getBase64ImagePromise(absoluteUrl);
+              if (dataUrl && dataUrl.startsWith("data:image")) {
+                replacements.set(originalUrl, dataUrl);
+              } else {
+                // If failed, remove from map so we don't replace it with null
+                replacements.delete(originalUrl);
+              }
+            } catch (e) {
+              console.warn(`Could not convert image:`, absoluteUrl);
+              replacements.delete(originalUrl);
+            }
+          });
+        } catch (e) {
+          console.warn(`Invalid URL found in Markdown:`, originalUrl);
+        }
+      }
+    }
+
+    // Process image downloads in batches (size 5)
+    await processInBatches(conversionTasks, 5, (task) => task());
+
+    // 4. Apply replacements to the Markdown content
+    // We iterate the map to replace occurrences.
+    // Note: This matches the raw string. If a URL appears in text (not image), it might get replaced too.
+    // To be strictly safe, we could re-run the regex replacement, but global string replacement is usually acceptable for CLippers.
+    let finalMarkdown = markdownContent;
+    for (const [originalUrl, dataUrl] of replacements) {
+      if (dataUrl) {
+        // Global replace of the URL.
+        // Escaping special regex characters in the URL for the replace function
+        const escapedUrl = originalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const replaceRegex = new RegExp(escapedUrl, "g");
+        finalMarkdown = finalMarkdown.replace(replaceRegex, dataUrl);
+      }
+    }
+
+    // // Capture Screenshot (Same logic as original)
+    // let imageDataUrl = "";
+    // if (
+    //   typeof userSettings !== "undefined" &&
+    //   userSettings.enableScreenshotEmbedding
+    // ) {
+    //   try {
+    //     imageDataUrl = await new Promise((resolve, reject) => {
+    //       browserAPI.tabs.captureVisibleTab(
+    //         null,
+    //         { format: "jpeg", quality: 90 },
+    //         (data) => {
+    //           if (browserAPI.runtime.lastError)
+    //             reject(browserAPI.runtime.lastError);
+    //           else resolve(data);
+    //         },
+    //       );
+    //     });
+    //   } catch (e) {
+    //     console.warn("Screenshot failed:", e);
+    //   }
+    // }
+
+    // // Metadata handling (YAML Front Matter)
+    // let browserName = isChrome ? "Chrome" : "";
+    // browserName = isEdge ? "Edge" : browserName;
+    // browserName = isFirefox ? "Firefox" : browserName;
+
+    // const metadata = {
+    //   "data-createdwith": `TagSpaces Web Clipper (${browserName})`,
+    //   "data-sourceurl": currentTabURL,
+    //   "data-scrappedon": new Date().toISOString(),
+    //   ...(imageDataUrl ? { "data-screenshot": imageDataUrl } : {}),
+    // };
+
+    // finalMarkdown = injectFrontMatter(finalMarkdown, metadata);
+
+    return finalMarkdown;
+  } catch (error) {
+    console.error("Markdown preparation failed:", error);
+    return markdownContent;
+  }
+}
+
+/**
+ * Helper to inject or update YAML Front Matter at the top of the file
+ */
+function injectFrontMatter(content, newMeta) {
+  const frontMatterRegex = /^---\n([\s\S]*?)\n---/;
+  const match = content.match(frontMatterRegex);
+
+  let finalYaml = "";
+
+  if (match) {
+    // Existing Front Matter found
+    // Note: Parsing YAML without a library is risky, but for simple key-values:
+    let existingYaml = match[1];
+
+    // Simple append approach to avoid parsing/destroying existing complex YAML
+    let additionalYaml = "";
+    for (const [key, value] of Object.entries(newMeta)) {
+      // Very basic check to see if key exists (imperfect, but dependency-free)
+      if (!existingYaml.includes(`${key}:`)) {
+        additionalYaml += `${key}: "${value}"\n`;
+      }
+    }
+
+    // Replace the entire block with old + new
+    return content.replace(
+      frontMatterRegex,
+      `---\n${existingYaml}\n${additionalYaml}---`,
+    );
+  } else {
+    // No Front Matter, create new
+    let yamlBlock = "---\n";
+    for (const [key, value] of Object.entries(newMeta)) {
+      yamlBlock += `${key}: "${value}"\n`;
+    }
+    yamlBlock += "---\n\n";
+    return yamlBlock + content;
   }
 }
 
@@ -634,7 +874,7 @@ export function extractFileExtFromUrl(currentTabURL) {
 async function captureFullPage(tabId) {
   const MIN_DELAY = 600; // Ensuring we stay under 2 calls/sec (1000ms / 2 = 500ms + buffer)
 
-  // 1. Get dimensions
+  // Get dimensions
   const [{ result: dimensions }] = await browserAPI.scripting.executeScript({
     target: { tabId },
     func: () => ({

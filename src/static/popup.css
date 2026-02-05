@@ -72,10 +72,18 @@ label {
   right: 0px;
 }
 
-#simplifiedPreview, #fullPreview {
+#simplifiedPreview, #fullPreview, #markdownPreview {
   height: 28px;
   line-height: 18px;
   border-color: lightgray;
+}
+
+.activePreview {
+  background-color: lightgray;
+}
+
+.activePreview:hover {
+  background-color: #c6c6c6;
 }
 
 .closeIcon {
