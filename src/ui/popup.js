@@ -140,7 +140,7 @@ async function init() {
 
   // I18n this panel
   document.querySelectorAll("[data-i18n]").forEach((item) => {
-    item.innerHTML = browserAPI.i18n.getMessage(item.dataset.i18n);
+    item.innerText = browserAPI.i18n.getMessage(item.dataset.i18n);
   });
   document.querySelectorAll("[data-i18n-title]").forEach((item) => {
     item.setAttribute(
