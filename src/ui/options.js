@@ -22,18 +22,25 @@ let form = document.getElementById("form");
 
 // Saves options to browser.storage.sync.
 function save() {
-  OptionsManager.save({
-    enableScreenshotEmbedding: form.enableScreenshotEmbedding.checked,
-    enableOpenLocationCode: form.enableOpenLocationCode.checked,
-  });
+  const params = {
+    enableScreenshotEmbedding: form.enableScreenshotEmbedding?.checked,
+  };
+  if (form.enableOpenLocationCode) {
+    params.enableOpenLocationCode = form.enableOpenLocationCode.checked;
+  }
+  OptionsManager.save(params);
 }
 
 // Restores select box and checkbox state using the preferences
 // stored in browser.storage.
 function load() {
   OptionsManager.load().then((items) => {
-    form.enableScreenshotEmbedding.checked = items.enableScreenshotEmbedding;
-    form.enableOpenLocationCode.checked = items.enableOpenLocationCode;
+    if (form.enableScreenshotEmbedding) {
+      form.enableScreenshotEmbedding.checked = items.enableScreenshotEmbedding;
+    }
+    if (form.enableOpenLocationCode) {
+      form.enableOpenLocationCode.checked = items.enableOpenLocationCode;
+    }
   });
 }
 

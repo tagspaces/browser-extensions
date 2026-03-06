@@ -244,7 +244,12 @@ function markdownPreview() {
     codeBlockStyle: "fenced",
     fence: "```",
   });
-  let markdown = turndownService.turndown(htmlContent);
+  let markdown = "";
+  try {
+    markdown = turndownService.turndown(htmlContent || "");
+  } catch (e) {
+    // turndown may reject non-string / non-DOM input
+  }
   if (!markdown) {
     markdown = "Markdown conversion failed";
   }
@@ -490,6 +495,7 @@ function updatePreviewArea(htmlContent) {
 
   const allImages = previewHtmlEl.getElementsByTagName("img");
 
+  if (!documentBaseUri) return;
   const pathBaseURL = new URL(documentBaseUri.pathBase);
   const cleanedPath = pathBaseURL.origin + pathBaseURL.pathname;
 
