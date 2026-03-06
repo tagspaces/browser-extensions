@@ -624,6 +624,24 @@ async function prepareContentPromise(htmlContent) {
 
     // Metadata handling
     const body = doc.body || doc.createElement("body");
+    const head = doc.head || doc.createElement("head");
+
+    // Ensure head is attached if it didn't exist
+    if (!doc.head) {
+      doc.documentElement.insertBefore(head, doc.body);
+    }
+
+    // Check if a charset meta already exists
+    let charsetMeta = head.querySelector("meta[charset]");
+
+    if (!charsetMeta) {
+      // adding <meta charset="utf-8" />
+      charsetMeta = doc.createElement("meta");
+      charsetMeta.setAttribute("charset", "utf-8");
+
+      // Insert as first child (recommended position)
+      head.insertBefore(charsetMeta, head.firstChild);
+    }
 
     let browserName = isChrome ? "Chrome" : "";
     browserName = isEdge ? "Edge" : browserName;
