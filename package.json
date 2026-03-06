@@ -7,7 +7,7 @@
     "url": "git+https://github.com/tagspaces/browser-extensions/"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "build": "yarn build-chrome && yarn build-firefox",
     "build-chrome": "TARGET=chrome $(yarn bin)/webpack",
     "build-firefox": "TARGET=firefox $(yarn bin)/webpack",
@@ -18,13 +18,16 @@
     "bump-version": "yarn version",
     "eslint": "$(yarn bin)/eslint .",
     "update-i18n": "./tx pull -a -d && cd _locales && mv de_DE/* de/* && cd ..",
-    "clean": "rm -rf ./build/"
+    "clean": "rm -rf ./build/",
+    "test:watch": "vitest"
   },
   "license": "AGPL-3.0",
   "devDependencies": {
     "copy-webpack-plugin": "13.0.1",
     "eslint": "9.39.2",
+    "jsdom": "28.1.0",
     "shelljs": "0.10.0",
+    "vitest": "4.0.18",
     "web-ext": "9.2.0",
     "web-ext-types": "3.2.1",
     "webpack": "5.104.1",
