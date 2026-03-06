@@ -43,7 +43,9 @@ export default {
       let callbackChanges = {};
 
       for (let key in DEFAULT_OPTIONS) {
-        callbackChanges[key] = changes[key].newValue;
+        if (changes[key] !== undefined) {
+          callbackChanges[key] = changes[key].newValue;
+        }
       }
 
       callback(callbackChanges);

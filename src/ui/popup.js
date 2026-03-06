@@ -184,7 +184,7 @@ async function init() {
         // siteName: null
         // textContent: "Your Own Decentralized
         // title: "TagSpaces as a platform for file-based apps"
-        htmlCleaned = article.content;
+        htmlCleaned = DOMPurify.sanitize(article.content);
         if (article.title) {
           titleEl.value = article.title;
         }
@@ -231,7 +231,7 @@ function markdownPreview() {
   if (contentMode === "simplified") {
     htmlContent = htmlCleaned;
   } else if (contentMode === "original") {
-    htmlOriginal = htmlOriginal;
+    htmlContent = htmlOriginal;
   }
   contentMode = "markdown";
   document
@@ -446,8 +446,9 @@ function saveAsBookmark() {
     const screenshot = userSettings.enableScreenshotEmbedding
       ? "COMMENT=" + imageDataUrl + "\r\n"
       : "";
+    const safeUrl = currentTabURL.replace(/[\r\n]/g, "");
     const content =
-      "[InternetShortcut]\r\nURL=" + currentTabURL + "\r\n" + screenshot;
+      "[InternetShortcut]\r\nURL=" + safeUrl + "\r\n" + screenshot;
     const textBlob = new Blob([content], {
       type: "text/plain;charset=utf-8",
     });
@@ -885,8 +886,8 @@ export function extractFileExtFromUrl(currentTabURL) {
   if (currentTabURLParser.search) {
     url = currentTabURLParser.origin + currentTabURLParser.pathname;
   }
-  const ext = url.replace(/^.*?\.([a-zA-Z0-9]+)$/, "$1");
-  return ext.toLowerCase();
+  const match = url.match(/\.([a-zA-Z0-9]+)$/);
+  return match ? match[1].toLowerCase() : "";
 }
 
 async function captureFullPage(tabId) {
@@ -1003,8 +1004,7 @@ async function captureFullPage(tabId) {
   const ctx = canvas.getContext("2d");
 
   for (const item of images) {
-    const response = await fetch(item.dataUrl);
-    const blob = await response.blob();
+    const blob = await dataURItoBlobAsync(item.dataUrl);
     const img = await createImageBitmap(blob);
 
     // Draw using physical pixel coordinates

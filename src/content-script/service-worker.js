@@ -25,17 +25,7 @@ if (typeof browser !== "undefined") {
 }
 
 browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
-  // Get the current tab.
-  // console.log(
-  //   sender.tab
-  //     ? "from a content script:" + sender.tab.url
-  //     : "from the extension"
-  // );
-  // const tabs = await browserAPI.tabs.query({
-  //   active: true,
-  //   currentWindow: true,
-  // });
-  // const tabId = tabs[0].id;
+  if (sender.id !== browserAPI.runtime.id) return;
   if (msg.type === "capture-page") {
     const injectionResults = await browserAPI.scripting.executeScript({
       target: { tabId: msg.tabId },
