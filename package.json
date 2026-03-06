@@ -23,7 +23,7 @@
   },
   "license": "AGPL-3.0",
   "devDependencies": {
-    "copy-webpack-plugin": "13.0.1",
+    "copy-webpack-plugin": "14.0.0",
     "eslint": "9.39.2",
     "jsdom": "28.1.0",
     "shelljs": "0.10.0",
