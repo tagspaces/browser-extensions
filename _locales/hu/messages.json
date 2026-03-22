@@ -1,86 +1,86 @@
 {
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
+    "appLauncher": {
+        "message": "TagSpaces indítása",
+        "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
         "message": "Webtartalom összegyűjtése és -rendezése egyszerű szövegfájlba.",
         "description": "Description of the extension"
     },
-    "appLauncher": {
-        "message": "TagSpaces indítása",
-        "description": "Title of the application launcher in the browser."
-    },
-    "appLauncherLabel": {
-        "message": "Webtartalom elkapása",
-        "description": "Title of label."
+    "addTagHelp": {
+        "message": "A címkéket vesszővel kell elválasztani. A címkéknek legalább 2 karakternek hosszúnak kell lenni és nem tartalmazhatnak speciális karaktereket, mint a szóköz, #, / vagy \\.",
+        "description": "Add tag help message"
     },
     "editTitleLabel": {
         "message": "Fájl címének szerkesztése",
+        "description": "Title of label."
+    },
+    "appLauncherLabel": {
+        "message": "Webtartalom elkapása",
         "description": "Title of label."
     },
     "addTagLabel": {
         "message": "Címke hozzáadása",
         "description": "Title of label."
     },
-    "addTagHelp": {
-        "message": "A címkéket vesszővel kell elválasztani. A címkéknek legalább 2 karakternek hosszúnak kell lenni és nem tartalmazhatnak speciális karaktereket, mint a szóköz, #, / vagy \\.",
-        "description": "Add tag help message"
-    },
     "saveFileLabel": {
         "message": "Válaszd ki a mentési műveletet",
-        "description": "SAving action label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "Teljes oldal mentése képekkel együtt egy MHTML fájlba, megőrizve az eredeti kinézetet",
-        "description": "Title of the save as MHTML button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Teljes oldal mentése",
-        "description": "Label of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Kijelölt tartalom mentése képekkel együtt egy HTML fájlba",
-        "description": "Title of save selection button"
-    },
-    "saveAsSelectionLabel": {
-        "message": "Vágólap kiválasztása",
-        "description": "Label of save selection button"
-    },
-    "saveScreenshotTitle": {
-        "message": "Képernyőkép készítése a látható területről egy PNG fájlba. Méretezze át a böngésző ablakot egy bizonyos területre.",
-        "description": "Title of the take screenshot button"
+        "description": "Saving action label."
     },
     "saveScreenshotLabel": {
         "message": "Képernyőkép készítése",
         "description": "Label of the take screenshot button"
     },
-    "saveBookmarkTitle": {
-        "message": "Mentse el egy könyvjelzőként a jelenlegi oldal URL fájlba, Windows® és Mac OS® kompatibilisen",
-        "description": "Title of bookmark button"
+    "saveScreenshotTitle": {
+        "message": "Képernyőkép készítése a látható területről egy PNG fájlba. Méretezze át a böngésző ablakot egy bizonyos területre.",
+        "description": "Title of the take screenshot button"
     },
-    "saveBookmarkLabel": {
-        "message": "Könyvjelző készítése",
-        "description": "Lable of bookmark button"
+    "saveAsMhtmlLabel": {
+        "message": "Teljes oldal mentése",
+        "description": "Label of the save as MHTML button"
     },
-    "savePageAsHtmlTitle": {
-        "message": "Teljes oldal mentése képekkel együtt egy HTML fájlba, az eredeti kinézetet nélkül",
-        "description": "Title of the save as html button"
-    },
-    "downloadTitle": {
-        "message": "Fájl letöltése az eredeti forrmátumában",
-        "description": "Title of the download button"
-    },
-    "downloadLabel": {
-        "message": "Fájl letöltése",
-        "description": "Label of the download button"
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "Szerkeszthető oldal mentése",
         "description": "Label of the save as html button"
     },
+    "savePageAsHtmlTitle": {
+        "message": "Teljes oldal mentése képekkel együtt egy HTML fájlba, az eredeti kinézetet nélkül",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Könyvjelző készítése",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Vágólap kiválasztása",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Kijelölt tartalom mentése képekkel együtt egy HTML fájlba",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "Fájl letöltése",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "Fájl letöltése az eredeti forrmátumában",
+        "description": "Title of the download button"
+    },
     "desktopTagSpacesLabel": {
         "message": "Rendezze az összegyűjtött tartalmat a TagSpaces asztali alkalmazással. Szabadon hozzáférhető",
         "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     }
 }

@@ -1,86 +1,86 @@
 {
-    "appName": {
-        "message": "TagSpaces 網頁擷取工具",
-        "description": "The name of the extension"
+    "appLauncher": {
+        "message": "啟動 TagSpaces",
+        "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
         "message": "蒐集與組織網頁內容到文字檔",
         "description": "Description of the extension"
     },
-    "appLauncher": {
-        "message": "啟動 TagSpaces",
-        "description": "Title of the application launcher in the browser."
-    },
-    "appLauncherLabel": {
-        "message": "擷取 Web 內容",
-        "description": "Title of label."
+    "addTagHelp": {
+        "message": "多個標籤使用逗號分隔。標籤應該有2個字元的最小長度，不應該包含特殊字元。例：空格、＃、 /、\\等。",
+        "description": "Add tag help message"
     },
     "editTitleLabel": {
         "message": "編輯檔案標題",
+        "description": "Title of label."
+    },
+    "appLauncherLabel": {
+        "message": "擷取 Web 內容",
         "description": "Title of label."
     },
     "addTagLabel": {
         "message": "新增標籤",
         "description": "Title of label."
     },
-    "addTagHelp": {
-        "message": "多個標籤使用逗號分隔。標籤應該有2個字元的最小長度，不應該包含特殊字元。例：空格、＃、 /、\\等。",
-        "description": "Add tag help message"
-    },
     "saveFileLabel": {
         "message": "選擇儲存動作",
-        "description": "SAving action label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "儲存完整檔案(含圖片)為單一 MHTML 文件，保留原網頁設計",
-        "description": "Title of the save as MHTML button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "儲存完整檔案",
-        "description": "Label of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "儲存所選內容(含圖片)為單一 HTML 文件",
-        "description": "Title of save selection button"
-    },
-    "saveAsSelectionLabel": {
-        "message": "擷取選擇",
-        "description": "Label of save selection button"
-    },
-    "saveScreenshotTitle": {
-        "message": "將當前頁面可視區域截圖為 PNG 文件。調整瀏覽器窗口大小以對焦所需的截圖區域。",
-        "description": "Title of the take screenshot button"
+        "description": "Saving action label."
     },
     "saveScreenshotLabel": {
         "message": "建立螢幕截圖",
         "description": "Label of the take screenshot button"
     },
-    "saveBookmarkTitle": {
-        "message": "將當前頁面的書籤保存為 URL 文件，兼容 Windows® 和 Mac OS®",
-        "description": "Title of bookmark button"
+    "saveScreenshotTitle": {
+        "message": "將當前頁面可視區域截圖為 PNG 文件。調整瀏覽器窗口大小以對焦所需的截圖區域。",
+        "description": "Title of the take screenshot button"
     },
-    "saveBookmarkLabel": {
-        "message": "建立書籤",
-        "description": "Lable of bookmark button"
+    "saveAsMhtmlLabel": {
+        "message": "儲存完整檔案",
+        "description": "Label of the save as MHTML button"
     },
-    "savePageAsHtmlTitle": {
-        "message": "將完整頁面(含圖片)保存為單一 HTML 文件，不保留原始網頁設計",
-        "description": "Title of the save as html button"
-    },
-    "downloadTitle": {
-        "message": "下載原格式文件",
-        "description": "Title of the download button"
-    },
-    "downloadLabel": {
-        "message": "下載檔案",
-        "description": "Label of the download button"
+    "saveAsMhtmlTitle": {
+        "message": "在Firefox中保存包含圖片的完整網頁為PDF格式，於其他瀏覽器可以保存為MHTML",
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "儲存可編輯頁面",
         "description": "Label of the save as html button"
     },
+    "savePageAsHtmlTitle": {
+        "message": "將完整頁面(含圖片)保存為單一 HTML 文件，不保留原始網頁設計",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "建立書籤",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "將當前頁面保存為兼容 Windows® 和 Mac OS® URL 檔案的書籤",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "擷取選擇",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "儲存所選內容(含圖片)為單一 HTML 文件",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "下載檔案",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "下載原格式文件",
+        "description": "Title of the download button"
+    },
     "desktopTagSpacesLabel": {
         "message": "使用 TagSpaces 桌面應用整理收集的內容。 它是免費提供的 ",
         "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "TagSpaces 網頁擷取工具",
+        "description": "The name of the extension"
     }
 }

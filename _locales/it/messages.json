@@ -1,86 +1,86 @@
 {
-    "appName": {
-        "message": "Web Clipper di TagSpacesc",
-        "description": "The name of the extension"
+    "appLauncher": {
+        "message": "Avvia TagSpaces",
+        "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
         "message": "Colleziona e organizza contenuti web in semplici file.",
         "description": "Description of the extension"
     },
-    "appLauncher": {
-        "message": "Avvia TagSpaces",
-        "description": "Title of the application launcher in the browser."
-    },
-    "appLauncherLabel": {
-        "message": "Cattura il contenuto web",
-        "description": "Title of label."
+    "addTagHelp": {
+        "message": "Più etichette dovrebbero essere separate con una virgola. L'etichette devono avere una lunghezza minima di 2 caratteri e non devono contenere caratteri speciali come spazi, #, / o \\.",
+        "description": "Add tag help message"
     },
     "editTitleLabel": {
         "message": "Modifica il titolo del file",
+        "description": "Title of label."
+    },
+    "appLauncherLabel": {
+        "message": "Cattura il contenuto web",
         "description": "Title of label."
     },
     "addTagLabel": {
         "message": "Aggiungi etichette",
         "description": "Title of label."
     },
-    "addTagHelp": {
-        "message": "Più etichette dovrebbero essere separate con una virgola. L'etichette devono avere una lunghezza minima di 2 caratteri e non devono contenere caratteri speciali come spazi, #, / o \\.",
-        "description": "Add tag help message"
-    },
     "saveFileLabel": {
         "message": "Scegli il metodo di salvataggio",
-        "description": "SAving action label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "Salva la pagina completa includendo le immagini come un file MHTML, preservando la formattazione originale",
-        "description": "Title of the save as MHTML button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Salva la pagina completa",
-        "description": "Label of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Salva il contenuto selezionato comprese le immagini come un unico file HTML",
-        "description": "Title of save selection button"
-    },
-    "saveAsSelectionLabel": {
-        "message": "Selezione della clip",
-        "description": "Label of save selection button"
-    },
-    "saveScreenshotTitle": {
-        "message": "Fai uno screenshot dell'area della pagina visibile come file PNG. Ridimensiona la finestra del browser per mettere a fuoco l'area esatta dello screenshot.",
-        "description": "Title of the take screenshot button"
+        "description": "Saving action label."
     },
     "saveScreenshotLabel": {
         "message": "Fai uno screenshot",
         "description": "Label of the take screenshot button"
     },
-    "saveBookmarkTitle": {
-        "message": "Salva un segnalibro della pagina corrente come file di collegamento, compatibile con Windows® e Mac OS®",
-        "description": "Title of bookmark button"
+    "saveScreenshotTitle": {
+        "message": "Fai uno screenshot dell'area della pagina visibile come file PNG. Ridimensiona la finestra del browser per mettere a fuoco l'area esatta dello screenshot.",
+        "description": "Title of the take screenshot button"
     },
-    "saveBookmarkLabel": {
-        "message": "Crea un segnalibro",
-        "description": "Lable of bookmark button"
+    "saveAsMhtmlLabel": {
+        "message": "Salva la pagina completa",
+        "description": "Label of the save as MHTML button"
     },
-    "savePageAsHtmlTitle": {
-        "message": "Salva la pagina completa includendo le immagini come un unico file HTML, la formtazzione originale non verrà preservata",
-        "description": "Title of the save as html button"
-    },
-    "downloadTitle": {
-        "message": "Scarica il file nel formato originale",
-        "description": "Title of the download button"
-    },
-    "downloadLabel": {
-        "message": "Scarica file",
-        "description": "Label of the download button"
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "Salva la pagina modificabile",
         "description": "Label of the save as html button"
     },
+    "savePageAsHtmlTitle": {
+        "message": "Salva la pagina completa includendo le immagini come un unico file HTML, la formtazzione originale non verrà preservata",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Crea un segnalibro",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Selezione della clip",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Salva il contenuto selezionato comprese le immagini come un unico file HTML",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "Scarica file",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "Scarica il file nel formato originale",
+        "description": "Title of the download button"
+    },
     "desktopTagSpacesLabel": {
         "message": "Organizza il contenuto raccolto con l'app desktop TagSpaces. L'app è disponibile gratuitamente su",
         "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "Web Clipper di TagSpacesc",
+        "description": "The name of the extension"
     }
 }

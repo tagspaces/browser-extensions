@@ -1,86 +1,86 @@
 {
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
+    "appLauncher": {
+        "message": "Գործարկել TagSpaces-ը։",
+        "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
         "message": "Հավաքել և կարգավորել համացանցային նյութը հասարակ նիշքերում",
         "description": "Description of the extension"
     },
-    "appLauncher": {
-        "message": "Գործարկել TagSpaces-ը։",
-        "description": "Title of the application launcher in the browser."
-    },
-    "appLauncherLabel": {
-        "message": "Տեսակորզել համացանցային բովանդակությունը",
-        "description": "Title of label."
+    "addTagHelp": {
+        "message": "Մեկից ավելի պիտակները պետք է զատվեն ստորակետով։ Պիտակի անունը պետք է բաղկանա նվազագույնը 2 նիշից և չպարունակի բացատ ու հատուկ նշաններ, օրինակ՝ #, / or \\ ։",
+        "description": "Add tag help message"
     },
     "editTitleLabel": {
         "message": "Խմբագրել նիշքի անունը",
+        "description": "Title of label."
+    },
+    "appLauncherLabel": {
+        "message": "Տեսակորզել համացանցային բովանդակությունը",
         "description": "Title of label."
     },
     "addTagLabel": {
         "message": "Ավելացնել պիտակներ",
         "description": "Title of label."
     },
-    "addTagHelp": {
-        "message": "Մեկից ավելի պիտակները պետք է զատվեն ստորակետով։ Պիտակի անունը պետք է բաղկանա նվազագույնը 2 նիշից և չպարունակի բացատ ու հատուկ նշաններ, օրինակ՝ #, / or \\ ։",
-        "description": "Add tag help message"
-    },
     "saveFileLabel": {
         "message": "Ընտրել պահպանման գործողությունը",
-        "description": "SAving action label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "Պահպանել ամբողջ էջը՝ ներառյալ նկարները, որպես մեկ MHTML նիշք՝ պահելով սկզբնական ձևավորումը",
-        "description": "Title of the save as MHTML button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Պահպանել ամբողջ էջը",
-        "description": "Label of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Պահպանել ընտրված մասը՝ ներառյալ նկարները, որպես մեկ HTML նիշք",
-        "description": "Title of save selection button"
-    },
-    "saveAsSelectionLabel": {
-        "message": "Կտրել ընտրված մասը",
-        "description": "Label of save selection button"
-    },
-    "saveScreenshotTitle": {
-        "message": "Էկրանահանել էջի տեսանելի մասը որպես PNG  նիշք։ Դիտարկիչի պատուհանի չափերը փոխել էկրանահանի անհրաժեշտ հատվածն ընտրելու համար։",
-        "description": "Title of the take screenshot button"
+        "description": "Saving action label."
     },
     "saveScreenshotLabel": {
         "message": "Էկրանահանել",
         "description": "Label of the take screenshot button"
     },
-    "saveBookmarkTitle": {
-        "message": "Էջանշել որպես URL նիշք, որը համատեղելի է Windows®-ի և Mac OS®-ի հետ",
-        "description": "Title of bookmark button"
+    "saveScreenshotTitle": {
+        "message": "Էկրանահանել էջի տեսանելի մասը որպես PNG  նիշք։ Դիտարկիչի պատուհանի չափերը փոխել էկրանահանի անհրաժեշտ հատվածն ընտրելու համար։",
+        "description": "Title of the take screenshot button"
     },
-    "saveBookmarkLabel": {
-        "message": "Էջանշել",
-        "description": "Lable of bookmark button"
+    "saveAsMhtmlLabel": {
+        "message": "Պահպանել ամբողջ էջը",
+        "description": "Label of the save as MHTML button"
     },
-    "savePageAsHtmlTitle": {
-        "message": "Պահպանել ամբողջ էջը՝ ներառյալ նկարները, որպես մեկ HTML նիշք. սկզբնական ձևավորումը չի պահպանվելու",
-        "description": "Title of the save as html button"
-    },
-    "downloadTitle": {
-        "message": "Ներբեռնել նիշքը դրա սեփական ձևաչափով",
-        "description": "Title of the download button"
-    },
-    "downloadLabel": {
-        "message": "Ներբեռնել նիշքը",
-        "description": "Label of the download button"
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "Պահպանել խմբագրելի էջ",
         "description": "Label of the save as html button"
     },
+    "savePageAsHtmlTitle": {
+        "message": "Պահպանել ամբողջ էջը՝ ներառյալ նկարները, որպես մեկ HTML նիշք. սկզբնական ձևավորումը չի պահպանվելու",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Էջանշել",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Կտրել ընտրված մասը",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Պահպանել ընտրված մասը՝ ներառյալ նկարները, որպես մեկ HTML նիշք",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "Ներբեռնել նիշքը",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "Ներբեռնել նիշքը դրա սեփական ձևաչափով",
+        "description": "Title of the download button"
+    },
     "desktopTagSpacesLabel": {
         "message": "Կազմակերպել հավաքված նյութերը TagSpaces ծրագրով, որն ազատ կարելի է ձեռք բերել այստեղից՝ ",
         "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     }
 }

@@ -1,86 +1,86 @@
 {
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
+    "appLauncher": {
+        "message": "Запустить TagSpaces",
+        "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
         "message": "Собирайте и организуйте веб-контент в виде простых файлов.",
         "description": "Description of the extension"
     },
-    "appLauncher": {
-        "message": "Запустить TagSpaces",
-        "description": "Title of the application launcher in the browser."
-    },
-    "appLauncherLabel": {
-        "message": "Получить содержимое страницы",
-        "description": "Title of label."
+    "addTagHelp": {
+        "message": "Несколько тегов должны быть разделены запятой. Метки должны иметь минимальную длину 2 символа и не должны содержать специальных символов, таких как пробелы, #, / или \\.",
+        "description": "Add tag help message"
     },
     "editTitleLabel": {
         "message": "Изменить заголовок файла",
+        "description": "Title of label."
+    },
+    "appLauncherLabel": {
+        "message": "Получить содержимое страницы",
         "description": "Title of label."
     },
     "addTagLabel": {
         "message": "Добавить теги",
         "description": "Title of label."
     },
-    "addTagHelp": {
-        "message": "Несколько тегов должны быть разделены запятой. Метки должны иметь минимальную длину 2 символа и не должны содержать специальных символов, таких как пробелы, #, / или \\.",
-        "description": "Add tag help message"
-    },
     "saveFileLabel": {
         "message": "Выберите действие сохранения",
-        "description": "SAving action label."
-    },
-    "saveAsMhtmlTitle": {
-        "message": "Сохраните полную страницу, включая изображения, как один файл MHTML, сохранив оригинальный дизайн",
-        "description": "Title of the save as MHTML button"
-    },
-    "saveAsMhtmlLabel": {
-        "message": "Сохранить полную страницу",
-        "description": "Label of the save as MHTML button"
-    },
-    "saveSelectionAsHtmlTitle": {
-        "message": "Сохранить выбранный контент, включая изображения, в виде одного файла HTML",
-        "description": "Title of save selection button"
-    },
-    "saveAsSelectionLabel": {
-        "message": "Выбор клипа",
-        "description": "Label of save selection button"
-    },
-    "saveScreenshotTitle": {
-        "message": "Сделайте скриншот видимой области страницы в виде файла PNG. Измените размер окна браузера, чтобы выделить точную область для скриншота.",
-        "description": "Title of the take screenshot button"
+        "description": "Saving action label."
     },
     "saveScreenshotLabel": {
         "message": "Сделать скриншот",
         "description": "Label of the take screenshot button"
     },
-    "saveBookmarkTitle": {
-        "message": "Сохранить закладку текущей страницы в виде файла URL, совместимого с Windows® и Mac OS®",
-        "description": "Title of bookmark button"
+    "saveScreenshotTitle": {
+        "message": "Сделайте скриншот видимой области страницы в виде файла PNG. Измените размер окна браузера, чтобы выделить точную область для скриншота.",
+        "description": "Title of the take screenshot button"
     },
-    "saveBookmarkLabel": {
-        "message": "Создать закладку",
-        "description": "Lable of bookmark button"
+    "saveAsMhtmlLabel": {
+        "message": "Сохранить полную страницу",
+        "description": "Label of the save as MHTML button"
     },
-    "savePageAsHtmlTitle": {
-        "message": "Сохраните полную страницу, включая изображения, как один файл HTML, оригинальный дизайн не будет сохранен",
-        "description": "Title of the save as html button"
-    },
-    "downloadTitle": {
-        "message": "Скачать файл в оригинальном формате",
-        "description": "Title of the download button"
-    },
-    "downloadLabel": {
-        "message": "Скачать файл",
-        "description": "Label of the download button"
+    "saveAsMhtmlTitle": {
+        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
         "message": "Сохранить редактируемую страницу",
         "description": "Label of the save as html button"
     },
+    "savePageAsHtmlTitle": {
+        "message": "Сохраните полную страницу, включая изображения, как один файл HTML, оригинальный дизайн не будет сохранен",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "Создать закладку",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "Выбор клипа",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "Сохранить выбранный контент, включая изображения, в виде одного файла HTML",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "Скачать файл",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "Скачать файл в оригинальном формате",
+        "description": "Title of the download button"
+    },
     "desktopTagSpacesLabel": {
         "message": "Организуйте собранный контент с настольным приложением TagSpaces. Это свободно доступно на",
         "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     }
 }

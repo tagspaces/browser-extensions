@@ -1,27 +1,7 @@
 {
-    "desktopTagSpacesLabel": {
-        "message": "TagSpacesのデスクトップアプリで収集したコンテンツを整理します。自由に利用できます。",
-        "description": "Reference to TagSpaces Desktop label"
-    },
-    "saveAsSelectionLabel": {
-        "message": "選択を保存",
-        "description": "Label of save selection button"
-    },
-    "downloadTitle": {
-        "message": "オリジナルのファイルフォーマットでファイルをダウンロードします。",
-        "description": "Title of the download button"
-    },
-    "savePageAsHtmlTitle": {
-        "message": "1つのHTMLファイルとして画像を含む全ページを保存します。元のデザインは、維持されないでしょう。",
-        "description": "Title of the save as html button"
-    },
     "appLauncher": {
         "message": "TagSpacesを起動",
         "description": "Title of the application launcher in the browser."
-    },
-    "saveBookmarkTitle": {
-        "message": "Windows®とMac OS®と互換性のあるURLファイルとして現在のページのブックマークを保存します。",
-        "description": "Title of bookmark button"
     },
     "appDesc": {
         "message": "ウェブコンテンツをプレーンファイルで収集整理します。",
@@ -31,56 +11,76 @@
         "message": "複数のタグは、コンマで区切る必要があります。タグは、2文字以上必要であり、スペース、#、/、\\などの特殊文字を使用できません。",
         "description": "Add tag help message"
     },
-    "saveScreenshotTitle": {
-        "message": "PNGファイルとして表示しているページ範囲のスクリーンショットを撮影します。ブラウザウィンドウのサイズを変更して、スクリーンショットの正確な範囲にフォーカスを合わせます。",
-        "description": "Title of the take screenshot button"
-    },
     "editTitleLabel": {
         "message": "ファイルのタイトルを編集",
         "description": "Title of label."
-    },
-    "appName": {
-        "message": "TagSpaces Web Clipper",
-        "description": "The name of the extension"
-    },
-    "downloadLabel": {
-        "message": "ファイルのダウンロード",
-        "description": "Label of the download button"
-    },
-    "saveBookmarkLabel": {
-        "message": "ブックマークの作成",
-        "description": "Lable of bookmark button"
-    },
-    "savePageAsHtmlLabel": {
-        "message": "編集可能ページの保存",
-        "description": "Label of the save as html button"
     },
     "appLauncherLabel": {
         "message": "ウェブコンテンツのキャプチャ",
         "description": "Title of label."
     },
-    "saveScreenshotLabel": {
-        "message": "スクリーンショットの撮影",
-        "description": "Label of the take screenshot button"
-    },
     "addTagLabel": {
         "message": "タグの追加",
         "description": "Title of label."
     },
-    "saveAsMhtmlTitle": {
-        "message": "1つのMHTMLファイルとして画像を含む全ページを元のデザインを維持したまま保存します。",
-        "description": "Title of the save as MHTML button"
+    "saveFileLabel": {
+        "message": "保存方法の選択",
+        "description": "Saving action label."
     },
-    "saveSelectionAsHtmlTitle": {
-        "message": "1つのHTMLファイルとして画像を含む選択されたコンテンツをセーブします。",
-        "description": "Title of save selection button"
+    "saveScreenshotLabel": {
+        "message": "スクリーンショットの撮影",
+        "description": "Label of the take screenshot button"
+    },
+    "saveScreenshotTitle": {
+        "message": "PNGファイルとして表示しているページ範囲のスクリーンショットを撮影します。ブラウザウィンドウのサイズを変更して、スクリーンショットの正確な範囲にフォーカスを合わせます。",
+        "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
         "message": "ページ全体の保存",
         "description": "Label of the save as MHTML button"
     },
-    "saveFileLabel": {
-        "message": "保存方法の選択",
-        "description": "SAving action label."
+    "saveAsMhtmlTitle": {
+        "message": "画像を含む完全なページをFirefoxではPDFとして、他のすべてのブラウザではMHTMLとして保存します。",
+        "description": "Title of the save as MHTML button"
+    },
+    "savePageAsHtmlLabel": {
+        "message": "編集可能ページの保存",
+        "description": "Label of the save as html button"
+    },
+    "savePageAsHtmlTitle": {
+        "message": "1つのHTMLファイルとして画像を含む全ページを保存します。元のデザインは、維持されないでしょう。",
+        "description": "Title of the save as html button"
+    },
+    "saveBookmarkLabel": {
+        "message": "ブックマークの作成",
+        "description": "Lable of bookmark button"
+    },
+    "saveBookmarkTitle": {
+        "message": "現在のページのブックマークをWindows®およびMac OS®と互換性があるURLファイルとして保存します。",
+        "description": "Title of bookmark button"
+    },
+    "saveAsSelectionLabel": {
+        "message": "選択を保存",
+        "description": "Label of save selection button"
+    },
+    "saveSelectionAsHtmlTitle": {
+        "message": "1つのHTMLファイルとして画像を含む選択されたコンテンツをセーブします。",
+        "description": "Title of save selection button"
+    },
+    "downloadLabel": {
+        "message": "ファイルのダウンロード",
+        "description": "Label of the download button"
+    },
+    "downloadTitle": {
+        "message": "オリジナルのファイルフォーマットでファイルをダウンロードします。",
+        "description": "Title of the download button"
+    },
+    "desktopTagSpacesLabel": {
+        "message": "TagSpacesのデスクトップアプリで収集したコンテンツを整理します。自由に利用できます。",
+        "description": "Reference to TagSpaces Desktop label"
+    },
+    "appName": {
+        "message": "TagSpaces Web Clipper",
+        "description": "The name of the extension"
     }
 }
