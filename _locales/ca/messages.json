@@ -4,79 +4,79 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Recopileu i organitzeu contingut web en fitxers simples.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Diverses etiquetes s'han de separar amb comes. Les etiquetes han de tenir una longitud mínima de 2 caràcters i no han de contenir caràcters especials com espais, #, / o \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Edita el títol del fitxer",
         "description": "Title of label."
     },
     "appLauncherLabel": {
-        "message": "Capture Web Content",
+        "message": "Captura contingut web",
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Afegir etiquetes",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Trieu l'acció de desament",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "Fer captura de pantalla",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Feu una captura de pantalla de l'àrea visible de la pàgina com a fitxer PNG. Canvieu la mida de la finestra del navegador per centrar-vos en l'àrea exacta per a la captura.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Desa la pàgina completa",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Desa la pàgina completa incloent imatges com a PDF a Firefox o MHTML a tots els altres navegadors",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Desa la pàgina editable",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Desa la pàgina completa incloent imatges com un fitxer HTML, el disseny original no es conservarà",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Crea un marcador",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Desa un marcador de la pàgina actual com a fitxer URL, compatible amb Windows® i Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Retalla la selecció",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Desa el contingut seleccionat incloent imatges com un fitxer HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Descarrega el fitxer",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Descarrega el fitxer en el seu format original",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Organitzeu el contingut recopilat amb l'aplicació d'escriptori TagSpaces. Està disponible gratuïtament a ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

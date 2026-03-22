@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Сохранить полную страницу, включая изображения, как PDF в Firefox или MHTML во всех других браузерах",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -56,7 +56,7 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Сохранить закладку текущей страницы как файл URL, совместимый с Windows® и Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {

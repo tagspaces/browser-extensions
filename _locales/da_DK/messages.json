@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Indsaml og organiser webindhold i enkle filer.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Flere tags skal adskilles med komma. Tags skal have en minimumslængde på 2 tegn og må ikke indeholde specialtegn som mellemrum, #, / eller \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Rediger filtitel",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Tilføj tags",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Vælg gemmehandling",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "Tag skærmbillede",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Tag et skærmbillede af den synlige sideområde som en PNG-fil. Tilpas browservinduets størrelse for at fokusere det nøjagtige område til skærmbilledet.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Gem komplet side",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Gem komplet side inkl. billeder som PDF i Firefox eller MHTML i alle andre browsere",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Gem redigerbar side",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Gem komplet side inkl. billeder som én HTML-fil, det originale design bevares ikke",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Opret bogmærke",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Gem et bogmærke til den aktuelle side som URL-fil, kompatibel med Windows® og Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Klip markering",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Gem markeret indhold inkl. billeder som én HTML-fil",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Download fil",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Download filen i dens originale filformat",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Organiser det indsamlede indhold med TagSpaces desktopapp. Det er frit tilgængeligt på ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

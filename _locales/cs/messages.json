@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Sbírejte a organizujte webový obsah v jednoduchých souborech.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Více štítků by mělo být odděleno čárkou. Štítky by měly mít minimální délku 2 znaky a neměly by obsahovat speciální znaky jako mezery, #, / nebo \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Upravit název souboru",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Přidat štítky",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Vyberte akci uložení",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "Pořídit snímek obrazovky",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Pořiďte snímek obrazovky viditelné oblasti stránky jako soubor PNG. Změňte velikost okna prohlížeče, abyste zaměřili přesnou oblast pro snímek.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Uložit celou stránku",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Uložit celou stránku včetně obrázků jako PDF ve Firefoxu nebo MHTML ve všech ostatních prohlížečích",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Uložit upravitelnou stránku",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Uložit celou stránku včetně obrázků jako jeden soubor HTML, původní design nebude zachován",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Vytvořit záložku",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Uložit záložku aktuální stránky jako soubor URL, kompatibilní s Windows® a Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Vystřihnout výběr",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Uložit vybraný obsah včetně obrázků jako jeden soubor HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Stáhnout soubor",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Stáhnout soubor v původním formátu",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Organizujte shromážděný obsah pomocí desktopové aplikace TagSpaces. Je zdarma dostupná na ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

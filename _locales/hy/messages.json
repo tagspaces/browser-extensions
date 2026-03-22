@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Պահպանել ամբողջ էջը՝ ներառյալ նկարները, որպես PDF Firefox-ում կամ MHTML բոլոր մյուս դիտարկիչներում",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -56,7 +56,7 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Պահպանել ընթացիկ էջի նշագիծը որպես URL-նիշք, համատեղելի Windows®-ի և Mac OS®-ի հետ",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {

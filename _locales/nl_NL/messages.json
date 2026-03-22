@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Verzamel en organiseer webinhoud in eenvoudige bestanden.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Meerdere tags moeten worden gescheiden door een komma. Tags moeten een minimumlengte van 2 tekens hebben en mogen geen speciale tekens bevatten zoals spaties, #, / of \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Bestandstitel bewerken",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Tags toevoegen",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Kies de opslagactie",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "Schermafbeelding maken",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Maak een schermafbeelding van het zichtbare paginagebied als PNG-bestand. Verklein het browservenster om het exacte gebied voor de schermafbeelding te focussen.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Volledige pagina opslaan",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Sla de volledige pagina inclusief afbeeldingen op als PDF in Firefox of MHTML in alle andere browsers",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Bewerkbare pagina opslaan",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Sla de volledige pagina inclusief afbeeldingen op als één HTML-bestand, het originele ontwerp wordt niet bewaard",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Bladwijzer aanmaken",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Sla een bladwijzer van de huidige pagina op als URL-bestand, compatibel met Windows® en Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Selectie knippen",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Sla de geselecteerde inhoud inclusief afbeeldingen op als één HTML-bestand",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Bestand downloaden",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Download het bestand in zijn originele bestandsindeling",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Organiseer de verzamelde inhoud met de TagSpaces-desktopapp. Het is gratis beschikbaar op ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

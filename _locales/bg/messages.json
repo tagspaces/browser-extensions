@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Събирайте и организирайте уеб съдържание в обикновени файлове.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Етикетите трябва да бъдат разделени със запетая. Етикетите трябва да имат минимална дължина от 2 знака и не трябва да съдържат специални символи като интервали, #, / или \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Редактиране на заглавието на файла",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -24,7 +24,7 @@
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Изберете действие за запазване",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
@@ -32,7 +32,7 @@
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Направете снимка на видимата част от страницата като PNG файл. Преоразмерете прозореца на браузъра, за да фокусирате точната зона за снимката.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Запазете цялата страница с изображенията като PDF в Firefox или MHTML в другите браузъри",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -48,15 +48,15 @@
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Запазете цялата страница с изображенията като един HTML файл, оригиналният дизайн няма да бъде запазен",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Създайте отметка",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Запазете отметка на текущата страница като URL файл, съвместим с Windows® и Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
@@ -64,7 +64,7 @@
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Запазете избраното съдържание с изображенията като един HTML файл",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
@@ -72,11 +72,11 @@
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Изтеглете файла в оригиналния му формат",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Организирайте събраното съдържание с настолното приложение TagSpaces. Изтегли безплатно на ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

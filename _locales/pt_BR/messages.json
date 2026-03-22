@@ -8,7 +8,7 @@
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Várias etiquetas devem ser separadas por vírgula. As etiquetas devem ter um comprimento mínimo de 2 caracteres e não devem conter caracteres especiais como espaços, #, / ou \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
@@ -24,7 +24,7 @@
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Escolha a ação de guardar",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
@@ -32,7 +32,7 @@
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Faça uma captura de tela da área visível da página como arquivo PNG. Redimensione a janela do navegador para focar a área exata para a captura.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Guardar a página completa incluindo imagens como PDF no Firefox ou MHTML em todos os outros navegadores",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -48,7 +48,7 @@
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Guardar a página completa incluindo imagens como um arquivo HTML, o design original não será preservado",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
@@ -56,15 +56,15 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Guardar um marcador da página atual como arquivo URL, compatível com Windows® e Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Recortar seleção",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Guardar o conteúdo selecionado incluindo imagens como um arquivo HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
@@ -76,7 +76,7 @@
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Organize o conteúdo recolhido com a aplicação TagSpaces para desktop. Está disponível gratuitamente em ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

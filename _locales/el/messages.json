@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Συλλέξτε και οργανώστε περιεχόμενο ιστού σε απλά αρχεία.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Πολλές ετικέτες πρέπει να χωρίζονται με κόμμα. Οι ετικέτες πρέπει να έχουν ελάχιστο μήκος 2 χαρακτήρων και δεν πρέπει να περιέχουν ειδικούς χαρακτήρες όπως κενά, #, / ή \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Επεξεργασία τίτλου αρχείου",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Προσθήκη ετικετών",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Επιλέξτε την ενέργεια αποθήκευσης",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Λήψη Στιγμιότυπου ",
+        "message": "Λήψη Στιγμιότυπου",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Τραβήξτε ένα στιγμιότυπο οθόνης της ορατής περιοχής σελίδας ως αρχείο PNG. Αλλάξτε το μέγεθος του παραθύρου του προγράμματος περιήγησης για να εστιάσετε στην ακριβή περιοχή για το στιγμιότυπο.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Αποθήκευση πλήρους σελίδας",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Αποθήκευση πλήρους σελίδας συμπεριλαμβανομένων εικόνων ως PDF στο Firefox ή MHTML σε όλα τα άλλα προγράμματα περιήγησης",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Αποθήκευση επεξεργάσιμης σελίδας",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Αποθήκευση πλήρους σελίδας συμπεριλαμβανομένων εικόνων ως ένα αρχείο HTML, ο αρχικός σχεδιασμός δεν θα διατηρηθεί",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Δημιουργία σελιδοδείκτη",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Αποθηκεύστε έναν σελιδοδείκτη της τρέχουσας σελίδας ως αρχείο URL, συμβατό με Windows® και Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Αποκοπή επιλογής",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Αποθήκευση επιλεγμένου περιεχομένου συμπεριλαμβανομένων εικόνων ως ένα αρχείο HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Λήψη αρχείου",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Λήψη αρχείου στην αρχική μορφή του",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Οργανώστε το συλλεχθέν περιεχόμενο με την εφαρμογή επιφάνειας εργασίας TagSpaces. Είναι διαθέσιμη δωρεάν στο ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

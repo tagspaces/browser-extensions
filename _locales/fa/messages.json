@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "محتوای وب را در فایل‌های ساده جمع‌آوری و سازماندهی کنید.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "چندین برچسب باید با کاما از هم جدا شوند. برچسب‌ها باید حداقل ۲ کاراکتر داشته باشند و نباید شامل کاراکترهای خاص مانند فاصله، #، / یا \\ باشند.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "ویرایش عنوان فایل",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "افزودن برچسب‌ها",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "انتخاب عملیات ذخیره‌سازی",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "گرفتن تصویر صفحه",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "از ناحیه قابل مشاهده صفحه به عنوان فایل PNG تصویر بگیرید. برای تمرکز بر ناحیه دقیق، اندازه پنجره مرورگر را تغییر دهید.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "ذخیره صفحه کامل",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "ذخیره صفحه کامل شامل تصاویر به عنوان PDF در فایرفاکس یا MHTML در سایر مرورگرها",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "ذخیره صفحه قابل ویرایش",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "ذخیره صفحه کامل شامل تصاویر به عنوان یک فایل HTML، طراحی اصلی حفظ نخواهد شد",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "ایجاد نشانک",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "ذخیره نشانک صفحه جاری به عنوان فایل URL، سازگار با Windows® و Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "برش انتخاب",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "ذخیره محتوای انتخابی شامل تصاویر به عنوان یک فایل HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "دانلود فایل",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "دانلود فایل در فرمت اصلی آن",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "محتوای جمع‌آوری‌شده را با برنامه دسکتاپ TagSpaces سازماندهی کنید. به صورت رایگان در دسترس است در ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {

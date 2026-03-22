@@ -4,11 +4,11 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "使用纯文本收集和组织网页内容",
+        "message": "使用純文字收集和組織網頁內容",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "多个标签应以逗号分隔。标签长度至少应为 2 个字符，且不应包含空格、#、/ 或 \\ 等特殊字符。",
+        "message": "多個標籤使用逗號分隔。標籤應該有2個字元的最小長度，不應該包含特殊字元。例：空格、＃、 /、\\等。",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
@@ -32,7 +32,7 @@
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "将可见页面区域的屏幕截图保存为 PNG 文件。调整浏览器窗口大小，以便将焦点集中在屏幕截图的准确区域。",
+        "message": "將可見頁面區域的螢幕截圖儲存為 PNG 檔案。調整瀏覽器視窗大小，以便將焦點集中在截圖的精確區域。",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
@@ -40,7 +40,7 @@
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "在 Firefox 上将包含图片的完整页面保存为 PDF，在所有其他浏览器上将包含图片的完整页面保存为 MHTML",
+        "message": "在 Firefox 中將包含圖片的完整頁面儲存為 PDF，在所有其他瀏覽器中儲存為 MHTML",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -48,7 +48,7 @@
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "将包含图像的完整页面保存为一个 HTML 文件，原始设计将不会保留",
+        "message": "將包含圖像的完整頁面儲存為一個 HTML 檔案，原始設計將不會保留",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
@@ -56,7 +56,7 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "将当前页面的书签保存为 URL 文件，兼容 Windows® 和 Mac OS®",
+        "message": "將當前頁面的書籤儲存為 URL 檔案，與 Windows® 和 Mac OS® 相容",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
@@ -64,7 +64,7 @@
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "将选定的内容（包括图像）保存为一个 HTML 文件",
+        "message": "將選定的內容（包括圖像）儲存為一個 HTML 檔案",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
@@ -76,11 +76,11 @@
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "在 TagSpaces 桌面应用中组织所选内容",
+        "message": "使用 TagSpaces 桌面應用程式整理收集的內容。它可免費取得，請前往 ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {
-        "message": "TagSpaces 网页剪辑器",
+        "message": "TagSpaces 網頁擷取工具",
         "description": "The name of the extension"
     }
 }

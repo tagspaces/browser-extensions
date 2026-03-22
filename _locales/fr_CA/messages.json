@@ -60,7 +60,7 @@
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Selection Clip",
+        "message": "Extraire la sélection",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {

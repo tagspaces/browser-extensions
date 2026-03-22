@@ -4,15 +4,15 @@
         "description": "Title of the application launcher in the browser."
     },
     "appDesc": {
-        "message": "Collect and organize web content in plain files.",
+        "message": "Thu thập và tổ chức nội dung web trong các tệp đơn giản.",
         "description": "Description of the extension"
     },
     "addTagHelp": {
-        "message": "Multiple tags should be separated with comma. Tags should have a minimum length of 2 characters and should not contain special characters such as spaces, #, / or \\.",
+        "message": "Nhiều thẻ phải được phân tách bằng dấu phẩy. Thẻ phải có độ dài tối thiểu 2 ký tự và không được chứa các ký tự đặc biệt như khoảng trắng, #, / hoặc \\.",
         "description": "Add tag help message"
     },
     "editTitleLabel": {
-        "message": "Edit file title",
+        "message": "Chỉnh sửa tiêu đề tệp",
         "description": "Title of label."
     },
     "appLauncherLabel": {
@@ -20,63 +20,63 @@
         "description": "Title of label."
     },
     "addTagLabel": {
-        "message": "Add tags",
+        "message": "Thêm thẻ",
         "description": "Title of label."
     },
     "saveFileLabel": {
-        "message": "Choose the saving action",
+        "message": "Chọn hành động lưu",
         "description": "Saving action label."
     },
     "saveScreenshotLabel": {
-        "message": "Take Screenshot",
+        "message": "Chụp màn hình",
         "description": "Label of the take screenshot button"
     },
     "saveScreenshotTitle": {
-        "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
+        "message": "Chụp màn hình khu vực trang hiển thị dưới dạng tệp PNG. Thay đổi kích thước cửa sổ trình duyệt để tập trung vào khu vực chính xác cho ảnh chụp màn hình.",
         "description": "Title of the take screenshot button"
     },
     "saveAsMhtmlLabel": {
-        "message": "Save complete page",
+        "message": "Lưu trang hoàn chỉnh",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Lưu trang hoàn chỉnh bao gồm hình ảnh dưới dạng PDF trong Firefox hoặc MHTML trong tất cả các trình duyệt khác",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
-        "message": "Save editable page",
+        "message": "Lưu trang có thể chỉnh sửa",
         "description": "Label of the save as html button"
     },
     "savePageAsHtmlTitle": {
-        "message": "Save complete page including images as one HTML file, the original design will not be preserved",
+        "message": "Lưu trang hoàn chỉnh bao gồm hình ảnh dưới dạng một tệp HTML, thiết kế ban đầu sẽ không được giữ nguyên",
         "description": "Title of the save as html button"
     },
     "saveBookmarkLabel": {
-        "message": "Create Bookmark",
+        "message": "Tạo Dấu trang",
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Lưu dấu trang của trang hiện tại dưới dạng tệp URL, tương thích với Windows® và Mac OS®",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
-        "message": "Clip Selection",
+        "message": "Cắt vùng chọn",
         "description": "Label of save selection button"
     },
     "saveSelectionAsHtmlTitle": {
-        "message": "Save selected content including images as one HTML file",
+        "message": "Lưu nội dung đã chọn bao gồm hình ảnh dưới dạng một tệp HTML",
         "description": "Title of save selection button"
     },
     "downloadLabel": {
-        "message": "Download File",
+        "message": "Tải tệp xuống",
         "description": "Label of the download button"
     },
     "downloadTitle": {
-        "message": "Download the file in its original file format",
+        "message": "Tải tệp xuống ở định dạng tệp gốc của nó",
         "description": "Title of the download button"
     },
     "desktopTagSpacesLabel": {
-        "message": "Organize the collected content with the TagSpaces desktop app. It is freely available on ",
+        "message": "Sắp xếp nội dung đã thu thập bằng ứng dụng máy tính TagSpaces. Có thể tải xuống miễn phí tại ",
         "description": "Reference to TagSpaces Desktop label"
     },
     "appName": {
