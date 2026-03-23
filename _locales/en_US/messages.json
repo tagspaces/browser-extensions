@@ -35,6 +35,14 @@
         "message": "Take a screenshot of the visible page area as a PNG file. Resize the browser window in order to focus the exact area for the screenshot.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Full-Page Screenshot",
+        "description": "Label of the take full-page screenshot button"
+    },    
+    "saveFullScreenshotTitle": {
+        "message": "Take a screenshot of the whole page as a PNG file. ",
+        "description": "Title of the full screenshot button"
+    }, 
     "saveAsMhtmlLabel": {
         "message": "Save complete page",
         "description": "Label of the save as MHTML button"
