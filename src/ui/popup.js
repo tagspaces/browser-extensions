@@ -31,10 +31,20 @@ import TurndownService from "turndown";
 let browserAPI = null;
 if (typeof browser !== "undefined") {
   browserAPI = browser;
-  // Permission needed in Firefox for captureVisibleTabs
-  browser.permissions.request({ origins: ["<all_urls>"] });
 } else if (typeof chrome !== "undefined") {
   browserAPI = chrome;
+}
+
+const _ua = navigator.userAgent.toLowerCase();
+const isFirefoxUA = _ua.indexOf("firefox") > -1;
+const isSafari =
+  _ua.indexOf("safari") > -1 &&
+  _ua.indexOf("chrome") === -1 &&
+  _ua.indexOf("edg") === -1;
+
+// Firefox needs permission to capture visible tabs across origins
+if (isFirefoxUA && typeof browser !== "undefined") {
+  browser.permissions.request({ origins: ["<all_urls>"] });
 }
 
 let userSettings = {};
@@ -109,6 +119,11 @@ async function init() {
   );
 
   titleEl.focus();
+  if (isSafari) {
+    // pageCapture (MHTML) and downloads API are not supported in Safari
+    document.getElementById("saveAsMhtml").style.display = "none";
+    document.getElementById("downloadFile").style.display = "none";
+  }
   document
     .getElementById("saveAsMhtml")
     .addEventListener("click", isFirefox ? savePDF : saveAsMHTML);
@@ -205,16 +220,61 @@ async function init() {
   }
 }
 
+// Show a native Save As dialog using the File System Access API (Safari 15.2+).
+// Must be called as the FIRST await in a user-gesture handler to preserve transient activation.
+// Returns a FileSystemFileHandle, 'cancelled' if the user dismissed, or null if unsupported/failed.
+async function showSaveDialog(filename) {
+  if (!/** @type {any} */ (window).showSaveFilePicker) return null;
+  const ext = filename.split(".").pop().toLowerCase();
+  const mimeMap = {
+    html: "text/html",
+    md: "text/markdown",
+    url: "text/plain",
+    png: "image/png",
+    pdf: "application/pdf",
+  };
+  try {
+    return await /** @type {any} */ (window).showSaveFilePicker({
+      suggestedName: filename,
+      types: [
+        {
+          accept: {
+            [mimeMap[ext] || "application/octet-stream"]: ["." + ext],
+          },
+        },
+      ],
+    });
+  } catch (e) {
+    if (e.name === "AbortError") return "cancelled";
+    console.warn("showSaveFilePicker failed:", e);
+    return null;
+  }
+}
+
+async function writeFileHandle(handle, blob) {
+  const writable = await handle.createWritable();
+  await writable.write(blob);
+  await writable.close();
+}
+
 function saveAsFile(blob, filename) {
-  // if (isFirefox) {
-  saveAs(blob, filename);
-  // } else {
-  //   browser.downloads.download({
-  //     url: URL.createObjectURL(blob),
-  //     filename: filename,
-  //     saveAs: true,
-  //   });
-  // }
+  if (isSafari) {
+    // Best-effort fallback when showSaveFilePicker is unavailable.
+    // Convert blob to a data URL since blob:safari-web-extension:// URLs cannot be navigated.
+    const reader = new FileReader();
+    reader.onload = () => {
+      const a = document.createElement("a");
+      a.href = reader.result;
+      a.download = filename;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+    reader.readAsDataURL(blob);
+  } else {
+    saveAs(blob, filename);
+  }
 }
 
 function noPreview() {
@@ -309,97 +369,117 @@ function downloadFile() {
 async function savePageContent() {
   const saveAsHTMLSpinner = document.querySelector("#saveAsHTMLSpinner");
   saveAsHTMLSpinner.classList.remove("d-none");
-  if (contentMode === "markdown") {
-    const mdContent = document
-      .getElementById("preview")
-      ?.contentDocument?.getElementById("mdcontent")?.innerText;
-    try {
+  const isMarkdown = contentMode === "markdown";
+  const ext = isMarkdown ? "md" : "html";
+  const fileName = generateFileName(ext);
+
+  // showSaveFilePicker must be the first await to preserve the user gesture
+  let fileHandle = null;
+  if (isSafari) {
+    fileHandle = await showSaveDialog(fileName);
+    if (fileHandle === "cancelled") {
+      saveAsHTMLSpinner.classList.add("d-none");
+      return;
+    }
+  }
+
+  try {
+    let targetBlob;
+    if (isMarkdown) {
+      const mdContent = document
+        .getElementById("preview")
+        ?.contentDocument?.getElementById("mdcontent")?.innerText;
       const targetContent = await prepareMarkdownContentPromise(mdContent);
-      const targetBlob = new Blob([targetContent], {
-        type: "text/html;charset=utf-8",
-      });
-      saveAsFile(targetBlob, generateFileName("md"));
-    } catch (err) {
-      console.warn("Error handling html content", err);
-      alert("Error by preparing the MD content...");
-      location.reload();
-    } finally {
-      saveAsHTMLSpinner.classList.add("d-none");
-    }
-  } else {
-    const htmlContent =
-      document.getElementById("preview")?.contentDocument?.documentElement
-        ?.innerHTML;
-    try {
+      targetBlob = new Blob([targetContent], { type: "text/html;charset=utf-8" });
+    } else {
+      const htmlContent =
+        document.getElementById("preview")?.contentDocument?.documentElement
+          ?.innerHTML;
       const targetContent = await prepareContentPromise(htmlContent);
-      const targetBlob = new Blob([targetContent], {
-        type: "text/html;charset=utf-8",
-      });
-      saveAsFile(targetBlob, generateFileName("html"));
-    } catch (err) {
-      console.warn("Error handling html content", err);
-      alert("Error by preparing the HTML content...");
-      location.reload();
-    } finally {
-      saveAsHTMLSpinner.classList.add("d-none");
+      targetBlob = new Blob([targetContent], { type: "text/html;charset=utf-8" });
     }
+    if (fileHandle) {
+      await writeFileHandle(fileHandle, targetBlob);
+    } else {
+      saveAsFile(targetBlob, fileName);
+    }
+  } catch (err) {
+    console.warn("Error handling content", err);
+    alert(`Error by preparing the ${ext.toUpperCase()} content...`);
+    location.reload();
+  } finally {
+    saveAsHTMLSpinner.classList.add("d-none");
   }
 }
 
-function saveScreenshot() {
+async function saveScreenshot() {
   const saveScreenshotSpinner = document.querySelector(
     "#saveScreenshotSpinner",
   );
   saveScreenshotSpinner.classList.remove("d-none");
   const fileName = generateFileName("png", "screenshot");
-  const captureFull = true; // !isFirefox
-  browserAPI.tabs
-    .captureVisibleTab(undefined, {
-      format: "png",
-    })
-    .then(
-      (imageUrl) => {
-        dataURItoBlobAsync(imageUrl).then((blob) => {
-          saveAsFile(blob, fileName);
-        });
-        saveScreenshotSpinner.classList.add("d-none");
-      },
-      (err) => {
-        saveScreenshotSpinner.classList.add("d-none");
-        console.warn("Error taking screenshot " + JSON.stringify(err));
-        alert("Saving screenshot failed");
-      },
-    );
+
+  // showSaveFilePicker must be the first await to preserve the user gesture
+  let fileHandle = null;
+  if (isSafari) {
+    fileHandle = await showSaveDialog(fileName);
+    if (fileHandle === "cancelled") {
+      saveScreenshotSpinner.classList.add("d-none");
+      return;
+    }
+  }
+
+  try {
+    const imageUrl = await browserAPI.tabs.captureVisibleTab(undefined, { format: "png" });
+    const blob = await dataURItoBlobAsync(imageUrl);
+    if (fileHandle) {
+      await writeFileHandle(fileHandle, blob);
+    } else {
+      saveAsFile(blob, fileName);
+    }
+  } catch (err) {
+    console.warn("Error taking screenshot " + JSON.stringify(err));
+    alert("Saving screenshot failed");
+  } finally {
+    saveScreenshotSpinner.classList.add("d-none");
+  }
 }
 
-function saveFullScreenshot() {
+async function saveFullScreenshot() {
   const saveFullScreenshotSpinner = document.querySelector(
     "#saveFullScreenshotSpinner",
   );
   saveFullScreenshotSpinner.classList.remove("d-none");
   const fileName = generateFileName("png", "screenshot");
-  captureFullPage(currentTabID).then(
-    (blob) => {
+
+  // showSaveFilePicker must be the first await to preserve the user gesture
+  let fileHandle = null;
+  if (isSafari) {
+    fileHandle = await showSaveDialog(fileName);
+    if (fileHandle === "cancelled") {
+      saveFullScreenshotSpinner.classList.add("d-none");
+      return;
+    }
+  }
+
+  try {
+    const blob = await captureFullPage(currentTabID);
+    if (fileHandle) {
+      await writeFileHandle(fileHandle, blob);
+    } else if (isFirefox) {
       const url = URL.createObjectURL(blob);
-      saveFullScreenshotSpinner.classList.add("d-none");
-      if (isFirefox) {
-        dataURItoBlobAsync(url).then((blob) => {
-          saveAsFile(blob, fileName);
-        });
-      } else {
-        browserAPI.downloads.download({
-          url,
-          filename: fileName,
-          saveAs: true,
-        });
-      }
-    },
-    (err) => {
-      saveFullScreenshotSpinner.classList.add("d-none");
-      console.warn("Error taking screenshot " + JSON.stringify(err));
-      alert("Saving screenshot failed");
-    },
-  );
+      const b = await dataURItoBlobAsync(url);
+      saveAsFile(b, fileName);
+    } else {
+      const url = URL.createObjectURL(blob);
+      browserAPI.downloads.download({ url, filename: fileName, saveAs: true });
+    }
+  } catch (err) {
+    console.warn("Error taking screenshot " + JSON.stringify(err));
+    alert("Saving screenshot failed");
+  } finally {
+    saveFullScreenshotSpinner.classList.add("d-none");
+  }
 }
 
 /* Firefox only */
@@ -439,27 +519,42 @@ async function savePDF() {
   }
 }
 
-function saveAsBookmark() {
+async function saveAsBookmark() {
   const saveBookmarkSpinner = document.querySelector("#saveBookmarkSpinner");
   saveBookmarkSpinner.classList.remove("d-none");
-  const capturing = browserAPI.tabs.captureVisibleTab(null, {
-    format: "jpeg",
-    quality: 95,
-  });
-  capturing.then((imageDataUrl) => {
-    // Make capturing optional, evtl. resize the image
+  const fileName = generateFileName("url");
+
+  // showSaveFilePicker must be the first await to preserve the user gesture
+  let fileHandle = null;
+  if (isSafari) {
+    fileHandle = await showSaveDialog(fileName);
+    if (fileHandle === "cancelled") {
+      saveBookmarkSpinner.classList.add("d-none");
+      return;
+    }
+  }
+
+  try {
+    const imageDataUrl = await browserAPI.tabs.captureVisibleTab(null, {
+      format: "jpeg",
+      quality: 95,
+    });
     const screenshot = userSettings.enableScreenshotEmbedding
       ? "COMMENT=" + imageDataUrl + "\r\n"
       : "";
     const safeUrl = currentTabURL.replace(/[\r\n]/g, "");
-    const content =
-      "[InternetShortcut]\r\nURL=" + safeUrl + "\r\n" + screenshot;
-    const textBlob = new Blob([content], {
-      type: "text/plain;charset=utf-8",
-    });
-    saveAsFile(textBlob, generateFileName("url"));
+    const content = "[InternetShortcut]\r\nURL=" + safeUrl + "\r\n" + screenshot;
+    const textBlob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    if (fileHandle) {
+      await writeFileHandle(fileHandle, textBlob);
+    } else {
+      saveAsFile(textBlob, fileName);
+    }
+  } catch (err) {
+    console.warn("Error saving bookmark", err);
+  } finally {
     saveBookmarkSpinner.classList.add("d-none");
-  });
+  }
 }
 
 function updatePreviewArea(htmlContent) {
@@ -653,6 +748,7 @@ async function prepareContentPromise(htmlContent) {
     let browserName = isChrome ? "Chrome" : "";
     browserName = isEdge ? "Edge" : browserName;
     browserName = isFirefox ? "Firefox" : browserName;
+    browserName = isSafari ? "Safari" : browserName;
 
     body.setAttribute(
       "data-createdwith",

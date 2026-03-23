@@ -1,0 +1,1055 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D437DF32F5DFBF80050EF1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DF22F5DFBF80050EF1C /* AppDelegate.swift */; };
+		0D437DF52F5DFBF80050EF1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DF42F5DFBF80050EF1C /* SceneDelegate.swift */; };
+		0D437DF82F5DFBF80050EF1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DF62F5DFBF80050EF1C /* LaunchScreen.storyboard */; };
+		0D437DFB2F5DFBF80050EF1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DF92F5DFBF80050EF1C /* Main.storyboard */; };
+		0D437E042F5DFBF80050EF1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437E032F5DFBF80050EF1C /* AppDelegate.swift */; };
+		0D437E072F5DFBF80050EF1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E052F5DFBF80050EF1C /* Main.storyboard */; };
+		0D437E0E2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0D437E0D2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0D437E182F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0D437E172F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0D437E1D2F5DFBF80050EF1C /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE22F5DFBF70050EF1C /* Main.html */; };
+		0D437E1E2F5DFBF80050EF1C /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE22F5DFBF70050EF1C /* Main.html */; };
+		0D437E1F2F5DFBF80050EF1C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE42F5DFBF70050EF1C /* Icon.png */; };
+		0D437E202F5DFBF80050EF1C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE42F5DFBF70050EF1C /* Icon.png */; };
+		0D437E212F5DFBF80050EF1C /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE52F5DFBF70050EF1C /* Style.css */; };
+		0D437E222F5DFBF80050EF1C /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE52F5DFBF70050EF1C /* Style.css */; };
+		0D437E232F5DFBF80050EF1C /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE62F5DFBF70050EF1C /* Script.js */; };
+		0D437E242F5DFBF80050EF1C /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE62F5DFBF70050EF1C /* Script.js */; };
+		0D437E252F5DFBF80050EF1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DE72F5DFBF70050EF1C /* ViewController.swift */; };
+		0D437E262F5DFBF80050EF1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DE72F5DFBF70050EF1C /* ViewController.swift */; };
+		0D437E272F5DFBF80050EF1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE82F5DFBF80050EF1C /* Assets.xcassets */; };
+		0D437E282F5DFBF80050EF1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D437DE82F5DFBF80050EF1C /* Assets.xcassets */; };
+		0D437E292F5DFBF80050EF1C /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DEA2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift */; };
+		0D437E2A2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D437DEA2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift */; };
+		0D437E4D2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3C2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt */; };
+		0D437E4E2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3D2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt */; };
+		0D437E4F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt */; };
+		0D437E502F5DFBF80050EF1C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E412F5DFBF80050EF1C /* LICENSE */; };
+		0D437E512F5DFBF80050EF1C /* images in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E422F5DFBF80050EF1C /* images */; };
+		0D437E522F5DFBF80050EF1C /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E432F5DFBF80050EF1C /* popup.html */; };
+		0D437E532F5DFBF80050EF1C /* service-worker.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E442F5DFBF80050EF1C /* service-worker.dist.js */; };
+		0D437E542F5DFBF80050EF1C /* popup.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E452F5DFBF80050EF1C /* popup.dist.js */; };
+		0D437E552F5DFBF80050EF1C /* options.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E462F5DFBF80050EF1C /* options.dist.js */; };
+		0D437E562F5DFBF80050EF1C /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E472F5DFBF80050EF1C /* manifest.json */; };
+		0D437E572F5DFBF80050EF1C /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E482F5DFBF80050EF1C /* options.html */; };
+		0D437E582F5DFBF80050EF1C /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4A2F5DFBF80050EF1C /* popup.css */; };
+		0D437E592F5DFBF80050EF1C /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4B2F5DFBF80050EF1C /* _locales */; };
+		0D437E5A2F5DFBF80050EF1C /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4C2F5DFBF80050EF1C /* vendor */; };
+		0D437E5B2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3C2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt */; };
+		0D437E5C2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3D2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt */; };
+		0D437E5D2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E3F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt */; };
+		0D437E5E2F5DFBF80050EF1C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E412F5DFBF80050EF1C /* LICENSE */; };
+		0D437E5F2F5DFBF80050EF1C /* images in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E422F5DFBF80050EF1C /* images */; };
+		0D437E602F5DFBF80050EF1C /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E432F5DFBF80050EF1C /* popup.html */; };
+		0D437E612F5DFBF80050EF1C /* service-worker.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E442F5DFBF80050EF1C /* service-worker.dist.js */; };
+		0D437E622F5DFBF80050EF1C /* popup.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E452F5DFBF80050EF1C /* popup.dist.js */; };
+		0D437E632F5DFBF80050EF1C /* options.dist.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E462F5DFBF80050EF1C /* options.dist.js */; };
+		0D437E642F5DFBF80050EF1C /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E472F5DFBF80050EF1C /* manifest.json */; };
+		0D437E652F5DFBF80050EF1C /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E482F5DFBF80050EF1C /* options.html */; };
+		0D437E662F5DFBF80050EF1C /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4A2F5DFBF80050EF1C /* popup.css */; };
+		0D437E672F5DFBF80050EF1C /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4B2F5DFBF80050EF1C /* _locales */; };
+		0D437E682F5DFBF80050EF1C /* vendor in Resources */ = {isa = PBXBuildFile; fileRef = 0D437E4C2F5DFBF80050EF1C /* vendor */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0D437E0F2F5DFBF80050EF1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D437DDC2F5DFBF70050EF1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D437E0C2F5DFBF80050EF1C;
+			remoteInfo = "TagSpaces Web Clipper Extension (iOS)";
+		};
+		0D437E192F5DFBF80050EF1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D437DDC2F5DFBF70050EF1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D437E162F5DFBF80050EF1C;
+			remoteInfo = "TagSpaces Web Clipper Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0D437E302F5DFBF80050EF1C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0D437E0E2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E372F5DFBF80050EF1C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0D437E182F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0D437DE32F5DFBF70050EF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		0D437DE42F5DFBF70050EF1C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0D437DE52F5DFBF70050EF1C /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		0D437DE62F5DFBF70050EF1C /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		0D437DE72F5DFBF70050EF1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0D437DE82F5DFBF80050EF1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0D437DEA2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		0D437DEF2F5DFBF80050EF1C /* TagSpaces Web Clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TagSpaces Web Clipper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D437DF22F5DFBF80050EF1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D437DF42F5DFBF80050EF1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		0D437DF72F5DFBF80050EF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0D437DFA2F5DFBF80050EF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0D437DFC2F5DFBF80050EF1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D437E012F5DFBF80050EF1C /* TagSpaces Web Clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TagSpaces Web Clipper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D437E032F5DFBF80050EF1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0D437E062F5DFBF80050EF1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0D437E082F5DFBF80050EF1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D437E0D2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TagSpaces Web Clipper Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D437E122F5DFBF80050EF1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D437E172F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TagSpaces Web Clipper Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D437E1C2F5DFBF80050EF1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D437E3C2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = popup.dist.js.LICENSE.txt; path = ../../../build/safari/popup.dist.js.LICENSE.txt; sourceTree = "<group>"; };
+		0D437E3D2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "service-worker.dist.js.LICENSE.txt"; path = "../../../build/safari/service-worker.dist.js.LICENSE.txt"; sourceTree = "<group>"; };
+		0D437E3E2F5DFBF80050EF1C /* service-worker.dist.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = "service-worker.dist.js.map"; path = "../../../build/safari/service-worker.dist.js.map"; sourceTree = "<group>"; };
+		0D437E3F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = options.dist.js.LICENSE.txt; path = ../../../build/safari/options.dist.js.LICENSE.txt; sourceTree = "<group>"; };
+		0D437E402F5DFBF80050EF1C /* popup.dist.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = popup.dist.js.map; path = ../../../build/safari/popup.dist.js.map; sourceTree = "<group>"; };
+		0D437E412F5DFBF80050EF1C /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../../build/safari/LICENSE; sourceTree = "<group>"; };
+		0D437E422F5DFBF80050EF1C /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../build/safari/images; sourceTree = "<group>"; };
+		0D437E432F5DFBF80050EF1C /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../build/safari/popup.html; sourceTree = "<group>"; };
+		0D437E442F5DFBF80050EF1C /* service-worker.dist.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "service-worker.dist.js"; path = "../../../build/safari/service-worker.dist.js"; sourceTree = "<group>"; };
+		0D437E452F5DFBF80050EF1C /* popup.dist.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.dist.js; path = ../../../build/safari/popup.dist.js; sourceTree = "<group>"; };
+		0D437E462F5DFBF80050EF1C /* options.dist.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = options.dist.js; path = ../../../build/safari/options.dist.js; sourceTree = "<group>"; };
+		0D437E472F5DFBF80050EF1C /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../build/safari/manifest.json; sourceTree = "<group>"; };
+		0D437E482F5DFBF80050EF1C /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../../build/safari/options.html; sourceTree = "<group>"; };
+		0D437E492F5DFBF80050EF1C /* options.dist.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = options.dist.js.map; path = ../../../build/safari/options.dist.js.map; sourceTree = "<group>"; };
+		0D437E4A2F5DFBF80050EF1C /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; name = popup.css; path = ../../../build/safari/popup.css; sourceTree = "<group>"; };
+		0D437E4B2F5DFBF80050EF1C /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = ../../../build/safari/_locales; sourceTree = "<group>"; };
+		0D437E4C2F5DFBF80050EF1C /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = vendor; path = ../../../build/safari/vendor; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D437DEC2F5DFBF80050EF1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437DFE2F5DFBF80050EF1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E0A2F5DFBF80050EF1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E142F5DFBF80050EF1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D437DDB2F5DFBF70050EF1C = {
+			isa = PBXGroup;
+			children = (
+				0D437DE02F5DFBF70050EF1C /* Shared (App) */,
+				0D437DE92F5DFBF80050EF1C /* Shared (Extension) */,
+				0D437DF12F5DFBF80050EF1C /* iOS (App) */,
+				0D437E022F5DFBF80050EF1C /* macOS (App) */,
+				0D437E112F5DFBF80050EF1C /* iOS (Extension) */,
+				0D437E1B2F5DFBF80050EF1C /* macOS (Extension) */,
+				0D437DF02F5DFBF80050EF1C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0D437DE02F5DFBF70050EF1C /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437DE72F5DFBF70050EF1C /* ViewController.swift */,
+				0D437DE82F5DFBF80050EF1C /* Assets.xcassets */,
+				0D437DE12F5DFBF70050EF1C /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		0D437DE12F5DFBF70050EF1C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D437DE22F5DFBF70050EF1C /* Main.html */,
+				0D437DE42F5DFBF70050EF1C /* Icon.png */,
+				0D437DE52F5DFBF70050EF1C /* Style.css */,
+				0D437DE62F5DFBF70050EF1C /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0D437DE92F5DFBF80050EF1C /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437E3B2F5DFBF80050EF1C /* Resources */,
+				0D437DEA2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		0D437DF02F5DFBF80050EF1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0D437DEF2F5DFBF80050EF1C /* TagSpaces Web Clipper.app */,
+				0D437E012F5DFBF80050EF1C /* TagSpaces Web Clipper.app */,
+				0D437E0D2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */,
+				0D437E172F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D437DF12F5DFBF80050EF1C /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437DF22F5DFBF80050EF1C /* AppDelegate.swift */,
+				0D437DF42F5DFBF80050EF1C /* SceneDelegate.swift */,
+				0D437DF62F5DFBF80050EF1C /* LaunchScreen.storyboard */,
+				0D437DF92F5DFBF80050EF1C /* Main.storyboard */,
+				0D437DFC2F5DFBF80050EF1C /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		0D437E022F5DFBF80050EF1C /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437E032F5DFBF80050EF1C /* AppDelegate.swift */,
+				0D437E052F5DFBF80050EF1C /* Main.storyboard */,
+				0D437E082F5DFBF80050EF1C /* Info.plist */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		0D437E112F5DFBF80050EF1C /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437E122F5DFBF80050EF1C /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		0D437E1B2F5DFBF80050EF1C /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				0D437E1C2F5DFBF80050EF1C /* Info.plist */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		0D437E3B2F5DFBF80050EF1C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D437E3C2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt */,
+				0D437E3D2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt */,
+				0D437E3E2F5DFBF80050EF1C /* service-worker.dist.js.map */,
+				0D437E3F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt */,
+				0D437E402F5DFBF80050EF1C /* popup.dist.js.map */,
+				0D437E412F5DFBF80050EF1C /* LICENSE */,
+				0D437E422F5DFBF80050EF1C /* images */,
+				0D437E432F5DFBF80050EF1C /* popup.html */,
+				0D437E442F5DFBF80050EF1C /* service-worker.dist.js */,
+				0D437E452F5DFBF80050EF1C /* popup.dist.js */,
+				0D437E462F5DFBF80050EF1C /* options.dist.js */,
+				0D437E472F5DFBF80050EF1C /* manifest.json */,
+				0D437E482F5DFBF80050EF1C /* options.html */,
+				0D437E492F5DFBF80050EF1C /* options.dist.js.map */,
+				0D437E4A2F5DFBF80050EF1C /* popup.css */,
+				0D437E4B2F5DFBF80050EF1C /* _locales */,
+				0D437E4C2F5DFBF80050EF1C /* vendor */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D437DEE2F5DFBF80050EF1C /* TagSpaces Web Clipper (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D437E312F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper (iOS)" */;
+			buildPhases = (
+				0D437DEB2F5DFBF80050EF1C /* Sources */,
+				0D437DEC2F5DFBF80050EF1C /* Frameworks */,
+				0D437DED2F5DFBF80050EF1C /* Resources */,
+				0D437E302F5DFBF80050EF1C /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D437E102F5DFBF80050EF1C /* PBXTargetDependency */,
+			);
+			name = "TagSpaces Web Clipper (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "TagSpaces Web Clipper (iOS)";
+			productReference = 0D437DEF2F5DFBF80050EF1C /* TagSpaces Web Clipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0D437E002F5DFBF80050EF1C /* TagSpaces Web Clipper (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D437E382F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper (macOS)" */;
+			buildPhases = (
+				0D437DFD2F5DFBF80050EF1C /* Sources */,
+				0D437DFE2F5DFBF80050EF1C /* Frameworks */,
+				0D437DFF2F5DFBF80050EF1C /* Resources */,
+				0D437E372F5DFBF80050EF1C /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D437E1A2F5DFBF80050EF1C /* PBXTargetDependency */,
+			);
+			name = "TagSpaces Web Clipper (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "TagSpaces Web Clipper (macOS)";
+			productReference = 0D437E012F5DFBF80050EF1C /* TagSpaces Web Clipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0D437E0C2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D437E2D2F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper Extension (iOS)" */;
+			buildPhases = (
+				0D437E092F5DFBF80050EF1C /* Sources */,
+				0D437E0A2F5DFBF80050EF1C /* Frameworks */,
+				0D437E0B2F5DFBF80050EF1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TagSpaces Web Clipper Extension (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "TagSpaces Web Clipper Extension (iOS)";
+			productReference = 0D437E0D2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		0D437E162F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D437E342F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper Extension (macOS)" */;
+			buildPhases = (
+				0D437E132F5DFBF80050EF1C /* Sources */,
+				0D437E142F5DFBF80050EF1C /* Frameworks */,
+				0D437E152F5DFBF80050EF1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TagSpaces Web Clipper Extension (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "TagSpaces Web Clipper Extension (macOS)";
+			productReference = 0D437E172F5DFBF80050EF1C /* TagSpaces Web Clipper Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0D437DDC2F5DFBF70050EF1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					0D437DEE2F5DFBF80050EF1C = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					0D437E002F5DFBF80050EF1C = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					0D437E0C2F5DFBF80050EF1C = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					0D437E162F5DFBF80050EF1C = {
+						CreatedOnToolsVersion = 26.3;
+					};
+				};
+			};
+			buildConfigurationList = 0D437DDF2F5DFBF70050EF1C /* Build configuration list for PBXProject "TagSpaces Web Clipper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0D437DDB2F5DFBF70050EF1C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0D437DF02F5DFBF80050EF1C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0D437DEE2F5DFBF80050EF1C /* TagSpaces Web Clipper (iOS) */,
+				0D437E002F5DFBF80050EF1C /* TagSpaces Web Clipper (macOS) */,
+				0D437E0C2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (iOS) */,
+				0D437E162F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0D437DED2F5DFBF80050EF1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E1F2F5DFBF80050EF1C /* Icon.png in Resources */,
+				0D437DF82F5DFBF80050EF1C /* LaunchScreen.storyboard in Resources */,
+				0D437E1D2F5DFBF80050EF1C /* Main.html in Resources */,
+				0D437E232F5DFBF80050EF1C /* Script.js in Resources */,
+				0D437E272F5DFBF80050EF1C /* Assets.xcassets in Resources */,
+				0D437DFB2F5DFBF80050EF1C /* Main.storyboard in Resources */,
+				0D437E212F5DFBF80050EF1C /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437DFF2F5DFBF80050EF1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E202F5DFBF80050EF1C /* Icon.png in Resources */,
+				0D437E222F5DFBF80050EF1C /* Style.css in Resources */,
+				0D437E072F5DFBF80050EF1C /* Main.storyboard in Resources */,
+				0D437E242F5DFBF80050EF1C /* Script.js in Resources */,
+				0D437E282F5DFBF80050EF1C /* Assets.xcassets in Resources */,
+				0D437E1E2F5DFBF80050EF1C /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E0B2F5DFBF80050EF1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E632F5DFBF80050EF1C /* options.dist.js in Resources */,
+				0D437E5F2F5DFBF80050EF1C /* images in Resources */,
+				0D437E642F5DFBF80050EF1C /* manifest.json in Resources */,
+				0D437E612F5DFBF80050EF1C /* service-worker.dist.js in Resources */,
+				0D437E652F5DFBF80050EF1C /* options.html in Resources */,
+				0D437E602F5DFBF80050EF1C /* popup.html in Resources */,
+				0D437E5C2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt in Resources */,
+				0D437E5D2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt in Resources */,
+				0D437E682F5DFBF80050EF1C /* vendor in Resources */,
+				0D437E662F5DFBF80050EF1C /* popup.css in Resources */,
+				0D437E5E2F5DFBF80050EF1C /* LICENSE in Resources */,
+				0D437E622F5DFBF80050EF1C /* popup.dist.js in Resources */,
+				0D437E672F5DFBF80050EF1C /* _locales in Resources */,
+				0D437E5B2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E152F5DFBF80050EF1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E552F5DFBF80050EF1C /* options.dist.js in Resources */,
+				0D437E512F5DFBF80050EF1C /* images in Resources */,
+				0D437E562F5DFBF80050EF1C /* manifest.json in Resources */,
+				0D437E532F5DFBF80050EF1C /* service-worker.dist.js in Resources */,
+				0D437E572F5DFBF80050EF1C /* options.html in Resources */,
+				0D437E522F5DFBF80050EF1C /* popup.html in Resources */,
+				0D437E4E2F5DFBF80050EF1C /* service-worker.dist.js.LICENSE.txt in Resources */,
+				0D437E4F2F5DFBF80050EF1C /* options.dist.js.LICENSE.txt in Resources */,
+				0D437E5A2F5DFBF80050EF1C /* vendor in Resources */,
+				0D437E582F5DFBF80050EF1C /* popup.css in Resources */,
+				0D437E502F5DFBF80050EF1C /* LICENSE in Resources */,
+				0D437E542F5DFBF80050EF1C /* popup.dist.js in Resources */,
+				0D437E592F5DFBF80050EF1C /* _locales in Resources */,
+				0D437E4D2F5DFBF80050EF1C /* popup.dist.js.LICENSE.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0D437DEB2F5DFBF80050EF1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E252F5DFBF80050EF1C /* ViewController.swift in Sources */,
+				0D437DF32F5DFBF80050EF1C /* AppDelegate.swift in Sources */,
+				0D437DF52F5DFBF80050EF1C /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437DFD2F5DFBF80050EF1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E262F5DFBF80050EF1C /* ViewController.swift in Sources */,
+				0D437E042F5DFBF80050EF1C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E092F5DFBF80050EF1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E292F5DFBF80050EF1C /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0D437E132F5DFBF80050EF1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D437E2A2F5DFBF80050EF1C /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0D437E102F5DFBF80050EF1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D437E0C2F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (iOS) */;
+			targetProxy = 0D437E0F2F5DFBF80050EF1C /* PBXContainerItemProxy */;
+		};
+		0D437E1A2F5DFBF80050EF1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D437E162F5DFBF80050EF1C /* TagSpaces Web Clipper Extension (macOS) */;
+			targetProxy = 0D437E192F5DFBF80050EF1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0D437DE22F5DFBF70050EF1C /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D437DE32F5DFBF70050EF1C /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		0D437DF62F5DFBF80050EF1C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D437DF72F5DFBF80050EF1C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0D437DF92F5DFBF80050EF1C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D437DFA2F5DFBF80050EF1C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0D437E052F5DFBF80050EF1C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0D437E062F5DFBF80050EF1C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0D437E2B2F5DFBF80050EF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0D437E2C2F5DFBF80050EF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		0D437E2E2F5DFBF80050EF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper.Extension;
+				PRODUCT_NAME = "TagSpaces Web Clipper Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0D437E2F2F5DFBF80050EF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper.Extension;
+				PRODUCT_NAME = "TagSpaces Web Clipper Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D437E322F5DFBF80050EF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper;
+				PRODUCT_NAME = "TagSpaces Web Clipper";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0D437E332F5DFBF80050EF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper;
+				PRODUCT_NAME = "TagSpaces Web Clipper";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0D437E352F5DFBF80050EF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper.Extension;
+				PRODUCT_NAME = "TagSpaces Web Clipper Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0D437E362F5DFBF80050EF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper.Extension;
+				PRODUCT_NAME = "TagSpaces Web Clipper Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0D437E392F5DFBF80050EF1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper;
+				PRODUCT_NAME = "TagSpaces Web Clipper";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0D437E3A2F5DFBF80050EF1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "TagSpaces Web Clipper";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.tagspaces.webclipper;
+				PRODUCT_NAME = "TagSpaces Web Clipper";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0D437DDF2F5DFBF70050EF1C /* Build configuration list for PBXProject "TagSpaces Web Clipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D437E2B2F5DFBF80050EF1C /* Debug */,
+				0D437E2C2F5DFBF80050EF1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D437E2D2F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D437E2E2F5DFBF80050EF1C /* Debug */,
+				0D437E2F2F5DFBF80050EF1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D437E312F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D437E322F5DFBF80050EF1C /* Debug */,
+				0D437E332F5DFBF80050EF1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D437E342F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D437E352F5DFBF80050EF1C /* Debug */,
+				0D437E362F5DFBF80050EF1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0D437E382F5DFBF80050EF1C /* Build configuration list for PBXNativeTarget "TagSpaces Web Clipper (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D437E392F5DFBF80050EF1C /* Debug */,
+				0D437E3A2F5DFBF80050EF1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0D437DDC2F5DFBF70050EF1C /* Project object */;
+}
