@@ -1,6 +1,6 @@
 {
   "name": "tagspaces-browser-extension",
-  "version": "4.1.2",
+  "version": "4.1.3",
   "description": "Codebase for TagSpaces' Web Clipper extension available for Chrome, MSEdge and Firefox",
   "repository": {
     "type": "git",
@@ -10,6 +10,8 @@
     "build": "yarn build-chrome && yarn build-firefox",
     "build-chrome": "TARGET=chrome $(yarn bin)/webpack",
     "build-firefox": "TARGET=firefox $(yarn bin)/webpack",
+    "build-safari": "TARGET=safari $(yarn bin)/webpack",
+    "safari-xcode": "yarn build-safari && xcrun safari-web-extension-converter build/safari --project-location safari-xcode --app-name \"TagSpaces Web Clipper\" --bundle-identifier org.tagspaces.webclipper --swift --no-open && sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Automatic;\\n\\t\\t\\t\\tDEVELOPMENT_TEAM = \"\";/' \"safari-xcode/TagSpaces Web Clipper/TagSpaces Web Clipper.xcodeproj/project.pbxproj\"",
     "package": "yarn clean && yarn build && yarn patch-version && yarn pack-chrome && yarn pack-firefox",
     "patch-version": "node utils/patch-version.js",
     "pack-chrome": "node utils/pack-chrome.js",
@@ -17,6 +19,7 @@
     "bump-version": "yarn version",
     "eslint": "$(yarn bin)/eslint .",
     "update-i18n": "./tx pull -a -d && cd _locales && mv de_DE/* de/* && cd ..",
+    "push-i18n": "./tx push -t",
     "clean": "rm -rf ./build/",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "vitest run",
