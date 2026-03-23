@@ -82,5 +82,13 @@
     "appName": {
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
+    },
+    "saveFullScreenshotLabel": {
+        "message": "Ամբողջ էջի սքրինշոթ",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Ստեղծում է ամբողջ էջի սքրինշոթ PNG ֆայlի տեսqով:",
+        "description": "Title of the full screenshot button"
     }
 }

@@ -82,5 +82,13 @@
     "appName": {
         "message": "Web Clipper di TagSpacesc",
         "description": "The name of the extension"
+    },
+    "saveFullScreenshotLabel": {
+        "message": "Screenshot pagina intera",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Esegue uno screenshot dell'intera pagina come file PNG.",
+        "description": "Title of the full screenshot button"
     }
 }

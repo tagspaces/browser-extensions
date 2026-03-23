@@ -82,5 +82,13 @@
     "appName": {
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
+    },
+    "saveFullScreenshotLabel": {
+        "message": "Snímka celej stránky",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Vytvorí snímku celej stránky ako súbor PNG.",
+        "description": "Title of the full screenshot button"
     }
 }

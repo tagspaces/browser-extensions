@@ -82,5 +82,13 @@
     "appName": {
         "message": "TagSpaces网页剪藏工具",
         "description": "The name of the extension"
+    },
+    "saveFullScreenshotLabel": {
+        "message": "整頁截圖",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "將整個頁面截圖儲存為 PNG 檔案。",
+        "description": "Title of the full screenshot button"
     }
 }

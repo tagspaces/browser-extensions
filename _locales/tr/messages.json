@@ -82,5 +82,13 @@
     "appName": {
         "message": "TagSpaces Web Kırpıcı",
         "description": "The name of the extension"
+    },
+    "saveFullScreenshotLabel": {
+        "message": "Tam Sayfa Ekran Görüntüsü",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Tüm sayfanın ekran görüntüsünü PNG dosyası olarak alır.",
+        "description": "Title of the full screenshot button"
     }
 }
