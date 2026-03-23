@@ -30,12 +30,12 @@
   "license": "AGPL-3.0",
   "devDependencies": {
     "@playwright/test": "1.58.2",
-    "copy-webpack-plugin": "13.0.1",
+    "copy-webpack-plugin": "^14.0.0",
     "eslint": "9.39.2",
     "jsdom": "28.1.0",
     "shelljs": "0.10.0",
     "vitest": "4.0.18",
-    "web-ext": "9.2.0",
+    "web-ext": "^9.4.0",
     "web-ext-types": "3.2.1",
     "webpack": "5.104.1",
     "webpack-cli": "6.0.1"
