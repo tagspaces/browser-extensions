@@ -1,0 +1,34 @@
+🧩 TagSpaces Web Clipper — Salva, etichetta e possiedi i tuoi contenuti web
+
+Cattura qualsiasi pagina web e salvala direttamente sul tuo dispositivo — senza cloud, senza account, senza tracciamento. TagSpaces Web Clipper è un web scraper orientato alla privacy che ti mette in pieno controllo di cosa salvi e come lo salvi.
+
+🔒 100% Privato — Nessuna registrazione richiesta
+
+Nessuna iscrizione. Nessun server. Nessuna raccolta di dati. Tutto viene salvato localmente sul tuo computer. I tuoi ritagli appartengono a te.
+
+⭐ Funzionalità principali
+
+📝 Salva come Markdown o HTML — con immagini incorporate, pronto per la modifica o le annotazioni in TagSpaces, Obsidian, Notion o qualsiasi app che supporti questi formati aperti.
+📄 Salva come MHTML — preserva il layout e la formattazione completi della pagina esattamente come li vedi; aprilo in qualsiasi browser o lettore compatibile.
+✂️ Ritaglia il contenuto selezionato — salva solo le parti di una pagina che ti interessano.
+📸 Screenshot a pagina intera — cattura pagine intere come immagini PNG.
+🔖 Segnalibri visivi — salva un URL con immagine di anteprima per costruire una bella collezione dei tuoi siti preferiti.
+📍 Estrazione GPS e Plus Codes — estrai dati di posizione dagli URL delle mappe per usarli nella vista Mapique di TagSpaces.
+🏷️ Etichetta al salvataggio — aggiungi etichette durante il ritaglio per organizzare istantaneamente i tuoi file e trovarli facilmente in seguito.
+
+Tutti i file salvati sono in formati standard e aperti — nessun lock-in. Usali con TagSpaces, il tuo editor di testo preferito o qualsiasi strumento che supporti HTML, Markdown, MHTML, PDF o PNG.
+
+💻 Parte dell'ecosistema TagSpaces
+
+TagSpaces Web Clipper funziona perfettamente con l'app desktop TagSpaces — uno strumento gratuito di gestione della conoscenza personale e file manager offline. TagSpaces ti permette di organizzare qualsiasi file sul tuo dispositivo usando etichette, colori e metadati, senza mai inviare i tuoi dati a un server.
+
+Con TagSpaces puoi:
+🗂️ Etichettare e colorare qualsiasi tipo di file — documenti, immagini, note, ritagli web
+📝 Creare e modificare note in Markdown o testo formattato, salvate come file semplici di tua proprietà
+🌍 Visualizzare contenuti con geotag su una mappa interattiva con la vista Mapique integrata
+🔍 Cercare e sfogliare l'intera collezione di file locali con filtri potenti
+📁 Lavorare tra cartelle, unità e posizioni collegate — tutto offline
+
+TagSpaces è open source e disponibile gratuitamente per Windows, macOS e Linux, con funzionalità Pro opzionali per utenti avanzati.
+
+👉 Inizia a ritagliare — installa l'estensione e riprendi il controllo dei tuoi contenuti web.
