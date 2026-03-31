@@ -5,16 +5,11 @@
   "manifest_version": 3,
   "homepage_url": "https://www.tagspaces.org",
   "description": "__MSG_appDesc__",
-  "permissions": [
-    "tabs",
-    "activeTab",
-    "storage",
-    "scripting"
-  ],
+  "permissions": ["tabs", "activeTab", "storage", "scripting"],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
-  "default_locale": "en_US",
+  "default_locale": "en",
   "action": {
     "default_icon": "images/icon-128.png",
     "default_title": "__MSG_appLauncher__",

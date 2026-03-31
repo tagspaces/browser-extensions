@@ -16,7 +16,7 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   },
-  "default_locale": "en_US",
+  "default_locale": "en",
   "action": {
     "default_icon": "images/icon-128.png",
     "default_title": "__MSG_appLauncher__",
