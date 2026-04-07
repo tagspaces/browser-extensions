@@ -32,6 +32,10 @@ test.describe("Popup — UI structure", () => {
     await expect(popupPage.locator("#markdownPreview")).toBeVisible();
   });
 
+  test("renders the settings gear button", async ({ popupPage }) => {
+    await expect(popupPage.locator("#openSettings")).toBeVisible();
+  });
+
   test("title input is pre-populated with the tab title", async ({
     popupPage,
   }) => {
@@ -168,5 +172,77 @@ test.describe("Popup — save triggers", () => {
       const files = await page.evaluate(() => window.__savedFiles);
       expect(files[0]).toMatch(/\.html$/);
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Settings button
+// ---------------------------------------------------------------------------
+test.describe("Popup — settings button", () => {
+  test("settings button opens the options page", async ({
+    context,
+    popupPage,
+  }) => {
+    const pagePromise = context.waitForEvent("page");
+    await popupPage.locator("#openSettings").click();
+    const optionsPage = await pagePromise;
+    await optionsPage.waitForLoadState();
+    expect(optionsPage.url()).toContain("options");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Clear tags button
+// ---------------------------------------------------------------------------
+test.describe("Popup — clear tags button", () => {
+  test("clear button is hidden when tags field is empty", async ({
+    popupPage,
+  }) => {
+    await expect(popupPage.locator("#clearTags")).toBeHidden();
+  });
+
+  test("clear button appears when tags are entered", async ({
+    popupPage,
+  }) => {
+    await popupPage.locator("#tags").fill("tag1, tag2");
+    await expect(popupPage.locator("#clearTags")).toBeVisible();
+  });
+
+  test("clicking clear button empties the tags field", async ({
+    popupPage,
+  }) => {
+    await popupPage.locator("#tags").fill("tag1, tag2");
+    await popupPage.locator("#clearTags").click();
+    await expect(popupPage.locator("#tags")).toHaveValue("");
+  });
+
+  test("clear button is hidden again after clearing", async ({
+    popupPage,
+  }) => {
+    await popupPage.locator("#tags").fill("tag1");
+    await popupPage.locator("#clearTags").click();
+    await expect(popupPage.locator("#clearTags")).toBeHidden();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Internal URL guard
+// ---------------------------------------------------------------------------
+test.describe("Popup — internal URL guard", () => {
+  test("popup opens on internal pages without errors", async ({
+    context,
+    extensionId,
+  }) => {
+    const page = await context.newPage();
+    await page.goto("chrome://version");
+
+    const popupPage = await context.newPage();
+    const errors = [];
+    popupPage.on("pageerror", (e) => errors.push(e.message));
+    await popupPage.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popupPage.waitForSelector("#title", { state: "visible" });
+
+    await expect(popupPage.locator("#title")).toBeVisible();
+    await expect(popupPage.locator("#saveAsBookmark")).toBeVisible();
   });
 });

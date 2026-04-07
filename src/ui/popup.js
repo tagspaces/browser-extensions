@@ -918,14 +918,14 @@ async function prepareMarkdownContentPromise(markdownContent) {
   }
 }
 
-function escapeYamlString(str) {
+export function escapeYamlString(str) {
   return str.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 }
 
 /**
  * Helper to inject or update YAML Front Matter at the top of the file
  */
-function injectFrontMatter(content, newMeta) {
+export function injectFrontMatter(content, newMeta) {
   const frontMatterRegex = /^---\n([\s\S]*?)\n---/;
   const match = content.match(frontMatterRegex);
 
