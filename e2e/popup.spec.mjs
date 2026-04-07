@@ -105,6 +105,19 @@ test.describe("Popup — save triggers", () => {
           window.__savedFiles.push(name);
           if (orig) orig(blob, name);
         };
+        // Mock captureVisibleTab for tests where no real tab is available
+        if (typeof chrome !== "undefined" && chrome.tabs) {
+          const fakeDataUrl =
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+          chrome.tabs.captureVisibleTab = (...args) => {
+            const cb = args[args.length - 1];
+            if (typeof cb === "function") {
+              cb(fakeDataUrl);
+              return undefined;
+            }
+            return Promise.resolve(fakeDataUrl);
+          };
+        }
       });
     });
     await page.goto(`chrome-extension://${extensionId}/popup.html`);
