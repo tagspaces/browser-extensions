@@ -27,6 +27,17 @@ if (typeof browser !== "undefined") {
 browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
   if (sender.id !== browserAPI.runtime.id) return;
   if (msg.type === "capture-page") {
+    const tab = await browserAPI.tabs.get(msg.tabId);
+    if (
+      !tab.url ||
+      tab.url.startsWith("chrome://") ||
+      tab.url.startsWith("brave://") ||
+      tab.url.startsWith("edge://") ||
+      tab.url.startsWith("about:") ||
+      tab.url.startsWith("chrome-extension://")
+    ) {
+      return;
+    }
     const injectionResults = await browserAPI.scripting.executeScript({
       target: { tabId: msg.tabId },
       func: () => {
