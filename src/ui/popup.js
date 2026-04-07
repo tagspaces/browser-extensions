@@ -86,6 +86,7 @@ let htmlOriginal;
 let htmlCleaned;
 let htmlSelection;
 let documentBaseUri;
+let pageTags = [];
 let contentMode = "simplified"; // 'original', 'markdown'
 const activeTabQuery = browserAPI.tabs.query({
   currentWindow: true,
@@ -124,6 +125,22 @@ async function init() {
     document.getElementById("saveAsMhtml").style.display = "none";
     document.getElementById("downloadFile").style.display = "none";
   }
+  const tagsInput = document.getElementById("tags");
+  const clearTagsBtn = document.getElementById("clearTags");
+  const toggleClearBtn = () => {
+    clearTagsBtn.style.display = tagsInput.value ? "" : "none";
+  };
+  tagsInput.addEventListener("input", toggleClearBtn);
+  clearTagsBtn.addEventListener("click", () => {
+    tagsInput.value = "";
+    clearTagsBtn.style.display = "none";
+    tagsInput.focus();
+  });
+
+  document.getElementById("openSettings").addEventListener("click", () => {
+    browserAPI.runtime.openOptionsPage();
+  });
+
   document
     .getElementById("saveAsMhtml")
     .addEventListener("click", isFirefox ? savePDF : saveAsMHTML);
@@ -172,14 +189,26 @@ async function init() {
   });
 
   function handleHTML(msg, sender, sendResponse) {
-    // host: "www.tagspaces.com"
-    // pathBase: "https://www.tagspaces.com/articles/"
-    // prePath: "https://www.tagspaces.com"
-    // scheme: "https"
-    // spec: "https://www.tagspaces.com/articles/testarticle
+    if (sender.id !== browserAPI.runtime.id) return;
     const previewEl = document.getElementById("preview");
     documentBaseUri = msg.documentBaseUri;
-    // console.log(msg);
+    if (msg.pageTags) {
+      pageTags = msg.pageTags
+        .map((t) =>
+          t
+            .replace(/[^a-zA-Z0-9\u00C0-\u024F\u0400-\u04FF_-]/g, "-")
+            .replace(/-{2,}/g, "-")
+            .replace(/^-+|-+$/g, ""),
+        )
+        .filter((t) => t.length > 0);
+      if (userSettings.enableAutoTagging && pageTags.length > 0) {
+        const tagsInput = document.getElementById("tags");
+        const existing = tagsInput.value.trim();
+        const newTags = pageTags.join(", ");
+        tagsInput.value = existing ? existing + ", " + newTags : newTags;
+        toggleClearBtn();
+      }
+    }
     if (msg.originalHTML && !msg.selectionHTML) {
       htmlOriginal = DOMPurify.sanitize(msg.originalHTML);
       updatePreviewArea(htmlOriginal);
@@ -203,7 +232,11 @@ async function init() {
         if (article.title) {
           titleEl.value = article.title;
         }
-        htmlCleaned = "<h1>" + titleEl.value + "</h1>\n" + htmlCleaned;
+        const escapedTitle = titleEl.value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+        htmlCleaned = "<h1>" + escapedTitle + "</h1>\n" + htmlCleaned;
         updatePreviewArea(htmlCleaned);
         simplifiedPreview();
         contentMode = "simplified";
@@ -313,9 +346,14 @@ function markdownPreview() {
   if (!markdown) {
     markdown = "Markdown conversion failed";
   }
-  updatePreviewArea(
-    `<pre id="mdcontent" style="white-space: pre-wrap; font-size: 12px;">${markdown}</pre>`,
-  );
+  const preEl = document.createElement("pre");
+  preEl.id = "mdcontent";
+  preEl.style.cssText = "white-space: pre-wrap; font-size: 12px;";
+  preEl.textContent = markdown;
+  const previewEl = document.getElementById("preview");
+  const previewBody = previewEl.contentDocument.body;
+  previewBody.innerHTML = "";
+  previewBody.appendChild(preEl);
 }
 
 function simplifiedPreview() {
@@ -861,48 +899,27 @@ async function prepareMarkdownContentPromise(markdownContent) {
       }
     }
 
-    // // Capture Screenshot (Same logic as original)
-    // let imageDataUrl = "";
-    // if (
-    //   typeof userSettings !== "undefined" &&
-    //   userSettings.enableScreenshotEmbedding
-    // ) {
-    //   try {
-    //     imageDataUrl = await new Promise((resolve, reject) => {
-    //       browserAPI.tabs.captureVisibleTab(
-    //         null,
-    //         { format: "jpeg", quality: 90 },
-    //         (data) => {
-    //           if (browserAPI.runtime.lastError)
-    //             reject(browserAPI.runtime.lastError);
-    //           else resolve(data);
-    //         },
-    //       );
-    //     });
-    //   } catch (e) {
-    //     console.warn("Screenshot failed:", e);
-    //   }
-    // }
-
-    // // Metadata handling (YAML Front Matter)
-    // let browserName = isChrome ? "Chrome" : "";
-    // browserName = isEdge ? "Edge" : browserName;
-    // browserName = isFirefox ? "Firefox" : browserName;
-
-    // const metadata = {
-    //   "data-createdwith": `TagSpaces Web Clipper (${browserName})`,
-    //   "data-sourceurl": currentTabURL,
-    //   "data-scrappedon": new Date().toISOString(),
-    //   ...(imageDataUrl ? { "data-screenshot": imageDataUrl } : {}),
-    // };
-
-    // finalMarkdown = injectFrontMatter(finalMarkdown, metadata);
+    if (userSettings.enableFrontMatter) {
+      const metadata = {
+        url: currentTabURL,
+        date: new Date().toISOString(),
+      };
+      const tagsValue = document.getElementById("tags").value.trim();
+      if (tagsValue) {
+        metadata.tags = tagsValue;
+      }
+      finalMarkdown = injectFrontMatter(finalMarkdown, metadata);
+    }
 
     return finalMarkdown;
   } catch (error) {
     console.error("Markdown preparation failed:", error);
     return markdownContent;
   }
+}
+
+function escapeYamlString(str) {
+  return str.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 }
 
 /**
@@ -912,32 +929,33 @@ function injectFrontMatter(content, newMeta) {
   const frontMatterRegex = /^---\n([\s\S]*?)\n---/;
   const match = content.match(frontMatterRegex);
 
-  let finalYaml = "";
+  function formatEntry(key, value) {
+    if (key === "tags") {
+      let block = "tags:\n";
+      for (const tag of value.split(", ")) {
+        block += `  - "${escapeYamlString(tag)}"\n`;
+      }
+      return block;
+    }
+    return `${key}: "${escapeYamlString(value)}"\n`;
+  }
 
   if (match) {
-    // Existing Front Matter found
-    // Note: Parsing YAML without a library is risky, but for simple key-values:
     let existingYaml = match[1];
-
-    // Simple append approach to avoid parsing/destroying existing complex YAML
     let additionalYaml = "";
     for (const [key, value] of Object.entries(newMeta)) {
-      // Very basic check to see if key exists (imperfect, but dependency-free)
       if (!existingYaml.includes(`${key}:`)) {
-        additionalYaml += `${key}: "${value}"\n`;
+        additionalYaml += formatEntry(key, value);
       }
     }
-
-    // Replace the entire block with old + new
     return content.replace(
       frontMatterRegex,
       `---\n${existingYaml}\n${additionalYaml}---`,
     );
   } else {
-    // No Front Matter, create new
     let yamlBlock = "---\n";
     for (const [key, value] of Object.entries(newMeta)) {
-      yamlBlock += `${key}: "${value}"\n`;
+      yamlBlock += formatEntry(key, value);
     }
     yamlBlock += "---\n\n";
     return yamlBlock + content;

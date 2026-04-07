@@ -20,6 +20,8 @@ let DEFAULT_OPTIONS = {
   enableScreenshotEmbedding: true,
   enableOpenLocationCode: true,
   enableAutomaticScreenshotTagging: true,
+  enableFrontMatter: true,
+  enableAutoTagging: false,
 };
 
 let browserAPI = null;

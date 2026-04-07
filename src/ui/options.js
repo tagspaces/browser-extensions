@@ -28,6 +28,12 @@ function save() {
   if (form.enableOpenLocationCode) {
     params.enableOpenLocationCode = form.enableOpenLocationCode.checked;
   }
+  if (form.enableFrontMatter) {
+    params.enableFrontMatter = form.enableFrontMatter.checked;
+  }
+  if (form.enableAutoTagging) {
+    params.enableAutoTagging = form.enableAutoTagging.checked;
+  }
   OptionsManager.save(params);
 }
 
@@ -40,6 +46,12 @@ function load() {
     }
     if (form.enableOpenLocationCode) {
       form.enableOpenLocationCode.checked = items.enableOpenLocationCode;
+    }
+    if (form.enableFrontMatter) {
+      form.enableFrontMatter.checked = items.enableFrontMatter;
+    }
+    if (form.enableAutoTagging) {
+      form.enableAutoTagging.checked = items.enableAutoTagging;
     }
   });
 }

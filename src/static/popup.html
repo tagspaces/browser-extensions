@@ -39,6 +39,24 @@
       <div class="container" style="padding: 0">
         <span class="badge">1</span
         ><span data-i18n="previewLabel">Preview</span>
+        <button
+          id="openSettings"
+          type="button"
+          title="Open extension settings"
+          style="
+            float: right;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #888;
+            padding: 6px 6px;
+            line-height: 1;
+            margin-bottom: 5px;
+          "
+        >
+          &#9881;
+        </button>
         <div
           id="contentModeSwitch"
           class="btn-group btn-group-sm"
@@ -63,7 +81,7 @@
             title="Experimental feature trying to convert the clipped content in markdown"
           >
             markdown
-            <sup
+            <!-- <sup
               style="
                 background-color: rgb(var(--ts-color));
                 color: white;
@@ -71,7 +89,7 @@
                 border-radius: 5px;
               "
               >new</sup
-            >
+            > -->
           </button>
         </div>
       </div>
@@ -94,14 +112,38 @@
           <span class="badge">3</span>
           <span data-i18n="addTagLabel"></span>
         </label>
-        <input
-          class="form-control form-control-sm"
-          type="text"
-          name="tags"
-          id="tags"
-          value=""
-          autocomplete="off"
-        />
+        <div style="position: relative">
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            name="tags"
+            id="tags"
+            value=""
+            autocomplete="off"
+            style="padding-right: 24px"
+          />
+          <button
+            type="button"
+            id="clearTags"
+            title="Clear all tags"
+            style="
+              position: absolute;
+              right: 4px;
+              top: 50%;
+              transform: translateY(-50%);
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 16px;
+              color: #888;
+              padding: 0 4px;
+              line-height: 1;
+              display: none;
+            "
+          >
+            &times;
+          </button>
+        </div>
         <p
           class="help-block"
           style="font-size: 12px; margin-top: 0px; margin-bottom: 0px"

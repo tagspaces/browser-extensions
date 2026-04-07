@@ -74,6 +74,63 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
             loc.pathname.substring(0, loc.pathname.lastIndexOf("/") + 1),
         };
 
+        // Extract tags from the page using multiple strategies
+        const pageTags = [];
+        const seen = new Set();
+        const addTag = (t) => {
+          const tag = t.trim();
+          if (tag.length > 0 && !seen.has(tag.toLowerCase())) {
+            seen.add(tag.toLowerCase());
+            pageTags.push(tag);
+          }
+        };
+
+        // 1. <meta name="keywords">
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (metaKeywords && metaKeywords.content) {
+          metaKeywords.content.split(",").forEach(addTag);
+        }
+
+        // 2. <meta property="article:tag">
+        document
+          .querySelectorAll('meta[property="article:tag"]')
+          .forEach((el) => {
+            if (el.content) addTag(el.content);
+          });
+
+        // 3. Links to tag/category pages (e.g. /tags/foo/, /tag/foo, /category/foo)
+        document.querySelectorAll("a[href]").forEach((el) => {
+          const href = el.getAttribute("href") || "";
+          const match = href.match(
+            /(?:^|\/)(?:tags|tag|category|categories)\/([^/]+)\/?$/,
+          );
+          if (match) {
+            addTag(decodeURIComponent(match[1]));
+          }
+        });
+
+        // 4. JSON-LD keywords
+        document
+          .querySelectorAll('script[type="application/ld+json"]')
+          .forEach((el) => {
+            try {
+              const data = JSON.parse(el.textContent);
+              const kw = data.keywords;
+              const items = Array.isArray(kw)
+                ? kw
+                : typeof kw === "string"
+                  ? [kw]
+                  : [];
+              items.forEach((k) => {
+                if (typeof k === "string") {
+                  k.split(",").forEach(addTag);
+                }
+              });
+            } catch (e) {
+              // ignore malformed JSON-LD
+            }
+          });
+
         const response = {
           width: document.documentElement.scrollWidth,
           height: document.documentElement.scrollHeight,
@@ -81,6 +138,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
           documentBaseUri: uri, // document.baseURI,
           selectionHTML,
           documentHTML,
+          pageTags,
         };
         return response;
       },
@@ -94,6 +152,7 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         documentHTML,
         selectionHTML,
         documentBaseUri,
+        pageTags,
       } = injectionResults[0].result;
       const response = {
         action: "htmlcontent",
@@ -103,11 +162,12 @@ browserAPI.runtime.onMessage.addListener(async (msg, sender, sendResponse) => {
         height,
         viewportHeight,
         documentBaseUri,
+        pageTags,
       };
       await browserAPI.runtime.sendMessage(response);
     }
   }
-  // return true; needed for async responses
+  return true; // needed for async responses
 });
 
 browserAPI.runtime.onInstalled.addListener((details) => {
