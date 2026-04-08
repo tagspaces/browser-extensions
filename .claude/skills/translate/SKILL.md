@@ -51,9 +51,10 @@ Automatically translate new or untranslated strings from the English `messages.j
 These keys are expected to have the same value as English in many/all languages. Do NOT flag them as untranslated:
 
 - `appName` — brand name, kept as "TagSpaces Web Clipper" in all languages
+- `optionsTutorialLink` — "Tutorial" is used as-is in many Romance and Latin-based languages (ca, es, es_CL, id_ID, it, pt_BR, pt_PT, and others)
 - Keys where the English `message` is a single symbol, number, or punctuation (e.g., `"-"`, `"/"`)
 - Keys where the English `message` is a proper noun or brand name only (e.g., `"TagSpaces"`)
-- Keys where the English `message` is a widely-used English loanword that many languages keep as-is (e.g., `"Ok"`, `"Email"`, `"Markdown"`)
+- Keys where the English `message` is a widely-used English loanword that many languages keep as-is (e.g., `"Ok"`, `"Email"`, `"Markdown"`, `"Tutorial"`)
 - When in doubt, check if at least 5 other languages also have the same value as English — if so, it's likely intentional.
 
 ## Step 2 — Gather translation context
@@ -122,3 +123,14 @@ For each language, translate all missing and untranslated keys:
 | English value contains line breaks (`\n`) | Preserve line breaks in translation |
 | English value is very long (100+ chars) | Translate fully, do not truncate |
 | `de` and `de_DE` both exist | **Special case**: `de` and `de_DE` must always be kept in sync — they should have identical content. When translating German, write the same output to both `_locales/de/messages.json` and `_locales/de_DE/messages.json`. This is for historical reasons. |
+
+## Practical Notes (from past runs)
+
+- **Key reordering**: Many locale files have keys in a different order than English (e.g., `saveFullScreenshotLabel` at the end instead of after `saveScreenshotTitle`). When writing, always reorder to match English — this is expected and keeps diffs clean.
+- **Regional variants**: Some language pairs have deliberate differences — do NOT copy one to the other:
+  - `es` (Spain) uses "Añadir" vs `es_CL` (Chile) uses "Agregar"
+  - `pt_PT` uses "ficheiro/ecrã/etiquetas" vs `pt_BR` uses "arquivo/tela/tags"
+  - `fr` uses "enregistrés" vs `fr_CA` uses "sauvegardés"
+  - `zh_CN` (Simplified), `zh_HK` (Traditional HK), `zh_TW` (Traditional TW) each have distinct terminology
+- **Untranslated detection across batches**: When parallelizing, include untranslated key info in every batch prompt, not just the batch containing the affected language — the detection step should identify all issues upfront before dispatching agents.
+- **Batch size**: 7 batches of 4-5 languages works well for ~34 locales. Each agent completes in ~3-4 minutes.
