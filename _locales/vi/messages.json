@@ -35,6 +35,14 @@
         "message": "Chụp màn hình khu vực trang hiển thị dưới dạng tệp PNG. Thay đổi kích thước cửa sổ trình duyệt để tập trung vào khu vực chính xác cho ảnh chụp màn hình.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Chụp màn hình toàn trang",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Chụp ảnh màn hình toàn bộ trang dưới dạng tệp PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Lưu trang hoàn chỉnh",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Chụp màn hình toàn trang",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Tùy chọn TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Chụp ảnh màn hình toàn bộ trang dưới dạng tệp PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Cho phép nhúng ảnh chụp màn hình trang web vào tệp URL và HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Thêm YAML front matter (URL, ngày, thẻ) vào tệp Markdown đã lưu.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Nhúng hình ảnh dưới dạng URL dữ liệu trong tệp HTML và Markdown đã lưu.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Tự động trích xuất thẻ từ siêu dữ liệu trang vào trường thẻ.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Giấy phép",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Chính sách Bảo mật",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Hướng dẫn",
+        "description": "Label for the tutorial link"
     }
 }

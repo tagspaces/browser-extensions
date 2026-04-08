@@ -35,6 +35,14 @@
         "message": "将可见页面区域的屏幕截图保存为 PNG 文件。调整浏览器窗口大小，以便将焦点集中在屏幕截图的准确区域。",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "全页截图",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "将整个页面截图保存为 PNG 文件。",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "保存整个网页",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces 网页剪辑器",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "全页截图",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces 网页剪辑器选项",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "将整个页面截图保存为 PNG 文件。",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "在 URL 和 HTML 文件中嵌入网页截图。",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "在保存的 Markdown 文件中添加 YAML front matter（URL、日期、标签）。",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "在保存的 HTML 和 Markdown 文件中将图片嵌入为 data URL。",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "从页面元数据中自动提取标签到标签字段。",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "许可协议",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "隐私政策",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "使用教程",
+        "description": "Label for the tutorial link"
     }
 }

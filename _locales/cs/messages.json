@@ -35,6 +35,14 @@
         "message": "Pořiďte snímek obrazovky viditelné oblasti stránky jako soubor PNG. Změňte velikost okna prohlížeče, abyste zaměřili přesnou oblast pro snímek.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Snímek celé stránky",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Pořídí snímek celé stránky jako soubor PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Uložit celou stránku",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Snímek celé stránky",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Nastavení TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Pořídí snímek celé stránky jako soubor PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Povolit vložení snímku obrazovky webové stránky do souborů URL a HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Přidat YAML front matter (URL, datum, štítky) do uložených souborů Markdown.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Vložit obrázky jako data URL do uložených souborů HTML a Markdown.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Automaticky extrahovat štítky z metadat stránky do pole štítků.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licence",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Zásady ochrany osobních údajů",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Návod",
+        "description": "Label for the tutorial link"
     }
 }

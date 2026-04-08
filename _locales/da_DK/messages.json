@@ -35,6 +35,14 @@
         "message": "Tag et skærmbillede af den synlige sideområde som en PNG-fil. Tilpas browservinduets størrelse for at fokusere det nøjagtige område til skærmbilledet.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Fuld-side skærmbillede",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Tag et skærmbillede af hele siden som en PNG-fil.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Gem komplet side",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Fuld-side skærmbillede",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper Indstillinger",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Tag et skærmbillede af hele siden som en PNG-fil.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Aktivér indlejring af et skærmbillede af websiden i URL- og HTML-filer.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Tilføj YAML front matter (URL, dato, tags) til gemte Markdown-filer.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Indlejr billeder som data-URL'er i gemte HTML- og Markdown-filer.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Udtræk automatisk tags fra sidens metadata til tags-feltet.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licens",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Privatlivspolitik",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Vejledning",
+        "description": "Label for the tutorial link"
     }
 }

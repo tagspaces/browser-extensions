@@ -35,6 +35,14 @@
         "message": "Зробіть скріншот видимої частини сторінки у вигляді PNG файлу. Змініть розмір вікна браузера, щоб зосередитися на потрібній ділянці для скріншота.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Знімок всієї сторінки",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Робить знімок екрана всієї сторінки у форматі PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Зберегти усю сторінку",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Знімок всієї сторінки",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Налаштування TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Робить знімок екрана всієї сторінки у форматі PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Увімкнути вбудовування знімка веб-сторінки у файли URL та HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Додавати YAML метадані (URL, дата, мітки) до збережених файлів Markdown.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Вбудовувати зображення як URL даних у збережені файли HTML та Markdown.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Автоматично витягувати мітки з метаданих сторінки в поле міток.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Ліцензія",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Політика конфіденційності",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Посібник",
+        "description": "Label for the tutorial link"
     }
 }

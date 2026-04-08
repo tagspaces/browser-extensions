@@ -35,6 +35,14 @@
         "message": "Направете снимка на видимата част от страницата като PNG файл. Преоразмерете прозореца на браузъра, за да фокусирате точната зона за снимката.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Снимка на цялата страница",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Прави снимка на екрана на цялата страница като PNG файл.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Запази цялата страница",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Снимка на цялата страница",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Настройки на TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Прави снимка на екрана на цялата страница като PNG файл.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Вграждане на екранна снимка на уеб страницата в URL и HTML файлове.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Добавяне на YAML front matter (URL, дата, етикети) в запазените Markdown файлове.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Вграждане на изображения като data URL в запазените HTML и Markdown файлове.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Автоматично извличане на етикети от метаданните на страницата в полето за етикети.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Лиценз",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Политика за поверителност",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Ръководство",
+        "description": "Label for the tutorial link"
     }
 }

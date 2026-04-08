@@ -35,6 +35,14 @@
         "message": "Feu una captura de pantalla de l'àrea visible de la pàgina com a fitxer PNG. Canvieu la mida de la finestra del navegador per centrar-vos en l'àrea exacta per a la captura.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Captura de pantalla completa",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Fa una captura de pantalla de tota la pàgina com a fitxer PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Desa la pàgina completa",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Captura de pantalla completa",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Opcions del TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Fa una captura de pantalla de tota la pàgina com a fitxer PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Activa la incrustació d'una captura de pantalla de la pàgina web en fitxers URL i HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Afegeix YAML front matter (URL, data, etiquetes) als fitxers Markdown desats.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Incrusta les imatges com a data URL en els fitxers HTML i Markdown desats.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Extreu automàticament les etiquetes de les metadades de la pàgina al camp d'etiquetes.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Llicència",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Política de privadesa",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Tutorial",
+        "description": "Label for the tutorial link"
     }
 }

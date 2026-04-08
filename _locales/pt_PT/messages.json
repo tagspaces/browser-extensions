@@ -35,6 +35,14 @@
         "message": "Tirar uma captura de ecrã da área visível da página como ficheiro PNG. Redimensione a janela do navegador para focar a área exata para a captura.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Captura de ecrã de página inteira",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Tira uma captura de ecrã de toda a página como ficheiro PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Guardar página completa",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Captura de ecrã de página inteira",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Opções do TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Tira uma captura de ecrã de toda a página como ficheiro PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Ativar a incorporação de uma captura de ecrã da página em ficheiros URL e HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Adicionar YAML front matter (URL, data, etiquetas) aos ficheiros Markdown guardados.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Incorporar imagens como data URLs em ficheiros HTML e Markdown guardados.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Extrair automaticamente etiquetas dos metadados da página para o campo de etiquetas.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licença",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Política de Privacidade",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Tutorial",
+        "description": "Label for the tutorial link"
     }
 }

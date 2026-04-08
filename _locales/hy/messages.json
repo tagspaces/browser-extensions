@@ -35,6 +35,14 @@
         "message": "Էկրանահանել էջի տեսանելի մասը որպես PNG  նիշք։ Դիտարկիչի պատուհանի չափերը փոխել էկրանահանի անհրաժեշտ հատվածն ընտրելու համար։",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Ամբողջ էջի սքրինշոթ",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Ստեղծում է ամբողջ էջի սքրինշոթ PNG ֆայlի տեսqով:",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Պահպանել ամբողջ էջը",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Ամբողջ էջի սքրինշոթ",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper-ի կարգավորումներ",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Ստեղծում է ամբողջ էջի սքրինշոթ PNG ֆայlի տեսqով:",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Ներալել վեբ էջի էկրանահանը URL և HTML նիշքերում։",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Ավելացնել YAML front matter (URL, ամսաթիվ, պիտակներ) պահպանված Markdown նիշքերում։",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Նկարները ներալել որպես data URL-ներ պահպանված HTML և Markdown նիշքերում։",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Ինքնաբեր հանել պիտակները էջի մետատվյալներից պիտակների դաշտում։",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Արտոնագիր",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Գաղտնիության քաղաքականություն",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Օգտակար ուղեցույց",
+        "description": "Label for the tutorial link"
     }
 }

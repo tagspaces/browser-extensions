@@ -35,6 +35,14 @@
         "message": "Képernyőkép készítése a látható területről egy PNG fájlba. Méretezze át a böngésző ablakot egy bizonyos területre.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Teljes oldalas képernyőkép",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Képernyőképet készít az egész oldalról PNG fájlként.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Teljes oldal mentése",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Teljes oldalas képernyőkép",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper beállítások",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Képernyőképet készít az egész oldalról PNG fájlként.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Képernyőkép beágyazása a weboldal URL és HTML fájlokba.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "YAML front matter (URL, dátum, címkék) hozzáadása a mentett Markdown fájlokhoz.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Képek beágyazása data URL-ként a mentett HTML és Markdown fájlokba.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Címkék automatikus kinyerése az oldal metaadataiból a címke mezőbe.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licenc",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Adatvédelmi irányelvek",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Útmutató",
+        "description": "Label for the tutorial link"
     }
 }

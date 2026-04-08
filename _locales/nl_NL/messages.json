@@ -35,6 +35,14 @@
         "message": "Maak een schermafbeelding van het zichtbare paginagebied als PNG-bestand. Verklein het browservenster om het exacte gebied voor de schermafbeelding te focussen.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Volledige paginaschermafbeelding",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Maakt een schermafbeelding van de volledige pagina als PNG-bestand.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Volledige pagina opslaan",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Volledige paginaschermafbeelding",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper-opties",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Maakt een schermafbeelding van de volledige pagina als PNG-bestand.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Insluiting van een schermafbeelding van de webpagina in URL- en HTML-bestanden inschakelen.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "YAML-frontmatter (URL, datum, tags) toevoegen aan opgeslagen Markdown-bestanden.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Afbeeldingen als data-URLs insluiten in opgeslagen HTML- en Markdown-bestanden.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Tags automatisch extraheren uit paginametadata naar het tagveld.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licentie",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Privacybeleid",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Handleiding",
+        "description": "Label for the tutorial link"
     }
 }

@@ -35,6 +35,14 @@
         "message": "Ta skjermbilde av siden som en PNG-fil. Endre størrelsen på nettleservinduet for å fokusere det nøyaktige området for skjermbildet.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Helsidessskjermbilde",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Ta et skjermbilde av hele siden som en PNG-fil.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Lagre den ferdige siden",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Helsidessskjermbilde",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper-innstillinger",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Ta et skjermbilde av hele siden som en PNG-fil.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Aktiver innbygging av skjermbilde av nettsiden i URL- og HTML-filer.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Legg til YAML-frontmatter (URL, dato, stikkord) i lagrede Markdown-filer.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Bygg inn bilder som data-URLer i lagrede HTML- og Markdown-filer.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Hent stikkord automatisk fra sidens metadata til stikkordfeltet.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Lisens",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Personvernerklæring",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Veiledning",
+        "description": "Label for the tutorial link"
     }
 }

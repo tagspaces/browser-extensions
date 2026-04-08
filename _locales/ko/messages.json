@@ -35,6 +35,14 @@
         "message": "현재 페이지의 보이는 화면을 png 파일 포맷으로 저장합니다. 정확한 영역을 지정하려면 브라우저 창 크기를 조절하세요.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "전체 페이지 스크린샷",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "전체 페이지를 PNG 파일로 캡처합니다.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "전체 페이지 저장",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "전체 페이지 스크린샷",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper 옵션",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "전체 페이지를 PNG 파일로 캡처합니다.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "URL 및 HTML 파일에 웹 페이지 스크린샷 삽입을 활성화합니다.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "저장된 Markdown 파일에 YAML 프론트 매터(URL, 날짜, 태그)를 추가합니다.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "저장된 HTML 및 Markdown 파일에 이미지를 데이터 URL로 삽입합니다.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "페이지 메타데이터에서 태그를 자동 추출하여 태그 필드에 추가합니다.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "라이선스",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "개인정보 처리방침",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "튜토리얼",
+        "description": "Label for the tutorial link"
     }
 }

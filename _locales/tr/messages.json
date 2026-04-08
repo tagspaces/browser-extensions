@@ -35,12 +35,20 @@
         "message": "Görünen sayfa alanının PNG olarak ekran görüntüsünü al. Ekran görüntüsü alınacak alana odaklanmak için tarayıcı ekranını yeniden boyutlandırın.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Tam Sayfa Ekran Görüntüsü",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Tüm sayfanın ekran görüntüsünü PNG dosyası olarak alır.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Tüm sayfayı kaydet",
         "description": "Label of the save as MHTML button"
     },
     "saveAsMhtmlTitle": {
-        "message": "Save complete page including images as PDF on Firefox or MHTML on all other browsers",
+        "message": "Görseller dahil tam sayfayı Firefox'ta PDF veya diğer tüm tarayıcılarda MHTML olarak kaydet",
         "description": "Title of the save as MHTML button"
     },
     "savePageAsHtmlLabel": {
@@ -56,7 +64,7 @@
         "description": "Lable of bookmark button"
     },
     "saveBookmarkTitle": {
-        "message": "Save a bookmark of the current page as URL file, compatible with Windows® and Mac OS®",
+        "message": "Geçerli sayfanın yer imini Windows® ve Mac OS® ile uyumlu bir URL dosyası olarak kaydet",
         "description": "Title of bookmark button"
     },
     "saveAsSelectionLabel": {
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Kırpıcı",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Tam Sayfa Ekran Görüntüsü",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Kırpıcı Seçenekleri",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Tüm sayfanın ekran görüntüsünü PNG dosyası olarak alır.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "URL ve HTML dosyalarına web sayfası ekran görüntüsü gömmeyi etkinleştir.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Kaydedilen Markdown dosyalarına YAML ön bilgi (URL, tarih, etiketler) ekle.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Kaydedilen HTML ve Markdown dosyalarında görselleri veri URL olarak göm.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Sayfa meta verilerinden etiketleri otomatik olarak etiket alanına çıkar.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Lisans",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Gizlilik Politikası",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Öğretici",
+        "description": "Label for the tutorial link"
     }
 }

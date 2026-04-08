@@ -35,6 +35,14 @@
         "message": "צלם צילום מסך של אזור הדף הנראה כקובץ PNG. שנה את גודל חלון הדפדפן כדי להתמקד באזור המדויק לצילום המסך.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "צילום מסך של עמוד מלא",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "צלם את כל העמוד כקובץ PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "שמור דף מלא",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "צילום מסך של עמוד מלא",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "אפשרויות TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "צלם את כל העמוד כקובץ PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "הטמע צילום מסך של דף אינטרנט בקבצי URL ו-HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "הוסף YAML front matter (URL, תאריך, תגיות) לקבצי Markdown שנשמרו.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "הטמע תמונות כ-data URLs בקבצי HTML ו-Markdown שנשמרו.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "חלץ תגיות אוטומטית ממטא-נתוני הדף לשדה התגיות.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "רישיון",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "מדיניות פרטיות",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "מדריך",
+        "description": "Label for the tutorial link"
     }
 }

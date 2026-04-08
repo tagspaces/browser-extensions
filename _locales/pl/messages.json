@@ -35,6 +35,14 @@
         "message": "Zrób zrzut ekranu widocznego obszaru strony jako plik PNG. Zmień rozmiar okna przeglądarki, aby skupić się na dokładnym obszarze zrzutu.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Zrzut całej strony",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Robi zrzut ekranu całej strony jako plik PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Zapisz całą stronę",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Zrzut całej strony",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Opcje TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Robi zrzut ekranu całej strony jako plik PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Włącz osadzanie zrzutu ekranu strony w plikach URL i HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Dodaj nagłówek YAML (URL, data, tagi) do zapisanych plików Markdown.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Osadzaj obrazy jako adresy data URL w zapisanych plikach HTML i Markdown.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Automatycznie wyodrębniaj tagi z metadanych strony do pola tagów.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licencja",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Polityka prywatności",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Poradnik",
+        "description": "Label for the tutorial link"
     }
 }

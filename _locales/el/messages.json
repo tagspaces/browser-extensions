@@ -35,6 +35,14 @@
         "message": "Τραβήξτε ένα στιγμιότυπο οθόνης της ορατής περιοχής σελίδας ως αρχείο PNG. Αλλάξτε το μέγεθος του παραθύρου του προγράμματος περιήγησης για να εστιάσετε στην ακριβή περιοχή για το στιγμιότυπο.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Στιγμιότυπο ολόκληρης σελίδας",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Τραβά ένα στιγμιότυπο ολόκληρης της σελίδας ως αρχείο PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Αποθήκευση πλήρους σελίδας",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Στιγμιότυπο ολόκληρης σελίδας",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Επιλογές TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Τραβά ένα στιγμιότυπο ολόκληρης της σελίδας ως αρχείο PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Ενεργοποίηση ενσωμάτωσης στιγμιότυπου οθόνης της ιστοσελίδας σε αρχεία URL και HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Προσθήκη YAML front matter (URL, ημερομηνία, ετικέτες) στα αποθηκευμένα αρχεία Markdown.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Ενσωμάτωση εικόνων ως data URL στα αποθηκευμένα αρχεία HTML και Markdown.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Αυτόματη εξαγωγή ετικετών από τα μεταδεδομένα της σελίδας στο πεδίο ετικετών.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Άδεια χρήσης",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Πολιτική απορρήτου",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Οδηγός",
+        "description": "Label for the tutorial link"
     }
 }

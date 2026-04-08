@@ -35,6 +35,14 @@
         "message": "Ambil tangkapan layar area halaman yang terlihat sebagai file PNG. Ubah ukuran jendela browser untuk memfokuskan area yang tepat untuk tangkapan layar.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Tangkapan Layar Halaman Penuh",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Mengambil tangkapan layar seluruh halaman sebagai file PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Simpan halaman lengkap",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Tangkapan Layar Halaman Penuh",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Opsi TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Mengambil tangkapan layar seluruh halaman sebagai file PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Aktifkan penyematan tangkapan layar halaman web di file URL dan HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Tambahkan YAML front matter (URL, tanggal, tag) ke file Markdown yang disimpan.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Sematkan gambar sebagai data URL di file HTML dan Markdown yang disimpan.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Ekstrak tag secara otomatis dari metadata halaman ke kolom tag.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Lisensi",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Kebijakan Privasi",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Tutorial",
+        "description": "Label for the tutorial link"
     }
 }

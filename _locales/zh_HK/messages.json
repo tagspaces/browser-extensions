@@ -35,6 +35,14 @@
         "message": "將當前頁面可視區域截圖為 PNG 文件。調整瀏覽器窗口大小以對焦所需的截圖區域。",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "整頁截圖",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "將整個頁面截圖儲存為 PNG 檔案。",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "儲存完整檔案",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces网页剪藏工具",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "整頁截圖",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces 網頁剪藏工具選項",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "將整個頁面截圖儲存為 PNG 檔案。",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "在 URL 和 HTML 檔案中嵌入網頁截圖。",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "在儲存的 Markdown 檔案中加入 YAML front matter（URL、日期、標籤）。",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "在儲存的 HTML 和 Markdown 檔案中將圖片嵌入為 data URL。",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "從頁面元數據中自動擷取標籤到標籤欄位。",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "授權條款",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "私隱政策",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "使用教學",
+        "description": "Label for the tutorial link"
     }
 }

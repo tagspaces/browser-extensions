@@ -35,6 +35,14 @@
         "message": "Fai uno screenshot dell'area della pagina visibile come file PNG. Ridimensiona la finestra del browser per mettere a fuoco l'area esatta dello screenshot.",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "Screenshot pagina intera",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "Esegue uno screenshot dell'intera pagina come file PNG.",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "Salva la pagina completa",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "Web Clipper di TagSpacesc",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "Screenshot pagina intera",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "Opzioni di TagSpaces Web Clipper",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "Esegue uno screenshot dell'intera pagina come file PNG.",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "Incorpora uno screenshot della pagina web nei file URL e HTML.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Aggiungi YAML front matter (URL, data, etichette) ai file Markdown salvati.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Incorpora le immagini come data URL nei file HTML e Markdown salvati.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Estrai automaticamente le etichette dai metadati della pagina nel campo etichette.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "Licenza",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Informativa sulla privacy",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Tutorial",
+        "description": "Label for the tutorial link"
     }
 }

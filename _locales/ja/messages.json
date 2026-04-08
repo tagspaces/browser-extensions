@@ -35,6 +35,14 @@
         "message": "PNGファイルとして表示しているページ範囲のスクリーンショットを撮影します。ブラウザウィンドウのサイズを変更して、スクリーンショットの正確な範囲にフォーカスを合わせます。",
         "description": "Title of the take screenshot button"
     },
+    "saveFullScreenshotLabel": {
+        "message": "フルページスクリーンショット",
+        "description": "Label of the take full-page screenshot button"
+    },
+    "saveFullScreenshotTitle": {
+        "message": "ページ全体をPNGファイルとしてスクリーンショットします。",
+        "description": "Title of the full screenshot button"
+    },
     "saveAsMhtmlLabel": {
         "message": "ページ全体の保存",
         "description": "Label of the save as MHTML button"
@@ -83,12 +91,36 @@
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
     },
-    "saveFullScreenshotLabel": {
-        "message": "フルページスクリーンショット",
-        "description": "Label of the take full-page screenshot button"
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper オプション",
+        "description": "Title of the options page"
     },
-    "saveFullScreenshotTitle": {
-        "message": "ページ全体をPNGファイルとしてスクリーンショットします。",
-        "description": "Title of the full screenshot button"
+    "optionsScreenshotEmbedding": {
+        "message": "URLファイルとHTMLファイルにウェブページのスクリーンショットを埋め込む機能を有効にします。",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "保存したMarkdownファイルにYAMLフロントマター（URL、日付、タグ）を追加します。",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "保存したHTMLおよびMarkdownファイルに画像をデータURLとして埋め込みます。",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "ページのメタデータからタグを自動抽出してタグフィールドに追加します。",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "ライセンス",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "プライバシーポリシー",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "チュートリアル",
+        "description": "Label for the tutorial link"
     }
 }
