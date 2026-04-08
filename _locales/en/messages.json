@@ -122,5 +122,9 @@
     "optionsTutorialLink": {
         "message": "Tutorial",
         "description": "Label for the tutorial link"
+    },
+    "optionsChangelogLink": {
+        "message": "Changelog",
+        "description": "Label for the changelog link"
     }
 }

@@ -77,6 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const msg = browserAPI.i18n.getMessage(el.dataset.i18n);
       if (msg) el.textContent = msg;
     });
+    const manifest = browserAPI.runtime.getManifest();
+    const versionEl = document.getElementById("extVersion");
+    if (versionEl && manifest.version) {
+      versionEl.textContent = "v" + manifest.version;
+    }
   }
 });
 document.getElementById("form").addEventListener("change", save);
