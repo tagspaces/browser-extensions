@@ -62,5 +62,21 @@ function load() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", load);
+document.addEventListener("DOMContentLoaded", () => {
+  load();
+
+  // I18n
+  let browserAPI = null;
+  if (typeof browser !== "undefined") {
+    browserAPI = browser;
+  } else if (typeof chrome !== "undefined") {
+    browserAPI = chrome;
+  }
+  if (browserAPI) {
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const msg = browserAPI.i18n.getMessage(el.dataset.i18n);
+      if (msg) el.textContent = msg;
+    });
+  }
+});
 document.getElementById("form").addEventListener("change", save);

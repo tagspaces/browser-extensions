@@ -90,5 +90,37 @@
     "appName": {
         "message": "TagSpaces Web Clipper",
         "description": "The name of the extension"
+    },
+    "optionsTitle": {
+        "message": "TagSpaces Web Clipper Options",
+        "description": "Title of the options page"
+    },
+    "optionsScreenshotEmbedding": {
+        "message": "Enable embedding a web page screenshot in URL and HTML files.",
+        "description": "Label for the screenshot embedding option"
+    },
+    "optionsFrontMatter": {
+        "message": "Add YAML front matter (URL, date, tags) to saved Markdown files.",
+        "description": "Label for the front matter option"
+    },
+    "optionsImageDataUrl": {
+        "message": "Embed images as data URLs in saved HTML and Markdown files.",
+        "description": "Label for the image data URL option"
+    },
+    "optionsAutoTagging": {
+        "message": "Auto-extract tags from page metadata into the tags field.",
+        "description": "Label for the auto-tagging option"
+    },
+    "optionsLicenseLink": {
+        "message": "License",
+        "description": "Label for the license link"
+    },
+    "optionsPrivacyLink": {
+        "message": "Privacy Policy",
+        "description": "Label for the privacy policy link"
+    },
+    "optionsTutorialLink": {
+        "message": "Tutorial",
+        "description": "Label for the tutorial link"
     }
 }
