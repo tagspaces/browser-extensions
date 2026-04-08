@@ -692,52 +692,54 @@ async function prepareContentPromise(htmlContent) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
 
-    // Define the targets we want to convert to Base64
-    const targets = [
-      { selector: "img", attribute: "src" },
-      { selector: "video[poster]", attribute: "poster" },
-    ];
+    if (userSettings.enableImageDataUrl) {
+      // Define the targets we want to convert to Base64
+      const targets = [
+        { selector: "img", attribute: "src" },
+        { selector: "video[poster]", attribute: "poster" },
+      ];
 
-    const conversionTasks = [];
+      const conversionTasks = [];
 
-    // Collect all images and video posters
-    for (const target of targets) {
-      const elements = Array.from(doc.querySelectorAll(target.selector));
+      // Collect all images and video posters
+      for (const target of targets) {
+        const elements = Array.from(doc.querySelectorAll(target.selector));
 
-      for (const el of elements) {
-        const originalUrl = el.getAttribute(target.attribute);
+        for (const el of elements) {
+          const originalUrl = el.getAttribute(target.attribute);
 
-        // Skip empty or already converted sources
-        if (!originalUrl || originalUrl.startsWith("data:")) continue;
+          // Skip empty or already converted sources
+          if (!originalUrl || originalUrl.startsWith("data:")) continue;
 
-        try {
-          // Resolve absolute URL relative to the current tab
-          const absoluteUrl =
-            target.selector === "img"
-              ? getHighestResUrl(el, currentTabURL)
-              : new URL(originalUrl, currentTabURL).href;
+          try {
+            // Resolve absolute URL relative to the current tab
+            const absoluteUrl =
+              target.selector === "img"
+                ? getHighestResUrl(el, currentTabURL)
+                : new URL(originalUrl, currentTabURL).href;
 
-          conversionTasks.push(async () => {
-            try {
-              const dataUrl = await getBase64ImagePromise(absoluteUrl);
-              if (dataUrl && dataUrl.startsWith("data:image")) {
-                el.setAttribute(target.attribute, dataUrl);
+            conversionTasks.push(async () => {
+              try {
+                const dataUrl = await getBase64ImagePromise(absoluteUrl);
+                if (dataUrl && dataUrl.startsWith("data:image")) {
+                  el.setAttribute(target.attribute, dataUrl);
+                }
+              } catch (e) {
+                console.warn(
+                  `Could not convert ${target.attribute}:`,
+                  absoluteUrl,
+                );
               }
-            } catch (e) {
-              console.warn(
-                `Could not convert ${target.attribute}:`,
-                absoluteUrl,
-              );
-            }
-          });
-        } catch (e) {
-          console.warn(`Invalid URL in ${target.selector}:`, originalUrl);
+            });
+          } catch (e) {
+            console.warn(`Invalid URL in ${target.selector}:`, originalUrl);
+          }
         }
       }
-    }
 
-    // Process image and poster downloads in batches (size 5)
-    await processInBatches(conversionTasks, 5, (task) => task());
+      // Process image and poster downloads in batches (size 5)
+      await processInBatches(conversionTasks, 5, (task) => task());
+    }
 
     // Capture Screenshot
     let imageDataUrl = "";
@@ -821,81 +823,72 @@ async function prepareContentPromise(htmlContent) {
  */
 async function prepareMarkdownContentPromise(markdownContent) {
   try {
-    // Define Regex targets (Standard Markdown images and HTML img tags within MD)
-    const regexTargets = [
-      // Matches ![alt](url "title") or ![alt](url)
-      {
-        type: "markdown",
-        regex: /!\[(.*?)\]\(((?!data:).+?)(?:\s+"(.*?)")?\)/g,
-        urlIndex: 2, // The capture group index for the URL
-      },
-      // Matches <img src="url" ...>
-      {
-        type: "html",
-        regex: /<img\s+[^>]*src=["']((?!data:)[^"']+)["'][^>]*>/g,
-        urlIndex: 1,
-      },
-    ];
+    let finalMarkdown = markdownContent;
 
-    const conversionTasks = [];
-    const replacements = new Map(); // Store Original URL -> Data URL mapping
+    if (userSettings.enableImageDataUrl) {
+      // Define Regex targets (Standard Markdown images and HTML img tags within MD)
+      const regexTargets = [
+        // Matches ![alt](url "title") or ![alt](url)
+        {
+          type: "markdown",
+          regex: /!\[(.*?)\]\(((?!data:).+?)(?:\s+"(.*?)")?\)/g,
+          urlIndex: 2, // The capture group index for the URL
+        },
+        // Matches <img src="url" ...>
+        {
+          type: "html",
+          regex: /<img\s+[^>]*src=["']((?!data:)[^"']+)["'][^>]*>/g,
+          urlIndex: 1,
+        },
+      ];
 
-    // Scan content to find URLs to convert
-    for (const target of regexTargets) {
-      let match;
-      // Reset lastIndex because we are reusing regex objects or looping
-      while ((match = target.regex.exec(markdownContent)) !== null) {
-        const originalUrl = match[target.urlIndex];
+      const conversionTasks = [];
+      const replacements = new Map(); // Store Original URL -> Data URL mapping
 
-        if (!originalUrl) continue;
+      // Scan content to find URLs to convert
+      for (const target of regexTargets) {
+        let match;
+        while ((match = target.regex.exec(markdownContent)) !== null) {
+          const originalUrl = match[target.urlIndex];
 
-        try {
-          // Resolve absolute URL relative to the current tab
-          // Note: Markdown doesn't have `getHighestResUrl` equivalent easily without DOM,
-          // so we usually just resolve the string path.
-          const absoluteUrl = new URL(originalUrl, currentTabURL).href;
+          if (!originalUrl) continue;
 
-          // Avoid queuing the same URL multiple times
-          if (replacements.has(originalUrl)) continue;
+          try {
+            const absoluteUrl = new URL(originalUrl, currentTabURL).href;
 
-          // Reserve a spot in the map
-          replacements.set(originalUrl, null);
+            if (replacements.has(originalUrl)) continue;
 
-          conversionTasks.push(async () => {
-            try {
-              const dataUrl = await getBase64ImagePromise(absoluteUrl);
-              if (dataUrl && dataUrl.startsWith("data:image")) {
-                replacements.set(originalUrl, dataUrl);
-              } else {
-                // If failed, remove from map so we don't replace it with null
+            replacements.set(originalUrl, null);
+
+            conversionTasks.push(async () => {
+              try {
+                const dataUrl = await getBase64ImagePromise(absoluteUrl);
+                if (dataUrl && dataUrl.startsWith("data:image")) {
+                  replacements.set(originalUrl, dataUrl);
+                } else {
+                  replacements.delete(originalUrl);
+                }
+              } catch (e) {
+                console.warn(`Could not convert image:`, absoluteUrl);
                 replacements.delete(originalUrl);
               }
-            } catch (e) {
-              console.warn(`Could not convert image:`, absoluteUrl);
-              replacements.delete(originalUrl);
-            }
-          });
-        } catch (e) {
-          console.warn(`Invalid URL found in Markdown:`, originalUrl);
+            });
+          } catch (e) {
+            console.warn(`Invalid URL found in Markdown:`, originalUrl);
+          }
         }
       }
-    }
 
-    // Process image downloads in batches (size 5)
-    await processInBatches(conversionTasks, 5, (task) => task());
+      // Process image downloads in batches (size 5)
+      await processInBatches(conversionTasks, 5, (task) => task());
 
-    // 4. Apply replacements to the Markdown content
-    // We iterate the map to replace occurrences.
-    // Note: This matches the raw string. If a URL appears in text (not image), it might get replaced too.
-    // To be strictly safe, we could re-run the regex replacement, but global string replacement is usually acceptable for CLippers.
-    let finalMarkdown = markdownContent;
-    for (const [originalUrl, dataUrl] of replacements) {
-      if (dataUrl) {
-        // Global replace of the URL.
-        // Escaping special regex characters in the URL for the replace function
-        const escapedUrl = originalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const replaceRegex = new RegExp(escapedUrl, "g");
-        finalMarkdown = finalMarkdown.replace(replaceRegex, dataUrl);
+      // Apply replacements to the Markdown content
+      for (const [originalUrl, dataUrl] of replacements) {
+        if (dataUrl) {
+          const escapedUrl = originalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          const replaceRegex = new RegExp(escapedUrl, "g");
+          finalMarkdown = finalMarkdown.replace(replaceRegex, dataUrl);
+        }
       }
     }
 

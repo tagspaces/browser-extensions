@@ -34,6 +34,9 @@ function save() {
   if (form.enableAutoTagging) {
     params.enableAutoTagging = form.enableAutoTagging.checked;
   }
+  if (form.enableImageDataUrl) {
+    params.enableImageDataUrl = form.enableImageDataUrl.checked;
+  }
   OptionsManager.save(params);
 }
 
@@ -52,6 +55,9 @@ function load() {
     }
     if (form.enableAutoTagging) {
       form.enableAutoTagging.checked = items.enableAutoTagging;
+    }
+    if (form.enableImageDataUrl) {
+      form.enableImageDataUrl.checked = items.enableImageDataUrl;
     }
   });
 }

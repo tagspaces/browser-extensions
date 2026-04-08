@@ -40,6 +40,18 @@ test.describe("Options page — structure (new settings)", () => {
       page.locator('[name="enableAutoTagging"]'),
     ).toBeVisible();
   });
+
+  test("renders enableImageDataUrl checkbox", async ({
+    context,
+    extensionId,
+  }) => {
+    const page = await context.newPage();
+    await page.goto(`chrome-extension://${extensionId}/options.html`);
+    await page.waitForSelector("form", { state: "visible" });
+    await expect(
+      page.locator('[name="enableImageDataUrl"]'),
+    ).toBeVisible();
+  });
 });
 
 test.describe("Options page — persistence", () => {
@@ -104,6 +116,27 @@ test.describe("Options page — persistence", () => {
     await page.waitForSelector("form", { state: "visible" });
     const after = await page
       .locator('[name="enableAutoTagging"]')
+      .isChecked();
+    expect(after).toBe(!before);
+  });
+
+  test("toggling enableImageDataUrl persists after reload", async ({
+    context,
+    extensionId,
+  }) => {
+    const page = await context.newPage();
+    await page.goto(`chrome-extension://${extensionId}/options.html`);
+    await page.waitForSelector("form", { state: "visible" });
+
+    const checkbox = page.locator('[name="enableImageDataUrl"]');
+    const before = await checkbox.isChecked();
+    await checkbox.click();
+    await page.waitForTimeout(500);
+
+    await page.reload();
+    await page.waitForSelector("form", { state: "visible" });
+    const after = await page
+      .locator('[name="enableImageDataUrl"]')
       .isChecked();
     expect(after).toBe(!before);
   });

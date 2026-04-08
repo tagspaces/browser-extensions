@@ -22,6 +22,7 @@ let DEFAULT_OPTIONS = {
   enableAutomaticScreenshotTagging: true,
   enableFrontMatter: true,
   enableAutoTagging: false,
+  enableImageDataUrl: true,
 };
 
 let browserAPI = null;
