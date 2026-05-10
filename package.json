@@ -35,7 +35,7 @@
     "jsdom": "28.1.0",
     "shelljs": "0.10.0",
     "vitest": "4.0.18",
-    "web-ext": "^9.4.0",
+    "web-ext": "^10.1.0",
     "web-ext-types": "3.2.1",
     "webpack": "5.104.1",
     "webpack-cli": "6.0.1"
