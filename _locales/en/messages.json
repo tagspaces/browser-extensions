@@ -111,6 +111,14 @@
         "message": "Auto-extract tags from page metadata into the tags field.",
         "description": "Label for the auto-tagging option"
     },
+    "optionsScreenshotFormat": {
+        "message": "Screenshot format:",
+        "description": "Label for the screenshot image format selector (WebP, JPEG, PNG)"
+    },
+    "optionsScreenshotQuality": {
+        "message": "Screenshot quality (JPEG and WebP):",
+        "description": "Label for the slider that sets the image quality of JPEG and WebP screenshots"
+    },
     "optionsLicenseLink": {
         "message": "License",
         "description": "Label for the license link"

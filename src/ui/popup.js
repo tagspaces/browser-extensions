@@ -455,12 +455,14 @@ async function saveScreenshot() {
     "#saveScreenshotSpinner",
   );
   saveScreenshotSpinner.classList.remove("d-none");
-  const fileName = generateFileName("png", "screenshot");
+  const format = getScreenshotFormat();
 
   // showSaveFilePicker must be the first await to preserve the user gesture
   let fileHandle = null;
   if (isSafari) {
-    fileHandle = await showSaveDialog(fileName);
+    fileHandle = await showSaveDialog(
+      generateFileName(SCREENSHOT_FORMATS[format].ext, "screenshot"),
+    );
     if (fileHandle === "cancelled") {
       saveScreenshotSpinner.classList.add("d-none");
       return;
@@ -468,12 +470,11 @@ async function saveScreenshot() {
   }
 
   try {
-    const imageUrl = await browserAPI.tabs.captureVisibleTab(undefined, { format: "png" });
-    const blob = await dataURItoBlobAsync(imageUrl);
+    const { blob, ext } = await captureVisibleScreenshot(format);
     if (fileHandle) {
       await writeFileHandle(fileHandle, blob);
     } else {
-      saveAsFile(blob, fileName);
+      saveAsFile(blob, generateFileName(ext, "screenshot"));
     }
   } catch (err) {
     console.warn("Error taking screenshot " + JSON.stringify(err));
@@ -488,12 +489,14 @@ async function saveFullScreenshot() {
     "#saveFullScreenshotSpinner",
   );
   saveFullScreenshotSpinner.classList.remove("d-none");
-  const fileName = generateFileName("png", "screenshot");
+  const format = getScreenshotFormat();
 
   // showSaveFilePicker must be the first await to preserve the user gesture
   let fileHandle = null;
   if (isSafari) {
-    fileHandle = await showSaveDialog(fileName);
+    fileHandle = await showSaveDialog(
+      generateFileName(SCREENSHOT_FORMATS[format].ext, "screenshot"),
+    );
     if (fileHandle === "cancelled") {
       saveFullScreenshotSpinner.classList.add("d-none");
       return;
@@ -501,7 +504,9 @@ async function saveFullScreenshot() {
   }
 
   try {
-    const blob = await captureFullPage(currentTabID);
+    const canvas = await captureFullPage(currentTabID);
+    const { blob, ext } = await encodeCanvas(canvas, format);
+    const fileName = generateFileName(ext, "screenshot");
     if (fileHandle) {
       await writeFileHandle(fileHandle, blob);
     } else if (isFirefox) {
@@ -973,7 +978,7 @@ export function generateFileName(extension, type) {
       tags.push(trimmedTag);
     }
   }
-  if (type === "screenshot" && extension.toLowerCase() === "png") {
+  if (type === "screenshot") {
     // screenshot case
     tags.push("screenshot");
     tags.push(currentTabURLParser ? currentTabURLParser.hostname : "");
@@ -1125,5 +1130,67 @@ async function captureFullPage(tabId) {
     img.close();
   }
 
-  return canvas.convertToBlob({ type: "image/png" });
+  return canvas;
+}
+
+const SCREENSHOT_FORMATS = {
+  webp: { mime: "image/webp", ext: "webp", lossy: true },
+  jpeg: { mime: "image/jpeg", ext: "jpg", lossy: true },
+  png: { mime: "image/png", ext: "png", lossy: false },
+};
+
+/** Quality for lossy screenshot formats as a 0..1 number (setting is 10-100). */
+function getScreenshotQuality() {
+  const q = Number(userSettings.screenshotQuality);
+  if (!Number.isFinite(q)) return 0.85;
+  return Math.min(100, Math.max(10, q)) / 100;
+}
+
+function getScreenshotFormat() {
+  let format = userSettings.screenshotFormat;
+  if (!SCREENSHOT_FORMATS[format]) format = "png";
+  // Safari cannot encode WebP from a canvas (it silently falls back to PNG)
+  if (format === "webp" && isSafari) format = "jpeg";
+  return format;
+}
+
+/**
+ * Encodes the canvas in the requested format. Falls back to JPEG and then PNG
+ * when the browser can't encode the format (e.g. WebP is limited to
+ * 16383px per side, so very long full-page screenshots fall back to JPEG).
+ */
+async function encodeCanvas(canvas, format) {
+  const candidates = [...new Set([format, "jpeg", "png"])];
+  for (const key of candidates) {
+    const { mime, ext, lossy } = SCREENSHOT_FORMATS[key];
+    try {
+      const blob = await canvas.convertToBlob(
+        lossy ? { type: mime, quality: getScreenshotQuality() } : { type: mime },
+      );
+      if (blob && blob.type === mime) return { blob, ext };
+    } catch (err) {
+      console.warn(`Encoding screenshot as ${mime} failed`, err);
+    }
+  }
+  throw new Error("Encoding screenshot failed");
+}
+
+async function captureVisibleScreenshot(format) {
+  if (format === "png" || format === "jpeg") {
+    // captureVisibleTab encodes PNG and JPEG natively (quality is 0-100)
+    const { ext, lossy } = SCREENSHOT_FORMATS[format];
+    const options = { format };
+    if (lossy) options.quality = Math.round(getScreenshotQuality() * 100);
+    const dataUrl = await browserAPI.tabs.captureVisibleTab(null, options);
+    return { blob: await dataURItoBlobAsync(dataUrl), ext };
+  }
+  // Other formats: capture lossless PNG and re-encode via canvas
+  const dataUrl = await browserAPI.tabs.captureVisibleTab(null, {
+    format: "png",
+  });
+  const img = await createImageBitmap(await dataURItoBlobAsync(dataUrl));
+  const canvas = new OffscreenCanvas(img.width, img.height);
+  canvas.getContext("2d").drawImage(img, 0, 0);
+  img.close();
+  return encodeCanvas(canvas, format);
 }

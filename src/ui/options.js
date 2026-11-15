@@ -25,6 +25,12 @@ function save() {
   const params = {
     enableScreenshotEmbedding: form.enableScreenshotEmbedding?.checked,
   };
+  if (form.screenshotFormat) {
+    params.screenshotFormat = form.screenshotFormat.value;
+  }
+  if (form.screenshotQuality) {
+    params.screenshotQuality = Number(form.screenshotQuality.value);
+  }
   if (form.enableOpenLocationCode) {
     params.enableOpenLocationCode = form.enableOpenLocationCode.checked;
   }
@@ -47,6 +53,13 @@ function load() {
     if (form.enableScreenshotEmbedding) {
       form.enableScreenshotEmbedding.checked = items.enableScreenshotEmbedding;
     }
+    if (form.screenshotFormat) {
+      form.screenshotFormat.value = items.screenshotFormat;
+    }
+    if (form.screenshotQuality) {
+      form.screenshotQuality.value = items.screenshotQuality;
+    }
+    updateQualityUI();
     if (form.enableOpenLocationCode) {
       form.enableOpenLocationCode.checked = items.enableOpenLocationCode;
     }
@@ -84,4 +97,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+// Shows the current quality value and disables the slider for PNG (lossless)
+function updateQualityUI() {
+  if (!form.screenshotQuality) return;
+  const valueEl = document.getElementById("screenshotQualityValue");
+  if (valueEl) valueEl.textContent = form.screenshotQuality.value + "%";
+  if (form.screenshotFormat) {
+    form.screenshotQuality.disabled = form.screenshotFormat.value === "png";
+  }
+}
+
+document.getElementById("form").addEventListener("input", updateQualityUI);
 document.getElementById("form").addEventListener("change", save);

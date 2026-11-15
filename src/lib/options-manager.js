@@ -23,6 +23,8 @@ let DEFAULT_OPTIONS = {
   enableFrontMatter: true,
   enableAutoTagging: false,
   enableImageDataUrl: true,
+  screenshotFormat: "png", // png | jpeg | webp
+  screenshotQuality: 90, // 10-100, used for jpeg and webp
 };
 
 let browserAPI = null;

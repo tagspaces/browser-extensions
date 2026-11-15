@@ -102,4 +102,13 @@ describe("generateFileName", () => {
     expect(result).toMatch(/\d{8}/); // date as YYYYMMDD
     expect(result).toMatch(/\.png$/);
   });
+
+  it("adds screenshot tag for non-PNG screenshot formats", () => {
+    for (const ext of ["webp", "jpg"]) {
+      const result = generateFileName(ext, "screenshot");
+      expect(result).toContain("screenshot");
+      expect(result).toMatch(/\d{8}/);
+      expect(result).toMatch(new RegExp(`\\.${ext}$`));
+    }
+  });
 });
